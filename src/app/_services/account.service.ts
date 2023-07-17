@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
@@ -41,6 +41,9 @@ export class AccountService {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
     this.presenceService.createHubConnection(user);
+  }
+  getGender(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}gender`);
   }
 
   logout() {

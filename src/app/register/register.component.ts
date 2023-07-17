@@ -16,20 +16,30 @@ export class RegisterComponent implements OnInit{
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
     private fb: FormBuilder, private router: Router) { }
+    genders: any[] = [];
 
   ngOnInit(): void {
     this.initializeForm();
     this.maxDate.setFullYear(this.maxDate.getFullYear() -18);
+    this.accountService.getGender().subscribe(
+      response => {
+        this.genders = response;
+      },
+      error => {
+        console.log(error); // Xử lý lỗi tùy ý
+      }
+    );
   }
-  
+
   initializeForm() {
     this.registerForm = this.fb.group({
-      gender: ['male'],
+      genderId: [],
       username: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      email: ['', Validators.required],
       knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
       password: ['', [Validators.required, 
         Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
