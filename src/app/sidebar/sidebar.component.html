@@ -1,0 +1,40 @@
+<div class="navigation" [class.active]="sidebarActive">
+  <ng-container *ngIf="accountService.currentUser$  | async"></ng-container>
+  <ul>
+    <li>
+      <div class="toggle" (click)="sidebarActive = !sidebarActive"></div>
+    </li>
+    <li>
+      <a routerLink="/" routerLinkActive="active">
+        <span class="icon"><i class="fa fa-home"></i></span>
+        <span class="title">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a  routerLink="/members" 
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active">
+          <span class="icon"><i class="fa fa-id-card-o"></i></span>
+          <span class="title">Matches</span>
+        </a>
+    </li>
+    <li>
+      <a routerLink="/messages" routerLinkActive="active">
+        <span class="icon"><i class="fa fa-commenting-o"></i></span>
+        <span class="title">Messages</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/lists">
+        <span class="icon"><i class="fa fa-list"></i></span>
+        <span class="title">Lists</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/errors">
+        <span class="icon"><i class="fa fa-exclamation-circle"></i></span>
+        <span class="title">Errors</span>
+      </a>
+    </li>
+  </ul>
+</div>
