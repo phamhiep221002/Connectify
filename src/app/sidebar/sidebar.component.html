@@ -1,5 +1,4 @@
 <div class="navigation" [class.active]="sidebarActive">
-  <ng-container *ngIf="accountService.currentUser$  | async">
   <ul>  
     <li>
       <div class="toggle" (click)="sidebarActive = !sidebarActive"></div>
@@ -10,6 +9,7 @@
         <span class="title">Dashboard</span>
       </a>
     </li>
+    <ng-container *ngIf="accountService.currentUser$  | async">
     <li class="sidebar-content">
       <a  routerLink="/members" 
           [routerLinkActiveOptions]="{exact: true}"
@@ -36,6 +36,7 @@
         <span class="title">Admin</span>
       </a>
     </li>
+    </ng-container>
   </ul>
-  </ng-container>
+  
 </div>

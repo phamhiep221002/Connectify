@@ -25,3 +25,13 @@
 .profile_name{
     margin: 5px;
 }
+
+.dropdown-menu.show{
+    inset: 100% 5% auto auto !important;
+}
+
+.username{
+    text-decoration: none;
+    margin: 10px;
+    cursor: pointer;
+}
