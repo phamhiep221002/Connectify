@@ -14,9 +14,10 @@
   .navigation {
     position: fixed;
     inset: 20px;
-    background: #202028;
+    background: #fff;
     top: 6em !important;
     width: 80px;
+    height: 25em;
     border-left: 10px solid #1212;
     border-radius: 50px;
     overflow: hidden;
@@ -33,10 +34,10 @@
   
   .toggle {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 50px;
-    height: 50px;
+    right: 20px;
+    bottom: -21px;
+    width: 40px;
+    height: 40px;
     background: #c17aff;
     border-radius: 50%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
@@ -58,7 +59,7 @@
     width: 26px;
     height: 3px;
     border-radius: 3px;
-    background: #282828;
+    background: #ffffff;
     transition: 1s;
   }
   
@@ -80,13 +81,14 @@
   
   .navigation ul {
     position: absolute;
-    top: 15%;
+    top: 5%;
     left: 0;
     width: 100%;
   }
   
   .navigation ul li {
     position: relative;
+    top: 10px;
     list-style: none;
     width: 100%;
     border-top-left-radius: 30px;
@@ -99,10 +101,11 @@
   }
   
   .navigation ul li:nth-child(1) {
-    top: 20px;
+    top: 15px;
     margin-bottom: 40px;
     background: none;
   }
+
   
   .navigation ul li:not(:first-child):hover::before,
   .navigation ul li:not(:first-child):hover::after {
@@ -161,6 +164,8 @@
     text-align: start;
     white-space: nowrap;
   }
+
+  
   
   
   
