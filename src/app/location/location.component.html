@@ -1,0 +1,24 @@
+<!-- your-component.component.html -->
+<div *ngIf="latitude && longitude">
+  <p>City: {{ foundCity }}</p>
+  <p>Latitude: {{ latitude }}</p>
+  <p>Longitude: {{ longitude }}</p>
+</div>
+
+<div *ngIf="!latitude && !longitude && foundCity">
+  <p>{{ foundCity }}</p>
+</div>
+<a *ngIf="!accessDenied">
+    Preview Screenshot of connectify-3d40r8gxw-phamhiep221002.vercel.app
+    Status
+    Ready
+    Environment
+    Production
+    Duration
+    1m 39s (1h ago)
+    Domains
+    iconnectify.vercel.app
+    +1
+    connectify-git-main-phamhiep221002.vercel.app
+    connectify-3d40r8gxw-phamhiep221002.vercel.app
+    Source</a>

@@ -32,6 +32,9 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { LocationComponent } from './location/location.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+
 
 
 
@@ -59,7 +62,8 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogComponent    
+    ConfirmDialogComponent,
+    LocationComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -68,7 +72,8 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
