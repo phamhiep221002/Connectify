@@ -12,7 +12,7 @@
     <ng-container *ngIf="accountService.currentUser$  | async">
     <li class="sidebar-content">
       <a  routerLink="/members" 
-          [routerLinkActiveOptions]="{exact: true}"
+      [routerLinkActiveOptions]="{exact: true}"
           routerLinkActive="active">
           <span class="icon"><i class="fa fa-id-card-o"></i></span>
           <span class="title">Matches</span>
