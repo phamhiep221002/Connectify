@@ -35,6 +35,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LocationComponent } from './location/location.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -65,7 +66,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     RolesModalComponent,
     ConfirmDialogComponent,
     LocationComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserAnimationsModule,

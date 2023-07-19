@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../_services/location.service';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-location',
@@ -14,7 +15,7 @@ export class LocationComponent implements OnInit {
   foundCity: string | undefined;
   accessDenied: boolean = false;
 
-  constructor(private locationService: LocationService, private toastr: ToastrService ) { }
+  constructor(private locationService: LocationService, private toastr: ToastrService, private accountService: AccountService ) { }
   ngOnInit() {
     this.getLocation();
     
