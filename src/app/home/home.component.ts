@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-home',
@@ -21,4 +24,5 @@ export class HomeComponent implements OnInit {
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
   } 
+
 } 

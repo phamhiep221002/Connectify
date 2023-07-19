@@ -1,5 +1,5 @@
 <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
-    <h2 class="text-center text-primary">Sign up</h2>
+    <h2 class="text-center text-primary signup">Sign up</h2>
     <hr>
 
     <!-- <div class="mb-3">
@@ -11,7 +11,8 @@
             <input type="radio" class="form-check-input ms-3" value="female" formControlName="gender"> Female
         </label>
     </div> -->
-    <select [formControl]="$any(registerForm.controls['genderId'])" class="form-control">
+    <select [formControl]="$any(registerForm.controls['genderId'])" class="form-control gender">
+        <option style="display: none;"[value]="null" disabled selected>Gender</option>
         <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</option>
     </select>
     <app-text-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'"></app-text-input>
@@ -34,7 +35,7 @@
         </ul>
     </div>
     <div class="text-center">
-        <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
-        <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+        <button [disabled]="!registerForm.valid" class="btn me-2 registerbtn" type="submit">Register</button>
+        <button class="btn btn-default cancelbtn" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>
