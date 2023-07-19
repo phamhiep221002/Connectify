@@ -21,7 +21,7 @@
       </div>  
     </div>
 
-      <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="on">
+      <!-- <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="on">
         <input 
         name="username" 
         [(ngModel)]="model.username" 
@@ -35,6 +35,6 @@
         type="password" 
         placeholder="Password">
         <button class="btn btn-success" type="submit">Login</button>
-      </form>
+      </form> -->
   </div> 
 </nav>

@@ -9,20 +9,13 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  registerMode = false; 
-  users: any;
+  isLoggedIn = false;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.accountService.currentUser$.subscribe(user => {
+      this.isLoggedIn = user !== null;
+    });
   }
-
-  registerToggle() {
-    this.registerMode = !this.registerMode;
-  }
-
-  cancelRegisterMode(event: boolean) {
-    this.registerMode = event;
-  } 
-
 } 

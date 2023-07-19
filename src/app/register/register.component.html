@@ -1,16 +1,6 @@
 <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
     <h2 class="text-center text-primary signup">Sign up</h2>
     <hr>
-
-    <!-- <div class="mb-3">
-        <label style="margin-right:10px">I am a: </label>
-        <label class="form-check-label">
-            <input type="radio" class="form-check-input" value="male" formControlName="gender"> Male
-        </label>
-        <label class="form-check-label">
-            <input type="radio" class="form-check-input ms-3" value="female" formControlName="gender"> Female
-        </label>
-    </div> -->
     <select [formControl]="$any(registerForm.controls['genderId'])" class="form-control gender">
         <option style="display: none;"[value]="null" disabled selected>Gender</option>
         <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</option>
@@ -36,6 +26,6 @@
     </div>
     <div class="text-center">
         <button [disabled]="!registerForm.valid" class="btn me-2 registerbtn" type="submit">Register</button>
-        <button class="btn btn-default cancelbtn" type="button" (click)="cancel()">Cancel</button>
+        <button class="btn btn-default cancelbtn" type="button" routerLink="/" routerLinkActive="active">Back to Home</button>
     </div>
 </form>
