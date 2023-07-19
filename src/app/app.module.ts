@@ -63,7 +63,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogComponent    
+    ConfirmDialogComponent,
+    LocationComponent 
   ],
   imports: [
     BrowserAnimationsModule,
