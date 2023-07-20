@@ -183,7 +183,7 @@
       inset: 10px;
       background: #fff;
       top: 6em !important;
-      width: 40px;
+      width: 35px;
       border-left: 6px solid #1212;
       border-radius: 30px;
       overflow: hidden;
@@ -200,10 +200,10 @@
     
     .toggle {
       position: absolute;
-      right: 5px;
+      right: 3px;
       bottom: 20px;
-      width: 28px;
-      height: 28px;
+      width: 25px;
+      height: 25px;
       background: #c17aff;
       border-radius: 50%;
       box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
@@ -222,7 +222,7 @@
     .toggle::after {
       content: "";
       position: absolute;
-      width: 18px;
+      width: 16px;
       height: 2px;
       border-radius: 2px;
       background: #ffffff;
@@ -311,7 +311,7 @@
     .navigation ul li a .icon {
       position: relative;
       display: block;
-      min-width: 32px;
+      min-width: 28px;
       height: 40px;
       line-height: 45px;
       text-align: center;

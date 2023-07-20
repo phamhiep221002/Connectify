@@ -457,9 +457,9 @@
   
   form {
     position: relative;
-    right: 8%;
+    right: 15%;
     margin: 0px auto;
-    width: 280px;
+    width: 260px;
     height: 440px;
     display: flex;
     flex-direction: column;
