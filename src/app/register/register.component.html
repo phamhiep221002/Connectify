@@ -1,21 +1,23 @@
 <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
-    <h2 class="text-center text-primary signup">Sign up</h2>
+    <h1 class="text-center text-primary">Sign up</h1>
     <hr>
+    <div class="register-form">
     <select [formControl]="$any(registerForm.controls['genderId'])" class="form-control gender">
         <option style="display: none;"[value]="null" disabled selected>Gender</option>
         <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</option>
     </select>
-    <app-text-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'"></app-text-input>
-    <app-text-input [formControl]="$any(registerForm.controls['firstname'])" [label]="'Firstname'"></app-text-input>
-    <app-text-input [formControl]="$any(registerForm.controls['lastname'])" [label]="'Lastname'"></app-text-input>
-    <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'Email'"></app-text-input>
-    <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" [label]="'Known As'"></app-text-input>
+    <app-text-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'" class="input"></app-text-input>
+    <app-text-input [formControl]="$any(registerForm.controls['firstname'])" [label]="'Firstname'" class="input"></app-text-input>
+    <app-text-input [formControl]="$any(registerForm.controls['lastname'])" [label]="'Lastname'" class="input"></app-text-input>
+    <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'Email'" class="input"></app-text-input>
+    <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" [label]="'Known As'" class="input"></app-text-input>
     <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" [label]="'Date of Birth'"
-        [maxDate]="maxDate"></app-date-picker>
-    <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Password'" [type]="'password'">
+        [maxDate]="maxDate" class="input"></app-date-picker>
+    <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Password'" [type]="'password'" class="input">
     </app-text-input>
     <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" [label]="'Confirm Password'"
-        [type]="'password'"></app-text-input>
+        [type]="'password'" class="input"></app-text-input>
+    </div>
 
     <div class="row" *ngIf="validationErrors">
         <ul class="text-danger">
