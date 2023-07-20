@@ -29,8 +29,8 @@
                 style="width: 150px" 
                 class="form-select ms-1" 
                 [(ngModel)]="userParams.gender">
-                <option *ngFor="let gender of genderList" [value]="gender.value">
-                    {{gender.display}}
+                <option *ngFor="let gender of genders" [value]="gender.name">
+                    {{gender.name}}
                 </option>
             </select>
         </div>
