@@ -11,6 +11,7 @@
         "Signin",
         "signup",
         "titlecase",
-        "Toastr"
+        "Toastr",
+        "Webstorage"
     ]
 }
