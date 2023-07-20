@@ -164,7 +164,173 @@
     white-space: nowrap;
   }
 
-  
+  @media screen and (max-width: 767px){
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; 
+    }
+    
+    body {
+      min-height: 100vh;
+      background: #111;
+      transition: background-color 0.4s ease-in-out;
+      font-family: "Satoshi", sans-serif;
+    }
+    
+    .navigation {
+      position: fixed;
+      inset: 10px;
+      background: #fff;
+      top: 6em !important;
+      width: 40px;
+      border-left: 6px solid #1212;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.25);
+      transition: 0.5s;
+      z-index: 100;
+    }
+    
+    .navigation.active {
+      width: 200px;
+      border-radius: 15px;
+      z-index: 100;
+    }
+    
+    .toggle {
+      position: absolute;
+      right: 5px;
+      bottom: 20px;
+      width: 28px;
+      height: 28px;
+      background: #c17aff;
+      border-radius: 50%;
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .toggle:hover {
+      background: #9d2cff;
+      transition: all 0.3s ease;
+    }
+    
+    .toggle::before,
+    .toggle::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: #ffffff;
+      transition: 1s;
+    }
+    
+    .toggle::before {
+      transform: translateY(-3px);
+    }
+    
+    .toggle::after {
+      transform: translateY(3px);
+    }
+    
+    .navigation.active .toggle::before {
+      transform: translateY(0px) rotate(-405deg);
+    }
+    
+    .navigation.active .toggle::after {
+      transform: translateY(0px) rotate(225deg);
+    }
+
+    .navigation ul{
+      position: absolute;
+      top: 2%;
+      left: 0;
+      width: 100%;
+    }
+    
+    .navigation ul li {
+      position: relative;
+      top: 35px;
+      list-style: none;
+      width: 100%;
+      margin: 50px 0;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    
+    .navigation ul li:hover {
+      background: #c17aff;
+      color: #222;
+    }
+    
+    .navigation ul li:nth-child(1) {
+      top: 8px;
+      margin-bottom: 30px;
+      background: none;
+    }
+    
+    .navigation ul li:not(:first-child):hover::before,
+    .navigation ul li:not(:first-child):hover::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      background: transparent;
+    }
+    
+    .navigation ul li:not(:first-child):hover::before {
+      top: -12px;
+      border-bottom-right-radius: 13px;
+      box-shadow: 4.5px 4.5px 0 4.5px #c17aff;
+    }
+    
+    .navigation ul li:not(:first-child):hover::after {
+      bottom: -12px;
+      border-top-right-radius: 13px;
+      box-shadow: 4.5px -4.5px 0 4.5px #c17aff;
+    }
+    
+    .navigation ul li a {
+      position: relative;
+      width: 100%;
+      display: flex;
+      text-decoration: none;
+      color: #c17aff;
+      font-weight: 400;
+    }
+    
+    .navigation ul li:hover:not(:first-child) a {
+      color: #f1f1f1;
+    }
+    
+    .navigation ul li a .icon {
+      position: relative;
+      display: block;
+      min-width: 32px;
+      height: 40px;
+      line-height: 45px;
+      text-align: center;
+    }
+    
+    .navigation ul li a .icon i {
+      font-size: 1.5em;
+    }
+    
+    .navigation ul li a .title {
+      position: relative;
+      display: block;
+      padding: 5px 15px;
+      height: 40px;
+      line-height: 30px;
+      text-align: start;
+      white-space: nowrap;
+    }
+  }
   
   
   
