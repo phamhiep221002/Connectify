@@ -14,7 +14,6 @@ export class ResetPasswordComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private accountService: AccountService
   ) {
     this.route.queryParams.subscribe(params => {

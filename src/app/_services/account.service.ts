@@ -33,7 +33,7 @@ export class AccountService {
         }
       })
     )
-  } 
+  }
   setCurrentUser(user: User) {
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
@@ -57,10 +57,10 @@ export class AccountService {
   }
   async forgotPassword(email: string): Promise<void> {
     const forgotPasswordDto = { email };
-    await this.http.post<any>(`${this.baseUrl}account/forgot-password`, forgotPasswordDto).toPromise();
+    await this.http.post(this.baseUrl + 'account/forgot-password', forgotPasswordDto, { responseType: 'text' }).toPromise();
   }
   async resetPassword(token: string, newPassword: string): Promise<void> {
     const resetPasswordDto = { token, newPassword };
-    await this.http.post<any>(`${this.baseUrl}account/reset-password`, resetPasswordDto).toPromise();
+    await this.http.post(this.baseUrl + 'account/reset-password', resetPasswordDto, { responseType: 'text' }).toPromise();
   }
 }
