@@ -61,6 +61,6 @@ export class AccountService {
   }
   async resetPassword(token: string, newPassword: string): Promise<void> {
     const resetPasswordDto = { token, newPassword };
-    await this.http.post<any>(`${this.baseUrl}reset-password`, resetPasswordDto).toPromise();
+    await this.http.post<any>(`${this.baseUrl}account/reset-password`, resetPasswordDto).toPromise();
   }
 }
