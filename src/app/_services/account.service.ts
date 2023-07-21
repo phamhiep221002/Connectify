@@ -55,4 +55,12 @@ export class AccountService {
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]))
   }
+  async forgotPassword(email: string): Promise<void> {
+    const forgotPasswordDto = { email };
+    await this.http.post<any>(`${this.baseUrl}account/forgot-password`, forgotPasswordDto).toPromise();
+  }
+  async resetPassword(token: string, newPassword: string): Promise<void> {
+    const resetPasswordDto = { token, newPassword };
+    await this.http.post<any>(`${this.baseUrl}reset-password`, resetPasswordDto).toPromise();
+  }
 }

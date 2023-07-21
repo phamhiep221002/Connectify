@@ -36,6 +36,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LocationComponent } from './location/location.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -67,7 +69,9 @@ import { LoginComponent } from './login/login.component';
     ConfirmDialogComponent,
     LocationComponent,
     SidebarComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserAnimationsModule,
