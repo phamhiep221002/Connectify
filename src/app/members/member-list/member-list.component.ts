@@ -33,6 +33,7 @@ export class MemberListComponent implements OnInit {
         console.log(error); // Xử lý lỗi tùy ý
       }
     );
+    
   }
 
   loadMembers() {
@@ -48,6 +49,13 @@ export class MemberListComponent implements OnInit {
       })
     }
   }
+  loadAllMembers() {
+    this.userParams!.minAge = 18;   // or whatever your minimum age is
+    this.userParams!.maxAge = 99;   // or whatever your maximum age is
+    this.userParams!.gender = '';   // reset the gender filter
+    this.userParams!.orderBy = '';  // reset the order
+    this.loadMembers();            // now load the members
+}
 
   resetFilters() {
     this.userParams = this.memberService.resetUserParams();

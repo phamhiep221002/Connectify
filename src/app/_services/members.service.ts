@@ -26,8 +26,10 @@ export class MembersService {
           this.userParams = new UserParams(user);
           this.user = user;
         }
+        
       }
     })
+    
   }
 
   getUserParams() {
