@@ -106,7 +106,7 @@ export class MembersService {
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'likes', params, this.http);
   }
-  getGender(): Observable<any> {
+  getGender() {
     return this.http.get<any>(`${this.baseUrl}gender`);
   }
 

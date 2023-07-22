@@ -43,7 +43,7 @@ export class AccountService {
     this.presenceService.createHubConnection(user);
   }
   getGender(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}gender`);
+    return this.http.get(`${this.baseUrl}gender`);
   }
 
   logout() {

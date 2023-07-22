@@ -57,10 +57,10 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();            // now load the members
 }
 
-  resetFilters() {
-    this.userParams = this.memberService.resetUserParams();
-    this.loadMembers();
-  }
+  // resetFilters() {
+  //   this.userParams = this.memberService.resetUserParams();
+  //   this.loadMembers();
+  // }
 
   pageChanged(event: any) {
     if (this.userParams && this.userParams?.pageNumber !== event.page) {
