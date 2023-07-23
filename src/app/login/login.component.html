@@ -7,6 +7,7 @@
 </div>
 
 
+<div class="container">
 <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="on">
   
   <h1>Login</h1>
@@ -29,15 +30,13 @@
       type="password" 
       placeholder="Enter your password">
     </div>
-    <a class="forgot">Forgot password?</a>
+    <a  class="forgot" routerLink="/forgot-password" routerLinkActive="active">Forgot Password?</a>
   </div>
   <button class="login-btn" type="submit">
     LOGIN
   </button>
   <div class="alternative-signup">
-    <p>Not a member? <span>Signup</span></p>
-  </div>
-  <div class="alternative-signup">
-    <p routerLink="/forgot-password" routerLinkActive="active"><span>Forgot Password?</span></p>
+    <p>Not a member? <span routerLink="/register" routerLinkActive="active">Signup</span></p>
   </div>
 </form>
+</div>
