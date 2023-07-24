@@ -65,10 +65,9 @@ export class AccountService {
     await this.http.post(this.baseUrl + 'account/forgot-password', forgotPasswordDto, { responseType: 'text' }).toPromise();
   }
 
-  resetPassword(param: ResetPasswordDto) {
-    debugger
-    return this.http.put<OperationResult>(this.baseUrl + "account/reset-password", param);
+  async resetPassword(param: ResetPasswordDto): Promise<void> {
+    const url = `${this.baseUrl}account/reset-password/${param.email}/${param.token}`;
+    param.token = decodeURIComponent(param.token)
+    await this.http.put(url, param, { responseType: 'text' }).toPromise();
   }
- 
-
 }

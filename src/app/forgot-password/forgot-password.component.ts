@@ -20,8 +20,6 @@ export class ForgotPasswordComponent {
       this.message = 'Password reset link sent to your email.';
       this.toastr.success(this.message, 'Success'); // Show success message
     } catch (error: any) {
-      this.message = 'Error: ' + error.message;
-      this.toastr.error(this.message, 'Error'); // Show error message
     }
   }
 }

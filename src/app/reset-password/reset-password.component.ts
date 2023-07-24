@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { Location } from '@angular/common';
 import { ResetPasswordDto } from '../_models/resetPasswordDto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -20,33 +21,31 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private accountService: AccountService,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      const currentURL = this.location.path();        
+      const currentURL = this.location.path();
       // Tách thông tin email và token
       const emailTokenArr = currentURL.split("/reset-password/email")[1].split("&token");
       this.email = decodeURIComponent(emailTokenArr[0]);
       this.token = emailTokenArr[1];
     });
   }
-
- param: ResetPasswordDto = <ResetPasswordDto>{
-  };
-  onSubmit() {
+  param: ResetPasswordDto = <ResetPasswordDto>{};
+  async onSubmit() {
     this.message = '';
-    this.param.email = "donmqpk00888@gmail.com"
-    this.param.token = "abc"
+    this.param.email = this.email
+    this.param.token = this.token
     this.param.newPassword = this.newPassword
-    this.accountService.resetPassword(this.param).subscribe({
-      next: (result:any) => {
-        if (result.isSuccess) {
-          this.message = 'Password reset successfully. Please login again.';
-        }
-      },
-      error: (err: any) => this.message = 'Error: ' + err.message // Handle error messages from the server
-    })
+    try {
+      await this.accountService.resetPassword(this.param);
+      this.submitted=true;
+      this.message = 'Password reset successfully. Please login again.';
+      this.toastr.success(this.message, 'Success');
+    } catch (err: any) {
+    }
   }
 }
