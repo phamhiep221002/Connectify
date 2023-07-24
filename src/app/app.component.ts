@@ -18,10 +18,11 @@ export class AppComponent implements OnInit{
   longitude: number | undefined;
   foundCity: string | undefined;
   accessDenied: boolean = false;
-  isLoggedIn = false;
-  isLocationAllowed = false;
 
-  constructor (private accountService: AccountService, private toastr: ToastrService, private router: Router ){}
+  constructor (private accountService: AccountService,
+     private toastr: ToastrService,
+      private router: Router,
+       private locationService: LocationService ){}
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit{
           },
           (error: GeolocationPositionError) => {
             this.accessDenied = true;
-            this.toastr.error('Please allow location access to use the app.', 'Location Access Denied');
+            this.toastr.warning('Please allow location access to use the app.', 'Location Access Denied');
             reject(error);
           }
         );

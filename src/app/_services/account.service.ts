@@ -69,5 +69,6 @@ export class AccountService {
     debugger
     return this.http.put<OperationResult>(this.baseUrl + "account/reset-password", param);
   }
+ 
 
 }

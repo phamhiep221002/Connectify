@@ -22,21 +22,21 @@ export class LocationComponent implements OnInit {
   }
   
 
-  searchCity() {
-    this.locationService.getCityInfo(this.cityName)
-      .subscribe((data: any) => {
-        if (data.results.length > 0) {
-          this.latitude = data.results[0].geometry.lat;
-          this.longitude = data.results[0].geometry.lng;
-          this.foundCity = data.results[0].components.city || data.results[0].components.city_district;
-        } else {
-          this.foundCity = 'Not found';
-        }
-      }, error => {
-        console.error(error);
-        this.foundCity = 'Error occurred';
-      });
-  }
+  // searchCity() {
+  //   this.locationService.getCityInfo(this.cityName)
+  //     .subscribe((data: any) => {
+  //       if (data.results.length > 0) {
+  //         this.latitude = data.results[0].geometry.lat;
+  //         this.longitude = data.results[0].geometry.lng;
+  //         this.foundCity = data.results[0].components.city || data.results[0].components.city_district;
+  //       } else {
+  //         this.foundCity = 'Not found';
+  //       }
+  //     }, error => {
+  //       console.error(error);
+  //       this.foundCity = 'Error occurred';
+  //     });
+  // }
 
   getLocation() {
     if ('geolocation' in navigator) {
