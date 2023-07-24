@@ -11,7 +11,7 @@
     <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" [label]="'Date of Birth'"
     [maxDate]="maxDate" class="input"></app-date-picker>
     <select [formControl]="$any(registerForm.controls['genderId'])" class="form-control gender">
-        <option style="display: none;"[value]="null" disabled selected>Gender</option>
+        <option style="display: none; color: rgb(134 142 150);"[value]="null" disabled selected>Gender</option>
         <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</option>
     </select>
     <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'Email'" class="input"></app-text-input>
@@ -29,7 +29,7 @@
             </li>
         </ul>
     </div>
-    <div class="text-center">
+    <div class="text-center" style="margin-bottom: 15px;">
         <button [disabled]="!registerForm.valid" class="btn me-2 registerbtn" type="submit">Register</button>
         <button class="btn btn-default cancelbtn" type="button" routerLink="/" routerLinkActive="active">Back to Home</button>
     </div>
