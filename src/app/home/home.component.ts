@@ -10,7 +10,6 @@ import { AccountService } from '../_services/account.service';
 })
 export class HomeComponent implements OnInit {
   isLoggedIn = false;
-
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
@@ -18,4 +17,5 @@ export class HomeComponent implements OnInit {
       this.isLoggedIn = user !== null;
     });
   }
+  
 } 

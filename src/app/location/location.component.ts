@@ -42,11 +42,10 @@ export class LocationComponent implements OnInit {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position: GeolocationPosition) => {
-          console.log('aaa')
+          console.log(position)
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
           this.accessDenied = false; // Mở khóa nội dung trang web sau khi có quyền truy cập vị trí
-
           // Gọi service để lấy tên thành phố dựa trên vị trí hiện tại
           this.locationService.getCityInfoByCoords(this.latitude, this.longitude)
             .subscribe((data: any) => {

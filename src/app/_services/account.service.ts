@@ -1,9 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
+import { ResetPasswordDto } from '../_models/resetPasswordDto';
+import { OperationResult } from '../_models/operation-result';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  private emailSource = new BehaviorSubject<string | null>(null);
+  email$ = this.emailSource.asObservable();
 
   constructor(private http: HttpClient, private presenceService: PresenceService) { }
 
@@ -55,13 +59,15 @@ export class AccountService {
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]))
   }
-  forgotPassword(email: string) {
-    debugger
+
+  async forgotPassword(email: string): Promise<void> {
     const forgotPasswordDto = { email };
-    return this.http.post(this.baseUrl + 'account/forgot-password', forgotPasswordDto, { responseType: 'text' })
+    await this.http.post(this.baseUrl + 'account/forgot-password', forgotPasswordDto, { responseType: 'text' }).toPromise();
   }
-  resetPassword(token: string, newPassword: string) {
-    const resetPasswordDto = { token, newPassword };
-    return this.http.post(this.baseUrl + 'account/reset-password', resetPasswordDto, { responseType: 'text' })
+
+  resetPassword(param: ResetPasswordDto) {
+    debugger
+    return this.http.put<OperationResult>(this.baseUrl + "account/reset-password", param);
   }
+
 }

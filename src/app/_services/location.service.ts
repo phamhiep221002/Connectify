@@ -1,14 +1,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocationService {
+export class LocationService implements OnInit {
   private apiKey = '25839ee5018e4811b0f01ff59ae7e9eb';
   private apiUrl = 'https://api.opencagedata.com/geocode/v1/json';
+  
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   getCityInfo(cityName: string) {
     const url = `${this.apiUrl}?q=${encodeURIComponent(cityName)}&key=${this.apiKey}`;
