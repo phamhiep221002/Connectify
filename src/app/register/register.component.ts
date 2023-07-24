@@ -33,13 +33,13 @@ export class RegisterComponent implements OnInit{
 
   initializeForm() {
     this.registerForm = this.fb.group({
-      genderId: [],
-      username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', Validators.required],
       knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
+      genderId: [],
+      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', [Validators.required, 
         Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
