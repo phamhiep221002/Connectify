@@ -21,7 +21,7 @@
     top: 5%;
     justify-content: center;
     margin-bottom: 10%;
-    margin-left: 5%;
+    align-items: center;
 }
 
 form{
@@ -226,7 +226,7 @@ h1 {
         display: flex;
         top: 5%;
         justify-content: center;
-        margin-left: 10%;
+        align-items: center;
     }
 
     form{
@@ -254,7 +254,7 @@ h1 {
         display: flex;
         top: 5%;
         justify-content: center;
-        margin-left: 10%;
+        align-items: center;
         margin-bottom: 10%;
     }
     
@@ -284,7 +284,7 @@ h1 {
         display: flex;
         top: 5%;
         justify-content: center;
-        margin-left: 20px;
+        align-items: center;
     }
 
     form{
