@@ -109,7 +109,4 @@ export class MembersService {
   getGender() {
     return this.http.get<any>(`${this.baseUrl}gender`);
   }
-
-
-
 }

@@ -26,32 +26,11 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.setCurrentUser();
-    this.getLocation();
   }
   setCurrentUser() {
     const userString = localStorage.getItem('user');
     if (!userString) return;
     const user: User = JSON.parse(userString);
     this.accountService.setCurrentUser(user); 
-  }
-  getLocation(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (position: GeolocationPosition) => {
-            this.accessDenied = false;
-            resolve(position);
-          },
-          (error: GeolocationPositionError) => {
-            this.accessDenied = true;
-            this.toastr.warning('Please allow location access to use the app.', 'Location Access Denied');
-            reject(error);
-          }
-        );
-      } else {
-        this.accessDenied = true;
-        reject('Geolocation is not available in this browser.');
-      }
-    });
   }
 }

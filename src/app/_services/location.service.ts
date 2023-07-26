@@ -28,11 +28,6 @@ export class LocationService implements OnInit {
     const url = `${this.apiUrl}?q=${latitude}+${longitude}&key=${this.apiKey}`;
     return this.http.get(url);
   }
-  sendUserLocation(latitude: number, longitude: number): Observable<any> {
-    debugger
-    const userLocation = { latitude, longitude };
-    return this.http.post<any>(`${this.baseUrl}account/update-location`, userLocation);
-  }
   getLocation(): Promise<any> {
     return new Promise((resolve, reject) => {
       if ('geolocation' in navigator) {
