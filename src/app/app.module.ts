@@ -9,7 +9,6 @@ import { NavComponent } from './nav/nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -33,14 +32,10 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { LocationComponent } from './location/location.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -48,7 +43,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     NavComponent,
     HomeComponent,
     RegisterComponent,
-    MemberListComponent,
     MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
@@ -67,7 +61,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     PhotoManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
-    LocationComponent,
     SidebarComponent,
     LoginComponent,
     ForgotPasswordComponent,

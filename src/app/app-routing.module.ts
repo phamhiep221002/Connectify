@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard} from './_guards/auth.guard';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
@@ -28,8 +27,7 @@ const routes: Routes = [
   {path: '', 
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
-    children: [
-      {path: 'members', component: MemberListComponent},
+    children: [     
       {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'lists', component: ListsComponent},
@@ -44,7 +42,6 @@ const routes: Routes = [
   {path: '**', component: NotFoundComponent, pathMatch: 'full'},
   {path: '**', component: MessagesComponent},
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

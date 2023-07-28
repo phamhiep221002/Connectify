@@ -15,6 +15,7 @@ export class LocationService{
   baseUrl = environment.apiUrl;
   locationDto: LocationDto = { latitude: 0, longitude: 0 };
   requestingLocation = false;
+  private locationPermissionGranted = false;
   
 
   constructor(private http: HttpClient, private toastr: ToastrService, private router: Router) { }
@@ -42,15 +43,26 @@ export class LocationService{
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           this.updateLocation(latitude, longitude);
+        }
+      );
+    }
+  }
+  checkLocation(): void {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.locationPermissionGranted = true;
         },
         (error) => {
           this.toastr.error('Failed to get location. Please manually share your location.', 'Error');
-          this.router.navigateByUrl('/members');
+          this.router.navigateByUrl('/');
+          this.locationPermissionGranted = false;
         }
       );
     } else {
       this.toastr.error('Your browser does not support Geolocation API. Please manually share your location.', 'Error');
-      this.router.navigateByUrl('/members');
+      this.router.navigateByUrl('/');
+      this.locationPermissionGranted = false;
     }
   }
 
@@ -58,12 +70,14 @@ export class LocationService{
     const locationDto = { latitude: latitude, longitude: longitude };
     this.getLocation(locationDto).subscribe(
       (_) => {
-        console.log('Location updated successfully.');
-        this.router.navigateByUrl('/members');
+        this.router.navigateByUrl('/');
       },
       (error) => {
-        this.router.navigateByUrl('/members');
+        this.router.navigateByUrl('/');
       }
     );
+  }
+  isLocationPermissionGranted(): boolean {
+    return this.locationPermissionGranted;
   }
 }

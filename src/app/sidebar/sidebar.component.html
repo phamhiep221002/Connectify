@@ -10,14 +10,14 @@
       </a>
     </li>
     <ng-container *ngIf="accountService.currentUser$  | async">
-    <li class="sidebar-content">
+    <!-- <li class="sidebar-content">
       <a  routerLink="/members" 
       [routerLinkActiveOptions]="{exact: true}"
           routerLinkActive="active">
           <span class="icon"><i class="fa fa-id-card-o"></i></span>
           <span class="title">Matches</span>
         </a>
-    </li>
+    </li> -->
     <li class="sidebar-content">
       <a routerLink="/messages" routerLinkActive="active">
         <span class="icon"><i class="fa fa-comments"></i></span>

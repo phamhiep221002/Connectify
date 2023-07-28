@@ -17,10 +17,8 @@ export class AccountService {
   private emailSource = new BehaviorSubject<string | null>(null);
   email$ = this.emailSource.asObservable();
 
-  constructor(private http: HttpClient, private presenceService: PresenceService, private locationService: LocationService) {
+  constructor(private http: HttpClient, private presenceService: PresenceService) {
   }
-
-  
 
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
@@ -28,8 +26,6 @@ export class AccountService {
         const user = response;
         if (user) {
           this.setCurrentUser(user);
-          localStorage.setItem('token', user.token);
-          console.log('Token saved in localStorage:', user.token);
         }
       })
     )
@@ -57,7 +53,6 @@ export class AccountService {
 
   logout() {
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.presenceService.stopHubConnection();
   }
