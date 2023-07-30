@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +36,7 @@ import { JwtInterceptor } from '../_interceptor/jwt.interceptor';
 import { LoadingInterceptor } from '../_interceptors/loading.interceptor';
 import { RolesModalComponent } from './admin/modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './admin/modals/confirm-dialog/confirm-dialog.component';
+import { MemberListComponent } from './member-list/member-list.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ConfirmDialogComponent } from './admin/modals/confirm-dialog/confirm-di
     SidebarComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -77,10 +79,10 @@ import { ConfirmDialogComponent } from './admin/modals/confirm-dialog/confirm-di
     NgxWebstorageModule.forRoot()
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
