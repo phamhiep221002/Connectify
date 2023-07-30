@@ -4,6 +4,7 @@
 
 .navbar-brand {
     font-family: "Satoshi", sans-serif;
+    font-size: 1.7em;
 }
 
 .nav-item {
@@ -47,4 +48,5 @@ img {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
