@@ -4,19 +4,21 @@ import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MessagesComponent } from './messages/messages.component';
-import { AuthGuard} from './_guards/auth.guard';
+
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
-import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
+
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AuthGuard } from '../_guards/auth.guard';
+import { MemberDetailedResolver } from '../_resolvers/member-detailed.resolver';
+import { PreventUnsavedChangesGuard } from '../_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

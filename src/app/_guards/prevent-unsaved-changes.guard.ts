@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { MemberEditComponent } from '../members/member-edit/member-edit.component';
+
 import { ConfirmService } from '../_services/confirm.service';
+import { MemberEditComponent } from '../content/members/member-edit/member-edit.component';
 
 @Injectable({
   providedIn: 'root'

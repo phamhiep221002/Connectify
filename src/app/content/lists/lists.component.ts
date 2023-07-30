@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../_models/member';
-import { Pagination } from '../_models/pagination';
-import { MembersService } from '../_services/members.service';
-
+import { Member } from 'src/app/_models/member';
+import { Pagination } from 'src/app/_models/pagination';
+import { MembersService } from 'src/app/_services/members.service';
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',

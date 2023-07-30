@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../_services/account.service';
 import { Location } from '@angular/common';
-import { ResetPasswordDto } from '../_models/resetPasswordDto';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/_services/account.service';
+import { ResetPasswordDto } from 'src/app/_models/resetPasswordDto';
 
 @Component({
   selector: 'app-reset-password',
