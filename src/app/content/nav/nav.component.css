@@ -35,3 +35,16 @@
     margin: 10px;
     cursor: pointer;
 }
+
+img {
+    max-height: 40px;
+    display: inline;
+}
+
+.logo-brand {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
