@@ -25,7 +25,6 @@ import { NavComponent } from "./nav/nav.component";
 import { RegisterComponent } from "./register/register.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { NgxSliderModule } from "ngx-slider-v2";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
@@ -37,6 +36,7 @@ import { JwtInterceptor } from "../common/_interceptor/jwt.interceptor";
 import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
+import { NgxSliderModule } from "ngx-slider-v2";
 
 @NgModule({
   declarations: [

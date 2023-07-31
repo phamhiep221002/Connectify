@@ -16,11 +16,16 @@
     flex-direction: row;
 }
 
-.profile_img{
+.profile_image{
     width: 35px;
     height: 35px;
-    border-radius: 50%;
     cursor: pointer;
+}
+.avatar{
+    display: inline;
+    max-width: 35px;
+    max-height: 35px;
+    border-radius: 50%;
 }
 
 .profile_name{
@@ -33,11 +38,11 @@
 
 .username{
     text-decoration: none;
-    margin: 10px;
+    margin: 5px;
     cursor: pointer;
 }
 
-img {
+.logo-img {
     max-height: 40px;
     display: inline;
 }
@@ -46,7 +51,7 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
 }

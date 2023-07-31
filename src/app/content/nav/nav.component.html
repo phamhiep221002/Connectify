@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
     <div class="logo-brand">
-    <img src="../favicon.ico">
+    <img class="logo-img" src="../favicon.ico" alt="logo">
     <a class="navbar-brand" routerLink="/" routerLinkActive="active">Connectify</a>
     </div>
 
       <div class="profile" *ngIf="(accountService.currentUser$  | async) as user" dropdown>
           <div class="profile_image">
-            <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">
+            <img class="avatar" src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">
           </div>
           <div class="profile_name">
             <a class="dropdown-toggle text-light username" dropdownToggle>{{user.username | titlecase}}
