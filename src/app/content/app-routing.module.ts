@@ -17,7 +17,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AuthGuard } from '../_guards/auth.guard';
 import { MemberDetailedResolver } from '../_resolvers/member-detailed.resolver';
 import { PreventUnsavedChangesGuard } from '../_guards/prevent-unsaved-changes.guard';
-import { MemberListComponent } from './member-list/member-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

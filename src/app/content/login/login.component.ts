@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     }
     this.accountService.login(this.model).subscribe({
       next: (_) => {
-        this.locationService.getCurrentLocation();
+        this.router.navigateByUrl('/');
       },
       error: (error) => {
         console.error(error);

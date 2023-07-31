@@ -9,7 +9,7 @@
 
       <div class="profile" *ngIf="(accountService.currentUser$  | async) as user" dropdown>
           <div class="profile_image">
-          <img src="../assets/user.png" class="profile_img">
+            <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo">
           </div>
           <div class="profile_name">
             <a class="dropdown-toggle text-light username" dropdownToggle>{{user.username | titlecase}}

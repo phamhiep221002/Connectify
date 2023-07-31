@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -36,7 +35,9 @@ import { JwtInterceptor } from '../_interceptor/jwt.interceptor';
 import { LoadingInterceptor } from '../_interceptors/loading.interceptor';
 import { RolesModalComponent } from './admin/modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './admin/modals/confirm-dialog/confirm-dialog.component';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { NgxSliderModule } from 'ngx-slider-v2';
+
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { MemberListComponent } from './member-list/member-list.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    NgxSliderModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

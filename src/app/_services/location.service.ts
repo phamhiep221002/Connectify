@@ -32,25 +32,13 @@ export class LocationService{
   getLocation(locationDto: LocationDto): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}users/update-location`, locationDto);
   }
-  requestLocation(): void {
-    this.requestingLocation = true;
-    this.getCurrentLocation();
-  }
-  getCurrentLocation(): void {
+  checkLocation(): void {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           this.updateLocation(latitude, longitude);
-        }
-      );
-    }
-  }
-  checkLocation(): void {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
           this.locationPermissionGranted = true;
         },
         (error) => {
@@ -69,7 +57,7 @@ export class LocationService{
   updateLocation(latitude: number, longitude: number): void {
     const locationDto = { latitude: latitude, longitude: longitude };
     this.getLocation(locationDto).subscribe(
-      (_) => {
+      (next) => {
         this.router.navigateByUrl('/');
       },
       (error) => {

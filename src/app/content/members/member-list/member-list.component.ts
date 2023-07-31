@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LocationDto } from 'src/app/_models/locationDto';
+import { Options } from '@angular-slider/ngx-slider';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
-import { User } from 'src/app/_models/user';
 import { UserParams } from 'src/app/_models/userParams';
-import { AccountService } from 'src/app/_services/account.service';
 import { LocationService } from 'src/app/_services/location.service';
 import { MembersService } from 'src/app/_services/members.service';
+
 
 @Component({
   selector: 'app-member-list',
@@ -20,14 +18,21 @@ export class MemberListComponent implements OnInit {
   userParams: UserParams | undefined;
   genders: any[] = [];
 
+  minValue: number = 18;
+  maxValue: number = 99;
+  ageSliderOptions: Options = {
+    floor: 18,
+    ceil: 99
+ };
+ ageRangeSliderValue: number[] = [];
   constructor(private memberService: MembersService, 
-    public locationService: LocationService, 
-    private accountService: AccountService) {
+    public locationService: LocationService) {
     this.userParams = this.memberService.getUserParams();
   }
 
   ngOnInit(): void {
     this.loadMembers();
+    this.ageRangeSliderValue = [this.userParams!.minAge, this.userParams!.maxAge];
     this.memberService.getGender().subscribe(
       (response) => {
         this.genders = response;
@@ -38,6 +43,7 @@ export class MemberListComponent implements OnInit {
     );
     this.locationService.checkLocation();
   }
+
 
   loadMembers() {
     if (this.userParams) {
