@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { Observable, of } from 'rxjs';
-
-import { ConfirmService } from '../_services/confirm.service';
-import { MemberEditComponent } from '../content/members/member-edit/member-edit.component';
+import { MemberEditComponent } from 'src/app/content/members/member-edit/member-edit.component';
+import { ConfirmService } from '../../_services/confirm.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +16,4 @@ export class PreventUnsavedChangesGuard implements CanDeactivate<MemberEditCompo
     }
     return of(true);
   }
-  
 }

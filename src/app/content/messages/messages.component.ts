@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'src/app/_models/message';
-import { Pagination } from 'src/app/_models/pagination';
-import { MessageService } from 'src/app/_services/message.service';
+import { Message } from 'src/app/common/_models/message';
+import { Pagination } from 'src/app/common/_models/pagination';
+import { MessageService } from 'src/app/common/_services/message.service';
+
 
 @Component({
   selector: 'app-messages',

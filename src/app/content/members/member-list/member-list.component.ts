@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
-import { Member } from 'src/app/_models/member';
-import { Pagination } from 'src/app/_models/pagination';
-import { UserParams } from 'src/app/_models/userParams';
-import { LocationService } from 'src/app/_services/location.service';
-import { MembersService } from 'src/app/_services/members.service';
+import { Member } from 'src/app/common/_models/member';
+import { Pagination } from 'src/app/common/_models/pagination';
+import { UserParams } from 'src/app/common/_models/userParams';
+import { MembersService } from 'src/app/common/_services/members.service';
+import { LocationService } from 'src/app/common/_services/location.service';
 
 
 @Component({

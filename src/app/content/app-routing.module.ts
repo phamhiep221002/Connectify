@@ -13,9 +13,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AuthGuard } from '../_guards/auth.guard';
-import { MemberDetailedResolver } from '../_resolvers/member-detailed.resolver';
-import { PreventUnsavedChangesGuard } from '../_guards/prevent-unsaved-changes.guard';
+import { AuthGuard } from '../common/_guards/auth.guard';
+import { MemberDetailedResolver } from '../common/_resolvers/member-detailed.resolver';
+import { PreventUnsavedChangesGuard } from '../common/_forms/text-input/prevent-unsaved-changes.guard';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

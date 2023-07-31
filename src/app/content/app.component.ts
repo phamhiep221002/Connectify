@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AccountService } from '../_services/account.service';
-import { LocationService } from '../_services/location.service';
-import { User } from '../_models/user';
+import { AccountService } from '../common/_services/account.service';
+import { LocationService } from '../common/_services/location.service';
+import { User } from '../common/_models/user';
+
 
 @Component({
   selector: 'app-root',
