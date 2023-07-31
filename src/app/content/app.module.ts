@@ -11,7 +11,6 @@ import { RegisterComponent } from './register/register.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
@@ -48,7 +47,6 @@ import { NgxSliderModule } from 'ngx-slider-v2';
     MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
-    TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,

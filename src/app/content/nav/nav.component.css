@@ -4,6 +4,7 @@
 
 .navbar-brand {
     font-family: "Satoshi", sans-serif;
+    font-size: 1.7em;
 }
 
 .nav-item {
@@ -35,8 +36,17 @@
     margin: 10px;
     cursor: pointer;
 }
+
 img {
-    max-height: 50px;
-    border: 2px solid white;
+    max-height: 40px;
     display: inline;
-}   
+}
+
+.logo-brand {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
