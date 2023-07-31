@@ -26,10 +26,10 @@ export class MembersService {
           this.userParams = new UserParams(user);
           this.user = user;
         }
-        
+
       }
     })
-    
+
   }
 
   getUserParams() {
@@ -54,11 +54,13 @@ export class MembersService {
     if (response) return of(response);
 
     let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
-    
+
     params = params.append('minAge', userParams.minAge);
     params = params.append('maxAge', userParams.maxAge);
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
+    params = params.append('latitude', userParams.latitude?.toString());
+    params = params.append('longitude', userParams.longitude?.toString());
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http).pipe(
       map(response => {
@@ -94,7 +96,7 @@ export class MembersService {
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
-  
+
   addLike(username: string) {
     return this.http.post(this.baseUrl + 'likes/' + username, {});
   }

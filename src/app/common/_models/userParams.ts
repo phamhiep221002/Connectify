@@ -7,7 +7,8 @@ export class UserParams {
     pageNumber = 1;
     pageSize = 5;
     orderBy = 'lastActive';
-
+    latitude!: number;
+    longitude!: number;
     constructor(user: User) {
         if (user.gender === 'female') {
             this.gender = 'male';
