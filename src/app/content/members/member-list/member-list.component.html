@@ -10,8 +10,8 @@
                 <ngx-slider [(value)]="userParams.minAge" [(highValue)]="userParams.maxAge" [options]="ageSliderOptions" 
                             (valueChange)="loadMembers()" (highValueChange)="loadMembers()"></ngx-slider>
                 <label class="col-form-label">Distance: </label>
-                <ngx-slider [(value)]="userParams.latitude" [(highValue)]="userParams.longitude" [options]=" distanceSliderOptions" 
-                (valueChange)="loadMembers()" (highValueChange)="loadMembers()"></ngx-slider>
+                <ngx-slider [(value)]="userParams.distance" [options]="distanceSliderOptions" 
+                (valueChange)="loadMembers()"></ngx-slider>
                 <div class="d-flex px-2">
                     <label class="col-form-label me-2">Show: </label>
                     <select name="gender" style="width: 150px" class="form-select ms-1" [(ngModel)]="userParams.gender" 

@@ -23,13 +23,12 @@ export class MemberListComponent implements OnInit {
     floor: 18,
     ceil: 99
   };
-  ageRangeSliderValue: number[] = [];
-  
   distanceSliderOptions: Options = {
-    floor: 0,
+    floor: 1,
     ceil: 100
-  };
-  distanceSliderValue: number[] = [];
+};
+distanceSliderValue = 50;
+  ageRangeSliderValue: number[] = [];
   constructor(
     private memberService: MembersService,
     public locationService: LocationService,
@@ -40,7 +39,7 @@ export class MemberListComponent implements OnInit {
   ngOnInit(): void {
     this.loadMembers();
     this.ageRangeSliderValue = [this.userParams!.minAge, this.userParams!.maxAge];
-    this.distanceSliderValue =[this.userParams!.latitude, this.userParams!.longitude];;
+    this.distanceSliderValue = this.userParams!.distance;
     this.memberService.getGender().subscribe(
       (response) => {
         this.genders = response;
@@ -73,8 +72,6 @@ export class MemberListComponent implements OnInit {
     this.userParams!.maxAge = 99;   // or whatever your maximum age is
     this.userParams!.gender = '';   // reset the gender filter
     this.userParams!.orderBy = '';  // reset the order
-    this.userParams?.latitude;
-    this.userParams?.longitude;
     this.loadMembers();            // now load all members
   }
 
