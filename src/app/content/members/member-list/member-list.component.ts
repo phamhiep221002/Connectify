@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { Member } from 'src/app/common/_models/member';
 import { Pagination } from 'src/app/common/_models/pagination';
 import { UserParams } from 'src/app/common/_models/userParams';
 import { MembersService } from 'src/app/common/_services/members.service';
 import { LocationService } from 'src/app/common/_services/location.service';
-import { LocationDto } from 'src/app/common/_models/locationDto';
-
+declare var H: any;
 
 @Component({
   selector: 'app-member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.css']
 })
-export class MemberListComponent implements OnInit {
+export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  @ViewChild('mapContainer') 
+  public mapElement!: ElementRef;
+  private platform: any;
+  private map: any;
+  private apikey = "Nqpc6uq6FCCCEeAliAwEhlsxGEJxB7y48MGkS07jyts";
   members: Member[] = [];
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
@@ -26,17 +29,20 @@ export class MemberListComponent implements OnInit {
   distanceSliderOptions: Options = {
     floor: 1,
     ceil: 100
-};
-distanceSliderValue = 50;
+  };
+  distanceSliderValue = 100;
   ageRangeSliderValue: number[] = [];
   constructor(
     private memberService: MembersService,
     public locationService: LocationService,
   ) {
     this.userParams = this.memberService.getUserParams();
+    this.platform = new H.service.Platform({
+      "apikey": this.apikey
+    });
   }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.loadMembers();
     this.ageRangeSliderValue = [this.userParams!.minAge, this.userParams!.maxAge];
     this.distanceSliderValue = this.userParams!.distance;
@@ -51,6 +57,43 @@ distanceSliderValue = 50;
     this.locationService.checkLocation();
   }
 
+  ngAfterViewInit(): void {
+    this.loadMap();
+  }
+
+  ngAfterViewChecked(): void {
+    if (!this.map && this.mapElement && this.mapElement.nativeElement) {
+      this.loadMap();
+    }
+  }
+
+  private loadMap(): void {
+    if (this.mapElement && this.mapElement.nativeElement) {
+      const defaultLayers = this.platform.createDefaultLayers();
+      this.map = new H.Map(
+        this.mapElement.nativeElement,
+        defaultLayers.vector.normal.map,
+        {
+          zoom: 4,
+          center: { lat: 10.762622, lng: 106.660172 }
+        }
+      );
+      let mapEvents = new H.mapevents.MapEvents(this.map);
+
+      let behavior = new H.mapevents.Behavior(mapEvents);
+    
+      let ui = H.ui.UI.createDefault(this.map, defaultLayers);
+      this.map.addEventListener('tap', (evt: any) => {
+        const coord = this.map.screenToGeo(evt.currentPointer.viewportX, evt.currentPointer.viewportY);
+        console.log(`Clicked at ${Math.abs(coord.lat.toFixed(4))} ${Math.abs(coord.lng.toFixed(4))}`);
+        if (this.userParams) {
+          this.userParams.currentLatitude = coord.lat;
+          this.userParams.currentLongitude = coord.lng;
+          this.loadMembers();
+        }
+      });
+    }
+  }
 
   loadMembers() {
     if (this.userParams) {
@@ -67,14 +110,10 @@ distanceSliderValue = 50;
       });
     }
   }
-  loadAllMembers() {
-    this.userParams!.minAge = 18;   // or whatever your minimum age is
-    this.userParams!.maxAge = 99;   // or whatever your maximum age is
-    this.userParams!.gender = '';   // reset the gender filter
-    this.userParams!.orderBy = '';  // reset the order
-    this.loadMembers();            // now load all members
+  resetFilters() {
+    this.userParams = this.memberService.resetUserParams();
+    this.loadMembers();
   }
-
   pageChanged(event: any) {
     if (this.userParams && this.userParams?.pageNumber !== event.page) {
       this.userParams.pageNumber = event.page;

@@ -7,7 +7,6 @@ import { ConfirmDialogComponent } from "./admin/modals/confirm-dialog/confirm-di
 import { RolesModalComponent } from "./admin/modals/roles-modal/roles-modal.component";
 import { PhotoManagementComponent } from "./admin/photo-management/photo-management.component";
 import { UserManagementComponent } from "./admin/user-management/user-management.component";
-
 import { NotFoundComponent } from "./errors/not-found/not-found.component";
 import { ServerErrorComponent } from "./errors/server-error/server-error.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
@@ -76,7 +75,7 @@ import { NgxSliderModule } from "ngx-slider-v2";
     ReactiveFormsModule,
     SharedModule,
     NgxWebstorageModule.forRoot(),
-    NgxSliderModule,
+    NgxSliderModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

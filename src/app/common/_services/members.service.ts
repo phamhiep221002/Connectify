@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, of, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -51,15 +51,16 @@ export class MembersService {
     const response = this.memberCache.get(Object.values(userParams).join('-'));
 
     if (response) return of(response);
-
     let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
-debugger
     params = params.append('minAge', userParams.minAge);
     params = params.append('maxAge', userParams.maxAge);
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
     params = params.append('distance', userParams.distance);
-
+    if(userParams.currentLatitude && userParams.currentLongitude != null){
+    params = params.append('currentLatitude', userParams.currentLatitude);
+    params = params.append('currentLongitude', userParams.currentLongitude);
+    }
     return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http).pipe(
       map(response => {
         this.memberCache.set(Object.values(userParams).join('-'), response);

@@ -7,7 +7,9 @@ export class UserParams {
     pageNumber = 1;
     pageSize = 6;
     orderBy = 'lastActive';
-    distance = 50; 
+    distance = 100;
+    currentLatitude!: number;
+    currentLongitude!: number;
     constructor(user: User) {
         if (user.gender === '') {
             this.gender = '';

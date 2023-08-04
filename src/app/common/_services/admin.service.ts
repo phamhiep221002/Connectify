@@ -19,4 +19,11 @@ export class AdminService {
     return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' 
       + username + '?roles=' + roles, {});
   }
+  blockUser(username: string) {
+    return this.http.put(this.baseUrl + 'admin/block/' + username, {});
+  }
+  
+  unblockUser(username: string) {
+    return this.http.put(this.baseUrl + 'admin/unblock/' + username, {});
+  }
 }

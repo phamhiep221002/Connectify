@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit{
     const values = {...this.registerForm.value, dateOfBirth: dob};
     this.accountService.register(values).subscribe({
       next: () => {
-        this.router.navigateByUrl('/members')
+        this.router.navigateByUrl('/')
       },
       error: error => {
         this.validationErrors = error
