@@ -75,7 +75,7 @@ export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChec
         this.mapElement.nativeElement,
         defaultLayers.vector.normal.map,
         {
-          zoom: 4,
+          zoom: 2,
           center: { lat: 10.762622, lng: 106.660172 }
         }
       );
