@@ -15,6 +15,7 @@ declare var H: any;
 export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('mapContainer') 
   public mapElement!: ElementRef;
+  private currentMarker: any; 
   private platform: any;
   private map: any;
   private apikey = "Nqpc6uq6FCCCEeAliAwEhlsxGEJxB7y48MGkS07jyts";
@@ -91,6 +92,11 @@ export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChec
           this.userParams.currentLongitude = coord.lng;
           this.loadMembers();
         }
+        if (this.currentMarker) {
+          this.map.removeObject(this.currentMarker);
+        }
+        this.currentMarker = new H.map.Marker({ lat: coord.lat, lng: coord.lng });
+        this.map.addObject(this.currentMarker);
       });
     }
   }
@@ -111,6 +117,12 @@ export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChec
     }
   }
   resetFilters() {
+    if (this.currentMarker) {
+      this.map.removeObject(this.currentMarker);
+      this.currentMarker = null;
+    }
+    this.map.setCenter({ lat: 10.762622, lng: 106.660172 });
+    this.map.setZoom(4);
     this.userParams = this.memberService.resetUserParams();
     this.loadMembers();
   }
