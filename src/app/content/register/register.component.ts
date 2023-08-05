@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ToastrService } from 'ngx-toastr';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/common/_services/account.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit{
   validationErrors: string[] | undefined;
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
-    private fb: FormBuilder, private router: Router) { }
+    private fb: FormBuilder, private router: Router, private recaptchaV3Service: ReCaptchaV3Service) { }
     genders: any[] = [];
 
   ngOnInit(): void {
@@ -76,6 +77,21 @@ export class RegisterComponent implements OnInit{
     let theDob = new Date(dob);
     return new Date(theDob.setMinutes(theDob.getMinutes()-theDob.getTimezoneOffset()))
       .toISOString().slice(0,10);
+  }
+
+  public send(form: NgForm): void {
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+      return;
+    }
+
+    this.recaptchaV3Service.execute('importantAction')
+    .subscribe((token: string) => {
+      debugger
+      console.debug(`Token [${token}] generated`);
+    });
   }
 }
 
