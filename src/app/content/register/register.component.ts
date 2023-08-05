@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/common/_services/account.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit{
   validationErrors: string[] | undefined;
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
-    private fb: FormBuilder, private router: Router, private recaptchaV3Service: ReCaptchaV3Service) { }
+    private fb: FormBuilder, private router: Router) { }
     genders: any[] = [];
 
   ngOnInit(): void {

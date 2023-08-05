@@ -36,8 +36,8 @@ import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
 import { NgxSliderModule } from "ngx-slider-v2";
-import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
-import { environment } from "src/environments/environment";
+// import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+// import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -78,14 +78,14 @@ import { environment } from "src/environments/environment";
     SharedModule,
     NgxWebstorageModule.forRoot(),
     NgxSliderModule,
-    RecaptchaV3Module
+    // RecaptchaV3Module
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    { provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: environment.recaptcha.siteKey, }
+    // { provide: RECAPTCHA_V3_SITE_KEY,
+    //   useValue: environment.recaptcha.siteKey, }
   ],
   bootstrap: [AppComponent]
 })
