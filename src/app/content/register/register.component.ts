@@ -86,10 +86,8 @@ export class RegisterComponent implements OnInit{
       }
       return;
     }
-
     this.recaptchaV3Service.execute('importantAction')
     .subscribe((token: string) => {
-      debugger
       console.debug(`Token [${token}] generated`);
     });
   }
