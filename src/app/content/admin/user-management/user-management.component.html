@@ -16,8 +16,8 @@
                 <td>{{user.isBlocked ? 'Blocked' : 'Active'}}</td>
                 <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>              
                 <td>
-                    <input type="checkbox" [checked]="user.isBlocked" (change)="blockUser(user.username)" [disabled]="isAdmin(user)"  > Block
-                    <input type="checkbox" [checked]="!user.isBlocked" (change)="unblockUser(user.username)" [disabled]="isAdmin(user)" > Unblock       
+                    <input type="checkbox" [checked]="user.isBlocked" (change)="blockUser(user.username)" [disabled]="isAdmin(user)|| user.isBlocked"  > Block
+                    <input type="checkbox" [checked]="!user.isBlocked" (change)="unblockUser(user.username)" [disabled]="isAdmin(user)|| !user.isBlocked" > Unblock       
                 </td>
             </tr>
         </tbody>
