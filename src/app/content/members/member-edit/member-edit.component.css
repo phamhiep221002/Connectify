@@ -13,3 +13,11 @@
     background-color: #fff;
     border-top: none;
 }
+
+.main-box{
+    display: flex;
+    position: relative;
+    margin: 120px;
+    flex-wrap: wrap;
+    align-items: center;
+}

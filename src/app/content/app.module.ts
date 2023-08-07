@@ -36,9 +36,8 @@ import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
 import { NgxSliderModule } from "ngx-slider-v2";
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { GenderManagementComponent } from './admin/gender-management/gender-management.component';
-// import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
-// import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -80,14 +79,18 @@ import { GenderManagementComponent } from './admin/gender-management/gender-mana
     SharedModule,
     NgxWebstorageModule.forRoot(),
     NgxSliderModule,
-    // RecaptchaV3Module
+    RecaptchaModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    // { provide: RECAPTCHA_V3_SITE_KEY,
-    //   useValue: environment.recaptcha.siteKey, }
+    {provide: RECAPTCHA_SETTINGS,
+    useValue: {
+      siteKey: '6Leup4AnAAAAANNuiRoTeYEvTmuo6IpnTcJsoKKo',
+    } as RecaptchaSettings,}
+
   ],
   bootstrap: [AppComponent]
 })
