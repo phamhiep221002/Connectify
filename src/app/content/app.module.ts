@@ -36,6 +36,7 @@ import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
 import { NgxSliderModule } from "ngx-slider-v2";
+import { GenderManagementComponent } from './admin/gender-management/gender-management.component';
 // import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 // import { environment } from "src/environments/environment";
 
@@ -66,7 +67,8 @@ import { NgxSliderModule } from "ngx-slider-v2";
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    MemberListComponent
+    MemberListComponent,
+    GenderManagementComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -4,21 +4,22 @@
             <tr>
                 <th style="width: 30%;">Username</th>
                 <th style="width: 40%;">Active roles</th>
-                <th style="width: 40%;">Status</th>
-                <th style="width: 30%;"></th>
                 <th style="width: 10%;">Block users</th>
+                <th style="width: 10%;">Deleted users</th>
+                <th style="width: 30%;">Edit</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
                 <td>{{user.username}}</td>
                 <td>{{user.roles}}</td>
-                <td>{{user.isBlocked ? 'Blocked' : 'Active'}}</td>
-                <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>              
                 <td>
-                    <input type="checkbox" [checked]="user.isBlocked" (change)="blockUser(user.username)" [disabled]="isAdmin(user)|| user.isBlocked"  > Block
-                    <input type="checkbox" [checked]="!user.isBlocked" (change)="unblockUser(user.username)" [disabled]="isAdmin(user)|| !user.isBlocked" > Unblock       
+                    <input type="checkbox" [checked]="user.isBlocked" (change)="toggleBlock(user)"
+                        [disabled]="isAdmin(user)">
+                    {{user.isBlocked ? 'Unblock' : 'Block'}}
                 </td>
+                <td>{{user.isDeleted}}</td>
+                <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>
             </tr>
         </tbody>
     </table>

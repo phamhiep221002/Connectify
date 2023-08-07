@@ -6,5 +6,5 @@ export interface User {
     gender: string;
     roles: string[];
     isBlocked: boolean;
-
+    isDeleted: string;
 }

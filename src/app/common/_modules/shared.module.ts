@@ -11,6 +11,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TimeagoModule } from 'ngx-timeago';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -41,7 +42,8 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule,
     ButtonsModule,
     TimeagoModule,
-    ModalModule
+    ModalModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

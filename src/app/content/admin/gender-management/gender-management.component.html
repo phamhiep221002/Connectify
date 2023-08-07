@@ -1,0 +1,52 @@
+<h2>Genders</h2>
+<td><button class="btn btn-info" (click)="openCreateGendersModal(createGenderTemplate)">Create new Genders</button></td>
+<div class="row">
+  <table class="table">
+      <thead>
+          <tr>
+              <th style="width: 30%;">ID</th>
+              <th style="width: 40%;">Gender</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let gender of genders; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{ gender.name }}</td>
+            <td><button class="btn btn-info" (click)="openEditGendersModal(editGenderTemplate, gender)">Edit Gender</button></td>
+            <td><button class="btn btn-danger" (click)="openDeleteGendersModal(deleteGenderTemplate, gender)">Delete Genders</button></td>
+          
+          </tr>  
+      </tbody>
+  </table>
+</div>
+<ng-template #editGenderTemplate>
+  <div class="modal-body">
+    <form [formGroup]="editForm" (ngSubmit)="updateGender()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</ng-template>
+<ng-template #deleteGenderTemplate>
+  <div class="modal-body text-center">
+      <h4>Are you sure you want to delete this gender?</h4>
+      <button type="button" class="btn btn-primary" (click)="confirmDeleteGender()">Yes</button>
+      <button type="button" class="btn btn-secondary" (click)="declineDeleteGender()">No</button>
+  </div>
+</ng-template>
+<ng-template #createGenderTemplate>
+  <div class="modal-body">
+  <form [formGroup]="genderForm" (ngSubmit)="createGender()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+    <button class="btn btn-primary" (click)="closeModal()">Close</button>
+</div>
+</ng-template>
+
