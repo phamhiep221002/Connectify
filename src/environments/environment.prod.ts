@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://iconnectify.azurewebsites.net/api/',
-    hubUrl: 'https://iconnectify.azurewebsites.net/hubs/'
+    apiUrl: 'https://localhost:5001/api/',
+    hubUrl: 'https://localhost:5001/hubs/'
 };
 
