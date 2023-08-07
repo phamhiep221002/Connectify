@@ -48,13 +48,12 @@ form{
     align-items: center;
     width: 100%;
     max-width: 400px;
-    margin-top: 20px;
     border: none !important;
 }
 
 h1 {
-    margin: 20px 0 10px 0;
-    font-size: 3.2rem;
+    margin: 70px 0 0 0;
+    font-size: 3.5rem;
     font-weight: 600;
     color: #00B99E !important;
     font-family: tangerine, sans-serif;
@@ -77,6 +76,30 @@ h1 {
     margin: 7px 0px 20px 0px;
 }
 
+.alternative-login {
+    width: 70%;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .alternative-login>p {
+    width: 90%;
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-family: tangerine, sans-serif;
+  }
+
+  span {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #00C2AE;
+    font-family: tangerine, sans-serif;
+    cursor: pointer;
+  }
 
 .registerbtn{
     position: absolute;
@@ -214,7 +237,6 @@ h1 {
         align-items: center;
         width: 100%;
         max-width: 500px;
-        margin-top: 20px;
     }
 }
 
@@ -313,7 +335,6 @@ h1 {
         align-items: center;
         width: 80%;
         max-width: 400px;
-        margin-top: 20px;
         border: none !important;
     }
 }

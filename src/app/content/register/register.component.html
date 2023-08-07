@@ -2,7 +2,7 @@
 <div class="container">
 
 <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
-    <h1 class="text-center text-primary">Sign up</h1>
+    <h1 class="text-center text-primary">Welcome!</h1>
     <hr>
     <div class="register-form">
     <app-text-input [formControl]="$any(registerForm.controls['firstname'])" [label]="'Firstname'" class="input"></app-text-input>
@@ -30,7 +30,9 @@
         </ul>
     </div>
     <re-captcha (resolved)="handleResolved($event)"></re-captcha>
-
+    <div class="alternative-login">
+      <p>Already a member?<span routerLink="/login" routerLinkActive="active">Login</span></p>
+    </div>
     <div class="text-center" style="margin-bottom: 15px;">
         <button [disabled]="!registerForm.valid" class="btn me-2 registerbtn" type="submit">Register</button>
         <button class="btn btn-default cancelbtn" type="button" routerLink="/" routerLinkActive="active">Back to Home</button>

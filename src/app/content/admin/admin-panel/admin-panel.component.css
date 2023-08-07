@@ -1,0 +1,32 @@
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 0 -15px -15px;
+    position: absolute;
+    left: 10%;
+    width: 80%;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-width: 1px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0.625rem;
+    height: 3.5rem;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #62BAAD;
+    border-bottom: 1px solid rgba(26,54,126,.125);
+    font-size: 1.5em;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: helvetica,sans-serif;
+}
+
+td {
+    vertical-align: middle !important;
+    box-sizing: border-box;
+}
