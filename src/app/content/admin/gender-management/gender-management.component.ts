@@ -24,10 +24,10 @@ export class GenderManagementComponent implements OnInit {
   ngOnInit(): void {
     this.loadGenders();
     this.editForm = new FormGroup({
-      'name': new FormControl(null, Validators.required)
+      'gender': new FormControl(null, Validators.required)
     });
     this.genderForm = new FormGroup({
-      'name': new FormControl(null, Validators.required)
+      'gender': new FormControl(null, Validators.required)
     });
   }
   loadGenders() {
@@ -59,7 +59,7 @@ export class GenderManagementComponent implements OnInit {
   openEditGendersModal(template: TemplateRef<any>, gender: Genders) {
     this.selectedGender = gender;
     this.editForm.setValue({
-      'name': this.selectedGender.name
+      'gender': this.selectedGender.name
     });
     this.bsModalRef = this.modalService.show(template);
   }
