@@ -38,7 +38,7 @@ td {
   height: 40px;
   background-color: var(--bg-color);
   border-radius: 100%;
-  box-shadow: 0px 0px 5px 7px rgba(0, 0, 0, 0.199);
+  box-shadow: 0px 0px 5px 7px rgba(63, 43, 60, 0.199);
   transition: all .6s ease;
 }
 

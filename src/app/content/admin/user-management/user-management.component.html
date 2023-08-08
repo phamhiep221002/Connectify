@@ -3,7 +3,6 @@
         <thead>
             <tr>
                 <th>Username</th>
-                <th class="text-center">Active roles</th>
                 <th class="text-center">Block users</th>
                 <th class="text-center">Deleted users</th>
                 <th class="text-center">Edit</th>
@@ -22,12 +21,11 @@
                             </div>
                             <div class="widget-content-left flex2">
                                 <div class="widget-heading">{{user.username}}</div>
-                                <div class="widget-subheading opacity-7">Career</div>
-                            </div>
+                                <div class="widget-subheading opacity-7">{{user.roles}}</div>
+                                </div>
                         </div>
                     </div>
                 </td>
-                <td class="text-center">{{user.roles}}</td>
                 <td class="text-center block-user">
                     <label class="theme">
                         <input class="btn-block" checked="checked" type="checkbox" [checked]="user.isBlocked"
@@ -66,8 +64,8 @@
                     {{user.isDeleted}}
                 </td>
                 <td class="text-center">
-                    <button (click)="openRolesModal(user)" class="btn btn-info"
-                        style="background-color: #006B60;border: none;">Edit Roles</button>
+                    <button (click)="openRolesModal(user)" class="btn btn-info" 
+                        style="background: #00C2AD;border: none;"><i class="fa fa-pencil"></i></button>
                 </td>
             </tr>
         </tbody>
