@@ -7,6 +7,7 @@ import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { IntroductionUpdateDto } from '../_models/introductionUpdate';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +29,7 @@ export class MembersService {
 
       }
     })
-
   }
-
   getUserParams() {
     return this.userParams;
   }
@@ -57,9 +56,9 @@ export class MembersService {
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
     params = params.append('distance', userParams.distance);
-    if(userParams.currentLatitude && userParams.currentLongitude != null){
-    params = params.append('currentLatitude', userParams.currentLatitude);
-    params = params.append('currentLongitude', userParams.currentLongitude);
+    if (userParams.currentLatitude && userParams.currentLongitude != null) {
+      params = params.append('currentLatitude', userParams.currentLatitude);
+      params = params.append('currentLongitude', userParams.currentLongitude);
     }
     return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http).pipe(
       map(response => {
@@ -87,6 +86,9 @@ export class MembersService {
       })
     )
   }
+  updateUserIntroduction(introductionUpdateDto: IntroductionUpdateDto) {
+    return this.http.put(this.baseUrl + 'updateintroduction', introductionUpdateDto);
+  }
 
   setMainPhoto(photoId: number) {
     return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
@@ -109,5 +111,14 @@ export class MembersService {
   }
   getGender() {
     return this.http.get<any>(`${this.baseUrl}gender`);
+  }
+  setVisible() {
+    return this.http.put(this.baseUrl + 'users/visible', {});
+  }
+  setInvisible() {
+    return this.http.put(this.baseUrl + 'users/invisible', {});
+  }
+  deleteAccount() {
+    return this.http.put(this.baseUrl + 'users/delete-account', {});
   }
 }
