@@ -7,6 +7,7 @@ import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { LookingForsDto } from '../_models/lookingForsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class MembersService {
   memberCache = new Map();
   user: User | undefined;
   userParams: UserParams | undefined;
+
 
   constructor(private http: HttpClient, private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
@@ -105,9 +107,9 @@ export class MembersService {
     return this.http.put(this.baseUrl + 'users/invisible', {});
   }
   deleteAccount() {
-    return this.http.put(this.baseUrl + 'users/delete-account', { responseType: 'text' as 'json' });
+    return this.http.put(this.baseUrl + 'users/delete-account', {}, { responseType: 'text' });
   }
   updateUserIntroduction(member: Member) {
     return this.http.put(this.baseUrl + 'updateintroduction', member);
-}
+  }
 }

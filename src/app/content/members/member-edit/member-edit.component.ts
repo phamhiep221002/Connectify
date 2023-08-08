@@ -21,6 +21,7 @@ export class MemberEditComponent implements OnInit {
   isVisible = false;
   member: Member | undefined;
   user: User | null = null;
+  lookingFors: any;
 
   constructor(private accountService: AccountService, private memberService: MembersService,
     private toastr: ToastrService, private router: Router, private fb: FormBuilder, private modalService: BsModalService) {
@@ -65,13 +66,12 @@ export class MemberEditComponent implements OnInit {
       });
     }
   }
-  deleteAccount() {
-    if (confirm('Are you sure to disable your account?')) {
-      this.memberService.deleteAccount()
+  deleteAccount(): void {
+    this.memberService.deleteAccount().subscribe(() => {
       this.accountService.logout();
       this.router.navigate(['/']);
-      this.toastr.success('Account is disable successfully')
-    }
+      this.toastr.success('Account is disable!')
+    });
   }
   updateIntroduction() {
     if (!this.member) {
