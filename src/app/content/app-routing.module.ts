@@ -15,7 +15,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AuthGuard } from '../common/_guards/auth.guard';
 import { MemberDetailedResolver } from '../common/_resolvers/member-detailed.resolver';
-import { PreventUnsavedChangesGuard } from '../common/_forms/text-input/prevent-unsaved-changes.guard';
 
 
 const routes: Routes = [
@@ -30,7 +29,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'members/:username', component: MemberDetailComponent, resolve: { member: MemberDetailedResolver } },
-      { path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
+      { path: 'member/edit', component: MemberEditComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'admin', component: AdminPanelComponent },

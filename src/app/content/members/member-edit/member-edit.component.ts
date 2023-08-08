@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { Member } from 'src/app/common/_models/member';
@@ -15,22 +16,20 @@ import { MembersService } from 'src/app/common/_services/members.service';
   styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit {
-  introduction!: string;
+  updateIntroForm!: FormGroup;
+  modalRef!: BsModalRef;
   isVisible = false;
-  @ViewChild('editForm') editForm: NgForm | undefined;
-  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
-    if (this.editForm?.dirty) {
-      $event.returnValue = true;
-    }
-  }
   member: Member | undefined;
   user: User | null = null;
 
   constructor(private accountService: AccountService, private memberService: MembersService,
-    private toastr: ToastrService, private router: Router) {
+    private toastr: ToastrService, private router: Router, private fb: FormBuilder, private modalService: BsModalService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
+    this.updateIntroForm = this.fb.group({
+      introduction: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
@@ -40,15 +39,9 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     if (!this.user) return;
     this.memberService.getMember(this.user.username).subscribe({
-      next: member => this.member = member
-    })
-  }
-
-  updateMember() {
-    this.memberService.updateMember(this.editForm?.value).subscribe({
-      next: _ => {
-        this.toastr.success('Profile updated successfully');
-        this.editForm?.reset(this.member);
+      next: member => {
+        this.member = member
+        this.isVisible = member.isVisible;
       }
     })
   }
@@ -56,25 +49,55 @@ export class MemberEditComponent implements OnInit {
     this.isVisible = status;
     if (status) {
       this.memberService.setVisible().subscribe({
-        next: () => this.toastr.success('Set visibility successfully'),
+        next: () => {
+          this.toastr.success('Set visibility successfully')
+          this.loadMember();
+        },
         error: error => console.log('Failed to update visibility: ', error)
       });
     } else {
       this.memberService.setInvisible().subscribe({
         next: () => {
           this.toastr.success('Set invisibility successfully')
+          this.loadMember();
         },
         error: error => console.log('Failed to update visibility: ', error)
       });
     }
   }
   deleteAccount() {
-    this.memberService.deleteAccount().subscribe({
-      next: () =>{
-        this.toastr.success('Account deleted successfully')
-        this.router.navigateByUrl('/')
+    if (confirm('Are you sure to disable your account?')) {
+      this.memberService.deleteAccount()
+      this.accountService.logout();
+      this.router.navigate(['/']);
+      this.toastr.success('Account is disable successfully')
+    }
+  }
+  updateIntroduction() {
+    if (!this.member) {
+      return;
+    }
+    if (this.updateIntroForm.valid && this.updateIntroForm.dirty) {
+      this.member.introduction = this.updateIntroForm.value.introduction;
+    }
+    this.memberService.updateUserIntroduction(this.member).subscribe({
+      next: () => {
+        this.toastr.success('Introduction updated successfully');
+        this.updateIntroForm.reset(this.updateIntroForm.value);
+        this.modalRef.hide();
       },
-      error: error => this.toastr.error('Failed to delete account: ', error)
+      error: error => {
+        this.toastr.error(error);
+      }
+    })
+  }
+  openModal(template: TemplateRef<any>) {
+    if (!this.member) {
+      return;
+    }
+    this.updateIntroForm.setValue({
+      introduction: this.member.introduction
     });
+    this.modalRef = this.modalService.show(template);
   }
 }
