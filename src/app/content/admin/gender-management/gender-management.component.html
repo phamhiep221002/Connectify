@@ -26,8 +26,8 @@
   <div class="modal-body">
       <form class="form" [formGroup]="editForm" (ngSubmit)="updateGender()">
         <div class="form-group">
-          <label for="gender">Gender</label>
-          <input type="text" id="gender" class="form-control" formControlName="name" required>
+          <label for="name">Gender</label>
+          <input type="text" id="name" class="form-control" formControlName="name" required>
         </div>
         <button type="submit" class="form-submit-btn">Update</button>
       </form>
@@ -44,14 +44,14 @@
 </ng-template>
 <ng-template #createGenderTemplate>
   <div class="modal-body">
-  <form [formGroup]="genderForm" (ngSubmit)="createGender()">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+  <form class="form" [formGroup]="genderForm" (ngSubmit)="createGender()">
     <div class="form-group">
-      <label for="name">Name</label>
+      <label for="name">Gender</label>
       <input type="text" id="name" class="form-control" formControlName="name" required>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="form-create-btn">Create</button>
   </form>
-    <button class="btn btn-primary" (click)="closeModal()">Close</button>
 </div>
 </ng-template>
 
