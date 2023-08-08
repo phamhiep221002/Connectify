@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -10,23 +10,19 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class LocationService{
-  private apiKey = '25839ee5018e4811b0f01ff59ae7e9eb';
-  private apiUrl = 'https://api.opencagedata.com/geocode/v1/json';
+  private apiLocationKey = environment.apiLocationKey;
+  private  apiLocationUrl=environment.apiLocationUrl;
   baseUrl = environment.apiUrl;
-  locationDto: LocationDto = { latitude: 0, longitude: 0 };
+  locationDto: LocationDto = { latitude: 0, longitude: 0, locationName:'' };
   requestingLocation = false;
   private locationPermissionGranted = false;
+  locationName!: string;
   
 
   constructor(private http: HttpClient, private toastr: ToastrService, private router: Router) { }
 
-  getCityInfo(cityName: string) {
-    const url = `${this.apiUrl}?q=${encodeURIComponent(cityName)}&key=${this.apiKey}`;
-    return this.http.get(url);
-  }
-
   getCityInfoByCoords(latitude: number, longitude: number) {
-    const url = `${this.apiUrl}?q=${latitude}+${longitude}&key=${this.apiKey}`;
+    const url = `${this.apiLocationUrl}?q=${latitude}+${longitude}&key=${this.apiLocationKey}`;
     return this.http.get(url);
   }
   getLocation(locationDto: LocationDto): Observable<any> {
@@ -38,7 +34,19 @@ export class LocationService{
         (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-          this.updateLocation(latitude, longitude);
+          this.getCityInfoByCoords(latitude, longitude)
+          .subscribe((data: any) => {
+            if (data.results.length > 0) {
+              this.locationName = data.results[0].components.city || data.results[0].components.city_district;
+              this.updateLocation(latitude, longitude, this.locationName);
+            } else {
+              this.locationName = 'City not found';
+              this.toastr.error(this.locationName);
+            } 
+          }, error => {
+            this.locationName = 'Error occurred';
+            this.toastr.error(this.locationName);
+          });         
           this.locationPermissionGranted = true;
         },
         (error) => {
@@ -53,9 +61,8 @@ export class LocationService{
       this.locationPermissionGranted = false;
     }
   }
-
-  updateLocation(latitude: number, longitude: number): void {
-    const locationDto = { latitude: latitude, longitude: longitude };
+  updateLocation(latitude: number, longitude: number, locationName: string): void {
+    const locationDto = { latitude: latitude, longitude: longitude, locationName: locationName };
     this.getLocation(locationDto).subscribe(
       (next) => {
         this.router.navigateByUrl('/');

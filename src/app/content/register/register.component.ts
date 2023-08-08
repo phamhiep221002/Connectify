@@ -83,9 +83,6 @@ export class RegisterComponent implements OnInit{
     handleResolved(captchaResponse: string): void {
       console.log(`Resolved captcha with response: ${captchaResponse}`);
     }
-  
-  
-
 }
 
 

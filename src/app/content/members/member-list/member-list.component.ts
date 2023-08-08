@@ -5,6 +5,7 @@ import { Pagination } from 'src/app/common/_models/pagination';
 import { UserParams } from 'src/app/common/_models/userParams';
 import { MembersService } from 'src/app/common/_services/members.service';
 import { LocationService } from 'src/app/common/_services/location.service';
+import { environment } from 'src/environments/environment';
 declare var H: any;
 
 @Component({
@@ -18,7 +19,7 @@ export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChec
   private currentMarker: any; 
   private platform: any;
   private map: any;
-  private apikey = "Nqpc6uq6FCCCEeAliAwEhlsxGEJxB7y48MGkS07jyts";
+  private apiMapKey =environment.apiMapKey;
   members: Member[] = [];
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
@@ -39,7 +40,7 @@ export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChec
   ) {
     this.userParams = this.memberService.getUserParams();
     this.platform = new H.service.Platform({
-      "apikey": this.apikey
+      "apikey": this.apiMapKey
     });
   }
 
