@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.nav{
+  --bs-nav-link-color: #000000;
+}
 
 .tab-panel {
     border: 1px solid #ddd;
@@ -7,7 +10,7 @@
   }
 
   .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
-    border-bottom: 4px solid #fbcdcf;
+    border-bottom: 4px solid #62BAAD;
   }
 
   .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
@@ -25,7 +28,8 @@
   }
 
   .member-tabset > .nav-tabs > li.active {
-    border-bottom: 4px solid #E95420;
+    border-bottom: 4px solid #62BAAD;
+    color: black;
     position: relative;
   }
 
