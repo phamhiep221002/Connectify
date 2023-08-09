@@ -30,14 +30,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxWebstorageModule } from "ngx-webstorage";
 import { SharedModule } from "../common/_modules/shared.module";
-import { ErrorInterceptor } from "../common/_interceptor/error.interceptor";
-import { JwtInterceptor } from "../common/_interceptor/jwt.interceptor";
+
 import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
 import { NgxSliderModule } from "ngx-slider-v2";
 import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { GenderManagementComponent } from './admin/gender-management/gender-management.component';
+import { ErrorInterceptor } from "../common/_interceptors/error.interceptor";
+import { JwtInterceptor } from "../common/_interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
