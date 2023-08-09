@@ -40,6 +40,9 @@ import { GenderManagementComponent } from './admin/gender-management/gender-mana
 import { ErrorInterceptor } from "../common/_interceptors/error.interceptor";
 import { JwtInterceptor } from "../common/_interceptors/jwt.interceptor";
 import { LookingforManagementComponent } from "./admin/lookingfor-management/lookingfor-management.component";
+import { InterestManagementComponent } from "./admin/interest-management/interest-management.component";
+import { EditLookingforComponent } from './members/edit-lookingfor/edit-lookingfor.component';
+import { EditInterestComponent } from './members/edit-interest/edit-interest.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { LookingforManagementComponent } from "./admin/lookingfor-management/loo
     ResetPasswordComponent,
     MemberListComponent,
     GenderManagementComponent,
-    LookingforManagementComponent
+    LookingforManagementComponent,
+    InterestManagementComponent,
+    EditLookingforComponent,
+    EditInterestComponent
   ],
   imports: [
     BrowserAnimationsModule,

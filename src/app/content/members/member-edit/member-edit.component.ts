@@ -1,9 +1,10 @@
-import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { InterestsDto } from 'src/app/common/_models/interestsDto';
 import { LookingForsDto } from 'src/app/common/_models/lookingForsDto';
 import { Member } from 'src/app/common/_models/member';
 import { User } from 'src/app/common/_models/user';
@@ -22,14 +23,19 @@ export class MemberEditComponent implements OnInit {
   isVisible = false;
   member: Member | undefined;
   user: User | null = null;
-  lookingFors!: any;
+  lookingFors: LookingForsDto[] = [];
+  searchlookingForm!: FormGroup;
+  searchinterestForm!: FormGroup;
+  bsModalRef!: BsModalRef;
+  interests: InterestsDto[] = []
 
   constructor(private accountService: AccountService,
     private memberService: MembersService,
     private toastr: ToastrService,
     private router: Router,
     private fb: FormBuilder,
-    private modalService: BsModalService) {
+    private modalService: BsModalService,
+    ) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
@@ -48,6 +54,8 @@ export class MemberEditComponent implements OnInit {
       next: member => {
         this.member = member
         this.isVisible = member.isVisible;
+        this.lookingFors = member.lookingFors;
+        this.interests = member.interests;
       }
     })
   }
@@ -113,5 +121,24 @@ export class MemberEditComponent implements OnInit {
       introduction: this.member.introduction
     });
     this.modalRef = this.modalService.show(template);
+  }
+  reloadData() {
+    this.loadMember();
+  }
+  deleteInterest(id: number) {
+    this.memberService.deleteInterest(id).subscribe(response => {
+      this.toastr.success('Interest removed successfully');
+      this.loadMember();
+    }, error => {
+      this.toastr.error(error);
+    });
+  }
+  deleteLookingFor(id: number) {
+    this.memberService.deleteLookingFor(id).subscribe(response => {
+      this.toastr.success('Looking for removed successfully');
+      this.loadMember();
+    }, error => {
+      this.toastr.error(error);
+    });
   }
 }

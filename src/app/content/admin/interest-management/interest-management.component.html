@@ -1,14 +1,13 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
     <div class="form-group">
-      <label for="name">Search Looking for:</label>
+      <label for="name">Search Interests:</label>
       <input type="text" id="name" class="form-control" formControlName="name">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 <button (click)="openCreateModal(createLookingForTemplate)">Create New</button>
   
-  <!-- Section to display the results -->
-  <div *ngFor="let item of lookingFors">
+  <div *ngFor="let item of interests">
    <i>{{item.name}}</i>
    <button (click)="openUpdateModal(item, updateLookingForTemplate)">Update</button>
   <button (click)="onDelete(item.id)">Delete</button>
@@ -16,7 +15,7 @@
   <ng-template #updateLookingForTemplate>
     <div class="modal-body">
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
-      <form class="form" [formGroup]="updateForm" (ngSubmit)="updateLookingFor()">
+      <form class="form" [formGroup]="updateForm" (ngSubmit)="updateInterest()">
         <div class="form-group">
           <label for="updateName">Name</label>
           <input type="text" id="updateName" class="form-control" formControlName="name" required>
@@ -28,7 +27,7 @@
   <ng-template #createLookingForTemplate>
     <div class="modal-body">
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
-      <form class="form" [formGroup]="createForm" (ngSubmit)="createLookingFor()">
+      <form class="form" [formGroup]="createForm" (ngSubmit)="createInterest()">
         <div class="form-group">
           <label for="createName">Name</label>
           <input type="text" id="createName" class="form-control" formControlName="name" required>

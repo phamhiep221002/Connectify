@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, of, take } from 'rxjs';
+import { Observable, Subject, map, of, take, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { LookingForsDto } from '../_models/lookingForsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,8 @@ export class MembersService {
   memberCache = new Map();
   user: User | undefined;
   userParams: UserParams | undefined;
+  private _reloadMember = new Subject<void>();
+  reloadMember$ = this._reloadMember.asObservable();
 
 
   constructor(private http: HttpClient, private accountService: AccountService) {
@@ -111,5 +112,19 @@ export class MembersService {
   }
   updateUserIntroduction(member: Member) {
     return this.http.put(this.baseUrl + 'updateintroduction', member, { responseType: 'text' as 'json' });
+  }
+  addLookingFor(id: number) {
+    return this.http.post(this.baseUrl + 'users/add-lookingfor/' + id, {})
+  }
+  
+  deleteLookingFor(id: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-lookingfor/' + id,);
+  }
+  addInterest(id: number) {
+    return this.http.post(this.baseUrl + 'users/add-interest/' + id, {})
+  }
+  
+  deleteInterest(id: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-interest/' + id,);
   }
 }

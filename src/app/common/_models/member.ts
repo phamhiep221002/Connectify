@@ -1,3 +1,5 @@
+import { InterestsDto } from "./interestsDto";
+import { LookingForsDto } from "./lookingForsDto";
 import { Photo } from "./photo";
 
 export interface Member {
@@ -10,8 +12,8 @@ export interface Member {
     lastActive: Date;
     gender: string;
     introduction: string;
-    lookingFors: string;
-    interests: string;
+    lookingFors: LookingForsDto[];
+    interests: InterestsDto[];
     city: string;
     country: string;
     photos: Photo[];

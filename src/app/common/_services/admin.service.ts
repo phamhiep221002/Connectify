@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { Genders } from '../_models/gender';
 import { LookingForsDto } from '../_models/lookingForsDto';
+import { InterestsDto } from '../_models/interestsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,21 @@ export class AdminService {
   createLookingFor(lookingFor: LookingForsDto) {
     return this.http.post(this.baseUrl + 'lookingfor', lookingFor, { responseType: 'text' as 'json' });
   }
-  
+  getInterest(name?: string) {
+    let url = this.baseUrl + 'interest';
+    if (name) {
+      url += `/${name}`;
+    }
+    return this.http.get<InterestsDto[]>(url);
+  }
+  updateInterest(interest: InterestsDto) {
+    return this.http.put(this.baseUrl + 'interest/' + interest.id, interest, { responseType: 'text' as 'json' });
+  }
+
+  deleteInterest(id: number) {
+    return this.http.delete(this.baseUrl + 'interest/' + id, { responseType: 'text' as 'json' });
+  }
+  createInterest(interest: InterestsDto) {
+    return this.http.post(this.baseUrl + 'interest', interest, { responseType: 'text' as 'json' });
+  }
 }

@@ -2,19 +2,19 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { LookingForsDto } from 'src/app/common/_models/lookingForsDto';
+import { InterestsDto } from 'src/app/common/_models/interestsDto';
 import { AdminService } from 'src/app/common/_services/admin.service';
 
 @Component({
-  selector: 'app-lookingfor-management',
-  templateUrl: './lookingfor-management.component.html',
-  styleUrls: ['./lookingfor-management.component.css']
+  selector: 'app-interest-management',
+  templateUrl: './interest-management.component.html',
+  styleUrls: ['./interest-management.component.css']
 })
-export class LookingforManagementComponent implements OnInit {
-  lookingFors: LookingForsDto[] = [];
+export class InterestManagementComponent implements OnInit {
+  interests: InterestsDto[] = [];
   searchForm!: FormGroup;
   updateForm!: FormGroup;
-  selectedLookingFor!: LookingForsDto;
+  selectedInterest!: InterestsDto;
   bsModalRef!: BsModalRef;
   createForm!: FormGroup;
 
@@ -41,11 +41,11 @@ export class LookingforManagementComponent implements OnInit {
       this.toastr.error('Please fill in the information');
       return;
     }
-    this.loadLookingFors(searchValue);
+    this.loadInterests(searchValue);
   }
-  loadLookingFors(name?: string) {
-    this.adminService.getLookingFors(name).subscribe(response => {
-      this.lookingFors = response;
+  loadInterests(name?: string) {
+    this.adminService.getInterest(name).subscribe(response => {
+      this.interests = response;
     }, error => {
       this.toastr.error(error);
     });
@@ -60,9 +60,9 @@ export class LookingforManagementComponent implements OnInit {
   openCreateModal(template: TemplateRef<any>) {
     this.bsModalRef = this.modalService.show(template);
   }
-  createLookingFor() {
-    const lookingforText = this.createForm.value.name;
-    if (lookingforText.length > 200) {
+  createInterest() {
+    const interestText = this.createForm.value.name;
+    if (interestText.length > 200) {
       this.toastr.error('Your information is too long. Please limit it to 200 characters.');
       return;
     }
@@ -72,7 +72,7 @@ export class LookingforManagementComponent implements OnInit {
       return;
     }
     if (this.createForm.valid) {
-      this.adminService.createLookingFor(this.createForm.value).subscribe(response => {
+      this.adminService.createInterest(this.createForm.value).subscribe(response => {
         this.toastr.success('Created successfully');
         this.createForm.reset(this.createForm.value);
         this.closeModal();
@@ -93,14 +93,14 @@ export class LookingforManagementComponent implements OnInit {
     });
   }
 
-  openUpdateModal(lookingFor: LookingForsDto, template: TemplateRef<any>) {
-    this.selectedLookingFor = lookingFor;
-    this.updateForm.patchValue(lookingFor);
+  openUpdateModal(interest: InterestsDto, template: TemplateRef<any>) {
+    this.selectedInterest = interest;
+    this.updateForm.patchValue(interest);
     this.bsModalRef = this.modalService.show(template);
   }
-  updateLookingFor() {
-    const lookingforText = this.updateForm.value.name;
-    if (lookingforText.length > 200) {
+  updateInterest() {
+    const interestText = this.updateForm.value.name;
+    if (interestText.length > 200) {
       this.toastr.error('Your information is too long. Please limit it to 200 characters.');
       return;
     }
@@ -110,14 +110,14 @@ export class LookingforManagementComponent implements OnInit {
       return;
     }
     if (this.updateForm.valid) {
-      const updatedLookingFor: LookingForsDto = {
-        ...this.selectedLookingFor,
+      const updatedInterest: InterestsDto = {
+        ...this.selectedInterest,
         ...this.updateForm.value
       };
-      this.adminService.updateLookingFor(updatedLookingFor).subscribe(response => {
-        const index = this.lookingFors.findIndex(lf => lf.id === updatedLookingFor.id);
+      this.adminService.updateInterest(updatedInterest).subscribe(response => {
+        const index = this.interests.findIndex(lf => lf.id === updatedInterest.id);
         if (index !== -1) {
-          this.lookingFors[index] = updatedLookingFor;
+          this.interests[index] = updatedInterest;
         }
         this.toastr.success('Updated successfully!');
         this.closeModal();
@@ -133,7 +133,7 @@ export class LookingforManagementComponent implements OnInit {
   //delete
   onDelete(id: number) {
     this.adminService.deleteLookingFor(id).subscribe(response => {
-      this.lookingFors = this.lookingFors.filter(lf => lf.id !== id);
+      this.interests = this.interests.filter(lf => lf.id !== id);
       this.toastr.success('Deleted successfully!');
     }, error => {
       this.toastr.error(error);

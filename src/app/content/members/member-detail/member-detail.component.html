@@ -40,7 +40,9 @@
                 <h4>Description</h4>
                 <p>{{member.introduction}}</p>
                 <h4>Looking for</h4>
-                <p>{{member.lookingFors}}</p>
+                <ul>
+                    <li *ngFor="let lookingFor of member.lookingFors">{{lookingFor.name}}</li>
+                </ul>
             </tab>
             <tab heading="Interests" (selectTab)="onTabActivated($event)" >
                 <h4>Interests</h4>

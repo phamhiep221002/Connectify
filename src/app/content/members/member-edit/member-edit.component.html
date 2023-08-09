@@ -3,36 +3,18 @@
         <div class="col-8">
             <tabset class="member-tabset">
                 <tab heading="About {{member.knownAs}}">
-                    <p>{{member.introduction}}</p>
-                    <ng-template #updateIntroTemplate>
-                        <div class="modal-body">
-                            <form [formGroup]="updateIntroForm" (ngSubmit)="updateIntroduction()">
-                                <div class="form-group">
-                                    <label for="introduction">Introduction</label>
-                                    <div class="alert alert-info pb-0" *ngIf="updateIntroForm.dirty">
-                                        <p><strong>Information: </strong>You have made changes. Any unsaved changes will be lost</p>
-                                    </div>
-                                    <textarea id="introduction" class="form-control" formControlName="introduction"
-                                        required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary"
-                                    [disabled]="!updateIntroForm.valid || !updateIntroForm.dirty">
-                                    Update
-                                </button>
-                            </form>
-                            <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
-                        </div>
-                    </ng-template>
-
                     <button class="btn btn-primary" (click)="openModal(updateIntroTemplate)">Update
                         Introduction</button>
-                    <p>{{member.lookingFors}}</p>
-                    
+                </tab>
+                <tab heading="Edit Looking For">
+                    <app-edit-lookingfor (interestAdded)="reloadData()"></app-edit-lookingfor>
+                </tab>
+                <tab heading="Edit Interest">
+                    <app-edit-interest (interestAdded)="reloadData()"></app-edit-interest>
                 </tab>
                 <tab heading="Edit Photos">
                     <app-photo-editor [member]="member"></app-photo-editor>
                 </tab>
-                <tab heading="Edit Profile"></tab>
             </tabset>
         </div>
         <div class="center">
@@ -67,6 +49,23 @@
                         <strong>Gender:</strong>
                         <p>{{member.gender}}</p>
                     </div>
+                    <div>
+                        <strong>Looking fors:</strong>
+                        <li *ngFor="let lookingFor of member.lookingFors">{{lookingFor.name}}
+                            <button (click)="deleteLookingFor(lookingFor.id)">Delete</button>
+                        </li>
+                    </div>
+                    <div>
+                        <strong>Introduction:</strong>
+                        <p>{{member.introduction}}</p>
+                    </div>
+                    <div>
+                        <strong>Interests:</strong>
+                        <li *ngFor="let interest of member.interests">{{interest.name}}
+                            <button (click)="deleteInterest(interest.id)">Delete</button>
+                        </li>
+                        
+                    </div>
                     <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="visibilitySwitch" [(ngModel)]="isVisible"
@@ -76,5 +75,25 @@
                 </div>
             </div>
         </div>
+        <ng-template #updateIntroTemplate>
+            <div class="modal-body">
+                <form [formGroup]="updateIntroForm" (ngSubmit)="updateIntroduction()">
+                    <div class="form-group">
+                        <label for="introduction">Introduction</label>
+                        <div class="alert alert-info pb-0" *ngIf="updateIntroForm.dirty">
+                            <p><strong>Information: </strong>You have made changes. Any unsaved changes will
+                                be lost</p>
+                        </div>
+                        <textarea id="introduction" class="form-control" formControlName="introduction"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="!updateIntroForm.valid || !updateIntroForm.dirty">
+                        Update
+                    </button>
+                </form>
+                <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+            </div>
+        </ng-template>
     </div>
 </div>
