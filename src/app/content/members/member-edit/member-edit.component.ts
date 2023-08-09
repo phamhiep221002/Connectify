@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -23,13 +23,17 @@ export class MemberEditComponent implements OnInit {
   user: User | null = null;
   lookingFors: any;
 
-  constructor(private accountService: AccountService, private memberService: MembersService,
-    private toastr: ToastrService, private router: Router, private fb: FormBuilder, private modalService: BsModalService) {
+  constructor(private accountService: AccountService,
+    private memberService: MembersService,
+    private toastr: ToastrService,
+    private router: Router,
+    private fb: FormBuilder,
+    private modalService: BsModalService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
     this.updateIntroForm = this.fb.group({
-      introduction: ['', Validators.required]
+      introduction: ['', [Validators.required]]
     });
   }
 
@@ -77,6 +81,11 @@ export class MemberEditComponent implements OnInit {
     if (!this.member) {
       return;
     }
+    const introductionText = this.updateIntroForm.value.introduction;
+    if (introductionText.length > 200) { // Giả sử 200 là giới hạn của bạn
+      this.toastr.error('Your introduction is too long. Please limit it to 200 characters.');
+      return;
+    }
     if (this.updateIntroForm.valid && this.updateIntroForm.dirty) {
       this.member.introduction = this.updateIntroForm.value.introduction;
     }
@@ -87,9 +96,13 @@ export class MemberEditComponent implements OnInit {
         this.modalRef.hide();
       },
       error: error => {
-        this.toastr.error(error);
+        if (error.statusCode === 500) {
+          this.toastr.error('There was an error updating your introduction. Please try again later.');  
+        } else {
+          this.toastr.error(error);
+        }
       }
-    })
+})
   }
   openModal(template: TemplateRef<any>) {
     if (!this.member) {

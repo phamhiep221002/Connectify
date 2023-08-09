@@ -110,6 +110,6 @@ export class MembersService {
     return this.http.put(this.baseUrl + 'users/delete-account', {}, { responseType: 'text' });
   }
   updateUserIntroduction(member: Member) {
-    return this.http.put(this.baseUrl + 'updateintroduction', member);
+    return this.http.put(this.baseUrl + 'updateintroduction', member, { responseType: 'text' as 'json' });
   }
 }

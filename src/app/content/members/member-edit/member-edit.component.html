@@ -9,11 +9,16 @@
                             <form [formGroup]="updateIntroForm" (ngSubmit)="updateIntroduction()">
                                 <div class="form-group">
                                     <label for="introduction">Introduction</label>
+                                    <div class="alert alert-info pb-0" *ngIf="updateIntroForm.dirty">
+                                        <p><strong>Information: </strong>You have made changes. Any unsaved changes will be lost</p>
+                                    </div>
                                     <textarea id="introduction" class="form-control" formControlName="introduction"
                                         required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary"
-                                    [disabled]="!updateIntroForm.dirty">Update</button>
+                                    [disabled]="!updateIntroForm.valid || !updateIntroForm.dirty">
+                                    Update
+                                </button>
                             </form>
                             <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
                         </div>
