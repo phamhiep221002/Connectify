@@ -39,6 +39,7 @@ import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recap
 import { GenderManagementComponent } from './admin/gender-management/gender-management.component';
 import { ErrorInterceptor } from "../common/_interceptors/error.interceptor";
 import { JwtInterceptor } from "../common/_interceptors/jwt.interceptor";
+import { LookingforManagementComponent } from "./admin/lookingfor-management/lookingfor-management.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { JwtInterceptor } from "../common/_interceptors/jwt.interceptor";
     ResetPasswordComponent,
     MemberListComponent,
     GenderManagementComponent,
+    LookingforManagementComponent
   ],
   imports: [
     BrowserAnimationsModule,

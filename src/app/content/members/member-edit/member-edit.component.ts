@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { LookingForsDto } from 'src/app/common/_models/lookingForsDto';
 import { Member } from 'src/app/common/_models/member';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
@@ -21,7 +22,7 @@ export class MemberEditComponent implements OnInit {
   isVisible = false;
   member: Member | undefined;
   user: User | null = null;
-  lookingFors: any;
+  lookingFors!: any;
 
   constructor(private accountService: AccountService,
     private memberService: MembersService,
@@ -97,12 +98,12 @@ export class MemberEditComponent implements OnInit {
       },
       error: error => {
         if (error.statusCode === 500) {
-          this.toastr.error('There was an error updating your introduction. Please try again later.');  
+          this.toastr.error('There was an error updating your introduction. Please try again later.');
         } else {
           this.toastr.error(error);
         }
       }
-})
+    })
   }
   openModal(template: TemplateRef<any>) {
     if (!this.member) {

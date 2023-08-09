@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { Genders } from '../_models/gender';
+import { LookingForsDto } from '../_models/lookingForsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +42,22 @@ export class AdminService {
   deleteGender(id: number) {
     return this.http.delete<Genders>(this.baseUrl + 'gender/' + id, { responseType: 'text' as 'json' });
   }
+  getLookingFors(name?: string) {
+    let url = this.baseUrl + 'lookingfor';
+    if (name) {
+      url += `/${name}`;
+    }
+    return this.http.get<LookingForsDto[]>(url);
+  }
+  updateLookingFor(lookingFor: LookingForsDto) {
+    return this.http.put(this.baseUrl + 'lookingfor/' + lookingFor.id, lookingFor, { responseType: 'text' as 'json' });
+  }
+
+  deleteLookingFor(id: number) {
+    return this.http.delete(this.baseUrl + 'lookingfor/' + id, { responseType: 'text' as 'json' });
+  }
+  createLookingFor(lookingFor: LookingForsDto) {
+    return this.http.post(this.baseUrl + 'lookingfor', lookingFor, { responseType: 'text' as 'json' });
+  }
+  
 }

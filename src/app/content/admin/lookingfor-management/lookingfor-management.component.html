@@ -1,0 +1,39 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div class="form-group">
+      <label for="name">Search by Name:</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<button (click)="openCreateModal(createLookingForTemplate)">Create New</button>
+  
+  <!-- Section to display the results -->
+  <div *ngFor="let item of lookingFors">
+   <i>{{item.name}}</i>
+   <button (click)="openUpdateModal(item, updateLookingForTemplate)">Update</button>
+  <button (click)="onDelete(item.id)">Delete</button>
+  </div>
+  <ng-template #updateLookingForTemplate>
+    <div class="modal-body">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+      <form class="form" [formGroup]="updateForm" (ngSubmit)="updateLookingFor()">
+        <div class="form-group">
+          <label for="updateName">Name</label>
+          <input type="text" id="updateName" class="form-control" formControlName="name" required>
+        </div>
+        <button type="submit" class="form-update-btn">Update</button>
+      </form>
+    </div>
+  </ng-template>
+  <ng-template #createLookingForTemplate>
+    <div class="modal-body">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+      <form class="form" [formGroup]="createForm" (ngSubmit)="createLookingFor()">
+        <div class="form-group">
+          <label for="createName">Name</label>
+          <input type="text" id="createName" class="form-control" formControlName="name" required>
+        </div>
+        <button type="submit" class="form-create-btn">Create</button>
+      </form>
+    </div>
+  </ng-template>
