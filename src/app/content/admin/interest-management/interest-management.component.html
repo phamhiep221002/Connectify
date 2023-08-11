@@ -1,11 +1,32 @@
+<div class="form-create-btn">
 <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
     <div class="form-group">
       <label for="name">Search Interests:</label>
       <input type="text" id="name" class="form-control" formControlName="name">
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+    
+
+
+    <button class="c-button c-button--gooey" type="submit"> Search
+      <div class="c-button__blobs">
+      <div></div>
+      <div></div>
+      <div></div>
+      </div>
+    </button>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+
 </form>
-<button (click)="openCreateModal(createLookingForTemplate)">Create New</button>
+<button class="btn btn-create" (click)="openCreateModal(createLookingForTemplate)">Create New</button>
+</div>
   
   <div *ngFor="let item of interests">
    <i>{{item.name}}</i>
