@@ -28,7 +28,6 @@ export class MembersService {
           this.userParams = new UserParams(user);
           this.user = user;
         }
-
       }
     })
   }
@@ -50,7 +49,6 @@ export class MembersService {
 
   getMembers(userParams: UserParams) {
     const response = this.memberCache.get(Object.values(userParams).join('-'));
-
     if (response) return of(response);
     let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
     params = params.append('minAge', userParams.minAge);

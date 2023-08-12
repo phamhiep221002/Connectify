@@ -15,6 +15,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AuthGuard } from '../common/_guards/auth.guard';
 import { MemberDetailedResolver } from '../common/_resolvers/member-detailed.resolver';
+import { AdminGuard } from '../common/_guards/admin.guard';
 
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
       { path: 'member/edit', component: MemberEditComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
-      { path: 'admin', component: AdminPanelComponent },
+      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'sidebar', component: SidebarComponent },
     ]
   },
