@@ -82,6 +82,4 @@ export class EditInterestComponent implements OnInit {
     }
     return this.member.interests.some(lf => lf.id === interestId);
   }
-
-
 }

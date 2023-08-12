@@ -35,7 +35,7 @@ export class MemberEditComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private modalService: BsModalService,
-    ) {
+  ) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
@@ -91,7 +91,7 @@ export class MemberEditComponent implements OnInit {
       return;
     }
     const introductionText = this.updateIntroForm.value.introduction;
-    if (introductionText.length > 200) { // Giả sử 200 là giới hạn của bạn
+    if (introductionText.length > 200) { 
       this.toastr.error('Your introduction is too long. Please limit it to 200 characters.');
       return;
     }

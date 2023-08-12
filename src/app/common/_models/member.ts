@@ -15,7 +15,7 @@ export interface Member {
     lookingFors: LookingForsDto[];
     interests: InterestsDto[];
     city: string;
-    country: string;
-    photos: Photo[];
+    photos: Photo[];    
     isVisible: boolean;
+    fullName: string;
 }
