@@ -35,7 +35,7 @@ import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
 import { NgxSliderModule } from "ngx-slider-v2";
-import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RecaptchaFormsModule } from 'ng-recaptcha';
 import { GenderManagementComponent } from './admin/gender-management/gender-management.component';
 import { ErrorInterceptor } from "../common/_interceptors/error.interceptor";
 import { JwtInterceptor } from "../common/_interceptors/jwt.interceptor";
@@ -88,8 +88,8 @@ import { EditInterestComponent } from './members/edit-interest/edit-interest.com
     SharedModule,
     NgxWebstorageModule.forRoot(),
     NgxSliderModule,
-    RecaptchaModule
-
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

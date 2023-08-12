@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit{
   registerForm: FormGroup = new FormGroup({});
   maxDate: Date = new Date();
   validationErrors: string[] | undefined;
+  captchaResponse: string | null = null;
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
     private fb: FormBuilder, private router: Router) { }
@@ -57,7 +58,7 @@ export class RegisterComponent implements OnInit{
   }
   register() {
     const dob = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
-    const values = {...this.registerForm.value, dateOfBirth: dob};
+    const values = {...this.registerForm.value, dateOfBirth: dob, captcha: this.captchaResponse};
     this.accountService.register(values).subscribe({
       next: () => {
         this.router.navigateByUrl('/')
@@ -80,9 +81,10 @@ export class RegisterComponent implements OnInit{
   }
 
   
-    handleResolved(captchaResponse: string): void {
-      console.log(`Resolved captcha with response: ${captchaResponse}`);
-    }
+  resolved(captchaResponse: string) {
+    this.captchaResponse = captchaResponse;
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
 }
 
 
