@@ -63,8 +63,15 @@
                         <strong>Interests:</strong>
                         <li *ngFor="let interest of member.interests">{{interest.name}}
                             <button (click)="deleteInterest(interest.id)">Delete</button>
-                        </li>
-                        
+                        </li>                  
+                    </div>
+                    <div>
+                        <strong>Known As:</strong>
+                        <p>{{member.knownAs}}</p>
+                    </div>
+                    <div>
+                        <strong>Fullname:</strong>
+                        <p>{{member.fullName}}</p>
                     </div>
                     <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
                     <div class="form-check form-switch">
