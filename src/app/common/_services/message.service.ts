@@ -8,6 +8,7 @@ import { Message } from '../_models/message';
 import { User } from '../_models/user';
 import { BusyService } from './busy.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class MessageService {
   private messageThreadSource = new BehaviorSubject<Message[]>([]);
   messageThread$ = this.messageThreadSource.asObservable();
 
-  constructor(private http: HttpClient, private busyService: BusyService) { }
+  constructor(private http: HttpClient, private busyService: BusyService, private toastr: ToastrService) { }
 
   createHubConnection(user: User, otherUsername: string) {
     this.busyService.busy();
@@ -82,7 +83,7 @@ export class MessageService {
 
   async sendMessage(username: string, content: string) {
     return this.hubConnection?.invoke('SendMessage', {recipientUsername: username, content})
-      .catch(error => console.log(error));
+      .catch(error =>  this.toastr.error(error));
   }
 
   deleteMessage(id: number) {

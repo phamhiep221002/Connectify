@@ -5,7 +5,6 @@ import { TextInputComponent } from "../common/_forms/text-input/text-input.compo
 import { AdminPanelComponent } from "./admin/admin-panel/admin-panel.component";
 import { ConfirmDialogComponent } from "./admin/modals/confirm-dialog/confirm-dialog.component";
 import { RolesModalComponent } from "./admin/modals/roles-modal/roles-modal.component";
-import { PhotoManagementComponent } from "./admin/photo-management/photo-management.component";
 import { UserManagementComponent } from "./admin/user-management/user-management.component";
 import { NotFoundComponent } from "./errors/not-found/not-found.component";
 import { ServerErrorComponent } from "./errors/server-error/server-error.component";
@@ -30,7 +29,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxWebstorageModule } from "ngx-webstorage";
 import { SharedModule } from "../common/_modules/shared.module";
-
 import { LoadingInterceptor } from "../common/_interceptors/loading.interceptor";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from "./app.component";
@@ -64,7 +62,6 @@ import { EditInterestComponent } from './members/edit-interest/edit-interest.com
     AdminPanelComponent,
     HasRoleDirective,
     UserManagementComponent,
-    PhotoManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
     SidebarComponent,

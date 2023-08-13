@@ -4,7 +4,7 @@ import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 
 @Directive({
-  selector: '[appHasRole]' // *appHasRole='["Admin", "Thing"]'
+  selector: '[appHasRole]'
 })
 export class HasRoleDirective implements OnInit {
   @Input() appHasRole: string[] = [];
