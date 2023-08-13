@@ -1,8 +1,8 @@
 <div class="main-box">
     <div class="row" *ngIf="member">
-        <div class="col-8">
+        <div class="col-12">
             <tabset class="member-tabset">
-                <tab heading="About {{member.knownAs}}">
+                <tab class="introduction-tab" heading="About {{member.knownAs}}">
                     <button class="btn btn-primary" (click)="openModal(updateIntroTemplate)">Update
                         Introduction</button>
                 </tab>
@@ -20,8 +20,8 @@
         <div class="center">
             <h1>Your profile</h1>
         </div>
-        <div class="col-4">
-            <div class="card">
+        <div class="col-12">
+            <div class="card card-profile">
                 <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
                     class="card-img-top img-thumbnail">
                 <div class="card-body">
@@ -73,18 +73,21 @@
                         <strong>Fullname:</strong>
                         <p>{{member.fullName}}</p>
                     </div>
-                    <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="visibilitySwitch" [(ngModel)]="isVisible"
-                            (ngModelChange)="setVisibility($event)">
-                        <label class="form-check-label" for="visibilitySwitch">Visibility</label>
+                    <div class="profile-btn">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="visibilitySwitch" [(ngModel)]="isVisible"
+                                (ngModelChange)="setVisibility($event)">
+                            <label class="form-check-label" for="visibilitySwitch">Visibility</label>
+                        </div>
+                        <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
                     </div>
                 </div>
             </div>
         </div>
         <ng-template #updateIntroTemplate>
             <div class="modal-body">
-                <form [formGroup]="updateIntroForm" (ngSubmit)="updateIntroduction()">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef.hide()"></button>
+                <form class="form" [formGroup]="updateIntroForm" (ngSubmit)="updateIntroduction()">
                     <div class="form-group">
                         <label for="introduction">Introduction</label>
                         <div class="alert alert-info pb-0" *ngIf="updateIntroForm.dirty">
@@ -94,12 +97,11 @@
                         <textarea id="introduction" class="form-control" formControlName="introduction"
                             required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary"
+                    <button type="submit" class="form-update-btn"
                         [disabled]="!updateIntroForm.valid || !updateIntroForm.dirty">
                         Update
                     </button>
                 </form>
-                <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
             </div>
         </ng-template>
     </div>
