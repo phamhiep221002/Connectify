@@ -22,7 +22,25 @@
                                     timeago}})</span>
                             </small>
                         </div>
-                        <p>{{message.content}}</p>
+                        <div *ngIf="message.messageType === 'Image'">
+                            <img [src]="message.content" />
+                        </div>
+                        <div *ngIf="message.messageType === 'Video'">
+                            <video controls [src]="message.content"></video>
+                        </div>
+                        <div *ngIf="message.messageType === 'Location'">
+                            <button (click)="increaseZoom()">+</button>
+                            <button (click)="decreaseZoom()">-</button>
+                            <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
+                                width="600">
+                        </div>
+                        <div
+                            *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File'">
+                            <p>{{message.content}}</p>
+                        </div>
+                        <div *ngIf="message.messageType === 'File'">
+                            <a href="{{message.content}}" target="_blank">A File has been shared by the sender. Click here to download.</a>
+                        </div>
                     </div>
                 </div>
             </li>

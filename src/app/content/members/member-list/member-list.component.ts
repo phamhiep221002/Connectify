@@ -13,7 +13,7 @@ declare var H: any;
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.css']
 })
-export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class MemberListComponent implements OnInit, AfterViewChecked {
   @ViewChild('mapContainer') 
   public mapElement!: ElementRef;
   private currentMarker: any; 
@@ -59,9 +59,6 @@ export class MemberListComponent implements OnInit, AfterViewInit, AfterViewChec
     this.locationService.checkLocation();
   }
 
-  ngAfterViewInit(): void {
-    this.loadMap();
-  }
 
   ngAfterViewChecked(): void {
     if (!this.map && this.mapElement && this.mapElement.nativeElement) {

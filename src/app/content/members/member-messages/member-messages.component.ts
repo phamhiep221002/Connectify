@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MessageService } from 'src/app/common/_services/message.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -10,13 +11,15 @@ import { MessageService } from 'src/app/common/_services/message.service';
   styleUrls: ['./member-messages.component.css']
 })
 export class MemberMessagesComponent implements OnInit {
-  @ViewChild('messageForm') messageForm?: NgForm
+  @ViewChild('messageForm') messageForm?: NgForm;
   @Input() username?: string;
   messageContent = '';
   loading = false;
   file64?: string;
   fileName?: string;
-
+  mapURL?: string;
+  zoomLevel: number = 14;
+  private apiMapKey = environment.apiMapKey;
   constructor(public messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -46,16 +49,16 @@ export class MemberMessagesComponent implements OnInit {
     if (!this.username || !this.file64 || !this.fileName) return;
     this.loading = true;
     try {
-        await this.messageService.createFileMessage(this.username, this.fileName, this.file64).then();
-        // Handle successful message send, for example, reset form or show notification
-        this.file64 = undefined;
-        this.fileName = undefined;
+      await this.messageService.createFileMessage(this.username, this.fileName, this.file64).then();
+      // Handle successful message send, for example, reset form or show notification
+      this.file64 = undefined;
+      this.fileName = undefined;
     } catch (error) {
-        console.error("Failed to send file message:", error);
+      console.error("Failed to send file message:", error);
     } finally {
-        this.loading = false;
+      this.loading = false;
     }
-}
+  }
   // New method to send location message
   async sendLocationMessage() {
     if (!this.username) return;
@@ -63,11 +66,31 @@ export class MemberMessagesComponent implements OnInit {
     try {
       await this.messageService.createLocationMessage(this.username).then();
       this.messageForm?.reset();
-      // Handle successful message send, for example, show notification
     } catch (error) {
       console.error("Failed to send location message:", error);
     } finally {
       this.loading = false;
     }
+  }
+  getMapUrl(latitude: string, longitude: string): string {
+    const apiKey = this.apiMapKey;
+    const markerSize = this.calculateMarkerSize(this.zoomLevel);
+    return `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${apiKey}&lat=${latitude}&lon=${longitude}&z=${this.zoomLevel}&poi=${latitude},${longitude}&poisize=${markerSize}&w=600&h=400&ppi=320&poithm=2`;
+  }
+  increaseZoom() {
+    if (this.zoomLevel < 20) this.zoomLevel++;
+  }
+
+  decreaseZoom() {
+    if (this.zoomLevel > 0) this.zoomLevel--;
+  }
+  calculateMarkerSize(zoomLevel: number): number {
+    const minZoom = 0;
+    const maxZoom = 20;
+
+    const minSize = 10;
+    const maxSize = 50;
+
+    return minSize + (maxSize - minSize) * (zoomLevel - minZoom) / (maxZoom - minZoom);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
 import { Pagination } from 'src/app/common/_models/pagination';
+import { MembersService } from 'src/app/common/_services/members.service';
 import { MessageService } from 'src/app/common/_services/message.service';
 
 
@@ -16,8 +18,10 @@ export class MessagesComponent implements OnInit {
   pageNumber = 1;
   pageSize = 5;
   loading = false;
+  predicate = 'connected';
+  members: Member[] | undefined;
 
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService, private memberService: MembersService ) { }
 
   ngOnInit(): void {
     this.loadMessages();

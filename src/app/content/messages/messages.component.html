@@ -9,9 +9,13 @@
         <button class="btn btn-primary" btnRadio="Outbox" [(ngModel)]="container" (click)="loadMessages()">
             <i class="fa fa-paper-plane"></i> Outbox
         </button>
+        <tabset>
+            <tab heading="Member connected">
+                <app-member-connected></app-member-connected>
+            </tab>
+        </tabset>
     </div>
 </div>
-
 <div class="row" *ngIf="!messages || messages.length === 0">
     <h3>No messages</h3>
 </div>
