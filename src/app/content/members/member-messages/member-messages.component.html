@@ -1,20 +1,14 @@
 <div class="card">
-    <div class="card-body"
-            #scrollMe
-            style="overflow: scroll; height: 535px"
-            [scrollTop]="scrollMe.scrollHeight"
-    >
+    <div class="card-body" #scrollMe style="overflow: scroll; height: 535px" [scrollTop]="scrollMe.scrollHeight">
         <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
             No messages yet... say hi by using the message box below
         </div>
 
-        <ul 
-            *ngIf="(messageService.messageThread$ | async)!.length > 0" class="chat">
+        <ul *ngIf="(messageService.messageThread$ | async)!.length > 0" class="chat">
             <li *ngFor="let message of (messageService.messageThread$ | async)">
                 <div>
                     <span class="chat-img float-end">
-                        <img class="rounded-circle" 
-                            src="{{message.senderPhotoUrl || './assets/user.png'}}" 
+                        <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
                             alt="image of user">
                     </span>
                     <div class="chat-body">
@@ -24,7 +18,8 @@
                                 <span class="text-danger" *ngIf="!message.dateRead 
                                     && message.senderUsername !== username">(unread)</span>
                                 <span class="text-success" *ngIf="message.dateRead 
-                                    && message.senderUsername !== username">(read {{message.dateRead | timeago}})</span>
+                                    && message.senderUsername !== username">(read {{message.dateRead |
+                                    timeago}})</span>
                             </small>
                         </div>
                         <p>{{message.content}}</p>
@@ -35,18 +30,19 @@
     </div>
 
     <div class="card-footer">
+        <div class="mb-3">
+            <input type="file" (change)="onFileSelected($event)">
+            <button class="btn btn-success mt-2" (click)="sendFileMessage()">Gửi File</button>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-info" (click)="sendLocationMessage()">Gửi Vị Trí</button>
+        </div>
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">
-                <input 
-                    name="messageContent"
-                    required
-                    [(ngModel)]="messageContent"
-                    type="text" 
-                    class="form-control input-sm" 
-                    placeholder="Send a private message">
+                <input name="messageContent" required [(ngModel)]="messageContent" type="text"
+                    class="form-control input-sm" placeholder="Send a private message">
                 <div class="input-group-append">
-                    <button [disabled]="!messageForm.valid || loading" 
-                        class="btn btn-primary" type="submit">
+                    <button [disabled]="!messageForm.valid || loading" class="btn btn-primary" type="submit">
                         Send <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
                     </button>
                 </div>

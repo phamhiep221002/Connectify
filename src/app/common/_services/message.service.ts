@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpTransportType, HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Group } from '../_models/group';
 import { Message } from '../_models/message';
@@ -82,11 +82,25 @@ export class MessageService {
   }
 
   async sendMessage(username: string, content: string) {
-    return this.hubConnection?.invoke('SendMessage', {recipientUsername: username, content})
-      .catch(error =>  this.toastr.error(error));
+    return this.hubConnection?.invoke('SendMessage', { recipientUsername: username, content })
+      .catch(error => this.toastr.error(error));
   }
 
   deleteMessage(id: number) {
     return this.http.delete(this.baseUrl + 'messages/' + id);
+  }
+
+  async createFileMessage(username: string, fileName: string, fileBase64: string) {
+    return this.hubConnection?.invoke('CreateFileMessage', {
+      recipientUsername: username,
+      fileName: fileName,
+      file64: fileBase64
+    })
+      .catch(error => this.toastr.error(error));
+  }
+
+  async createLocationMessage(username: string) {
+    return this.hubConnection?.invoke('CreateLocationMessage', { recipientUsername: username })
+      .catch(error => this.toastr.error(error));
   }
 }
