@@ -1,5 +1,8 @@
 .navbar.navbar-expand-md.navbar-dark.fixed-top.bg-primary {
     background: #9F5BDC !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .navbar-brand {
