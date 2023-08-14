@@ -15,12 +15,15 @@
         "Meloep",
         "registerbtn",
         "Satoshi",
+        "searchinterest",
+        "searchlooking",
         "Signin",
         "signup",
         "tabset",
         "Timeago",
         "titlecase",
         "Toastr",
+        "updateintroduction",
         "Webstorage"
     ]
 }
