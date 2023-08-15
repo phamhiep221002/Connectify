@@ -11,10 +11,11 @@ export class UserParams {
     currentLatitude!: number;
     currentLongitude!: number;
     constructor(user: User) {
-        if (user.gender === '') {
-            this.gender = '';
-        }  else {
+        if (user.gender) {
+            this.gender = user.gender;
+        } else {
             this.gender = '';
         }
     }
+
 }
