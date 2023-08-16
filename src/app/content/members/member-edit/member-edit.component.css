@@ -37,6 +37,11 @@ h4{
   margin-top: 16px;
 }
 
+.profile-detail button{
+  position: absolute;
+  right: 10%;
+}
+
 .icon{
     margin-right: 10px;
     font-size: 1.2em;
@@ -79,6 +84,9 @@ h4{
 }
 
 
+.modal-content{
+  width: 120% !important;
+}
 .modal-body{
     background: linear-gradient(#fff, #fff) padding-box,
                 linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
@@ -86,7 +94,7 @@ h4{
     padding: 32px 24px;
     font-size: 14px;
     font-family: inherit;
-    color: white;
+    color: rgb(11, 11, 11);
     display: flex !important;
     flex-direction: column;
     gap: 20px;

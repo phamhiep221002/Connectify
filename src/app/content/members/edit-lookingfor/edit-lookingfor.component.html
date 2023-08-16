@@ -1,12 +1,12 @@
 <div>
-    <form [formGroup]="searchlookingForm" (ngSubmit)="onSearchLookingFor()">
+    <form class="form" [formGroup]="searchlookingForm" (ngSubmit)="onSearchLookingFor()">
         <div class="form-group">
             <label for="name">Search Looking fors:</label>
             <input type="text" id="name" class="form-control" formControlName="name">
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary btn-search">Search</button>
     </form>
-    <div *ngFor="let lookingFor of lookingFors">
+    <div class="lookingFor-detail" *ngFor="let lookingFor of lookingFors">
         <span>{{lookingFor.name}}</span>
         <button *ngIf="!isLookingForAdded(lookingFor.id)" (click)="addLookingFor(lookingFor.id)">Add</button>
         
