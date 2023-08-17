@@ -25,10 +25,12 @@
   <button class="btn btn-create" (click)="openCreateModal(createLookingForTemplate)">Create New</button>
 </div>
     
-<div *ngFor="let item of interests">
+<div *ngFor="let item of interests" class="interest-lists">
   <i>{{item.name}}</i>
-  <button (click)="openUpdateModal(item, updateLookingForTemplate)">Update</button>
-  <button (click)="onDelete(item.id)">Delete</button>
+  <div class="interest-btn">
+    <button class="update-btn" (click)="openUpdateModal(item, updateLookingForTemplate)">Update</button>
+    <button class="delete-btn" (click)="onDelete(item.id)">Delete</button>
+  </div>
 </div>
 <ng-template #updateLookingForTemplate>
       <div class="modal-body">
