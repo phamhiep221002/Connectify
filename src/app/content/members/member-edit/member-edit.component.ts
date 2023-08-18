@@ -125,6 +125,9 @@ export class MemberEditComponent implements OnInit {
   reloadData() {
     this.loadMember();
   }
+  openEditModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
   deleteInterest(id: number) {
     this.memberService.deleteInterest(id).subscribe(response => {
       this.toastr.success('Interest removed successfully');
