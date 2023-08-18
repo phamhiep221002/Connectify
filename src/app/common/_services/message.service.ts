@@ -90,17 +90,25 @@ export class MessageService {
     return this.http.delete(this.baseUrl + 'messages/' + id);
   }
 
-  async createFileMessage(username: string, fileName: string, fileBase64: string) {
-    return this.hubConnection?.invoke('CreateFileMessage', {
-      recipientUsername: username,
-      fileName: fileName,
-      file64: fileBase64
-    })
-      .catch(error => this.toastr.error(error));
-  }
+  // async createFileMessage(username: string, fileName: string, fileBase64: string) {
+  //   return this.hubConnection?.invoke('CreateFileMessage', {
+  //     recipientUsername: username,
+  //     fileName: fileName,
+  //     file64: fileBase64
+  //   })
+  //     .catch(error => this.toastr.error(error));
+  // }
 
   async createLocationMessage(username: string) {
     return this.hubConnection?.invoke('CreateLocationMessage', { recipientUsername: username })
       .catch(error => this.toastr.error(error));
+  }
+  async sendFileMessage(username: string, file: File) {
+    const formData = new FormData();
+    formData.append('File', file);
+    formData.append('RecipientUsername', username);
+
+    return this.http.post(this.baseUrl + 'messages/file', formData).toPromise()
+      .catch(error => this.toastr.error(error.error.message));
   }
 }

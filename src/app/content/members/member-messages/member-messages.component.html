@@ -34,12 +34,16 @@
                             <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
                                 width="600">
                         </div>
-                        <div
-                            *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File'">
-                            <p>{{message.content}}</p>
-                        </div>
                         <div *ngIf="message.messageType === 'File'">
-                            <a href="{{message.content}}" target="_blank">A File has been shared by the sender. Click here to download.</a>
+                            <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
+                        </div>
+                        <div *ngIf="message.messageType === 'Audio'">
+                            <audio controls [src]="message.content">
+                            </audio>
+                        </div>
+                        <div
+                            *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
+                            <p>{{message.content}}</p>
                         </div>
                     </div>
                 </div>
@@ -49,8 +53,8 @@
 
     <div class="card-footer">
         <div class="mb-3">
-            <input type="file" (change)="onFileSelected($event)">
-            <button class="btn btn-success mt-2" (click)="sendFileMessage()">Gửi File</button>
+            <input type="file" (change)="onFileSelected($event)" />
+            <button (click)="sendFileMessage()">Gửi file</button>
         </div>
         <div class="mb-3">
             <button class="btn btn-info" (click)="sendLocationMessage()">Gửi Vị Trí</button>

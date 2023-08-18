@@ -10,4 +10,5 @@ export interface Message {
     dateRead?: Date;
     messageSent: Date;
     messageType: string;
+    fileName: string;
 }

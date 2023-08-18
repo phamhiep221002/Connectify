@@ -20,6 +20,7 @@ export class MemberMessagesComponent implements OnInit {
   mapURL?: string;
   zoomLevel: number = 14;
   private apiMapKey = environment.apiMapKey;
+  selectedFile?: File;
   constructor(public messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -32,34 +33,30 @@ export class MemberMessagesComponent implements OnInit {
       this.messageForm?.reset();
     }).finally(() => this.loading = false);
   }
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.fileName = file.name;
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        // The result includes a MIME type prefix. We'll split it to get only the base64 data.
-        this.file64 = (reader.result as string).split(',')[1];
-      };
+  // New method to send file message
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0];
+      this.fileName = input.files[0].name;
     }
   }
-  // New method to send file message
+  // New method to send location message
   async sendFileMessage() {
-    if (!this.username || !this.file64 || !this.fileName) return;
+    if (!this.username || !this.selectedFile) return;
+
     this.loading = true;
     try {
-      await this.messageService.createFileMessage(this.username, this.fileName, this.file64).then();
-      // Handle successful message send, for example, reset form or show notification
-      this.file64 = undefined;
+      await this.messageService.sendFileMessage(this.username, this.selectedFile);
+      this.selectedFile = undefined;
       this.fileName = undefined;
+      this.messageForm?.reset();
     } catch (error) {
       console.error("Failed to send file message:", error);
     } finally {
       this.loading = false;
     }
   }
-  // New method to send location message
   async sendLocationMessage() {
     if (!this.username) return;
     this.loading = true;

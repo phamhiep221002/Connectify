@@ -24,6 +24,7 @@
     "@kolkov/ngx-gallery": "^2.0.1",
     "@microsoft/signalr": "^7.0.5",
     "@types/heremaps": "^3.1.10",
+    "@types/simple-peer": "^9.11.5",
     "bootstrap": "^5.2.3",
     "bootswatch": "^5.2.3",
     "font-awesome": "^4.7.0",
@@ -38,6 +39,7 @@
     "ngx-toastr": "^17.0.2",
     "ngx-webstorage": "^12.0.0",
     "rxjs": "~7.8.0",
+    "simple-peer": "^9.11.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
