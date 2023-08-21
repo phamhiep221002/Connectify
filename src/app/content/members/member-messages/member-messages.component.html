@@ -54,10 +54,12 @@
     <div class="card-footer">
         <div class="mb-3">
             <input type="file" (change)="onFileSelected($event)" />
-            <button (click)="sendFileMessage()">Gửi file</button>
+            <button (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
+                    class="fa fa-spinner fa-spin"></i></button>
         </div>
         <div class="mb-3">
-            <button class="btn btn-info" (click)="sendLocationMessage()">Gửi Vị Trí</button>
+            <button class="btn btn-info" (click)="sendLocationMessage()">Gửi
+                Vị Trí <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
         </div>
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">

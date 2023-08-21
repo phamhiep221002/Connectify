@@ -36,5 +36,4 @@ export class ListsComponent implements OnInit {
       this.loadLikes();
     }
   }
-
 }

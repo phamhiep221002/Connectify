@@ -15,6 +15,8 @@ export class MemberMessagesComponent implements OnInit {
   @Input() username?: string;
   messageContent = '';
   loading = false;
+  loadingfile = false;
+  loadinglocation = false;
   file64?: string;
   fileName?: string;
   mapURL?: string;
@@ -45,7 +47,7 @@ export class MemberMessagesComponent implements OnInit {
   async sendFileMessage() {
     if (!this.username || !this.selectedFile) return;
 
-    this.loading = true;
+    this.loadingfile = true;
     try {
       await this.messageService.sendFileMessage(this.username, this.selectedFile);
       this.selectedFile = undefined;
@@ -54,19 +56,19 @@ export class MemberMessagesComponent implements OnInit {
     } catch (error) {
       console.error("Failed to send file message:", error);
     } finally {
-      this.loading = false;
+      this.loadingfile = false;
     }
   }
   async sendLocationMessage() {
     if (!this.username) return;
-    this.loading = true;
+    this.loadinglocation = true;
     try {
       await this.messageService.createLocationMessage(this.username).then();
       this.messageForm?.reset();
     } catch (error) {
       console.error("Failed to send location message:", error);
     } finally {
-      this.loading = false;
+      this.loadinglocation = false;
     }
   }
   getMapUrl(latitude: string, longitude: string): string {

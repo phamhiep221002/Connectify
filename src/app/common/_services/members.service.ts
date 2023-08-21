@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, map, of, take, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -24,13 +24,13 @@ export class MembersService {
   constructor(private http: HttpClient, private accountService: AccountService) {
     this.accountService.currentUser$.subscribe(user => {
       if (user) {
-          this.user = user;
-          this.userParams = new UserParams(user);
+        this.user = user;
+        this.userParams = new UserParams(user);
       } else {
-          this.user = undefined;
-          this.userParams = undefined;
+        this.user = undefined;
+        this.userParams = undefined;
       }
-  });
+    });
   }
   getUserParams() {
     return this.userParams;
@@ -97,6 +97,10 @@ export class MembersService {
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'likes', params, this.http);
   }
+  getRecommendedMembers(userParams: UserParams, pageNumber: number, pageSize: number) {
+    let params = getPaginationHeaders(pageNumber, pageSize);
+    return getPaginatedResult<Member[]>(this.baseUrl + 'users/recommended', params, this.http);
+  }
   getGender() {
     return this.http.get<any>(`${this.baseUrl}gender`);
   }
@@ -115,14 +119,14 @@ export class MembersService {
   addLookingFor(id: number) {
     return this.http.post(this.baseUrl + 'users/add-lookingfor/' + id, {})
   }
-  
+
   deleteLookingFor(id: number) {
     return this.http.delete(this.baseUrl + 'users/delete-lookingfor/' + id,);
   }
   addInterest(id: number) {
     return this.http.post(this.baseUrl + 'users/add-interest/' + id, {})
   }
-  
+
   deleteInterest(id: number) {
     return this.http.delete(this.baseUrl + 'users/delete-interest/' + id,);
   }
