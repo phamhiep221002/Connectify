@@ -65,6 +65,10 @@ export class EditInterestComponent implements OnInit {
     this.memberService.addInterest(id).subscribe(response => {
       this.toastr.success('Interest added successfully');
       this.interestAdded.emit();
+      const index = this.interests.findIndex((lf) => lf.id === id);
+      if (index !== -1) {
+        this.interests.splice(index, 1);
+      }
     }, error => {
     });
   }
@@ -75,11 +79,5 @@ export class EditInterestComponent implements OnInit {
     }, error => {
       this.toastr.error(error);
     });
-  }
-  isInterestAdded(interestId: number): boolean {
-    if (!this.member || !this.member.interests) {
-      return false;
-    }
-    return this.member.interests.some(lf => lf.id === interestId);
   }
 }
