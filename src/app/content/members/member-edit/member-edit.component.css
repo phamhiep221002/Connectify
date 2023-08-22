@@ -1,3 +1,6 @@
+section{
+  width: 70em;
+}
 .img-thumbnail {
     width: 120px;
     height: 100%;
@@ -81,9 +84,11 @@
 .main-box{
     display: flex;
     position: relative;
-    margin: 100px;
+    margin: 30px;
     flex-wrap: wrap;
     align-items: center;
+    width: 100%;
+    margin-left: 100px;
 }
 
 .row{
@@ -170,6 +175,36 @@
 .modal-body #introduction {
     height: 150px;
     width: 100%;
+    background: linear-gradient(#fff, #fff) padding-box,
+                linear-gradient(145deg, transparent -35%,#e81cff, #40c9ff) border-box;
+    border: 2px solid transparent;
+    font-size: 14px;
+    font-family: inherit;
+    color: rgb(11, 11, 11);
+    display: flex !important;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.btn-update{
+  display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: flex-end;
+    font-family: inherit;
+    color: #fff;
+    font-weight: 600;
+    width: 30%;
+    background: linear-gradient(to top,#a18cd1 0%,#fbc2eb 100%);
+    border: 1px solid #fff;
+    padding: 12px 16px;
+    font-size: inherit;
+    gap: 8px;
+    margin: 8px 2px 0 0;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 .edit-btn {
@@ -227,15 +262,59 @@
   background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
 }
   
-
+/* Tablet */
 @media (max-width: 1023px) {
-    .card-profile {
-        flex-direction: column;
-    }
+  section{
+    max-width: 30em;
+  }
+  .card-profile {
+      flex-direction: column;
+  }
 }
 
-@media (max-width: 767px) {
-    .card-profile {
-        flex-direction: column;
-    }
+/* Mobile */
+@media (max-width: 480px) {
+  section{
+    width: 100%;
+    box-sizing: border-box; 
+  }
+  .card-profile {
+      flex-direction: column;
+  }
+  
+  .img-thumbnail {
+      width: 90px;
+  }
+
+  .profile-info {
+      width: 50%;
+      float: left;
+  }
+  .edit-profile{
+    width: 50%;
+    float: right;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  section{
+    width: 100%;
+    box-sizing: border-box; 
+  }
+  .card-profile {
+      flex-direction: column;
+  }
+  
+  .img-thumbnail {
+      width: 90px;
+  }
+
+  .profile-info {
+    width: 50%;
+    float: left;
+  }
+  .edit-profile{
+    width: 50%;
+    float: right;
+  }
 }

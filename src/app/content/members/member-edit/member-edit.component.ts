@@ -126,6 +126,12 @@ export class MemberEditComponent implements OnInit {
     this.loadMember();
   }
   openEditModal(template: TemplateRef<any>) {
+     if (!this.member) {
+      return;
+    }
+    this.updateIntroForm.setValue({
+      introduction: this.member.introduction
+    });
     this.modalRef = this.modalService.show(template);
   }
   deleteInterest(id: number) {

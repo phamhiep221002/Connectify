@@ -8,7 +8,7 @@
     </form>
     <div class="lookingFor-detail" *ngFor="let lookingFor of lookingFors">
         <span>{{lookingFor.name}}</span>
-        <button *ngIf="!isLookingForAdded(lookingFor.id)" (click)="addLookingFor(lookingFor.id)">Add</button>
+        <button class="add-btn" *ngIf="!isLookingForAdded(lookingFor.id)" (click)="addLookingFor(lookingFor.id)">Add</button>
         
     </div>
 </div>
