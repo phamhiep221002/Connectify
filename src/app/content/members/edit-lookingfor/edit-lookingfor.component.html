@@ -8,7 +8,7 @@
     </form>
     <div class="lookingFor-detail" *ngFor="let lookingFor of lookingFors">
         <span>{{lookingFor.name}}</span>
-        <button (click)="addLookingFor(lookingFor.id)">Add</button>
+        <button class="add-btn" (click)="addLookingFor(lookingFor.id)">Add</button>
         
     </div>
 </div>
