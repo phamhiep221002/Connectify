@@ -19,6 +19,8 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
   private currentMarker: any; 
   private platform: any;
   private map: any;
+  pageNumber = 1;
+  pageSize = 5;
   private apiMapKey =environment.apiMapKey;
   members: Member[] = [];
   pagination: Pagination | undefined;
@@ -101,8 +103,6 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
 
   loadMembers() {
     if (this.userParams) {
-      this.userParams.pageNumber = this.userParams.pageNumber ?? 1;
-      this.userParams.pageSize = this.userParams.pageSize ?? 5;
       this.memberService.setUserParams(this.userParams);
       this.memberService.getMembers(this.userParams).subscribe({
         next: (response) => {

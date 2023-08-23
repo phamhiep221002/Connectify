@@ -8,7 +8,6 @@
     </form>
     <div class="interest-detail" *ngFor="let interest of interests">
         <span>{{interest.name}}</span>
-        <button class="add-btn" *ngIf="!isInterestAdded(interest.id)" (click)="addInterest(interest.id)">Add</button>
-        <button *ngIf="isInterestAdded(interest.id)" disabled>Added</button>
+        <button (click)="addInterest(interest.id)">Add</button>
     </div>
 </div>

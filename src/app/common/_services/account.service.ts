@@ -6,6 +6,7 @@ import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
 import { ResetPasswordDto } from '../_models/resetPasswordDto';
 import { LocationService } from './location.service';
+import { UserParams } from '../_models/userParams';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AccountService {
   currentUser$ = this.currentUserSource.asObservable();
   private emailSource = new BehaviorSubject<string | null>(null);
   email$ = this.emailSource.asObservable();
+  userParams: UserParams | undefined;
 
   constructor(private http: HttpClient, private presenceService: PresenceService) {
   }

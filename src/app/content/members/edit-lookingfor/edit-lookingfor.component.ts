@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { InterestsDto } from 'src/app/common/_models/interestsDto';
@@ -17,8 +17,7 @@ export class EditLookingforComponent implements OnInit {
   lookingFors: LookingForsDto[] = [];
   searchlookingForm!: FormGroup;
   user: User | null = null;
-  member: Member | undefined;
-  isVisible = false;
+  @Input() member: Member | undefined;
   interests: InterestsDto[] = []
 
   constructor(
@@ -54,15 +53,12 @@ export class EditLookingforComponent implements OnInit {
     this.memberService.addLookingFor(id).subscribe(response => {
       this.toastr.success('Looking for added successfully');
       this.interestAdded.emit();
+      const index = this.lookingFors.findIndex((lf) => lf.id === id);
+      if (index !== -1) {
+        this.lookingFors.splice(index, 1);
+      }
     }, error => {
     });
   }
-
  
-  isLookingForAdded(lookingForId: number): boolean {
-    if (!this.member || !this.member.lookingFors) {
-      return false;
-    }
-    return this.member.lookingFors.some(lf => lf.id === lookingForId);
-  }
 }

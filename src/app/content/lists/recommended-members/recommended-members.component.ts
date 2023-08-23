@@ -1,38 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/common/_models/member';
 import { Pagination } from 'src/app/common/_models/pagination';
+import { UserParams } from 'src/app/common/_models/userParams';
 import { MembersService } from 'src/app/common/_services/members.service';
 
 @Component({
-  selector: 'app-member-connected',
-  templateUrl: './member-connected.component.html',
-  styleUrls: ['./member-connected.component.css']
+  selector: 'app-recommended-members',
+  templateUrl: './recommended-members.component.html',
+  styleUrls: ['./recommended-members.component.css']
 })
-export class MemberConnectedComponent implements OnInit {
+export class RecommendedMembersComponent implements OnInit {
   members: Member[] | undefined;
-  predicate = 'connected';
   pageNumber = 1;
   pageSize = 5;
+  userParams!: UserParams;
   pagination: Pagination | undefined;
 
-  constructor(private memberService: MembersService) { }
+  constructor(private membersService: MembersService) {}
 
   ngOnInit(): void {
-    this.loadConnected();
+    this.loadRecommendedMembers();
   }
-  loadConnected() {
-    this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize).subscribe({
+  
+  loadRecommendedMembers() {
+    this.membersService.getRecommendedMembers(this.userParams, this.pageNumber, this.pageSize).subscribe({
       next: response => {
         this.members = response.result;
         this.pagination = response.pagination;
       }
     })
   }
-
   pageChanged(event: any) {
     if (this.pageNumber !== event.page) {
       this.pageNumber = event.page;
-      this.loadConnected();
+      this.loadRecommendedMembers();
     }
   }
 }
