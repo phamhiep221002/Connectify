@@ -1,3 +1,7 @@
+section{
+  width: 70em;
+  margin-left: 100px;
+}
 .img-thumbnail {
     width: 120px;
     height: 100%;
@@ -45,14 +49,17 @@
   align-items: center;
 }
 
+.hobbies{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0 10px 0;
+  align-items: start;
+}
+
 .profile-detail p{
   margin-left: 10px;
   margin-top: 16px;
-}
-
-.profile-detail button{
-  position: absolute;
-  right: 10%;
 }
 
 .icon{
@@ -81,9 +88,11 @@
 .main-box{
     display: flex;
     position: relative;
-    margin: 100px;
+    margin: 30px;
     flex-wrap: wrap;
     align-items: center;
+    width: 100%;
+    margin-left: 100px;
 }
 
 .row{
@@ -170,6 +179,97 @@
 .modal-body #introduction {
     height: 150px;
     width: 100%;
+    background: linear-gradient(#fff, #fff) padding-box,
+                linear-gradient(145deg, transparent -35%,#e81cff, #40c9ff) border-box;
+    border: 2px solid transparent;
+    font-size: 14px;
+    font-family: inherit;
+    color: rgb(11, 11, 11);
+    display: flex !important;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.delete-btn {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #e43a15, #e65245);;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px linear-gradient(to right, #e43a15, #e65245);;
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+  margin: 5px;
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.delete-btn:hover {
+  width: 80px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: linear-gradient(to right, #e43a15, #e65245);;
+  align-items: center;
+}
+
+.delete-btn:hover .svgIcon {
+  opacity: 0;
+}
+
+.delete-btn::before {
+  position: absolute;
+  top: -17px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.delete-btn:hover::before {
+  font-size: 12px;
+  opacity: 1;
+  transform: translateY(20px);
+  transition-duration: .3s;
+}
+
+.hobbies-items{
+  display: inline-flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.btn-update{
+  display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: flex-end;
+    font-family: inherit;
+    color: #fff;
+    font-weight: 600;
+    width: 30%;
+    background: linear-gradient(to top,#a18cd1 0%,#fbc2eb 100%);
+    border: 1px solid #fff;
+    padding: 12px 16px;
+    font-size: inherit;
+    gap: 8px;
+    margin: 8px 2px 0 0;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 .edit-btn {
@@ -226,16 +326,153 @@
 .edit-btn:active {
   background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
 }
-  
 
-@media (max-width: 1023px) {
-    .card-profile {
-        flex-direction: column;
-    }
+.rounded-social-buttons {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
-@media (max-width: 767px) {
-    .card-profile {
-        flex-direction: column;
-    }
+.rounded-social-buttons .social-button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  border: 0.125rem solid transparent;
+  padding: 0;
+  text-decoration: none;
+  text-align: center;
+  color: #fefefe;
+  font-size: 1.5625rem;
+  font-weight: normal;
+  line-height: 2em;
+  border-radius: 1.6875rem;
+  transition: all 0.5s ease;
+  margin-right: 1.3rem;
+  margin-bottom: 0.25rem;
+}
+
+.rounded-social-buttons .social-button:hover, .rounded-social-buttons .social-button:focus {
+  -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+.rounded-social-buttons .fa-twitter, .fa-facebook-f, .fa-linkedin, .fa-youtube, .fa-github {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 30px;
+}
+
+.rounded-social-buttons .social-button.facebook {
+  background: #3b5998;
+}
+
+.rounded-social-buttons .social-button.facebook:hover, .rounded-social-buttons .social-button.facebook:focus {
+  color: #3b5998;
+  background: #fefefe;
+  border-color: #3b5998;
+}
+
+.rounded-social-buttons .social-button.twitter {
+  background: #55acee;
+}
+
+.rounded-social-buttons .social-button.twitter:hover, .rounded-social-buttons .social-button.twitter:focus {
+  color: #55acee;
+  background: #fefefe;
+  border-color: #55acee;
+}
+
+.rounded-social-buttons .social-button.linkedin {
+  background: #007bb5;
+}
+
+.rounded-social-buttons .social-button.linkedin:hover, .rounded-social-buttons .social-button.linkedin:focus {
+  color: #007bb5;
+  background: #fefefe;
+  border-color: #007bb5;
+}
+
+.rounded-social-buttons .social-button.youtube {
+  background: #bb0000;
+}
+
+.rounded-social-buttons .social-button.youtube:hover, .rounded-social-buttons .social-button.youtube:focus {
+  color: #bb0000;
+  background: #fefefe;
+  border-color: #bb0000;
+}
+
+.rounded-social-buttons .social-button.github {
+  background: #000;
+}
+
+.rounded-social-buttons .social-button.github:hover, .rounded-social-buttons .social-button.github:focus {
+  color: #000;
+  background: #fefefe;
+  border-color: #000;
+}
+
+
+  
+/* Tablet */
+@media (max-width: 1023px) {
+  section{
+    max-width: 30em;
+  }
+  .card-profile {
+      flex-direction: column;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  section{
+    width: 100%;
+    box-sizing: border-box; 
+  }
+  .card-profile {
+      flex-direction: column;
+  }
+  
+  .img-thumbnail {
+      width: 90px;
+  }
+
+  .profile-info {
+      width: 50%;
+      float: left;
+  }
+  .edit-profile{
+    width: 50%;
+    float: right;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  section{
+    width: 100%;
+    box-sizing: border-box; 
+  }
+  .card-profile {
+      flex-direction: column;
+  }
+  
+  .img-thumbnail {
+      width: 90px;
+  }
+
+  .profile-info {
+    width: 50%;
+    float: left;
+  }
+  .edit-profile{
+    width: 50%;
+    float: right;
+  }
 }
