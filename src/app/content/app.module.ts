@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, NgModule } from "@angular/core";
 import { HasRoleDirective } from "../common/_directives/has-role.directive";
 import { DatePickerComponent } from "../common/_forms/date-picker/date-picker.component";
 import { TextInputComponent } from "../common/_forms/text-input/text-input.component";
@@ -25,7 +25,7 @@ import { ResetPasswordComponent } from "./reset-password/reset-password.componen
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxWebstorageModule } from "ngx-webstorage";
 import { SharedModule } from "../common/_modules/shared.module";
@@ -42,6 +42,7 @@ import { InterestManagementComponent } from "./admin/interest-management/interes
 import { EditLookingforComponent } from './members/edit-lookingfor/edit-lookingfor.component';
 import { EditInterestComponent } from './members/edit-interest/edit-interest.component';
 import { RecommendedMembersComponent } from './lists/recommended-members/recommended-members.component';
+
 
 @NgModule({
   declarations: [
@@ -97,7 +98,7 @@ import { RecommendedMembersComponent } from './lists/recommended-members/recomme
     {provide: RECAPTCHA_SETTINGS,
     useValue: {
       siteKey: '6Leup4AnAAAAANNuiRoTeYEvTmuo6IpnTcJsoKKo',
-    } as RecaptchaSettings,}
+    } as RecaptchaSettings,},
 
   ],
   bootstrap: [AppComponent]

@@ -23,26 +23,38 @@
                             </small>
                         </div>
                         <div *ngIf="message.messageType === 'Image'">
+                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                            class="btn btn-danger">Delete</button>
                             <img [src]="message.content" />
                         </div>
                         <div *ngIf="message.messageType === 'Video'">
+                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                            class="btn btn-danger">Delete</button>
                             <video controls [src]="message.content"></video>
                         </div>
                         <div *ngIf="message.messageType === 'Location'">
                             <button (click)="increaseZoom()">+</button>
                             <button (click)="decreaseZoom()">-</button>
+                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                            class="btn btn-danger">Delete</button>
                             <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
                                 width="600">
                         </div>
                         <div *ngIf="message.messageType === 'File'">
+                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                            class="btn btn-danger">Delete</button>
                             <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
                         </div>
                         <div *ngIf="message.messageType === 'Audio'">
+                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                            class="btn btn-danger">Delete</button>
                             <audio controls [src]="message.content">
                             </audio>
                         </div>
                         <div
                             *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
+                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                            class="btn btn-danger">Delete</button>
                             <p>{{message.content}}</p>
                         </div>
                     </div>

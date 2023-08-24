@@ -7,7 +7,7 @@ import { LocationService } from 'src/app/common/_services/location.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  
+
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
@@ -20,8 +20,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (!this.model.username || !this.model.password) {
-      this.toastr.warning('Please enter username and password.', 'Notice');
+    if (!this.model.username) {
+      this.toastr.warning('Please enter username.', 'Notice');
+      return;
+    } else if (!this.model.password) {
+      this.toastr.warning('Please enter password.', 'Notice');
       return;
     }
     this.accountService.login(this.model).subscribe({
@@ -29,10 +32,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
       },
       error: (error) => {
-        console.error(error);
+        this.toastr.error(error);
       }
     });
   }
 
-  
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
 import { Pagination } from 'src/app/common/_models/pagination';
@@ -21,7 +21,7 @@ export class MessagesComponent implements OnInit {
   predicate = 'connected';
   members: Member[] | undefined;
 
-  constructor(private messageService: MessageService, private memberService: MembersService ) { }
+  constructor(private messageService: MessageService,private cdr: ChangeDetectorRef ) { }
 
   ngOnInit(): void {
     this.loadMessages();
@@ -40,7 +40,10 @@ export class MessagesComponent implements OnInit {
 
   deleteMessage(id: number) {
     this.messageService.deleteMessage(id).subscribe({
-      next: () => this.messages?.splice(this.messages.findIndex(m => m.id === id), 1)
+      next: () =>{
+        this.messages?.splice(this.messages.findIndex(m => m.id === id), 1)
+        this.cdr.detectChanges(); 
+      } 
     })
   }
 

@@ -1,5 +1,6 @@
-import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Message } from 'src/app/common/_models/message';
 import { MessageService } from 'src/app/common/_services/message.service';
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./member-messages.component.css']
 })
 export class MemberMessagesComponent implements OnInit {
-  @ViewChild('messageForm') messageForm?: NgForm;
+  @ViewChild('messageForm', { static: false }) messageForm?: NgForm;
   @Input() username?: string;
   messageContent = '';
   loading = false;
@@ -23,9 +24,11 @@ export class MemberMessagesComponent implements OnInit {
   zoomLevel: number = 14;
   private apiMapKey = environment.apiMapKey;
   selectedFile?: File;
-  constructor(public messageService: MessageService) { }
+  messages?: Message[];
+  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    
   }
 
   sendMessage() {
@@ -91,5 +94,13 @@ export class MemberMessagesComponent implements OnInit {
     const maxSize = 50;
 
     return minSize + (maxSize - minSize) * (zoomLevel - minZoom) / (maxZoom - minZoom);
+  }
+  deleteMessage(id: number) {
+    this.messageService.deleteMessage(id).subscribe({
+      next: () => {
+        this.messages?.splice(this.messages.findIndex(m => m.id === id), 1);
+        this.cdr.detectChanges();
+      }
+    });
   }
 }
