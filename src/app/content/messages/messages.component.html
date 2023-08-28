@@ -1,41 +1,82 @@
 <div class="chat-list-container">
     <div class="chat-list-sidebar">
         <div class="header-icons">
-            <button><i class="fa fa-comment icon-messenger"></i></button>
+            <button (click)="loadAllMessages()"><i class="fa fa-comment icon-messenger"></i></button>
             <button><i class="fa fa-cog icon-settings"></i></button>
             <button><i class="fa fa-users"></i></button>
             <button><i class="fa fa-archive"></i></button>
         </div>
-        .
         <div class="chat-list-header">
-            <div class="profile-image">
-                <img src="./assets/user.png" alt="Profile" />
+            <div class="profile-image" *ngIf="(accountService.currentUser$  | async) as user">
+                <img src="{{user.photoUrl || './assets/user.png'}}" alt="user photo" routerLink="/member/edit" />
             </div>
         </div>
     </div>
     <div class="chat-list-main">
         <div class="chat-list-title">
             <h4>Chat</h4>
-            <button class="new-chat"><i class="fa fa-pencil-square-o"></i></button>
         </div>
-    
-        <div class="chat-list">
-        <div class="chat-item">
-            <div class="chat-avatar">
-            <img src="./assets/user.png" alt="Chat Avatar" />
+        <div class="chat-list" *ngFor="let message of connectedMessage">
+            <div class="chat-item">
+                <div class="chat-avatar">
+                    <img src="{{message.photoUrl || './assets/user.png'}}" alt="Chat Avatar" />
+                </div>
+                <div class="chat-info">
+                    <div class="chat-name">{{message.fullName | titlecase}}</div>
+                    <div class="chat-preview">{{message.lastMessage}}</div>
+                </div>
+                <div class="chat-time">{{message.messageSent | timeago}}</div>
             </div>
-            <div class="chat-info">
-            <div class="chat-name">Johnny</div>
-            <div class="chat-preview">Hello</div>
-            </div>
-            <div class="chat-time">10 PM</div>
         </div>
+        <div class="row" *ngIf="!connectedMessage || connectedMessage.length === 0">
+            <h3>No messages</h3>
         </div>
     </div>
-  </div>
-  
-  
-  
+    <div class="d-flex justify-content-center"
+        *ngIf="!loading && pagination && connectedMessage && connectedMessage.length > 0">
+        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+            [maxSize]="10" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+        </pagination>
+    </div>
+</div>
+
+<!-- 
+<div class="row" *ngIf="messages && messages.length > 0">
+    <table class="table table-hover" style="cursor: pointer;">
+        <thead>
+            <tr>
+                <th style="width: 40%">Message</th>
+                <th style="width: 20%">From / To</th>
+                <th style="width: 20%">Sent / Received</th>
+                <th style="width: 20%"></th>
+            </tr>
+        </thead>
+        <tbody class="align-middle">
+            <tr [hidden]="loading" *ngFor="let message of messages" routerLink="{{container === 'Outbox' 
+                    ? '/members/' + message.recipientUsername 
+                    : '/members/' + message.senderUsername}}" [queryParams]="{tab: 'Messages'}">
+                <td>{{message.content}}</td>
+                <td>
+                    <div *ngIf="container === 'Outbox'">
+                        <img class="img-circle rounded-circle me-2"
+                            src="{{message.recipientPhotoUrl || './assets/user.png'}}" alt="recipient photo">
+                        <strong>{{message.recipientUsername | titlecase}}</strong>
+                    </div>
+                    <div *ngIf="container !== 'Outbox'">
+                        <img class="img-circle rounded-circle me-2"
+                            src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="recipient photo">
+                        <strong>{{message.senderUsername | titlecase}}</strong>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+
+
+
 
 
 

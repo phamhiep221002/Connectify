@@ -9,6 +9,7 @@ import { User } from '../_models/user';
 import { BusyService } from './busy.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 import { ToastrService } from 'ngx-toastr';
+import { ConnectedMessage } from '../_models/connectedMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,7 @@ export class MessageService {
       })
     })
   }
+  
 
   stopHubConnection() {
     if (this.hubConnection) {
@@ -111,4 +113,9 @@ export class MessageService {
     return this.http.post(this.baseUrl + 'messages/file', formData).toPromise()
       .catch(error => this.toastr.error(error.error.message));
   }
+  getconnectedMessages(pageNumber: number, pageSize: number) {
+    let params = getPaginationHeaders(pageNumber, pageSize);
+    return getPaginatedResult<ConnectedMessage[]>(this.baseUrl + 'messages/connectedmessages', params, this.http);
+  }
+  
 }

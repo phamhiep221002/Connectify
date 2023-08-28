@@ -97,7 +97,7 @@ export class MembersService {
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'likes', params, this.http);
   }
-  getRecommendedMembers(userParams: UserParams, pageNumber: number, pageSize: number) {
+  getRecommendedMembers(_userParams: UserParams, pageNumber: number, pageSize: number) {
     let params = getPaginationHeaders(pageNumber, pageSize);
     return getPaginatedResult<Member[]>(this.baseUrl + 'users/recommended', params, this.http);
   }

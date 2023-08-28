@@ -7,6 +7,7 @@ import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
+import { CallService } from 'src/app/common/_services/call.service';
 import { MessageService } from 'src/app/common/_services/message.service';
 import { PresenceService } from 'src/app/common/_services/presence.service';
 
@@ -26,7 +27,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   constructor(private accountService: AccountService, private route: ActivatedRoute, 
       private messageService: MessageService, public presenceService: PresenceService, 
-      private router: Router) {
+      private router: Router, private callService: CallService) {
           this.accountService.currentUser$.pipe(take(1)).subscribe({
             next: user => {
               if (user) this.user = user;
@@ -95,8 +96,10 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.activeTab = data;
     if (this.activeTab.heading === 'Messages' && this.user) {
       this.messageService.createHubConnection(this.user, this.member.userName);
+      this.callService.createHubConnection(this.user, this.member.userName);
     } else {
       this.messageService.stopHubConnection();
+      this.callService.stopHubConnection();
     }
   }
 

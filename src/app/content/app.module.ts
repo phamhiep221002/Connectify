@@ -41,7 +41,6 @@ import { LookingforManagementComponent } from "./admin/lookingfor-management/loo
 import { InterestManagementComponent } from "./admin/interest-management/interest-management.component";
 import { EditLookingforComponent } from './members/edit-lookingfor/edit-lookingfor.component';
 import { EditInterestComponent } from './members/edit-interest/edit-interest.component';
-import { RecommendedMembersComponent } from './lists/recommended-members/recommended-members.component';
 
 
 @NgModule({
@@ -76,7 +75,6 @@ import { RecommendedMembersComponent } from './lists/recommended-members/recomme
     InterestManagementComponent,
     EditLookingforComponent,
     EditInterestComponent,
-    RecommendedMembersComponent,
   ],
   imports: [
     BrowserAnimationsModule,

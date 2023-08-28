@@ -1,20 +1,21 @@
 <div class="container">
     <div class="text-center mt-3">
-        <h2>{{predicate === 'liked' ? 'Members I like' : 'Members who like me'}}</h2>
+        <h2>Member Management</h2>
     </div>
 
     <div class="like-lists">
         <div class="d-flex">
-            <div class="btn-group" name="predicate">
+            <div class="btn-group">
                 <button class="btn btn-primary" btnRadio="liked" [(ngModel)]="predicate" (click)="loadLikes()">Members I
                     like</button>
                 <button class="btn btn-primary" btnRadio="likedBy" [(ngModel)]="predicate" (click)="loadLikes()">Members
                     who like me</button>
                 <button class="btn btn-primary" btnRadio="connected" [(ngModel)]="predicate"
                     (click)="loadLikes()">Members connected</button>
+                <button class="btn btn-primary" btnRadio="recomend"  [(ngModel)]="predicate" (click)="loadRecommendedMembers()">Members
+                    recomended</button>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-2" *ngFor="let member of members">
                 <app-member-card [member]="member"></app-member-card>

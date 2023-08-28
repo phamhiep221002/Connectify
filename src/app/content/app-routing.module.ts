@@ -16,14 +16,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AuthGuard } from '../common/_guards/auth.guard';
 import { MemberDetailedResolver } from '../common/_resolvers/member-detailed.resolver';
 import { AdminGuard } from '../common/_guards/admin.guard';
-import { RecommendedMembersComponent } from './lists/recommended-members/recommended-members.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: '', component: HomeComponent, runGuardsAndResolvers: 'always' },
+  { path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always' },
+  { path: 'register', component: RegisterComponent, runGuardsAndResolvers: 'always' },
+  { path: 'forgot-password', component: ForgotPasswordComponent, runGuardsAndResolvers: 'always' },
   { path: 'reset-password/:token', component: ResetPasswordComponent, pathMatch: 'full' },
   {
     path: '',
@@ -36,7 +35,6 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'sidebar', component: SidebarComponent },
-      { path: 'recommend', component: RecommendedMembersComponent },
     ]
   },
   { path: 'not-found', component: NotFoundComponent },

@@ -7,6 +7,7 @@ import { PresenceService } from './presence.service';
 import { ResetPasswordDto } from '../_models/resetPasswordDto';
 import { LocationService } from './location.service';
 import { UserParams } from '../_models/userParams';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AccountService {
   email$ = this.emailSource.asObservable();
   userParams: UserParams | undefined;
 
-  constructor(private http: HttpClient, private presenceService: PresenceService) {
+  constructor(private http: HttpClient, private presenceService: PresenceService, private toastr: ToastrService) {
   }
 
   login(model: any) {
@@ -36,7 +37,8 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
       map(user => {
         if (user) {
-          this.setCurrentUser(user);
+          // this.setCurrentUser(user);
+          this.toastr.success('Register successfully !!')
         }
       })
     )

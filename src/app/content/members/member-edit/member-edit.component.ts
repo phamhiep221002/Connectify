@@ -21,7 +21,7 @@ export class MemberEditComponent implements OnInit {
   updateIntroForm!: FormGroup;
   modalRef!: BsModalRef;
   isVisible = false;
-  member: Member | undefined;
+  member!: Member;
   user: User | null = null;
   lookingFors: LookingForsDto[] = [];
   searchlookingForm!: FormGroup;
