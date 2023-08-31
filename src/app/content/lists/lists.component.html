@@ -4,15 +4,15 @@
     </div>
 
     <div class="like-lists">
-        <div class="d-flex">
+        <div class="manage-choose">
             <div class="btn-group">
-                <button class="btn btn-primary" btnRadio="liked" [(ngModel)]="predicate" (click)="loadLikes()">Members I
+                <button class="btn btn-primary btn-likes" btnRadio="liked" [(ngModel)]="predicate" (click)="loadLikes()">Members I
                     like</button>
-                <button class="btn btn-primary" btnRadio="likedBy" [(ngModel)]="predicate" (click)="loadLikes()">Members
+                <button class="btn btn-primary btn-likes" btnRadio="likedBy" [(ngModel)]="predicate" (click)="loadLikes()">Members
                     who like me</button>
-                <button class="btn btn-primary" btnRadio="connected" [(ngModel)]="predicate"
+                <button class="btn btn-primary btn-likes" btnRadio="connected" [(ngModel)]="predicate"
                     (click)="loadLikes()">Members connected</button>
-                <button class="btn btn-primary" btnRadio="recomend"  [(ngModel)]="predicate" (click)="loadRecommendedMembers()">Members
+                <button class="btn btn-primary btn-likes" btnRadio="recomend"  [(ngModel)]="predicate" (click)="loadRecommendedMembers()">Members
                     recomended</button>
             </div>
         </div>
