@@ -22,36 +22,40 @@
                                     timeago}})</span>
                             </small>
                         </div>
-                        <div *ngIf="message.messageType === 'Image'">
+                        <div class="message" *ngIf="message.messageType === 'Image'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
-                            <img [src]="message.content" />
+                            <img [src]="message.content" width="500"/>
                         </div>
-                        <div *ngIf="message.messageType === 'Video'">
+                        <div class="message" *ngIf="message.messageType === 'Video'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
-                            <video controls [src]="message.content"></video>
+                            <video controls [src]="message.content" width="500"></video>
                         </div>
-                        <div *ngIf="message.messageType === 'Location'">
-                            <button (click)="increaseZoom()">+</button>
-                            <button (click)="decreaseZoom()">-</button>
-                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
-                            class="btn btn-danger">Delete</button>
-                            <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
-                                width="600">
+                        <div class="message" *ngIf="message.messageType === 'Location'">                           
+                                <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                                class="btn btn-danger">Delete</button>
+                            <div class="mapper">
+                                <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
+                                    width="500">
+                                <div class="resize-btn-group">
+                                    <button class="resize" (click)="increaseZoom()">+</button>
+                                    <button class="resize" (click)="decreaseZoom()">-</button>
+                                </div>
+                            </div>
                         </div>
-                        <div *ngIf="message.messageType === 'File'">
+                        <div class="message" *ngIf="message.messageType === 'File'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
                             <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
                         </div>
-                        <div *ngIf="message.messageType === 'Audio'">
+                        <div class="message" *ngIf="message.messageType === 'Audio'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
                             <audio controls [src]="message.content">
                             </audio>
                         </div>
-                        <div
+                        <div class="message"
                             *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
@@ -63,14 +67,21 @@
         </ul>
     </div>
     <div class="card-footer">
-        <div class="mb-3">
-            <input type="file" (change)="onFileSelected($event)" />
-            <button (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
+        <div class="send-files">
+            <div class="file-choose">
+                <input type="file" id="file" ng2FileSelect (change)="onFileSelected($event)"  />
+                <label for="file" class="upload-file">
+                    <i class="fa fa-file-o" aria-hidden="true"></i>
+                    Choose file
+                </label>
+                <span>{{ fileName }}</span>
+            </div>
+            <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
                     class="fa fa-spinner fa-spin"></i></button>
         </div>
         <div class="mb-3">
-            <button class="btn btn-info" (click)="sendLocationMessage()">Gửi
-                Vị Trí <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
+            <button class="btn btn-info" (click)="sendLocationMessage()"> Send locations 
+                <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
         </div>
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">

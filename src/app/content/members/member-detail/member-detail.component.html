@@ -25,17 +25,17 @@
                     <div class="mb-5">
                         <tabset class="member-tabset" #memberTabs>
                             <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)" >
-                                <h4>Description</h4>
+                                <strong>Introduction</strong>
                                 <p>{{member.introduction}}</p>
-                                <h4>Location</h4>
+                                <strong>Location</strong>
                                 <p>{{member.city}}</p>
-                                <h4>Age:</h4>
+                                <strong>Age:</strong>
                                 <p>{{member.age}}</p>
                                 <strong>Last active:</strong>
                                 <p>{{member.lastActive | timeago}}</p>
                                 <strong>Member since:</strong>
                                 <p>{{member.created | date: 'dd MMM yyyy'}}</p>
-                                <h4>Looking for</h4>
+                                <strong>Looking for</strong>
                                 <ul>
                                     <li *ngFor="let lookingFor of member.lookingFors">{{lookingFor.name}}</li>
                                 </ul>

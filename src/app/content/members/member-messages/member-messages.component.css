@@ -17,3 +17,79 @@
 .rounded-circle {
     max-height: 50px;
 }
+
+.message.ng-star-inserted {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.resize-btn-group {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin: 10px;
+    justify-content: end;
+}
+
+.resize {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgb(161, 255, 20);
+    border: 2px solid rgb(161, 255, 20);
+    color: black;
+    font-weight: 900;
+}
+.send-files{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px 20px 5px;
+}
+.file-choose {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+}
+
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+  
+[type="file"] + label {
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Rubik', sans-serif;
+    font-size: inherit;
+    font-weight: 500;
+    margin: 0.2rem;
+    outline: none;
+    border-radius: 20px;
+    padding: 0.4rem 20px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+    letter-spacing: 1.2px;
+  }
+input[type=file] {
+    color: transparent;
+}
+
+.upload-file {
+    background-color: #00C2AE;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+  
+  .upload-file:hover {
+    background-color: #008B79; 
+  }
