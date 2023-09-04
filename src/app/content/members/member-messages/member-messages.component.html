@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-body" #scrollMe style="overflow: scroll; height: 535px" [scrollTop]="scrollMe.scrollHeight">
+    <div class="card-body" #scrollMe style="overflow-x: hidden; overflow-y: scroll; height: 535px" [scrollTop]="scrollMe.scrollHeight">
         <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
             No messages yet... say hi by using the message box below
         </div>
@@ -22,36 +22,40 @@
                                     timeago}})</span>
                             </small>
                         </div>
-                        <div *ngIf="message.messageType === 'Image'">
+                        <div class="message" *ngIf="message.messageType === 'Image'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
-                            <img [src]="message.content" />
+                            <img [src]="message.content" width="500"/>
                         </div>
-                        <div *ngIf="message.messageType === 'Video'">
+                        <div class="message" *ngIf="message.messageType === 'Video'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
-                            <video controls [src]="message.content"></video>
+                            <video controls [src]="message.content" width="500"></video>
                         </div>
-                        <div *ngIf="message.messageType === 'Location'">
-                            <button (click)="increaseZoom()">+</button>
-                            <button (click)="decreaseZoom()">-</button>
-                            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
-                            class="btn btn-danger">Delete</button>
-                            <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
-                                width="600">
+                        <div class="message" *ngIf="message.messageType === 'Location'">                           
+                                <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
+                                class="btn btn-danger">Delete</button>
+                            <div class="mapper">
+                                <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
+                                    width="500">
+                                <div class="resize-btn-group">
+                                    <button class="resize" (click)="increaseZoom()">+</button>
+                                    <button class="resize" (click)="decreaseZoom()">-</button>
+                                </div>
+                            </div>
                         </div>
-                        <div *ngIf="message.messageType === 'File'">
+                        <div class="message" *ngIf="message.messageType === 'File'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
                             <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
                         </div>
-                        <div *ngIf="message.messageType === 'Audio'">
+                        <div class="message" *ngIf="message.messageType === 'Audio'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
                             <audio controls [src]="message.content">
                             </audio>
                         </div>
-                        <div
+                        <div class="message"
                             *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
                             class="btn btn-danger">Delete</button>
@@ -63,23 +67,38 @@
         </ul>
     </div>
     <div class="card-footer">
-        <div class="mb-3">
-            <input type="file" (change)="onFileSelected($event)" />
-            <button (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
+        <div class="send-files">
+            <div class="file-choose">
+                <input type="file" id="file" ng2FileSelect (change)="onFileSelected($event)"  />
+                <label for="file" class="upload-file">
+                    <i class="fa fa-file-o" aria-hidden="true"></i>
+                    Choose file
+                </label>
+                <span>{{ fileName }}</span>
+            </div>
+            <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
                     class="fa fa-spinner fa-spin"></i></button>
         </div>
         <div class="mb-3">
-            <button class="btn btn-info" (click)="sendLocationMessage()">Gửi
-                Vị Trí <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
+            <button class="btn btn-info" (click)="sendLocationMessage()"> Send locations 
+                <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
         </div>
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">
                 <input name="messageContent" required [(ngModel)]="messageContent" type="text"
                     class="form-control input-sm" placeholder="Send a private message">
                 <div class="input-group-append">
-                    <button [disabled]="!messageForm.valid || loading" class="btn btn-primary" type="submit">
-                        Send <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
-                    </button>
+                    <button class="sends" [disabled]="!messageForm.valid || loading" type="submit">
+                        <div class="svg-wrapper-1">
+                          <div class="svg-wrapper"><i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <span>Send</span>
+                      </button>
                 </div>
             </div>
         </form>

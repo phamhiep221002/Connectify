@@ -1,4 +1,67 @@
-<div class="row">
+<div class="main-box">
+    <div class="row">
+      <div class="col col-lg-12 col-xl-12">
+        <section class="h-100 gradient-custom-2">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col col-lg-12 col-xl-12">
+                <div class="card">
+                  <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                      <div class="profile">
+                        <div class="profile-info">
+                          <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
+                                class="img-fluid img-thumbnail mb-3">
+                          <div class="profile-name">
+                            <h4>{{member.userName}}</h4>
+                            <p>{{member.knownAs}}</p>
+                            <div class="members-online"  *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                                <i class="class fa fa-user-circle text-success"></i> Online now
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="card-body p-4 text-black">
+                    <div class="mb-5">
+                        <tabset class="member-tabset" #memberTabs>
+                            <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)" >
+                                <strong>Introduction</strong>
+                                <p>{{member.introduction}}</p>
+                                <strong>Location</strong>
+                                <p>{{member.city}}</p>
+                                <strong>Age:</strong>
+                                <p>{{member.age}}</p>
+                                <strong>Last active:</strong>
+                                <p>{{member.lastActive | timeago}}</p>
+                                <strong>Member since:</strong>
+                                <p>{{member.created | date: 'dd MMM yyyy'}}</p>
+                                <strong>Looking for</strong>
+                                <ul>
+                                    <li *ngFor="let lookingFor of member.lookingFors">{{lookingFor.name}}</li>
+                                </ul>
+                            </tab>
+                            <tab heading="Interests" (selectTab)="onTabActivated($event)" >
+                                <h4>Interests</h4>
+                                <p>{{member.interests}}</p>
+                            </tab>
+                            <tab heading="Photos" (selectTab)="onTabActivated($event)" >
+                                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                            </tab>
+                            <tab heading="Messages" (selectTab)="onTabActivated($event)" >
+                                <app-member-messages [username]="member.userName"></app-member-messages>
+                            </tab>
+                        </tabset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+<!-- <div class="row main-box">
     <div class="col-4">
         <div class="card">
             <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
@@ -34,7 +97,7 @@
 
     </div>
 
-    <div class="col-8">
+    <div class="col col-sm-6 col-md-8 col-lg-8">
         <tabset class="member-tabset" #memberTabs>
             <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)" >
                 <h4>Description</h4>
@@ -56,4 +119,4 @@
             </tab>
         </tabset>
     </div>
-</div>
+</div> -->

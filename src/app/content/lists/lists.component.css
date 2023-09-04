@@ -6,5 +6,44 @@
     width: 100%;
     position: absolute;
     left: 10%;
+    height: 100vh;
 }
+
+.pagination-container {
+    margin-top: auto; 
+}
+
+.manage-choose{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.btn-likes{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    color: #875cdc;
+    background-color: #fff;
+    border-color: #875cdc;
+    transition: background-color 0.3s;
+}
+.btn-likes.active{
+    background-color: #9C7FE8;
+    border-color: #9C7FE8;
+    color: #fff;
+}
+.btn-likes:hover{
+    background-color: #9C7FE8;
+    border-color: #9C7FE8;
+    color: #fff;
+}
+
+
+
 

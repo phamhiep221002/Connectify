@@ -25,10 +25,10 @@
                     <button (click)="resetFilters()" class="btn btn-info ms-1" type="button">Reset Filters</button>
                     <div class="btn-group">
                         <button type="btn ms-1" class="btn btn-primary lastActive" name="orderBy"
-                            [(ngModel)]="userParams.orderBy" btnRadio="lastActive" (click)="loadMembers()">Last
+                            [(ngModel)]="userParams.orderBy" recommend="lastActive" (click)="loadMembers()">Last
                             Active</button>
                         <button type="btn ms-1" class="btn btn-primary newest-mem" name="orderBy"
-                            [(ngModel)]="userParams.orderBy" btnRadio="created" (click)="loadMembers()">Newest
+                            [(ngModel)]="userParams.orderBy" recommend="created" (click)="loadMembers()">Newest
                             members</button>
                     </div>
 
@@ -40,7 +40,7 @@
                     <app-member-card [member]="member"></app-member-card>
                 </div>
             </div>
-            <div id="map" style="width: 100%; height: 400px;"></div>
+            <div id="map" style="width: 100%;"></div>
             <div class="d-flex justify-content-center" *ngIf="pagination">
                 <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems"
                     [itemsPerPage]="pagination.itemsPerPage" [maxSize]="10" [(ngModel)]="pagination.currentPage"
