@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -7,6 +7,7 @@ import { take } from 'rxjs';
 import { InterestsDto } from 'src/app/common/_models/interestsDto';
 import { LookingForsDto } from 'src/app/common/_models/lookingForsDto';
 import { Member } from 'src/app/common/_models/member';
+import { MemberUpdateDto } from 'src/app/common/_models/memberUpdateDto';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
 import { MembersService } from 'src/app/common/_services/members.service';
@@ -28,6 +29,9 @@ export class MemberEditComponent implements OnInit {
   searchinterestForm!: FormGroup;
   bsModalRef!: BsModalRef;
   interests: InterestsDto[] = []
+  oldPassword!: string;
+  newPassword!: string;
+  confirmPassword!: string;
 
   constructor(private accountService: AccountService,
     private memberService: MembersService,
@@ -144,10 +148,27 @@ export class MemberEditComponent implements OnInit {
   }
   deleteLookingFor(id: number) {
     this.memberService.deleteLookingFor(id).subscribe(response => {
-      this.toastr.success('Looking for removed successfully');
+      this.toastr.success('Looking for removed successfully!!');
       this.loadMember();
     }, error => {
       this.toastr.error(error);
     });
+  }
+  changePassword(){
+    if (this.newPassword !== this.confirmPassword) {
+      this.toastr.error('Password and Confirm Password do not match.');
+      return;
+    }
+    this.accountService.changePassword(this.oldPassword, this.newPassword).subscribe(
+      response => {
+        this.toastr.success('Change password successfully!!');
+        window.location.reload();
+      },
+      error => {
+        // Xử lý lỗi
+        this.toastr.error('Invalid password format');
+        console.error(error);
+      }
+    );
   }
 }

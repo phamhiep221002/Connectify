@@ -7,6 +7,7 @@ import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { MemberUpdateDto } from '../_models/memberUpdateDto';
 
 @Injectable({
   providedIn: 'root'
@@ -129,5 +130,12 @@ export class MembersService {
 
   deleteInterest(id: number) {
     return this.http.delete(this.baseUrl + 'users/delete-interest/' + id,);
+  }
+  updateUser(memberUpdateDto: MemberUpdateDto): Observable<any> {
+    return this.http.put(`${this.baseUrl}users/update-user`, memberUpdateDto);
+  }
+
+  getUserForUpdate(): Observable<MemberUpdateDto> {
+    return this.http.get<MemberUpdateDto>(`${this.baseUrl}users/update-user`);
   }
 }

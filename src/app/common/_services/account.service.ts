@@ -8,6 +8,7 @@ import { ResetPasswordDto } from '../_models/resetPasswordDto';
 import { LocationService } from './location.service';
 import { UserParams } from '../_models/userParams';
 import { ToastrService } from 'ngx-toastr';
+import { MembersService } from './members.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +36,9 @@ export class AccountService {
   }
   register(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
-      map(user => {
+      map((user: User) => {
         if (user) {
-          // this.setCurrentUser(user);
-          this.toastr.success('Register successfully !!')
+          this.setCurrentUser(user);
         }
       })
     )
@@ -74,5 +74,9 @@ export class AccountService {
     const url = `${this.baseUrl}account/reset-password/${param.email}/${param.token}`;
     param.token = decodeURIComponent(param.token)
     await this.http.put(url, param, { responseType: 'text' }).toPromise();
+  }
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    const changePasswordDto = { oldPassword, newPassword };
+    return this.http.put(`${this.baseUrl}account/change-password`, changePasswordDto, { responseType: 'text' });
   }
 }

@@ -46,18 +46,18 @@ export class EditLookingforComponent implements OnInit {
   loadLookingFors(name?: string) {
     this.adminService.getLookingFors(name).subscribe(response => {
       this.lookingFors = response;
-    }, error => {
+    }, _error => {
     });
   }
   addLookingFor(id: number) {
-    this.memberService.addLookingFor(id).subscribe(response => {
+    this.memberService.addLookingFor(id).subscribe(_response => {
       this.toastr.success('Looking for added successfully');
       this.interestAdded.emit();
       const index = this.lookingFors.findIndex((lf) => lf.id === id);
       if (index !== -1) {
         this.lookingFors.splice(index, 1);
       }
-    }, error => {
+    }, _error => {
     });
   }
  

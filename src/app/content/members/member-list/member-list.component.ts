@@ -44,12 +44,6 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
     this.platform = new H.service.Platform({
       "apikey": this.apiMapKey
     });
-  }
-
-    ngOnInit(): void {
-    this.loadMembers();
-    this.ageRangeSliderValue = [this.userParams!.minAge, this.userParams!.maxAge];
-    this.distanceSliderValue = this.userParams!.distance;
     this.memberService.getGender().subscribe(
       (response) => {
         this.genders = response;
@@ -58,13 +52,20 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
         console.log(error);
       }
     );
+    this.ageRangeSliderValue = [this.userParams!.minAge, this.userParams!.maxAge];
+    this.distanceSliderValue = this.userParams!.distance;
+  
     this.locationService.checkLocation();
   }
 
+    ngOnInit() {
+      this.loadMembers();
 
-  ngAfterViewChecked(): void {
+  }
+  ngAfterViewChecked() {
     if (!this.map && this.mapElement && this.mapElement.nativeElement) {
       this.loadMap();
+      this.loadMembers();
     }
   }
 

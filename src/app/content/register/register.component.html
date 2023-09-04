@@ -21,14 +21,6 @@
     <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" [label]="'Confirm Password'"
         [type]="'password'" class="input"></app-text-input>
     </div>
-
-    <div class="row" *ngIf="validationErrors">
-        <ul class="text-danger">
-            <li *ngFor="let error of validationErrors">
-                {{error}}
-            </li>
-        </ul>
-    </div>
     <re-captcha (resolved)="resolved($event)" siteKey="6LeNw5UnAAAAAMbsWoPK8OYInESDb7MeloepV_FS"></re-captcha>
     <div class="alternative-login">
       <p>Already a member?<span routerLink="/login" routerLinkActive="active">Login</span></p>

@@ -18,13 +18,11 @@ export class MessagesComponent implements OnInit {
   messages?: Message[];
   connectedMessage?: ConnectedMessage[];
   pagination?: Pagination;
-  container = 'Unread';
   pageNumber = 1;
   pageSize = 5;
   loading = false;
   member!: Member;
   users: User[] = [];
-  containers='';
 
   constructor(private messageService: MessageService,public accountService: AccountService ) { }
 
@@ -32,16 +30,6 @@ export class MessagesComponent implements OnInit {
     this.loadAllMessages();
   }
 
-  // loadMessages() {
-  //   this.loading = true;
-  //   this.messageService.getMessages(this.pageNumber, this.pageSize, this.container).subscribe({
-  //     next: response => {
-  //       this.messages = response.result;
-  //       this.pagination = response.pagination;
-  //       this.loading = false;
-  //     }
-  //   })
-  // }
   loadAllMessages() {
     this.loading = true;
     this.messageService.getconnectedMessages(this.pageNumber, this.pageSize).subscribe({
