@@ -71,26 +71,24 @@
             <div class="file-choose">
                 <input type="file" id="file" ng2FileSelect (change)="onFileSelected($event)"  />
                 <label for="file" class="upload-file">
-                    <i class="fa fa-file-o" aria-hidden="true"></i>
-                    Choose file
+                    <i class="fa fa-file-o" aria-hidden="true"></i>                   
                 </label>
-                <span>{{ fileName }}</span>
+                <span class="file-name" [hidden]="!selectedFile">{{ fileName }}</span>
             </div>
-            <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
-                    class="fa fa-spinner fa-spin"></i></button>
-        </div>
-        <div class="mb-3">
-            <button class="btn btn-info" (click)="sendLocationMessage()"> Send locations 
+
+            <button class="send-locations" (click)="sendLocationMessage()"> <i class="fa fa-map-marker" aria-hidden="true"></i> 
                 <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
+            <!-- <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
+                    class="fa fa-spinner fa-spin"></i></button> -->
         </div>
-        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+        <form #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off">
             <div class="input-group">
                 <input name="messageContent" required [(ngModel)]="messageContent" type="text"
                     class="form-control input-sm" placeholder="Send a private message">
                 <div class="input-group-append">
-                    <button class="sends" [disabled]="!messageForm.valid || loading" type="submit">
+                    <button class="sends"  [disabled]="!messageForm.valid && !selectedFile" type="submit">
                         <div class="svg-wrapper-1">
-                          <div class="svg-wrapper"><i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                          <div class="svg-wrapper">
                             <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path d="M0 0h24v24H0z" fill="none"></path>
                               <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>

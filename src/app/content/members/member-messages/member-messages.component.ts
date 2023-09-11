@@ -31,37 +31,73 @@ export class MemberMessagesComponent implements OnInit {
     
   }
 
-  sendMessage() {
-    if (!this.username) return;
-    this.loading = true;
-    this.messageService.sendMessage(this.username, this.messageContent).then(() => {
-      this.messageForm?.reset();
-    }).finally(() => this.loading = false);
-  }
-  // New method to send file message
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
-      this.selectedFile = input.files[0];
-      this.fileName = input.files[0].name;
+        this.selectedFile = input.files[0];
+        this.fileName = input.files[0].name;
     }
-  }
-  // New method to send location message
-  async sendFileMessage() {
-    if (!this.username || !this.selectedFile) return;
+}
 
-    this.loadingfile = true;
-    try {
-      await this.messageService.sendFileMessage(this.username, this.selectedFile);
-      this.selectedFile = undefined;
-      this.fileName = undefined;
-      this.messageForm?.reset();
-    } catch (error) {
-      console.error("Failed to send file message:", error);
-    } finally {
-      this.loadingfile = false;
+  async sendCombinedMessage() {
+    if (!this.username) return;
+
+    if (this.selectedFile) {
+        this.loadingfile = true;
+        try {
+            await this.messageService.sendFileMessage(this.username, this.selectedFile);
+            this.selectedFile = undefined;
+            this.fileName = undefined;
+        } catch (error) {
+            console.error("Failed to send file message:", error);
+        } finally {
+            this.loadingfile = false;
+        }
+    } else {
+        this.loading = true;
+        try {
+            await this.messageService.sendMessage(this.username, this.messageContent);
+        } catch (error) {
+            console.error("Failed to send text message:", error);
+        } finally {
+            this.loading = false;
+        }
     }
-  }
+    this.messageForm?.reset();
+}
+
+  // sendMessage() {
+  //   if (!this.username) return;
+  //   this.loading = true;
+  //   this.messageService.sendMessage(this.username, this.messageContent).then(() => {
+  //     this.messageForm?.reset();
+  //   }).finally(() => this.loading = false);
+  // }
+  // // New method to send file message
+  // onFileSelected(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files[0]) {
+  //     this.selectedFile = input.files[0];
+  //     this.fileName = input.files[0].name;
+  //   }
+  // }
+  
+  // async sendFileMessage() {
+  //   if (!this.username || !this.selectedFile) return;
+
+  //   this.loadingfile = true;
+  //   try {
+  //     await this.messageService.sendFileMessage(this.username, this.selectedFile);
+  //     this.selectedFile = undefined;
+  //     this.fileName = undefined;
+  //     this.messageForm?.reset();
+  //   } catch (error) {
+  //     console.error("Failed to send file message:", error);
+  //   } finally {
+  //     this.loadingfile = false;
+  //   }
+  // }
+  // New method to send location message
   async sendLocationMessage() {
     if (!this.username) return;
     this.loadinglocation = true;

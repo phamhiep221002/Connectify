@@ -54,4 +54,13 @@
       --bs-nav-tabs-border-width: 0px;
   }
 
+  .pagination .page-item.active .page-link {
+    background-color: #9F5BDC;
+    border-color: #9F5BDC;
+    color: #fff;
+  }
+  
+  .pagination .page-link {
+    color:#9F5BDC;
+  }
   
