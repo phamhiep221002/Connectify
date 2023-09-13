@@ -3,9 +3,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
-    width: 100%;
-    position: absolute;
-    left: 10%;
+    width: 100vw;
     height: 100vh;
 }
 
@@ -28,19 +26,19 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    color: #875cdc;
+    color: #9F5BDC;
     background-color: #fff;
-    border-color: #875cdc;
+    border-color: #9F5BDC;
     transition: background-color 0.3s;
 }
 .btn-likes.active{
-    background-color: #9C7FE8;
-    border-color: #9C7FE8;
+    background-color: #9F5BDC;
+    border-color: #9F5BDC;
     color: #fff;
 }
 .btn-likes:hover{
-    background-color: #9C7FE8;
-    border-color: #9C7FE8;
+    background-color: #9F5BDC;
+    border-color: #9F5BDC;
     color: #fff;
 }
 
