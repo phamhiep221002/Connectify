@@ -60,12 +60,10 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
 
     ngOnInit() {
       this.loadMembers();
-
   }
   ngAfterViewChecked() {
     if (!this.map && this.mapElement && this.mapElement.nativeElement) {
       this.loadMap();
-      this.loadMembers();
     }
   }
 

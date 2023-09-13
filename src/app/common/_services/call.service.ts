@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../_models/user';
-import { BusyService } from './busy.service';
-import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-import { CreateCallDto, Room } from '../_models/call';
+import { CreateCallDto } from '../_models/call';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +15,10 @@ export class CallService {
   private callStatusSource = new BehaviorSubject<CreateCallDto[]>([]);
   callStatus$ = this.callStatusSource.asObservable();
 
-  constructor(private busyService: BusyService, private toastr: ToastrService) {}
+  constructor() {}
 
   createHubConnection(user: User, otherUsername: string) {
-    debugger
-    this.busyService.busy();
+    // Tạo kết nối tới CallHub
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'call?user=' + otherUsername, {
         accessTokenFactory: () => user.token,
@@ -29,9 +26,13 @@ export class CallService {
       })
       .withAutomaticReconnect()
       .build();
+
+    // Bắt đầu kết nối
     this.hubConnection.start()
-    .catch(error => console.log(error))
-    .finally(() => this.busyService.idle());
+      .catch(error => console.log(error))
+      .finally(() => {
+        // Khi kết nối thành công, bạn có thể thực hiện các hành động ở đây
+      });
   }
 
   stopHubConnection() {
@@ -41,41 +42,27 @@ export class CallService {
     }
   }
 
-  // async acceptCall(username: string) {
-  //   return this.hubConnection?.invoke('AcceptCall', { callerUsername: username })
-  //     .catch(error => this.toastr.error(error));
-  // }
+  // Gọi phương thức AcceptCall trên CallHub
+  acceptCall(createCallDto: CreateCallDto) {
+    if (this.hubConnection) {
+      this.hubConnection.invoke('AcceptCall', createCallDto)
+        .catch(error => console.log(error));
+    }
+  }
 
-  // async startCall(username: string) {
-  //   return this.hubConnection?.invoke('StartCall', { recipientUsername: username })
-  //     .catch(error => this.toastr.error(error));
-  // }
+  // Gọi phương thức StartCall trên CallHub
+  startCall(createCallDto: CreateCallDto) {
+    if (this.hubConnection) {
+      this.hubConnection.invoke('StartCall', createCallDto)
+        .catch(error => console.log(error));
+    }
+  }
 
-  // async endCall(username: string) {
-  //   return this.hubConnection?.invoke('EndCall', { recipientUsername: username })
-  //     .catch(error => this.toastr.error(error));
-  // }
-  // async updateMicroState(username: string, isEnabled: boolean) {
-  //   const dto = new CreateCallDto();
-  //   dto.recipientUsername = username;
-  //   dto.isVoiceEnabled = isEnabled;
-  //   return this.hubConnection?.invoke('Micro', dto)
-  //     .catch(error => this.toastr.error(error));
-  // }
-
-  // async updateCameraState(username: string, isEnabled: boolean) {
-  //   const dto = new CreateCallDto();
-  //   dto.recipientUsername = username;
-  //   dto.isVideoEnabled = isEnabled;
-  //   return this.hubConnection?.invoke('Camera', dto)
-  //     .catch(error => this.toastr.error(error));
-  // }
-
-  // async updateScreenState(username: string, isEnabled: boolean) {
-  //   const dto = new CreateCallDto();
-  //   dto.recipientUsername = username;
-  //   dto.isScreenSharingEnabled = isEnabled;
-  //   return this.hubConnection?.invoke('Screen', dto)
-  //     .catch(error => this.toastr.error(error));
-  // }
+  // Gọi phương thức EndCall trên CallHub
+  endCall(createCallDto: CreateCallDto) {
+    if (this.hubConnection) {
+      this.hubConnection.invoke('EndCall', createCallDto)
+        .catch(error => console.log(error));
+    }
+  }
 }
