@@ -29,12 +29,11 @@ section{
 }
 
 .edit-profile{
-  width: 50%;
   align-items: flex-end;
-  gap: 70px;
+  gap: 20px;
   float: right;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .profile-name h4{
