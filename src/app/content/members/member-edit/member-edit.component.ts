@@ -171,4 +171,8 @@ export class MemberEditComponent implements OnInit {
       }
     );
   }
+  openModalAccount(template: TemplateRef<any>) {
+    
+    this.modalRef = this.modalService.show(template);
+  }
 }

@@ -19,22 +19,13 @@
                     <div class="edit-profile">
                       <button class="btn btn-outline-dark edit-btn" data-mdb-ripple-color="dark"
                         (click)="openEditModal(editModal)">
-                        Edit profile
+                        Privacy setting
                       </button>
-                      <div class="d-flex justify-content-end text-center py-1 mr-3">
-                        <div class="rounded-social-buttons">
-                          <a class="social-button facebook" href="https://www.facebook.com/" target="_blank"><i
-                              class="fa fa-facebook-f"></i></a>
-                          <a class="social-button twitter" href="https://www.twitter.com/" target="_blank"><i
-                              class="fa fa-twitter"></i></a>
-                          <a class="social-button linkedin" href="https://www.linkedin.com/" target="_blank"><i
-                              class="fa fa-linkedin"></i></a>
-                          <a class="social-button youtube" href="https://www.youtube.com/" target="_blank"><i
-                              class="fa fa-youtube"></i></a>
-                          <a class="social-button github" href="https://www.github.com/" target="_blank"><i
-                              class="fa fa-github"></i></a>
-                        </div>
-                      </div>
+                      <button class="btn btn-outline-dark account-btn" data-mdb-ripple-color="dark"
+                        (click)="openModalAccount(accountModal)">
+                        Account Settings
+                      </button>
+                      
                       <ng-template #editModal #updateIntroTemplate>
 
                         <div class="modal-body">
@@ -57,9 +48,7 @@
                                   [disabled]="!updateIntroForm.valid || !updateIntroForm.dirty">
                                   Update
                                 </button>
-
                               </form>
-
                             </tab>
                             <tab heading="Edit Looking For">
                               <app-edit-lookingfor (interestAdded)="reloadData()"></app-edit-lookingfor>
@@ -145,30 +134,49 @@
                       </div>
                     </div>
                   </div>
-                  <div class="profile-btn">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="visibilitySwitch" [(ngModel)]="isVisible"
-                        (ngModelChange)="setVisibility($event)">
-                      <label class="form-check-label" for="visibilitySwitch">Visibility</label>
+                    <ng-template #accountModal>
+                      <div class="modal-body">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+                        </button>
+                      <form class="form-check-account" (ngSubmit)="changePassword()">
+                        <h4>Change Password
+                          <span class="icon">🔐</span>
+                        </h4>
+                        <div class="input-container">
+                          <input type="password" id="oldPassword" [(ngModel)]="oldPassword" name="oldPassword" required>
+                          <label for="oldPassword" class="changepw">Old Password</label>
+                          <div class="underline"></div>
+                        </div>
+                        <div class="input-container">
+                          <input type="password" id="newPassword" [(ngModel)]="newPassword" name="newPassword" required>
+                          <label for="newPassword" class="changepw">New Password</label>
+                          <div class="underline"></div>
+                        </div>
+                        <div class="input-container">
+                          <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+                          <label for="confirmPassword" class="changepw">Confirm Password</label>
+                          <div class="underline"></div>
+                        </div>          
+                        <button type="submit" class="btn-update">
+                             Change Password
+                        </button>
+                        <h4>Account state 👁️</h4>
+                        <div class="account-state">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="visibilitySwitch" [(ngModel)]="isVisible"
+                            (ngModelChange)="setVisibility($event)">
+                          <label class="form-check-label" for="visibilitySwitch">Visibility</label>
+                        </div>
+                        <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
+                      </div>
+                      </form>
                     </div>
-                    <button (click)="deleteAccount()" class="btn btn-danger">Delete Account</button>
-                    <form (ngSubmit)="changePassword()">
-                      <label for="oldPassword">Old Password:</label>
-                      <input type="password" id="oldPassword" [(ngModel)]="oldPassword" name="oldPassword" required>
-                    
-                      <label for="newPassword">New Password:</label>
-                      <input type="password" id="newPassword" [(ngModel)]="newPassword" name="newPassword" required>
-                    
-                      <label for="confirmPassword">Confirm Password:</label>
-                      <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>              
-                      <button type="submit">Change Password</button>
-                    </form>
+                    </ng-template>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </section>
     </div>
   </div>

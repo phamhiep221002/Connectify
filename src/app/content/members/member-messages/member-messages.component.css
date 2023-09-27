@@ -46,15 +46,15 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin: 10px 10px 10px 5px;
     padding: 5px 5px 5px 5px;
 }
 .file-choose {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     height: auto;
     width: 60px;
 }
