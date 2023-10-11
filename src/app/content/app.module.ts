@@ -42,6 +42,7 @@ import { InterestManagementComponent } from "./admin/interest-management/interes
 import { EditLookingforComponent } from './members/edit-lookingfor/edit-lookingfor.component';
 import { EditInterestComponent } from './members/edit-interest/edit-interest.component';
 import { UpdateUserComponent } from './members/update-user/update-user.component';
+import { CallComponent } from './call/call.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { UpdateUserComponent } from './members/update-user/update-user.component
     EditLookingforComponent,
     EditInterestComponent,
     UpdateUserComponent,
+    CallComponent,
   ],
   imports: [
     BrowserAnimationsModule,

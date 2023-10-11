@@ -31,6 +31,7 @@ export class CallService {
     this.hubConnection.start()
       .catch(error => console.log(error))
       .finally(() => {
+        
         // Khi kết nối thành công, bạn có thể thực hiện các hành động ở đây
       });
   }
@@ -39,30 +40,6 @@ export class CallService {
     if (this.hubConnection) {
       this.callStatusSource.next([]);
       this.hubConnection.stop();
-    }
-  }
-
-  // Gọi phương thức AcceptCall trên CallHub
-  acceptCall(createCallDto: CreateCallDto) {
-    if (this.hubConnection) {
-      this.hubConnection.invoke('AcceptCall', createCallDto)
-        .catch(error => console.log(error));
-    }
-  }
-
-  // Gọi phương thức StartCall trên CallHub
-  startCall(createCallDto: CreateCallDto) {
-    if (this.hubConnection) {
-      this.hubConnection.invoke('StartCall', createCallDto)
-        .catch(error => console.log(error));
-    }
-  }
-
-  // Gọi phương thức EndCall trên CallHub
-  endCall(createCallDto: CreateCallDto) {
-    if (this.hubConnection) {
-      this.hubConnection.invoke('EndCall', createCallDto)
-        .catch(error => console.log(error));
     }
   }
 }
