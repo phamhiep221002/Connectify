@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
     <div class="logo-brand">
     <img class="logo-img" src="../favicon.ico" alt="logo">
@@ -16,23 +16,125 @@
               <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
             </a>
+            <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="on">
+      <input 
+      name="username" 
+      [(ngModel)]="model.username" 
+      class="form-control me-2" 
+      type="text" 
+      placeholder="Username">
+      <input 
+      name="password" 
+      [(ngModel)]="model.password"
+      class="form-control me-2" 
+      type="password" 
+      placeholder="Password">
+      <button class="btn btn-success" type="submit">Login</button>
+    </form>
       </div>  
-    </div>
+    </div>-->
 
-      <!-- <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="on">
-        <input 
-        name="username" 
-        [(ngModel)]="model.username" 
-        class="form-control me-2" 
-        type="text" 
-        placeholder="Username">
-        <input 
-        name="password" 
-        [(ngModel)]="model.password"
-        class="form-control me-2" 
-        type="password" 
-        placeholder="Password">
-        <button class="btn btn-success" type="submit">Login</button>
-      </form> -->
-  </div> 
-</nav>
+      
+
+<div class="header">
+  <nav class="navbar-classic navbar navbar-expand-lg navbar navbar-expand navbar-light">
+    <div class="d-flex justify-content-between w-100">
+      <div class="d-flex align-items-center">
+        <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fa fa-bars" id="btn"></i>
+      <i class="fa fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+      <header>Menu</header>
+      <a  routerLink="/" routerLinkActive="active">
+        <i class="fa fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <ng-container *ngIf="accountService.currentUser$  | async">
+      <a routerLink="/messages" routerLinkActive="active">
+        <i class="fa fa-comment-o"></i>
+        <span>Messages</span>
+      </a>
+      <a routerLink="/lists" routerLinkActive="active">
+        <i class="fa fa-list"></i>
+        <span>Lists</span>
+      </a>
+      <a routerLink="/admin" routerLinkActive="active" *appHasRole="['Admin', 'Moderator']">
+         <i class="fa-user-circle-o"></i>
+        <span>Admin</span>
+      </a>
+    </ng-container>
+    </div>
+      </div>
+        <div class="ms-lg-3 d-lg-block">
+          <div class="d-flex align-items-center nav-item">
+            <img class="logo-img" src="../favicon.ico" alt="logo" />
+            <a class="navbar-brand" routerLink="/" routerLinkActive="active"
+              >Connectify</a
+            >
+          </div>
+        </div>
+      <div class="navbar-right-wrap ms-2 d-flex nav-top-wrap navbar-nav">
+        <ul class="navbar-right-wrap ms-auto d-flex nav-top-wrap navbar-nav">
+          <li
+            class="ms-2 dropdown"
+            *ngIf="accountService.currentUser$ | async as user"
+          >
+            <a
+              class="rounded-circle"
+              id="dropdownUser"
+              aria-expanded="true"
+              (click)="toggleDropdown2()"
+            >
+              <div class="avatar avatar-md">
+                <img
+                  alt="avatar"
+                  src="{{ user.photoUrl || './assets/user.png' }}"
+                  class="rounded-circle"
+                /></div
+            ></a>
+            <div
+              *ngIf="isDropdownVisible2"
+              aria-labelledby="dropdownUser"
+              data-bs-popper="static"
+              class="dropdown-menu dropdown-menu-end dropdown-menu show dropdown-menu-end dropdownUser"
+            >
+              <div data-rr-ui-dropdown-item="" class="px-4 pb-0 pt-2">
+                <div class="lh-1">
+                  <h6 class="mb-1">{{ user.username | titlecase }}</h6>
+                  <a class="text-inherit fs-8" routerLink="/member/edit"
+                    >View my profile</a
+                  >
+                </div>
+                <div class="dropdown-divider mt-3 mb-2"></div>
+              </div>
+              <a
+                aria-selected="false"
+                data-rr-ui-dropdown-item=""
+                class="dropdown-item"
+                role="button"
+                tabindex="0"
+                ><i class="fa fa-user-o items-2"></i> Edit Profile</a
+              ><a
+                data-rr-ui-dropdown-item=""
+                class="dropdown-item"
+                role="button"
+                tabindex="0"
+                href="#"
+                ><i class="fa fa-cog items-2"></i> Account Settings</a
+              ><a
+                data-rr-ui-dropdown-item=""
+                class="dropdown-item"
+                role="button"
+                tabindex="0"
+                (click)="logout()"
+                ><i class="fa fa-power-off items-2"></i>Sign Out</a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> 
+  </nav>
+</div>

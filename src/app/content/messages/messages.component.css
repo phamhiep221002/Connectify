@@ -10,7 +10,6 @@
     overflow-y: auto;
     box-sizing: border-box;
     margin-left: auto;
-    padding-left: 8em ;
     background-color: var(--surface-background);
 }
 
@@ -43,7 +42,7 @@
     margin-top: 10px;
     gap: 20px;
     height: 20em;
-    padding: 8px;
+    padding: 2rem;
     border-bottom: 1px solid #ccc;
 }
 
@@ -163,7 +162,7 @@
 .header-icons button {
   transition: background-color 0.3s; 
   border-radius: 10px;
-  padding: auto;
+  width: 50px;
   background-color: rgba(91, 91, 91, 0.1);
 }
 

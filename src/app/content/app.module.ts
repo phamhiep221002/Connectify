@@ -22,7 +22,6 @@ import { MessagesComponent } from "./messages/messages.component";
 import { NavComponent } from "./nav/nav.component";
 import { RegisterComponent } from "./register/register.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
-import { SidebarComponent } from "./sidebar/sidebar.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
@@ -67,7 +66,6 @@ import { CallComponent } from './call/call.component';
     UserManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
-    SidebarComponent,
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
