@@ -1,55 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Indie+Flower&display=swap');
-
-.fixed-container {
-  width: 100%;
-  height: 100%;
-  margin-bottom: 100px;
-  position: fixed;
-  left: 0;
-  top: 65px;
-  overflow-y: auto;
-}
-
-.custom-shape-divider-bottom-1689787146 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
-
-.custom-shape-divider-bottom-1689787146 svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 155px;
-  transform: rotateY(180deg);
-}
-
-.custom-shape-divider-bottom-1689787146 .shape-fill {
-  fill: #C17AFF;
-}
-
-.container {
+.login-container {
   width: 100%;
   height: auto;
   position: relative;
   display: flex;
-  top: 15%;
+  margin-top: 100px;
   justify-content: center;
   margin-bottom: 10%;
   align-items: center;
 }
 
 form {
-  position: absolute;
+  position: relative;
   top: 15%;
-  right: 20%;
   margin: 0px auto;
-  width: 50%;
+  width: 70%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -164,9 +130,8 @@ span {
   }
 
   form {
-    right: 10%;
-    width: 70%;
-    height: 400px;
+    width: 100%;
+    margin: 50px 30px;
   }
 
   h1 {
@@ -190,12 +155,6 @@ span {
     top: 8%;
   }
 
-  form {
-    right: 15%;
-    width: 60%;
-    height: 450px;
-  }
-
   h1 {
     font-size: 3rem;
   }
@@ -211,50 +170,232 @@ span {
     padding: 7px 20px;
   }
 }
+
 /* For Tablets */
-@media screen and (max-width: 600px) {
-  .form {
-    width: 80%;
-    right: 10%;
+@media screen and (min-width: 768px) {
+  form {
+    width: 70%;
   }
+
+  .alternative-signup > p {
+    width: 90%;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-family: tangerine, sans-serif;
+  }
+  span{
+    font-size: 2rem;}
 }
 
 /* For Laptops */
-@media screen and (min-width: 768px) {
-  .form {
-    width: 60%;
-    right: 20%;
-  }
-}
-
-/* For Large Laptops */
 @media screen and (min-width: 992px) {
-  .form {
-    width: 40%;
-    right: 30%;
+  .login-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+    margin-bottom: 10%;
+    align-items: center;
+}
+  form {
+    width: 60%;
   }
 }
 
 /* For Big TV's (HD Screens) */
 @media screen and (min-width: 1280px) {
-  .form {
-    width: 30%;
-    right: 35%;
+  .login-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+    margin-bottom: 10%;
+    align-items: center;
+    top: 50px;
+}
+  form {
+    width: 50%;
+    height: auto;
   }
+  h1 {
+    margin: 20px 0 10px 0;
+    font-size: 4.2rem;
+    font-weight: 600;
+    color: #00B99E;
+    font-family: tangerine, sans-serif;
+    z-index: 10;
+  }
+
+  h4{
+    margin: 10px 0 5px 0;
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'Indie Flower', sans-serif;
+}
+input{
+  font-size: 1.5rem;
+  padding: 7px 5px;
+}
+
+.forgot {
+  color: #775D8C;
+  position: relative;
+  margin: 15px 5px 0px 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: 'Indie Flower', sans-serif;
+}
+
+.login-btn {
+  width: 30%;
+  font-size: 1.5rem;
+  padding: 7px 20px;
+}
+
+.alternative-signup > p {
+  width: 90%;
+  font-size: 1.7rem;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-family: tangerine, sans-serif;
+}
+
+span {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #00C2AE;
+  font-family: tangerine, sans-serif;
+  cursor: pointer;
+}
 }
 
 /* For Projectors or Higher Resolution Screens (Full HD) */
 @media screen and (min-width: 1920px) {
-  .form {
-    width: 20%;
-    right: 40%;
+  form {
+    width: 60%;
   }
+  h1 {
+    margin: 20px 0 10px 0;
+    font-size: 7.2rem;
+    font-weight: 600;
+    color: #00B99E;
+    font-family: tangerine, sans-serif;
+    z-index: 10;
+  }
+
+  h4{
+    margin: 10px 0 5px 0;
+    font-size: 3rem;
+    font-weight: 200;
+    font-family: 'Indie Flower', sans-serif;
+}
+input{
+  font-size: 2.5rem;
+  padding: 7px 5px;
+}
+
+.forgot {
+  color: #775D8C;
+  position: relative;
+  margin: 15px 5px 0px 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 2.5rem;
+  cursor: pointer;
+  font-family: 'Indie Flower', sans-serif;
+}
+
+.login-btn {
+  width: 30%;
+  font-size: 2.5rem;
+  padding: 7px 20px;
+}
+
+.alternative-signup > p {
+  width: 90%;
+  font-size: 3.7rem;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-family: tangerine, sans-serif;
+}
+
+span {
+  font-size: 3.7rem;
+  font-weight: 600;
+  color: #00C2AE;
+  font-family: tangerine, sans-serif;
+  cursor: pointer;
+}
 }
 
 /* For 4K Displays (Ultra HD) */
 @media screen and (min-width: 3840px) {
-  .form {
-    width: 15%;
-    right: 42.5%;
+  form {
+    width: 50%;
+    height: 60em;
   }
+  h1 {
+    margin: 20px 0 10px 0;
+    font-size: 7.2rem;
+    font-weight: 600;
+    color: #00B99E;
+    font-family: tangerine, sans-serif;
+    z-index: 10;
+  }
+
+  h4{
+    margin: 10px 0 5px 0;
+    font-size: 4.2rem;
+    font-weight: 200;
+    font-family: 'Indie Flower', sans-serif;
+}
+input{
+  font-size: 3rem;
+  padding: 7px 5px;
+}
+
+.forgot {
+  color: #775D8C;
+  position: relative;
+  margin: 15px 5px 0px 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 3rem;
+  cursor: pointer;
+  font-family: 'Indie Flower', sans-serif;
+}
+
+.login-btn {
+  width: 30%;
+  font-size: 3rem;
+  padding: 7px 20px;
+}
+
+.alternative-signup > p {
+  width: 90%;
+  font-size: 4.7rem;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-family: tangerine, sans-serif;
+}
+
+span {
+  font-size: 4.7rem;
+  font-weight: 600;
+  color: #00C2AE;
+  font-family: tangerine, sans-serif;
+  cursor: pointer;
+}
+  
 }
