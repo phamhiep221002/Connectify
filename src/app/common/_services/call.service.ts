@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
-import { CreateCallDto } from '../_models/call';
+import { CreateCallDto, Room } from '../_models/call';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,10 @@ export class CallService {
   private hubConnection?: HubConnection;
   private callStatusSource = new BehaviorSubject<CreateCallDto[]>([]);
   callStatus$ = this.callStatusSource.asObservable();
+  private incomingCallSource = new BehaviorSubject<boolean>(false);
+  incomingCall$ = this.incomingCallSource.asObservable();
 
-  constructor() {}
+  constructor() { }
 
   createHubConnection(user: User, otherUsername: string) {
     // Tạo kết nối tới CallHub
@@ -30,10 +32,27 @@ export class CallService {
     // Bắt đầu kết nối
     this.hubConnection.start()
       .catch(error => console.log(error))
-      .finally(() => {
-        
-        // Khi kết nối thành công, bạn có thể thực hiện các hành động ở đây
-      });
+      .finally(() => { });
+
+    this.hubConnection.on('AcceptCall', () => {
+      this.incomingCallSource.next(false);
+    });
+
+    this.hubConnection.on('MicroUpdate', () => {
+    });
+
+    this.hubConnection.on('CameraUpdate', () => {
+    });
+
+    this.hubConnection.on('ScreenUpdate', () => {
+    });
+    this.hubConnection.on('IncomingCall', () => {
+      console.log("IncomingCall");
+      this.incomingCallSource.next(true);
+    });
+
+    this.hubConnection.on('EndCall', (createCallDto: CreateCallDto) => {
+    });
   }
 
   stopHubConnection() {
@@ -42,4 +61,34 @@ export class CallService {
       this.hubConnection.stop();
     }
   }
+  acceptCall(createCallDto: CreateCallDto) {
+    this.hubConnection?.invoke('AcceptCall', createCallDto)
+      .catch(error => console.log(error));
+  }
+
+  updateMicrophone(createCallDto: CreateCallDto) {
+    this.hubConnection?.invoke('Micro', createCallDto)
+      .catch(error => console.log(error));
+  }
+
+  updateCamera(createCallDto: CreateCallDto) {
+    this.hubConnection?.invoke('Camera', createCallDto)
+      .catch(error => console.log(error));
+  }
+
+  updateScreen(createCallDto: CreateCallDto) {
+    this.hubConnection?.invoke('Screen', createCallDto)
+      .catch(error => console.log(error));
+  }
+
+  startCall(createCallDto: CreateCallDto) {
+    this.hubConnection?.invoke('StartCall', createCallDto)
+      .catch(error => console.log(error));
+  }
+
+  endCall(createCallDto: CreateCallDto) {
+    this.hubConnection?.invoke('EndCall', createCallDto)
+      .catch(error => console.log(error));
+  }
+
 }

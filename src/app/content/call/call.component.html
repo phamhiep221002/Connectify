@@ -1,0 +1,21 @@
+<div class="call-container">
+    <div class="local-video">
+      <video #localVideo autoplay muted></video>
+    </div>
+    <div class="remote-video">
+      <video #remoteVideo autoplay></video>
+    </div>
+    <div class="controls">
+      <button (click)="enableOrDisableVideo()">Toggle Video</button>
+      <button (click)="enableOrDisableAudio()">Toggle Audio</button>
+      <button (click)="callUser()">Call</button>
+      <button (click)="shareScreen()">Chia sẻ màn hình</button>
+      <button (click)="endCall()">End Call</button>
+    </div>
+    <div *ngIf="showIncomingCallButtons" class="incoming-call-controls">
+      <button (click)="acceptIncomingCall()">Accept</button>
+      <button (click)="denyIncomingCall()">Deny</button>
+    </div>
+    
+  </div>
+  

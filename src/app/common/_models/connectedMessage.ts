@@ -4,5 +4,6 @@ export interface ConnectedMessage {
     lastMessage: string;
     unreadCount: number;
     messageSent: Date;
+    userName: string;
 
 }

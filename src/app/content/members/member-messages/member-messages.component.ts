@@ -1,5 +1,6 @@
 import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'src/app/common/_models/message';
 import { MessageService } from 'src/app/common/_services/message.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,8 @@ export class MemberMessagesComponent implements OnInit {
   private apiMapKey = environment.apiMapKey;
   selectedFile?: File;
   messages?: Message[];
-  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef) { }
+  callUrl = environment.callUrl;
+  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     
@@ -102,6 +104,7 @@ export class MemberMessagesComponent implements OnInit {
     if (!this.username) return;
     this.loadinglocation = true;
     try {
+      debugger
       await this.messageService.createLocationMessage(this.username).then();
       this.messageForm?.reset();
     } catch (error) {
@@ -139,5 +142,7 @@ export class MemberMessagesComponent implements OnInit {
       }
     });
   }
-  
+  callOpen(){
+    window.open(this.callUrl + this.username,'_blank','height=600,width=800')
+  }
 }

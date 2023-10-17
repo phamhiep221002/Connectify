@@ -14,6 +14,7 @@ export class PresenceService {
   private hubConnection?: HubConnection;
   private onlineUsersSource = new BehaviorSubject<string[]>([]);
   onlineUsers$ = this.onlineUsersSource.asObservable();
+  callUrl = environment.callUrl;
 
   constructor(private toastr: ToastrService, private router: Router) { }
 
@@ -50,6 +51,14 @@ export class PresenceService {
         .pipe(take(1))
         .subscribe({
           next: () => this.router.navigateByUrl('/members/' + username + '?tab=Messages')
+        })
+    })
+    this.hubConnection.on('IncomingCall', ({username, knownAs}) => {
+      this.toastr.info(knownAs + ' is calling you!')
+        .onTap
+        .pipe(take(1))
+        .subscribe({
+          next: () => window.open(this.callUrl + username,'_blank','height=600,width=800')
         })
     })
   }

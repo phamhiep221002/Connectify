@@ -21,7 +21,7 @@
             <h4 class="gradient-text">Discover the Power of Genuine Conversations</h4>
         </div>
         <div class="chat-list-content" *ngFor="let message of connectedMessage">
-            <div class="chat-item" [routerLink]="['/']">
+            <div class="chat-item" routerLink="/members/{{message.userName}}" [queryParams]="{tab: 'Messages'}">
                 <div class="chat-avatar">
                     <img src="{{message.photoUrl || './assets/user.png'}}" alt="Chat Avatar" />
                 </div>

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConnectedMessage } from 'src/app/common/_models/connectedMessage';
 import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
@@ -23,8 +24,9 @@ export class MessagesComponent implements OnInit {
   loading = false;
   member!: Member;
   users: User[] = [];
+  userName: any;
 
-  constructor(private messageService: MessageService,public accountService: AccountService ) { }
+  constructor(private messageService: MessageService,public accountService: AccountService, private router: Router ) { }
 
   ngOnInit(): void {
     this.loadAllMessages();

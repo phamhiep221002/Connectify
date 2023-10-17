@@ -36,7 +36,7 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'sidebar', component: SidebarComponent },
-      { path: 'call', component: CallComponent },
+      { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
     ]
   },
   { path: 'not-found', component: NotFoundComponent },

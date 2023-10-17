@@ -54,7 +54,7 @@
                             class="btn btn-danger">Delete</button>
                             <audio controls [src]="message.content">
                             </audio>
-                        </div>
+                        </div>                    
                         <div class="message"
                             *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
@@ -78,6 +78,7 @@
 
             <button class="send-locations" (click)="sendLocationMessage()"> <i class="fa fa-map-marker" aria-hidden="true"></i> 
                 <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
+                <button (click)="callOpen()">Call</button>
             <!-- <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
                     class="fa fa-spinner fa-spin"></i></button> -->
         </div>
