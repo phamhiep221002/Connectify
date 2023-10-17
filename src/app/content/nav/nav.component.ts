@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/common/_services/account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  sidebarActive: boolean = false;
 
   constructor(public accountService: AccountService, private router: Router, 
     private toastr: ToastrService) { }
@@ -31,6 +32,20 @@ export class NavComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl('/');
     window.location.reload();
+  }
+
+  isDropdownVisible1: boolean = false;
+  isDropdownVisible2: boolean = false;
+
+  toggleDropdown1() {
+    this.isDropdownVisible1 = !this.isDropdownVisible1;
+  }
+  toggleDropdown2() {
+    this.isDropdownVisible2 = !this.isDropdownVisible2;
+  }
+
+  toggleSidebar() {
+    this.sidebarActive = !this.sidebarActive;
   }
 
 }

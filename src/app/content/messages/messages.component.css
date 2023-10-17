@@ -10,7 +10,6 @@
     overflow-y: auto;
     box-sizing: border-box;
     margin-left: auto;
-    padding-left: 8em ;
     background-color: var(--surface-background);
 }
 
@@ -43,7 +42,7 @@
     margin-top: 10px;
     gap: 20px;
     height: 20em;
-    padding: 8px;
+    padding: 2rem;
     border-bottom: 1px solid #ccc;
 }
 
@@ -59,10 +58,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 50px;
     padding: 5px;
     flex-shrink: 1;
     flex-wrap: nowrap;
+    border-bottom: 2px solid #e9ecef;
 }
 
 .chat-item {
@@ -156,14 +156,14 @@
   color: transparent; 
   display: inline-block; 
   font-weight: 700;
-  font-size: x-large;
+  font-size: 50px;
   font-style: italic;
 }
 
 .header-icons button {
   transition: background-color 0.3s; 
   border-radius: 10px;
-  padding: auto;
+  width: 50px;
   background-color: rgba(91, 91, 91, 0.1);
 }
 
