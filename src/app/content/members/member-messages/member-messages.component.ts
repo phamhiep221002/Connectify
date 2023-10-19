@@ -27,6 +27,7 @@ export class MemberMessagesComponent implements OnInit {
   selectedFile?: File;
   messages?: Message[];
   callUrl = environment.callUrl;
+  expandedMessages: { [id: string]: boolean } = {};
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -66,7 +67,21 @@ export class MemberMessagesComponent implements OnInit {
         }
     }
     this.messageForm?.reset();
+
+    
 }
+
+toggleMessageExpansion(message: Message) {
+  const id = message.id;  
+  this.expandedMessages[id] = !this.expandedMessages[id];
+}
+
+  isDropdownVisible: boolean = false;
+
+
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
 
   // sendMessage() {
   //   if (!this.username) return;

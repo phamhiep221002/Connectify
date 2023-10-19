@@ -85,7 +85,7 @@
               class="rounded-circle"
               id="dropdownUser"
               aria-expanded="true"
-              (click)="toggleDropdown2()"
+              (click)="toggleDropdown()"
             >
               <div class="avatar avatar-md">
                 <img
@@ -95,7 +95,7 @@
                 /></div
             ></a>
             <div
-              *ngIf="isDropdownVisible2"
+              *ngIf="isDropdownVisible"
               aria-labelledby="dropdownUser"
               data-bs-popper="static"
               class="dropdown-menu dropdown-menu-end dropdown-menu show dropdown-menu-end dropdownUser"
