@@ -42,6 +42,11 @@ import { EditLookingforComponent } from './members/edit-lookingfor/edit-lookingf
 import { EditInterestComponent } from './members/edit-interest/edit-interest.component';
 import { UpdateUserComponent } from './members/update-user/update-user.component';
 import { CallComponent } from './call/call.component';
+import { AccountGeneralComponent } from "./account-settings/account-general/account-general.component";
+import { AccountSettingsComponent } from "./account-settings/account-settings.component";
+import { AccountChangePasswordComponent } from "./account-settings/account-change-password/account-change-password.component";
+import { AccountInfoComponent } from "./account-settings/account-info/account-info.component";
+import { AccountConnectionsComponent } from "./account-settings/account-connections/account-connections.component";
 
 
 @NgModule({
@@ -77,6 +82,11 @@ import { CallComponent } from './call/call.component';
     EditInterestComponent,
     UpdateUserComponent,
     CallComponent,
+    AccountSettingsComponent,
+    AccountGeneralComponent,
+    AccountChangePasswordComponent,
+    AccountInfoComponent,
+    AccountConnectionsComponent
   ],
   imports: [
     BrowserAnimationsModule,

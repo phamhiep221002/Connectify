@@ -5,14 +5,15 @@
         </div>
 
         <ul *ngIf="(messageService.messageThread$ | async)!.length > 0" class="chat">
-            <li *ngFor="let message of (messageService.messageThread$ | async)">
-                <div>
-                    <span class="chat-img float-end">
+            <li *ngFor="let message of (messageService.messageThread$ | async)" [ngClass]="{'receiver': message.senderUsername === username, 'sender': message.senderUsername !== username}">
+                <div class="d-flex chat-box">
+                    <span class="chat-img">
                         <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"
                             alt="image of user">
                     </span>
                     <div class="chat-body">
                         <div class="header">
+                            <strong class="user-name">{{message.senderUsername | titlecase}}</strong>
                             <small class="text-muted">
                                 <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
                                 <span class="text-danger" *ngIf="!message.dateRead 
@@ -58,8 +59,11 @@
                         <div class="message"
                             *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
                             <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"
-                            class="btn btn-danger">Delete</button>
-                            <p>{{message.content}}</p>
+                            class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            <div class="d-flex message-content">
+                                <p [class.expanded]="expandedMessages[message.id]">{{message.content}}</p>
+                                <span class="see-more" *ngIf="message.content.length > 100" (click)="toggleMessageExpansion(message)">{{ expandedMessages[message.id] ? 'Hide Less' : 'See More' }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +89,7 @@
         <form #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off">
             <div class="input-group">
                 <input name="messageContent" required [(ngModel)]="messageContent" type="text"
-                    class="form-control input-sm" placeholder="Send a private message">
+                    class="form-control input-sm" placeholder="Type a message...">
                 <div class="input-group-append">
                     <button class="sends"  [disabled]="!messageForm.valid && !selectedFile" type="submit">
                         <div class="svg-wrapper-1">

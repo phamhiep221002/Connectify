@@ -1,0 +1,56 @@
+<div class="container flex-grow-1 container-p-y">
+  <h4 class="title-namepage py-3 mb-4">Account settings</h4>
+  <div class="card overflow-hidden">
+    <div class="row no-gutters row-bordered row-border-light">
+      <div class="col-md-3 pt-0">
+        <div class="list-group list-group-flush account-settings-links">
+          <a
+            class="list-group-item list-group-item-action"
+            data-toggle="list"
+            routerLink="./general"
+            routerLinkActive="active"
+            >General</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            data-toggle="list"
+            routerLink="./change-password"
+            routerLinkActive="active"
+            >Change password</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            data-toggle="list"
+            routerLink="./info"
+            routerLinkActive="active"
+            >Info</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            data-toggle="list"
+            routerLink="./connections"
+            routerLinkActive="active"
+            >Connections</a
+          >
+        </div>
+      </div>
+      <div class="col-md-9">
+        <router-outlet></router-outlet>
+        <div class="tab-content">
+          <div class="tab-pane fade" id="account-general">
+            <app-account-general></app-account-general>
+          </div>
+          <div class="tab-pane fade" id="account-change-password">
+            <app-account-change-password></app-account-change-password>
+          </div>
+          <div class="tab-pane fade" id="account-change-password">
+            <app-account-info></app-account-info>
+          </div>
+          <div class="tab-pane fade" id="account-change-password">
+            <app-account-connections></app-account-connections>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

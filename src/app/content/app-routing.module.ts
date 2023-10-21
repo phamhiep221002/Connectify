@@ -16,6 +16,11 @@ import { AuthGuard } from '../common/_guards/auth.guard';
 import { MemberDetailedResolver } from '../common/_resolvers/member-detailed.resolver';
 import { AdminGuard } from '../common/_guards/admin.guard';
 import { CallComponent } from './call/call.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { AccountChangePasswordComponent } from './account-settings/account-change-password/account-change-password.component';
+import { AccountGeneralComponent } from './account-settings/account-general/account-general.component';
+import { AccountInfoComponent } from './account-settings/account-info/account-info.component';
+import { AccountConnectionsComponent } from './account-settings/account-connections/account-connections.component';
 
 
 const routes: Routes = [
@@ -35,6 +40,17 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
+    ]
+  },
+  {
+    path: 'account-settings',
+    component: AccountSettingsComponent,
+    children: [
+      { path: '', redirectTo: 'general', pathMatch: 'full' },
+      { path: 'general', component: AccountGeneralComponent },
+      { path: 'change-password', component: AccountChangePasswordComponent },
+      { path: 'info', component: AccountInfoComponent },
+      { path: 'connections', component: AccountConnectionsComponent },
     ]
   },
   { path: 'not-found', component: NotFoundComponent },

@@ -9,9 +9,10 @@
 }
 
 .chat li {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px dotted #B3A9A9;
+  clear: both;
+  overflow: hidden;
+  padding: 10px;
+  margin: 10px;
 }
 
 .rounded-circle {
@@ -23,7 +24,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
 }
 .resize-btn-group {
     display: flex;
@@ -185,4 +185,95 @@ input[type=file] {
   box-shadow: none; 
   outline: none;  
   background-color: #fff;
+}
+
+.sender {
+  float: right;
+}
+
+.sender .chat-box{
+  flex-direction: row-reverse;
+}
+
+.sender .header{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin: 15px;
+  min-width: 300px;
+}
+
+.sender span > img{
+  float: right;
+}
+
+.sender .message-content{
+  max-width: 450px;
+  padding: 15px;
+  background: #E5CFF8;
+  border-width: 10px 4px;
+  border-radius: 40px;
+}
+
+.sender .see-more{
+  margin: 10px 20px 10px 0px;
+}
+.receiver {
+  float: left;
+}
+
+.receiver .chat-box{
+  justify-content: space-between;
+}
+
+.receiver .header{
+  display: flex;
+  justify-content: space-between;
+  min-width: 300px;
+}
+
+.receiver .chat-body{
+  max-width: 450px;
+  padding: 15px;
+  border-radius: 15px;
+}
+.receiver > span {
+  float: left;
+}
+
+.receiver .message{
+  flex-direction: row-reverse;
+}
+
+.receiver .message-content{
+  max-width: 450px;
+  padding: 15px;
+  background-color: #C1FCF5;
+  border-width: 10px 4px;
+  border-radius: 40px;
+}
+
+.message-content p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin: 5px;
+}
+
+.message-content p.expanded {
+  -webkit-line-clamp: unset;
+}
+
+
+
+.chat li .see-more {
+  color: blue;
+  cursor: pointer;
+  text-align: end;
+}
+
+.message-content{
+  flex-direction: column;
+  margin: 10px;
 }

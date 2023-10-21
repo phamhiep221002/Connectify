@@ -34,14 +34,11 @@ export class NavComponent implements OnInit {
     window.location.reload();
   }
 
-  isDropdownVisible1: boolean = false;
-  isDropdownVisible2: boolean = false;
+  isDropdownVisible: boolean = false;
 
-  toggleDropdown1() {
-    this.isDropdownVisible1 = !this.isDropdownVisible1;
-  }
-  toggleDropdown2() {
-    this.isDropdownVisible2 = !this.isDropdownVisible2;
+
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
   }
 
   toggleSidebar() {
