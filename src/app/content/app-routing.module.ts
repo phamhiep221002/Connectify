@@ -19,8 +19,9 @@ import { CallComponent } from './call/call.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AccountChangePasswordComponent } from './account-settings/account-change-password/account-change-password.component';
 import { AccountGeneralComponent } from './account-settings/account-general/account-general.component';
-import { AccountInfoComponent } from './account-settings/account-info/account-info.component';
 import { AccountConnectionsComponent } from './account-settings/account-connections/account-connections.component';
+import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
+import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 
 
 const routes: Routes = [
@@ -49,8 +50,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'general', pathMatch: 'full' },
       { path: 'general', component: AccountGeneralComponent },
       { path: 'change-password', component: AccountChangePasswordComponent },
-      { path: 'info', component: AccountInfoComponent },
-      { path: 'connections', component: AccountConnectionsComponent },
+      { path: 'visibility', component: AccountSetvisibilityComponent },
+      { path: 'disable-account', component: AccountDisableAccountComponent },
     ]
   },
   { path: 'not-found', component: NotFoundComponent },

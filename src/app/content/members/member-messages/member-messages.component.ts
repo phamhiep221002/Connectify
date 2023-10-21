@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'src/app/common/_models/message';
@@ -12,8 +12,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './member-messages.component.html',
   styleUrls: ['./member-messages.component.css']
 })
-export class MemberMessagesComponent implements OnInit {
+export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   @ViewChild('messageForm', { static: false }) messageForm?: NgForm;
+  @ViewChild('scrollMe', { static: false }) private myScrollContainer?: ElementRef;
+
   @Input() username?: string;
   messageContent = '';
   loading = false;
@@ -29,52 +31,63 @@ export class MemberMessagesComponent implements OnInit {
   callUrl = environment.callUrl;
   expandedMessages: { [id: string]: boolean } = {};
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
 
   ngOnInit(): void {
-    
+    this.messageService.messageThread$.subscribe(
+      messages => {
+        this.messages = messages;
+      }
+    );
   }
+  private scrollToBottom(): void {
+    try {
+      this.myScrollContainer!.nativeElement.scrollTop = this.myScrollContainer!.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
-        this.selectedFile = input.files[0];
-        this.fileName = input.files[0].name;
+      this.selectedFile = input.files[0];
+      this.fileName = input.files[0].name;
     }
-}
+  }
 
   async sendCombinedMessage() {
     if (!this.username) return;
 
     if (this.selectedFile) {
-        this.loadingfile = true;
-        try {
-            await this.messageService.sendFileMessage(this.username, this.selectedFile);
-            this.selectedFile = undefined;
-            this.fileName = undefined;
-        } catch (error) {
-            console.error("Failed to send file message:", error);
-        } finally {
-            this.loadingfile = false;
-        }
+      this.loadingfile = true;
+      try {
+        await this.messageService.sendFileMessage(this.username, this.selectedFile);
+        this.selectedFile = undefined;
+        this.fileName = undefined;
+      } catch (error) {
+        console.error("Failed to send file message:", error);
+      } finally {
+        this.loadingfile = false;
+      }
     } else {
-        this.loading = true;
-        try {
-            await this.messageService.sendMessage(this.username, this.messageContent);
-        } catch (error) {
-            console.error("Failed to send text message:", error);
-        } finally {
-            this.loading = false;
-        }
+      this.loading = true;
+      try {
+        await this.messageService.sendMessage(this.username, this.messageContent);
+      } catch (error) {
+        console.error("Failed to send text message:", error);
+      } finally {
+        this.loading = false;
+      }
     }
     this.messageForm?.reset();
+  }
 
-    
-}
-
-toggleMessageExpansion(message: Message) {
-  const id = message.id;  
-  this.expandedMessages[id] = !this.expandedMessages[id];
-}
+  toggleMessageExpansion(message: Message) {
+    const id = message.id;
+    this.expandedMessages[id] = !this.expandedMessages[id];
+  }
 
   isDropdownVisible: boolean = false;
 
@@ -98,7 +111,7 @@ toggleMessageExpansion(message: Message) {
   //     this.fileName = input.files[0].name;
   //   }
   // }
-  
+
   // async sendFileMessage() {
   //   if (!this.username || !this.selectedFile) return;
 
@@ -149,6 +162,14 @@ toggleMessageExpansion(message: Message) {
 
     return minSize + (maxSize - minSize) * (zoomLevel - minZoom) / (maxZoom - minZoom);
   }
+  // deleteMessage(id: number) {
+  //   this.messageService.deleteMessage(id).subscribe({
+  //     next: () => {
+  //       this.messages?.splice(this.messages.findIndex(m => m.id === id), 1);
+  //       window.location.reload();
+  //     }
+  //   });
+  // }
   deleteMessage(id: number) {
     this.messageService.deleteMessage(id).subscribe({
       next: () => {
@@ -157,7 +178,7 @@ toggleMessageExpansion(message: Message) {
       }
     });
   }
-  callOpen(){
-    window.open(this.callUrl + this.username,'_blank','height=600,width=800')
+  callOpen() {
+    window.open(this.callUrl + this.username, '_blank', 'height=600,width=800')
   }
 }
