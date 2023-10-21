@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr';
 import { BehaviorSubject, take } from 'rxjs';
 import { User } from '../_models/user';
@@ -16,6 +16,9 @@ export class CallService {
   callStatus$ = this.callStatusSource.asObservable();
   private incomingCallSource = new BehaviorSubject<boolean>(false);
   incomingCall$ = this.incomingCallSource.asObservable();
+  microUpdate = new BehaviorSubject<boolean>(true);
+  cameraUpdate = new BehaviorSubject<boolean>(true);
+  screenUpdate = new EventEmitter<void>();
 
   constructor() { }
 
@@ -81,13 +84,17 @@ export class CallService {
       .catch(error => console.log(error));
   }
 
-  startCall(createCallDto: CreateCallDto) {
-    this.hubConnection?.invoke('StartCall', createCallDto)
+  declineCall(callerUsername: string) {
+    this.hubConnection?.invoke('Decline', callerUsername)
       .catch(error => console.log(error));
   }
 
   endCall(createCallDto: CreateCallDto) {
     this.hubConnection?.invoke('EndCall', createCallDto)
+      .catch(error => console.log(error));
+  }
+  missCall(recipientUsername: string) {
+    this.hubConnection?.invoke('MissCall', recipientUsername)
       .catch(error => console.log(error));
   }
 

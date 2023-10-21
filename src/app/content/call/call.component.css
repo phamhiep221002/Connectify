@@ -5,7 +5,7 @@
     height: 100vh;
   }
   
-  .local-video, .remote-video {
+  .local-video, .remote-video, .screen-video, .other-screen-video {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -28,4 +28,30 @@
   button {
     margin: 10px;
   }
+
+.hidden {
+  display: none;
+}
+
+.micro-on {
+  background-color: green;
+  color: white;
+}
+
+.micro-off {
+  background-color: red;
+  color: white;
+}
+.camera-on {
+  background-color: green;
+  color: white;
+}
+
+.camera-off {
+  background-color: red;
+  color: white;
+}
+
+
+
   

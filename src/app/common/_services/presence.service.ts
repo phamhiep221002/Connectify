@@ -45,7 +45,7 @@ export class PresenceService {
       this.onlineUsersSource.next(usernames);
     })
 
-    this.hubConnection.on('NewMessageReceived', ({username, knownAs}) => {
+    this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
       this.toastr.info(knownAs + ' has sent you a new message! Click me to see it')
         .onTap
         .pipe(take(1))
@@ -54,12 +54,26 @@ export class PresenceService {
         })
     })
     this.hubConnection.on('IncomingCall', ({username, knownAs}) => {
-      this.toastr.info(knownAs + ' is calling you!')
-        .onTap
-        .pipe(take(1))
-        .subscribe({
-          next: () => window.open(this.callUrl + username,'_blank','height=600,width=800')
-        })
+      let timeoutId: any;
+    
+      const toast = this.toastr.info(knownAs + ' is calling you!', '', {
+        timeOut: 20000 // Thời gian tự động ẩn thông báo là 30 giây
+      });
+    
+      // Đặt hành động sau 30 giây
+      timeoutId = setTimeout(() => {
+        this.hubConnection?.invoke('Decline', username);
+        this.toastr.warning('You missed '+ knownAs + ' call!')
+      }, 20000);
+    
+      toast.onTap
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          window.open(this.callUrl + username,'_blank','height=600,width=800');
+          clearTimeout(timeoutId);  // Hủy bỏ hành động đã đặt nếu người dùng nhấp vào thông báo
+        }
+      });
     })
   }
 
