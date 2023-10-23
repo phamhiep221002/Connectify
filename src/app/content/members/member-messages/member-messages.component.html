@@ -86,7 +86,7 @@
             <!-- <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
                     class="fa fa-spinner fa-spin"></i></button> -->
         </div>
-        <form #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off">
+        <form #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off" >
             <div class="input-group">
                 <input name="messageContent" required [(ngModel)]="messageContent" type="text"
                     class="form-control input-sm" placeholder="Type a message...">

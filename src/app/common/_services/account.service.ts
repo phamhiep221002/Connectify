@@ -71,9 +71,8 @@ export class AccountService {
   }
 
   async resetPassword(param: ResetPasswordDto): Promise<void> {
-    const url = `${this.baseUrl}account/reset-password/${param.email}/${param.token}`;
     param.token = decodeURIComponent(param.token)
-    await this.http.put(url, param, { responseType: 'text' }).toPromise();
+    await this.http.put(this.baseUrl + 'account/reset-password', param, { responseType: 'text' }).toPromise();
   }
   changePassword(oldPassword: string, newPassword: string): Observable<any> {
     const changePasswordDto = { oldPassword, newPassword };

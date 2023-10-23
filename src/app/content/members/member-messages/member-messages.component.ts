@@ -30,22 +30,22 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   messages?: Message[];
   callUrl = environment.callUrl;
   expandedMessages: { [id: string]: boolean } = {};
-  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) { }
-  ngAfterViewChecked(): void {
-    this.scrollToBottom();
-  }
-
-  ngOnInit(): void {
+  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
       }
     );
   }
-  private scrollToBottom(): void {
-    try {
+  ngAfterViewChecked(): void {
+
+  }
+
+  ngOnInit(): void {
+    this.scrollToBottom();
+  }
+   scrollToBottom(): void {
       this.myScrollContainer!.nativeElement.scrollTop = this.myScrollContainer!.nativeElement.scrollHeight;
-    } catch (err) { }
   }
 
 
