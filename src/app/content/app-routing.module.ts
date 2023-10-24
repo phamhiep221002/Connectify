@@ -19,7 +19,6 @@ import { CallComponent } from './call/call.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AccountChangePasswordComponent } from './account-settings/account-change-password/account-change-password.component';
 import { AccountGeneralComponent } from './account-settings/account-general/account-general.component';
-import { AccountConnectionsComponent } from './account-settings/account-connections/account-connections.component';
 import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 

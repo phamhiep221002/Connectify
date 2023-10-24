@@ -106,8 +106,8 @@
   
   .chat-list-content {
     overflow-y: auto;
-    padding: 0;
-    margin: 0;
+    margin: 10px;
+    padding-right: 20px;
   }
   
   .chat-item {
