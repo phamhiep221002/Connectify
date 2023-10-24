@@ -68,6 +68,11 @@ export class MembersService {
         return response;
       })
     )
+  
+  }
+  refreshMembers() {
+    this.memberCache.clear();  // Clear the existing cache
+    // Optionally, you could also call getMembers() here to repopulate the cache
   }
 
   getMember(username: string) {

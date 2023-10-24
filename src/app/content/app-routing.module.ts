@@ -22,6 +22,7 @@ import { AccountGeneralComponent } from './account-settings/account-general/acco
 import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 import { EndCallComponent } from './call/end-call/end-call.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 
 
 const routes: Routes = [

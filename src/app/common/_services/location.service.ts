@@ -28,7 +28,7 @@ export class LocationService{
   getLocation(locationDto: LocationDto): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}users/update-location`, locationDto);
   }
-  checkLocation(): void {
+  checkLocation(callback: Function): void {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -38,11 +38,12 @@ export class LocationService{
           .subscribe((data: any) => {
             if (data.results.length > 0) {
               this.locationName = data.results[0].components.city || data.results[0].components.city_district;
-              this.updateLocation(latitude, longitude, this.locationName);
+              this.updateLocation(latitude, longitude, this.locationName, callback);
             } else {
               this.locationName = 'City not found';
               this.toastr.error(this.locationName);
             } 
+            
           }, error => {
             this.locationName = 'Error occurred';
             this.toastr.error(this.locationName);
@@ -61,17 +62,19 @@ export class LocationService{
       this.locationPermissionGranted = false;
     }
   }
-  updateLocation(latitude: number, longitude: number, locationName: string): void {
+  updateLocation(latitude: number, longitude: number, locationName: string, callback: Function): void {
     const locationDto = { latitude: latitude, longitude: longitude, locationName: locationName };
     this.getLocation(locationDto).subscribe(
       (next) => {
         this.router.navigateByUrl('/');
+        callback();  // Thêm dòng này
       },
       (error) => {
         this.router.navigateByUrl('/');
       }
     );
   }
+  
   isLocationPermissionGranted(): boolean {
     return this.locationPermissionGranted;
   }
