@@ -21,6 +21,8 @@ import { AccountChangePasswordComponent } from './account-settings/account-chang
 import { AccountGeneralComponent } from './account-settings/account-general/account-general.component';
 import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
+import { EndCallComponent } from './call/end-call/end-call.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 
 
 const routes: Routes = [
@@ -40,6 +42,7 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
+      { path: 'end-call/:otherPeerId', component: EndCallComponent, pathMatch: 'full' },
     ]
   },
   {

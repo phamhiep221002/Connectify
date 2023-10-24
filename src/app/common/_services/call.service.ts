@@ -4,6 +4,8 @@ import { BehaviorSubject, take } from 'rxjs';
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { CreateCallDto, Room } from '../_models/call';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +18,17 @@ export class CallService {
   callStatus$ = this.callStatusSource.asObservable();
   private incomingCallSource = new BehaviorSubject<boolean>(false);
   incomingCall$ = this.incomingCallSource.asObservable();
-  microUpdate = new BehaviorSubject<boolean>(true);
-  cameraUpdate = new BehaviorSubject<boolean>(true);
   screenUpdate = new EventEmitter<void>();
+  autoCloseTabTimer: any;
 
-  constructor() { }
+  constructor(private toastr: ToastrService, private router: Router) { }
 
   createHubConnection(user: User, otherUsername: string) {
     // Tạo kết nối tới CallHub
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'call?user=' + otherUsername, {
         accessTokenFactory: () => user.token,
-        transport: HttpTransportType.WebSockets
+        transport: HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling
       })
       .withAutomaticReconnect()
       .build();
@@ -36,9 +37,15 @@ export class CallService {
     this.hubConnection.start()
       .catch(error => console.log(error))
       .finally(() => { });
+      this.autoCloseTabTimer = setTimeout(() => {
+        this.missCall(user.username);
+        window.close(); // Đóng cửa sổ
+      }, 20000);
 
     this.hubConnection.on('AcceptCall', () => {
       this.incomingCallSource.next(false);
+      clearTimeout(this.autoCloseTabTimer);
+      console.log("AcceptCall");
     });
 
     this.hubConnection.on('MicroUpdate', () => {
@@ -49,12 +56,20 @@ export class CallService {
 
     this.hubConnection.on('ScreenUpdate', () => {
     });
+    this.hubConnection.on('MissCall', () => {
+      console.log("Missed Call");
+      this.toastr.warning('Missed Call');
+      this.incomingCallSource.next(false);
+    });
     this.hubConnection.on('IncomingCall', () => {
       console.log("IncomingCall");
       this.incomingCallSource.next(true);
+      this.toastr.info('Calling!!');
     });
 
-    this.hubConnection.on('EndCall', (createCallDto: CreateCallDto) => {
+    this.hubConnection.on('EndCall', () => {
+      this.router.navigate(['/end-call/' + otherUsername]);
+      this.toastr.info('End Call');
     });
   }
 
@@ -91,7 +106,7 @@ export class CallService {
 
   endCall(createCallDto: CreateCallDto) {
     this.hubConnection?.invoke('EndCall', createCallDto)
-      .catch(error => console.log(error));
+      .catch();
   }
   missCall(recipientUsername: string) {
     this.hubConnection?.invoke('MissCall', recipientUsername)

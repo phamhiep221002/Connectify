@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/common/_services/account.service';
+import { MembersService } from 'src/app/common/_services/members.service';
 // import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit{
   captchaResponse: string | null = null;
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
-    private fb: FormBuilder, private router: Router) { }
+    private fb: FormBuilder, private router: Router, private membersService: MembersService) { }
     genders: any[] = [];
 
   ngOnInit(): void {
@@ -61,7 +62,8 @@ export class RegisterComponent implements OnInit{
     const values = {...this.registerForm.value, dateOfBirth: dob, captcha: this.captchaResponse};
     this.accountService.register(values).subscribe({
       next: () => {
-        this.router.navigateByUrl('/')
+        window.location.href = '/';
+        this.membersService.refreshMembers(); 
       },
       error: error => {
         this.validationErrors = error
