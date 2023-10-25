@@ -268,41 +268,17 @@
     margin-left: 20px;
   }
   @media(max-width : 860px){
-    .nav-item{
-      margin-left: 35px;
-    }
-    .sidebar{
-      height: auto;
-      width: 70px;
-      left: 0;
-      margin: 100px 0;
-    }
-    header,#btn,#cancel{
-      display: none;
-    }
-    span{
-      position: absolute;
-      margin-left: 23px;
-      opacity: 0;
-      visibility: hidden;
-    }
-    .sidebar a{
-      height: 60px;
-    }
-    .sidebar a i{
-      margin-left: -10px;
-    }
-    a:hover {
-      background: inherit;
-    }
-    .sidebar a:hover span{
-      opacity: 1;
-      visibility: visible;
+
+    label #btn,label #cancel{
+      height: 30px;
+      width: 30px;
+      font-size: 20px;
+      line-height: 30px;
     }
 
-    .notify{
-      opacity: 1;
-      visibility: visible;
+    .avatar{
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
   @media screen and (max-width: 480px) {

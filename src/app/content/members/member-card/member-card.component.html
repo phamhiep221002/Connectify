@@ -1,4 +1,4 @@
-<div class="card mb-4" *ngIf="member">
+<!-- <div class="card mb-4" *ngIf="member">
     <div class="card-img-wrapper">
         <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top">
         <ul class="list-inline member-icons animate text-center">
@@ -15,7 +15,7 @@
                     class="btn btn-primary btn-icon">
                     <i class="fa fa-envelope"></i>
                 </button>
-            </li> -->
+            </li> 
         </ul>
     </div>
     <div class="card-body p-1">
@@ -27,5 +27,21 @@
             {{member.knownAs}}, {{member.age}}
         </h6>
         <p class="card-text text-muted text-center">{{member.city}}</p>
+    </div>
+</div> -->
+
+<div class="image-area" *ngIf="member">
+    <div class="img-wrapper">
+        <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}">
+        <h3>
+            <span [class.is-online]="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                <i class="fa fa-user me-2"></i>
+            </span>
+            {{member.knownAs}}, {{member.age}}
+        </h3>
+        <ul>
+            <li><a routerLink="/members/{{member.userName}}"><i class="fa fa-user"></i></a></li>
+            <li><a (click)="addLike(member)"><i class="fa fa-heart"></i></a></li>
+        </ul>
     </div>
 </div>
