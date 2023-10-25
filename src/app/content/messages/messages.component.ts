@@ -25,6 +25,12 @@ export class MessagesComponent implements OnInit {
   member!: Member;
   users: User[] = [];
   userName: any;
+  isMessageNavBoxVisible: boolean = false;
+  isMessageMenuVisible: boolean = false;
+  isEmojiMenuVisible: boolean = false;
+  isChatinputMoreMenuVisible: boolean = false;
+  isMessageBoxVisible = false;
+  timeoutId: any;
 
   constructor(private messageService: MessageService,public accountService: AccountService, private router: Router ) { }
 
@@ -48,6 +54,40 @@ export class MessagesComponent implements OnInit {
       this.pageNumber = event.page;
       this.ngOnInit();
     }
+  }
+
+
+
+  toggleMessageBox(visible: boolean) {
+    // Delete the timer when the box is hidden before
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+  
+    if (visible) {
+      this.isMessageBoxVisible = true;
+    } else {
+      // box hidden, delay 1s
+      this.timeoutId = setTimeout(() => {
+        this.isMessageBoxVisible = false;
+      }, 1000);  // Delay time
+    }
+  }
+
+  toggleMessageNavBox() {
+    this.isMessageNavBoxVisible = !this.isMessageNavBoxVisible;
+  }
+
+  toggleMessageMenu() {
+    this.isMessageMenuVisible = !this.isMessageMenuVisible;
+  }
+
+  toggleEmojiMenu() {
+    this.isEmojiMenuVisible = !this.isEmojiMenuVisible;
+  }
+
+  toggleChatinputMoreMenu() {
+    this.isChatinputMoreMenuVisible = !this.isChatinputMoreMenuVisible;
   }
 
 }

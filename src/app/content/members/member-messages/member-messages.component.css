@@ -129,11 +129,11 @@ input[type=file] {
   }
   
   .sends:hover svg {
-    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+    transform: translateX(0em) rotate(45deg) scale(1.1);
   }
   
   .sends:hover span {
-    transform: translateX(5em);
+    transform: translateX(0);
   }
   
   .sends:active {

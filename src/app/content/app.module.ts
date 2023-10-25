@@ -40,12 +40,10 @@ import { LookingforManagementComponent } from "./admin/lookingfor-management/loo
 import { InterestManagementComponent } from "./admin/interest-management/interest-management.component";
 import { EditLookingforComponent } from './members/edit-lookingfor/edit-lookingfor.component';
 import { EditInterestComponent } from './members/edit-interest/edit-interest.component';
-import { UpdateUserComponent } from './members/update-user/update-user.component';
 import { CallComponent } from './call/call.component';
 import { AccountGeneralComponent } from "./account-settings/account-general/account-general.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { AccountChangePasswordComponent } from "./account-settings/account-change-password/account-change-password.component";
-import { AccountConnectionsComponent } from "./account-settings/account-connections/account-connections.component";
 import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 import { EndCallComponent } from './call/end-call/end-call.component';
@@ -82,12 +80,10 @@ import { EndCallComponent } from './call/end-call/end-call.component';
     InterestManagementComponent,
     EditLookingforComponent,
     EditInterestComponent,
-    UpdateUserComponent,
     CallComponent,
     AccountSettingsComponent,
     AccountGeneralComponent,
     AccountChangePasswordComponent,
-    AccountConnectionsComponent,
     AccountSetvisibilityComponent,
     AccountDisableAccountComponent,
     EndCallComponent

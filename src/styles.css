@@ -63,4 +63,8 @@
   .pagination .page-link {
     color:#9F5BDC;
   }
+
+  ul.nav.nav-tabs {
+    justify-content: center;
+}
   
