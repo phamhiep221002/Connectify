@@ -64,9 +64,9 @@
                                 class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             <div class="d-flex message-content">
                                 <p [class.expanded]="expandedMessages[message.id]">{{message.content}}</p>
-                                <span class="see-more" *ngIf="message.content.length > 100"
+                                <!-- <span class="see-more" *ngIf="message.content.length > 100"
                                     (click)="toggleMessageExpansion(message)">{{ expandedMessages[message.id] ? 'Hide
-                                    Less' : 'See More' }}</span>
+                                    Less' : 'See More' }}</span> -->
                             </div>
                         </div>
                     </div>
@@ -88,8 +88,6 @@
                     aria-hidden="true"></i>
                 <i *ngIf="loadinglocation" class="fa fa-spinner fa-spin"></i></button>
             <button (click)="callOpen()">Call</button>
-            <!-- <button class="btn btn-primary" (click)="sendFileMessage()">Send File<i *ngIf="loadingfile"
-                    class="fa fa-spinner fa-spin"></i></button> -->
         </div>
         <form #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off">
             <div class="input-group">
@@ -107,7 +105,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <span>Send<i *ngIf="loadingfile" class="fa fa-spinner fa-spin"></i></span>
+                        <span><i *ngIf="loadingfile" class="fa fa-spinner fa-spin"></i></span>
                     </button>
                 </div>
             </div>
