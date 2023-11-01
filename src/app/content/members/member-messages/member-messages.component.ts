@@ -29,7 +29,13 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   selectedFile?: File;
   messages?: Message[];
   callUrl = environment.callUrl;
-  expandedMessages: { [id: string]: boolean } = {};
+  isMessageNavBoxVisible: boolean = false;
+  isMessageMenuVisible: boolean = false;
+  isEmojiMenuVisible: boolean = false;
+  isChatinputMoreMenuVisible: boolean = false;
+  isMessageBoxVisible = false;
+  timeoutId: any;
+  // expandedMessages: { [id: string]: boolean } = {};
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
     this.messageService.messageThread$.subscribe(
       messages => {
@@ -84,17 +90,13 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
     this.messageForm?.reset();
   }
 
-  toggleMessageExpansion(message: Message) {
-    const id = message.id;
-    this.expandedMessages[id] = !this.expandedMessages[id];
-  }
+  // toggleMessageExpansion(message: Message) {
+  //   const id = message.id;
+  //   this.expandedMessages[id] = !this.expandedMessages[id];
+  // }
 
-  isDropdownVisible: boolean = false;
+  // isDropdownVisible: boolean = false;
 
-
-  toggleDropdown() {
-    this.isDropdownVisible = !this.isDropdownVisible;
-  }
 
   // New method to send location message
   async sendLocationMessage() {
@@ -142,5 +144,37 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   }
   callOpen() {
     window.open(this.callUrl + this.username, '_blank', 'height=600,width=800')
+  }
+
+  toggleMessageBox(visible: boolean) {
+    // Delete the timer when the box is hidden before
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+  
+    if (visible) {
+      this.isMessageBoxVisible = true;
+    } else {
+      // box hidden, delay 1s
+      this.timeoutId = setTimeout(() => {
+        this.isMessageBoxVisible = false;
+      }, 1000);  // Delay time
+    }
+  }
+
+  toggleMessageNavBox() {
+    this.isMessageNavBoxVisible = !this.isMessageNavBoxVisible;
+  }
+
+  toggleMessageMenu() {
+    this.isMessageMenuVisible = !this.isMessageMenuVisible;
+  }
+
+  toggleEmojiMenu() {
+    this.isEmojiMenuVisible = !this.isEmojiMenuVisible;
+  }
+
+  toggleChatinputMoreMenu() {
+    this.isChatinputMoreMenuVisible = !this.isChatinputMoreMenuVisible;
   }
 }

@@ -30,7 +30,7 @@
     </div>
 </div> -->
 
-<div class="image-area" *ngIf="member">
+<!-- <div class="image-area" *ngIf="member">
     <div class="img-wrapper">
         <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}">
         <h3>
@@ -44,4 +44,26 @@
             <li><a (click)="addLike(member)"><i class="fa fa-heart"></i></a></li>
         </ul>
     </div>
+</div> -->
+
+<div class="card member" *ngIf="member">
+  <div class="overlay"></div>
+  <div class="circle">
+    <img
+      src="{{ member.photoUrl || './assets/user.png' }}"
+      alt="{{ member.knownAs }}"
+    />
+  </div>
+  <p
+    [class.is-online]="
+      (presenceService.onlineUsers$ | async)?.includes(member.userName)
+    "
+  >
+    {{ member.knownAs }}, {{ member.age }}
+  </p>
+
+  <ul>
+    <li><a routerLink="/members/{{member.userName}}"><i class="fa fa-user"></i></a></li>
+    <li><a (click)="addLike(member)"><i class="fa fa-heart"></i></a></li>
+</ul>
 </div>

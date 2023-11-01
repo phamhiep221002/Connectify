@@ -42,6 +42,17 @@
     color: #fff;
 }
 
+@media (max-width: 767px) {
+    .col-3 {
+        width: 100%;
+    }
+}
 
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .col-3 {
+        width: 50%;
+    }
+}
 
 
