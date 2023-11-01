@@ -1,8 +1,15 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
+import { ConnectedMessage } from 'src/app/common/_models/connectedMessage';
+import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
+import { Pagination } from 'src/app/common/_models/pagination';
+import { User } from 'src/app/common/_models/user';
+import { AccountService } from 'src/app/common/_services/account.service';
 import { MessageService } from 'src/app/common/_services/message.service';
+import { PresenceService } from 'src/app/common/_services/presence.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -12,10 +19,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './member-messages.component.html',
   styleUrls: ['./member-messages.component.css']
 })
-export class MemberMessagesComponent implements OnInit, AfterViewChecked {
-  @ViewChild('messageForm', { static: false }) messageForm?: NgForm;
-  @ViewChild('scrollMe', { static: false }) private myScrollContainer?: ElementRef;
-
+export class MemberMessagesComponent implements OnInit {
   @Input() username?: string;
   messageContent = '';
   loading = false;
@@ -28,6 +32,7 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   private apiMapKey = environment.apiMapKey;
   selectedFile?: File;
   messages?: Message[];
+  member: Member = {} as Member;
   callUrl = environment.callUrl;
   isMessageNavBoxVisible: boolean = false;
   isMessageMenuVisible: boolean = false;
@@ -35,23 +40,37 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   isChatinputMoreMenuVisible: boolean = false;
   isMessageBoxVisible = false;
   timeoutId: any;
-  // expandedMessages: { [id: string]: boolean } = {};
-  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
+  user?: User;
+  connectedMessage?: ConnectedMessage[];
+  pagination?: Pagination;
+  pageNumber = 1;
+  pageSize = 5;
+  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router,
+    public presenceService: PresenceService, private accountService: AccountService) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
+        this.loadAllMessages();
       }
     );
-  }
-  ngAfterViewChecked(): void {
 
   }
-
   ngOnInit(): void {
-    this.scrollToBottom();
+    this.route.data.subscribe({
+      next: data => {
+        this.member = data['member'];
+      }
+    })
   }
-   scrollToBottom(): void {
-      this.myScrollContainer!.nativeElement.scrollTop = this.myScrollContainer!.nativeElement.scrollHeight;
+  loadAllMessages() {
+    this.loading = true;
+    this.messageService.getconnectedMessages(this.pageNumber, this.pageSize).subscribe({
+      next: response => {
+        this.connectedMessage = response.result;
+        this.pagination = response.pagination;
+        this.loading = false;
+      }
+    })
   }
 
 
@@ -60,6 +79,7 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0];
       this.fileName = input.files[0].name;
+      this.sendCombinedMessage();
     }
   }
 
@@ -78,34 +98,25 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
         this.loadingfile = false;
       }
     } else {
+      if (this.messageContent.trim() === '') return;
       this.loading = true;
       try {
         await this.messageService.sendMessage(this.username, this.messageContent);
+        this.messageContent = ''; 
       } catch (error) {
         console.error("Failed to send text message:", error);
       } finally {
         this.loading = false;
       }
     }
-    this.messageForm?.reset();
   }
 
-  // toggleMessageExpansion(message: Message) {
-  //   const id = message.id;
-  //   this.expandedMessages[id] = !this.expandedMessages[id];
-  // }
-
-  // isDropdownVisible: boolean = false;
-
-
-  // New method to send location message
   async sendLocationMessage() {
     if (!this.username) return;
     this.loadinglocation = true;
     try {
       debugger
       await this.messageService.createLocationMessage(this.username).then();
-      this.messageForm?.reset();
     } catch (error) {
       console.error("Failed to send location message:", error);
     } finally {
@@ -151,7 +162,7 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-  
+
     if (visible) {
       this.isMessageBoxVisible = true;
     } else {

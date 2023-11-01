@@ -34,7 +34,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
             }
           });
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-       }
+       }    
 
   ngOnInit(): void {
     this.route.data.subscribe({

@@ -47,7 +47,6 @@ import { AccountChangePasswordComponent } from "./account-settings/account-chang
 import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 import { EndCallComponent } from './call/end-call/end-call.component';
-import { ConnectedMessagesComponent } from './messages/connected-messages/connected-messages.component';
 
 
 @NgModule({
@@ -88,7 +87,6 @@ import { ConnectedMessagesComponent } from './messages/connected-messages/connec
     AccountSetvisibilityComponent,
     AccountDisableAccountComponent,
     EndCallComponent,
-    ConnectedMessagesComponent
   ],
   imports: [
     BrowserAnimationsModule,
