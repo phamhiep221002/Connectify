@@ -11,7 +11,7 @@
 <div class="container mt-5" *ngIf="isLoggedIn">
     <app-member-list></app-member-list>
 </div> -->
-
+<div class="home" *ngIf="!isLoggedIn">
 <section class="welcome-content h-100">
     <div class="container h-100">
         <div class="row d-flex align-items-center">
@@ -97,3 +97,7 @@
         <img src="../../../assets/background/welcome-pattern.png" alt="">
       </div>
 </section>
+</div>
+<div class="container mt-5" *ngIf="isLoggedIn">
+    <app-member-list></app-member-list>
+</div> 
