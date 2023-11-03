@@ -60,6 +60,7 @@
 } */
 
 
+
 .header .navbar {
     padding: 0.625rem 1.5rem;
 }
@@ -74,13 +75,15 @@
     justify-content: flex-start;
 }
 
-.navbar-expand .navbar-nav {
+.navbar-expand .navbar-nav, .navbar-brand {
     flex-direction: row;
     align-items: center;
+    display: flex;
 }
 
-
-
+.navbar-brand {
+  margin-right: auto; 
+}
 
 .avatar-md {
     width: 2.5rem;
@@ -267,6 +270,10 @@
   .nav-item{
     margin-right: 50px;
   }
+
+  .sidebar header {
+    padding-left: 20px; 
+}
   @media(max-width : 860px){
 
     label #btn,label #cancel{
@@ -293,11 +300,11 @@
       top: 170%;
     }
     .nav-item{
-      margin: 0;
+      margin-right: 0px; 
     }
 
     .navbar-brand {
-      font-size: 1.5em;
+      font-size: 1.8em;
       color: #fff;
   }
     
