@@ -63,7 +63,8 @@
                                     </p>
                                   </div>
                                   <div class="ms-auto">
-                                    <span class="badge badge-soft-danger rounded p-1 fs-10">{{message.unreadCount}}</span>
+                                    <span
+                                      class="badge badge-soft-danger rounded p-1 fs-10">{{message.unreadCount}}</span>
                                   </div>
                                 </div>
                               </a>
@@ -231,6 +232,7 @@
                                       <i class="fa fa-bookmark-o text-muted ms-2"></i></a> -->
                                     <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"><i
                                         class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    <button (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend</button>
                                   </div>
                                 </div>
                               </div>
@@ -322,7 +324,8 @@
                     <div class="swiper-slide">
                       <div class="text-center px-2 position-relative">
                         <div>
-                          <input id="attachedfile-input" type="file" class="d-none" multiple="" (change)="onFileSelected($event)"/>
+                          <input id="attachedfile-input" type="file" class="d-none" multiple=""
+                            (change)="onFileSelected($event)" />
                           <label for="attachedfile-input" class="avatar-sm mx-auto stretched-link">
                             <span class="avatar-title fs-18 rounded-circle">
                               <i class="fa fa-paperclip"></i>
@@ -337,7 +340,9 @@
                     <div class="swiper-slide">
                       <div class="text-center px-2 position-relative">
                         <div>
-                          <input id="galleryfile-input" type="file" class="d-none" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg, .raw, .psd, .heic, .ai, .eps, .mp4, .avi, .mkv, .mov, .flv, .wmv, .m4v, .webm, .3gp, .mpeg, .mpg, .vob, .rm, .rmvb, .ts, .ogv, .swf" multiple (change)="onFileSelected($event)" />
+                          <input id="galleryfile-input" type="file" class="d-none"
+                            accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg, .raw, .psd, .heic, .ai, .eps, .mp4, .avi, .mkv, .mov, .flv, .wmv, .m4v, .webm, .3gp, .mpeg, .mpg, .vob, .rm, .rmvb, .ts, .ogv, .swf"
+                            multiple (change)="onFileSelected($event)" />
                           <label for="galleryfile-input" class="avatar-sm mx-auto stretched-link">
                             <span class="avatar-title fs-18 rounded-circle">
                               <i class="fa fa-file-image-o"></i>
@@ -352,7 +357,9 @@
                     <div class="swiper-slide">
                       <div class="text-center px-2">
                         <div>
-                          <input id="audiofile-input" type="file" class="d-none" accept=".mp3, .wav, .ogg, .m4a, .aac, .flac, .wma, .alac, .ac3, .amr, .dts, .ra, .mid, .midi, .ape, .aiff, .mka" multiple (change)="onFileSelected($event)" />
+                          <input id="audiofile-input" type="file" class="d-none"
+                            accept=".mp3, .wav, .ogg, .m4a, .aac, .flac, .wma, .alac, .ac3, .amr, .dts, .ra, .mid, .midi, .ape, .aiff, .mka"
+                            multiple (change)="onFileSelected($event)" />
                           <label for="audiofile-input" class="avatar-sm mx-auto stretched-link">
                             <span class="avatar-title fs-18 rounded-circle">
                               <i class="fa fa-headphones"></i>
@@ -406,4 +413,12 @@
     <!-- end chat conversation section -->
   </div>
   <!-- end user chat content -->
+</div>
+<button class="btn btn-primary btn-likes" btnRadio="connected" [(ngModel)]="predicate" (click)="loadLikes()">Members
+  connected</button>
+<input type="text" [(ngModel)]="search" (input)="onSearchChange()">
+<div class="row mt-3">
+  <div class="col-3" *ngFor="let member of members">
+    <app-member-card [member]="member"></app-member-card>
+  </div>
 </div>

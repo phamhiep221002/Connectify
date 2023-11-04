@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
+import { MessageService } from './message.service';
+import { MessagesComponent } from 'src/app/content/messages/messages.component';
 
 @Injectable({
   providedIn: 'root'
@@ -50,30 +52,33 @@ export class PresenceService {
         .onTap
         .pipe(take(1))
         .subscribe({
-          next: () => this.router.navigateByUrl('/members/' + username + '?tab=Messages')
+          next: () => {
+            this.router.navigateByUrl('/members/' + username + '?tab=Messages')
+          }
+
         })
     })
-    this.hubConnection.on('IncomingCall', ({username, knownAs}) => {
+    this.hubConnection.on('IncomingCall', ({ username, knownAs }) => {
       let timeoutId: any;
-    
+
       const toast = this.toastr.info(knownAs + ' is calling you!', '', {
         timeOut: 20000 // Thời gian tự động ẩn thông báo là 30 giây
       });
-    
+
       // Đặt hành động sau 30 giây
       timeoutId = setTimeout(() => {
         this.hubConnection?.invoke('Decline', username);
-        this.toastr.warning('You missed '+ knownAs + ' call!')
+        this.toastr.warning('You missed ' + knownAs + ' call!')
       }, 20000);
-    
+
       toast.onTap
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          window.open(this.callUrl + username,'_blank','height=600,width=800');
-          clearTimeout(timeoutId);  // Hủy bỏ hành động đã đặt nếu người dùng nhấp vào thông báo
-        }
-      });
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            window.open(this.callUrl + username, '_blank', 'height=600,width=800');
+            clearTimeout(timeoutId);  // Hủy bỏ hành động đã đặt nếu người dùng nhấp vào thông báo
+          }
+        });
     })
   }
 

@@ -32,7 +32,8 @@ export class MessagesComponent implements OnInit {
   isMessageBoxVisible = false;
   timeoutId: any;
 
-  constructor(private messageService: MessageService,public accountService: AccountService, private router: Router ) { }
+  constructor(private messageService: MessageService, public accountService: AccountService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.loadAllMessages();
@@ -63,7 +64,7 @@ export class MessagesComponent implements OnInit {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-  
+
     if (visible) {
       this.isMessageBoxVisible = true;
     } else {

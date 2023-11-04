@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpTransportType, HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -63,8 +63,16 @@ export class MessageService {
         }
       })
     })
+    this.hubConnection.on('UnsendMessage', message => {
+      this.messageThread$.pipe(take(1)).subscribe({
+        next: messages => {
+          messages.splice(messages.findIndex(m => m.id === message), 1);
+          this.messageThreadSource.next([...messages, message])
+        }
+      })
+    })
   }
-  
+
 
   stopHubConnection() {
     if (this.hubConnection) {
@@ -91,6 +99,9 @@ export class MessageService {
   deleteMessage(id: number) {
     return this.http.delete(this.baseUrl + 'messages/' + id);
   }
+  unsendMessage(id: number) {
+    return this.http.put(this.baseUrl + 'messages/' + id, {});
+  }
   async createLocationMessage(username: string) {
     return this.hubConnection?.invoke('CreateLocationMessage', { recipientUsername: username })
       .catch(error => this.toastr.error(error));
@@ -107,5 +118,5 @@ export class MessageService {
     let params = getPaginationHeaders(pageNumber, pageSize);
     return getPaginatedResult<ConnectedMessage[]>(this.baseUrl + 'messages/connectedmessages', params, this.http);
   }
-  
+
 }

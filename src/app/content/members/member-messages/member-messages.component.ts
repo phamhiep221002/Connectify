@@ -8,6 +8,7 @@ import { Message } from 'src/app/common/_models/message';
 import { Pagination } from 'src/app/common/_models/pagination';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
+import { MembersService } from 'src/app/common/_services/members.service';
 import { MessageService } from 'src/app/common/_services/message.service';
 import { PresenceService } from 'src/app/common/_services/presence.service';
 import { environment } from 'src/environments/environment';
@@ -45,8 +46,11 @@ export class MemberMessagesComponent implements OnInit {
   pagination?: Pagination;
   pageNumber = 1;
   pageSize = 5;
+  predicate = 'connected';
+  members: Member[] | undefined;
+  search = '';
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router,
-    public presenceService: PresenceService, private accountService: AccountService) {
+    public presenceService: PresenceService, private accountService: AccountService, private memberService: MembersService) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
@@ -72,6 +76,18 @@ export class MemberMessagesComponent implements OnInit {
       }
     })
   }
+  loadLikes() {
+    this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize, this.search).subscribe({
+      next: response => {
+        this.members = response.result;
+        this.pagination = response.pagination;
+      }
+    })
+  }
+  onSearchChange() {
+    // Thực hiện phương thức loadLikes() với giá trị tìm kiếm mới
+    this.loadLikes();
+  }
 
 
   onFileSelected(event: Event) {
@@ -80,6 +96,7 @@ export class MemberMessagesComponent implements OnInit {
       this.selectedFile = input.files[0];
       this.fileName = input.files[0].name;
       this.sendCombinedMessage();
+      this.messageContent = '';
     }
   }
 
@@ -102,7 +119,7 @@ export class MemberMessagesComponent implements OnInit {
       this.loading = true;
       try {
         await this.messageService.sendMessage(this.username, this.messageContent);
-        this.messageContent = ''; 
+        this.messageContent = '';
       } catch (error) {
         console.error("Failed to send text message:", error);
       } finally {
@@ -153,6 +170,15 @@ export class MemberMessagesComponent implements OnInit {
       }
     });
   }
+  unsendMessage(id: number) {
+    this.messageService.unsendMessage(id).subscribe({
+      next: () => { 
+        // this.messages?.splice(this.messages.findIndex(m => m.id === id), 1);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
   callOpen() {
     window.open(this.callUrl + this.username, '_blank', 'height=600,width=800')
   }

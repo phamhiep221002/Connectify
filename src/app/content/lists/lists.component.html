@@ -15,7 +15,7 @@
                 <button class="btn btn-primary btn-likes" btnRadio="recommend"  [(ngModel)]="predicate" (click)="loadRecommendedMembers()">Members
                     recommended</button>
             </div>
-        </div>
+        </div>  
         <div class="row mt-3">
             <div class="col-3" *ngFor="let member of members">
                 <app-member-card [member]="member"></app-member-card>
