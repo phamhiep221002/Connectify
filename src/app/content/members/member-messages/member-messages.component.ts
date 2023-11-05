@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
@@ -49,26 +49,27 @@ export class MemberMessagesComponent implements OnInit {
   predicate = 'connected';
   members: Member[] | undefined;
   search = '';
-  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router,
-    public presenceService: PresenceService, private accountService: AccountService, private memberService: MembersService) {
+  fullName = '';
+  constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute,
+    public presenceService: PresenceService, private memberService: MembersService) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
         this.loadAllMessages();
       }
     );
-
-  }
-  ngOnInit(): void {
     this.route.data.subscribe({
       next: data => {
         this.member = data['member'];
       }
     })
+    this.loadLikes();
+  }
+  ngOnInit() {
   }
   loadAllMessages() {
     this.loading = true;
-    this.messageService.getconnectedMessages(this.pageNumber, this.pageSize).subscribe({
+    this.messageService.getconnectedMessages(this.pageNumber, this.pageSize, this.fullName).subscribe({
       next: response => {
         this.connectedMessage = response.result;
         this.pagination = response.pagination;
@@ -83,10 +84,6 @@ export class MemberMessagesComponent implements OnInit {
         this.pagination = response.pagination;
       }
     })
-  }
-  onSearchChange() {
-    // Thực hiện phương thức loadLikes() với giá trị tìm kiếm mới
-    this.loadLikes();
   }
 
 
@@ -172,7 +169,7 @@ export class MemberMessagesComponent implements OnInit {
   }
   unsendMessage(id: number) {
     this.messageService.unsendMessage(id).subscribe({
-      next: () => { 
+      next: () => {
         // this.messages?.splice(this.messages.findIndex(m => m.id === id), 1);
         this.cdr.detectChanges();
       }

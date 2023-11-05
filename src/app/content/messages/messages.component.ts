@@ -31,6 +31,7 @@ export class MessagesComponent implements OnInit {
   isChatinputMoreMenuVisible: boolean = false;
   isMessageBoxVisible = false;
   timeoutId: any;
+  fullName = '';
 
   constructor(private messageService: MessageService, public accountService: AccountService, private router: Router) {
   }
@@ -41,7 +42,7 @@ export class MessagesComponent implements OnInit {
 
   loadAllMessages() {
     this.loading = true;
-    this.messageService.getconnectedMessages(this.pageNumber, this.pageSize).subscribe({
+    this.messageService.getconnectedMessages(this.pageNumber, this.pageSize, this.fullName ).subscribe({
       next: response => {
         this.connectedMessage = response.result;
         this.pagination = response.pagination;

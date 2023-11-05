@@ -114,8 +114,9 @@ export class MessageService {
     return this.http.post(this.baseUrl + 'messages/file', formData).toPromise()
       .catch(error => this.toastr.error(error.error.message));
   }
-  getconnectedMessages(pageNumber: number, pageSize: number) {
+  getconnectedMessages(pageNumber: number, pageSize: number, fullName: string) {
     let params = getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('FullName', fullName);
     return getPaginatedResult<ConnectedMessage[]>(this.baseUrl + 'messages/connectedmessages', params, this.http);
   }
 

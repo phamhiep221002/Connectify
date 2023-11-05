@@ -20,10 +20,11 @@
                   </div>
                 </div>
               </div>
-              <form>
-                <div class="input-group search-panel mb-3">
+              <form (ngSubmit)="loadAllMessages()">
+                <div class="input-group search-panel mb-3" >
                   <div class="InputContainer">
-                    <input placeholder="Search.." id="input" class="input" name="text" type="text" />
+                    <input placeholder="Search.." name="fullName" class="input"  type="text" [(ngModel)]="fullName"/>
+                    <button type="submit">Search</button>
                   </div>
                 </div>
               </form>
@@ -414,11 +415,90 @@
   </div>
   <!-- end user chat content -->
 </div>
-<button class="btn btn-primary btn-likes" btnRadio="connected" [(ngModel)]="predicate" (click)="loadLikes()">Members
+<!-- <button class="btn btn-primary btn-likes" btnRadio="connected" [(ngModel)]="predicate" (click)="loadLikes()">Members
   connected</button>
-<input type="text" [(ngModel)]="search" (input)="onSearchChange()">
-<div class="row mt-3">
-  <div class="col-3" *ngFor="let member of members">
-    <app-member-card [member]="member"></app-member-card>
+<form (ngSubmit)="loadLikes()">
+  <input placeholder="Search.." name="search" class="input"  type="text" [(ngModel)]="search"/>
+  <button type="submit">Search</button>
+</form> -->
+<div class="tab-pane active show" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
+  <div>
+    <div class="px-4 pt-4">
+      <div class="d-flex align-items-start">
+        <div class="d-flex flex-grow-1 flex-wrap-0 justify-content-between">
+          <h4 class="mb-4">Connected</h4>
+          <div tabindex="0" class="plusButton">
+            <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+              <g mask="url(#mask0_21_345)">
+                <path d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z">
+                </path>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <form (ngSubmit)="loadLikes()">
+        <div class="input-group search-panel mb-3" >
+          <div class="InputContainer">
+            <input placeholder="Search.." name="fullName" class="input"  type="text" [(ngModel)]="search"/>
+            <button type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="chat-room-list" data-simplebar="init">
+      <div class="simplebar-wrapper" style="margin: 0px">
+        <div class="simplebar-height-auto-observer-wrapper">
+          <div class="simplebar-height-auto-observer"></div>
+        </div>
+        <div class="simplebar-mask">
+          <div class="simplebar-offset" style="right: 0px; bottom: 0px">
+            <div class="simplebar-content-wrapper" style="height: auto">
+              <div class="simplebar-content" style="padding: 0px">
+                <!-- Start chat-message-list -->
+                <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
+                  Connected user
+                </h5>
+
+                <div class="chat-message-list" *ngFor="let member of members" >
+                  <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
+                    <li id="contact-id-1" data-name="favorite" class="active">
+                      <a routerLink="/members/{{ member.userName }}" [queryParams]="{ tab: 'Messages' }"
+                        class="unread-msg-user">
+                        <div class="d-flex align-items-center">
+                          <div class="chat-user-img online align-self-center me-2 ms-0">
+                            <img src="{{
+                                member.photoUrl || './assets/user.png'
+                              }}" alt="Chat Avatar" class="rounded-circle avatar-xs" /><span
+                              class="user-status"></span>
+                          </div>
+                          <div class="overflow-hidden me-2">
+                            <p class="text-truncate chat-username mb-0">
+                              {{ member.fullName | titlecase }}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- End chat-message-list -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="simplebar-placeholder" style="width: auto; height: 1128px"></div>
+      </div>
+      <div class="simplebar-track simplebar-horizontal" style="visibility: hidden">
+        <div class="simplebar-scrollbar" style="width: 0px; display: none"></div>
+      </div>
+      <div class="simplebar-track simplebar-vertical" style="visibility: visible">
+        <div class="simplebar-scrollbar" style="
+            height: 323px;
+            transform: translate3d(0px, 0px, 0px);
+            display: block;
+          "></div>
+      </div>
+    </div>
   </div>
 </div>

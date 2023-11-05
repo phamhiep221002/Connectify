@@ -23,7 +23,6 @@ export class ListsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadLikes();
-    this.loadRecommendedMembers();
   }
 
   loadLikes() {
