@@ -927,6 +927,16 @@
   scale: 1.2;
 }
 
+.fa-clock-o:before {
+  content: "\f017";
+  margin-right: 5px;
+}
+
+.fa-check-circle:before {
+  content: "\f058";
+  margin: 5px;
+}
+
 @media (max-width: 991.98px) {
   .side-menu {
     position: fixed;
