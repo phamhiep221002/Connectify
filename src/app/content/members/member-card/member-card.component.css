@@ -172,7 +172,7 @@
   @media screen and (min-width: 768px) and (max-width: 1023px) {
 	.card {
 		width: 100%;
-		height: 350px;
+		height: 340px;
 	}
 	.circle {
 		width: 135px;
@@ -189,9 +189,9 @@
 	}
 	.overlay {
 		width: 120px;
-		height: 122px;
-		top: 90px;
-		left: 95px;
+    height: 127px;
+    top: 80px;
+    left: 105px;
 	}
 	.card ul li {
 		height: 50px;
@@ -206,9 +206,9 @@
   /* Đối với mobile */
   @media (max-width: 767px) {
 	.card {
-		width: 100%;
-		height: 350px;
-		margin-bottom: 25px;
+		width: 80%;
+		height: 320px;
+		margin: 25px 30px;
 	}
 	.circle {
 		width: 138px;
@@ -219,10 +219,10 @@
 	  margin-top: 20px;
 	}
 	.overlay {
-		width: 100px;
-    height: 136px;
-    top: 22%;
-    left: 30%;
+		width: 120px;
+		height: 120px;
+		top: 23%;
+		left: 30%;
 }
 	
 	.card ul li {

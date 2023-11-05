@@ -42,7 +42,6 @@
                         <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                           Latest messages
                         </h5>
-
                         <div class="chat-message-list" *ngFor="let message of connectedMessage">
                           <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                             <li id="contact-id-1" data-name="favorite" class="active">
@@ -227,13 +226,13 @@
                                       <i class="fa fa-share-alt ms-2 text-muted"></i></a>
                                     <a class="dropdown-item d-flex align-items-center justify-content-between copy-message"
                                       href="#" id="copy-message-0">Copy
-                                      <i class="fa fa-clone text-muted ms-2"></i></a>
+                                      <i class="fa fa-clone text-muted ms-2"></i></a>-->
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between delete-item"
+                                      (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Remove for you
+                                        <i class="fa fa-trash-o text-muted ms-2"></i></a>
                                     <a class="dropdown-item d-flex align-items-center justify-content-between"
-                                      href="#">Bookmark
-                                      <i class="fa fa-bookmark-o text-muted ms-2"></i></a> -->
-                                    <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"><i
-                                        class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    <button (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend</button>
+                                    (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend
+                                    <i class="fa fa-undo text-muted ms-2"></i></a> 
                                   </div>
                                 </div>
                               </div>
@@ -293,24 +292,33 @@
                   </div>
                 </div>
               </div>
-              <form #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off">
-                <div class="input-group">
-                  <input name="messageContent" required [(ngModel)]="messageContent" type="text"
-                    class="form-control input-sm" placeholder="Type a message...">
-                  <div class="input-group-append">
-                    <button class="sends" [disabled]="!messageForm.valid && !selectedFile" type="submit">
-                      <div class="svg-wrapper-1">
-                        <div class="svg-wrapper">
-                          <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                              d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                              fill="currentColor"></path>
-                          </svg>
+              <form class="row g-0 align-items-center" #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()" autocomplete="off">
+                <div class="col">
+                  <div class="position-relative">
+                    <div class="chat-input-feedback">
+                      Please Enter a Message
+                    </div>
+                    <input name="messageContent" required [(ngModel)]="messageContent" type="text"
+                    class="form-input input-sm" placeholder="Type a message..."/>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="chat-input-links ms-2 gap-md-1">
+                    <div class="links-list-item">
+                      <button class="sends" [disabled]="!messageForm.valid && !selectedFile" type="submit">
+                        <div class="svg-wrapper-1">
+                          <div class="svg-wrapper">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M0 0h24v24H0z" fill="none"></path>
+                              <path
+                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                fill="currentColor"></path>
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <span><i *ngIf="loadingfile" class="fa fa-spinner fa-spin"></i></span>
-                    </button>
+                        <span><i *ngIf="loadingfile" class="fa fa-spinner fa-spin"></i></span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </form>
