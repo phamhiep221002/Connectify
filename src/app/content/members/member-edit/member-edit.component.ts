@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -7,7 +7,6 @@ import { take } from 'rxjs';
 import { InterestsDto } from 'src/app/common/_models/interestsDto';
 import { LookingForsDto } from 'src/app/common/_models/lookingForsDto';
 import { Member } from 'src/app/common/_models/member';
-import { MemberUpdateDto } from 'src/app/common/_models/memberUpdateDto';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
 import { MembersService } from 'src/app/common/_services/members.service';

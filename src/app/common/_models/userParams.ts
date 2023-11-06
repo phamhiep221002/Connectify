@@ -5,7 +5,7 @@ export class UserParams {
     minAge = 18;
     maxAge = 99;
     pageNumber = 1;
-    pageSize = 6;
+    pageSize = 8;
     orderBy = 'lastActive';
     distance = 100;
     currentLatitude!: number;

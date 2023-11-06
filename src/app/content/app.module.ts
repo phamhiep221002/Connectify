@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { HasRoleDirective } from "../common/_directives/has-role.directive";
 import { DatePickerComponent } from "../common/_forms/date-picker/date-picker.component";
 import { TextInputComponent } from "../common/_forms/text-input/text-input.component";
@@ -48,6 +48,7 @@ import { AccountSetvisibilityComponent } from './account-settings/account-setvis
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 import { EndCallComponent } from './call/end-call/end-call.component';
 import { UserMessagesComponent } from './messages/user-messages/user-messages.component';
+import { TermManagementComponent } from './admin/term-management/term-management.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { UserMessagesComponent } from './messages/user-messages/user-messages.co
     AccountDisableAccountComponent,
     EndCallComponent,
     UserMessagesComponent,
+    TermManagementComponent,
   ],
   imports: [
     BrowserAnimationsModule,

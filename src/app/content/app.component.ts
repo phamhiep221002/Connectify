@@ -20,10 +20,7 @@ export class AppComponent implements OnInit{
   foundCity: string | undefined;
   accessDenied: boolean = false;
 
-  constructor (private accountService: AccountService,
-     private toastr: ToastrService,
-      private router: Router,
-       private locationService: LocationService ){}
+  constructor (private accountService: AccountService ){}
 
   ngOnInit(): void {
     this.setCurrentUser();

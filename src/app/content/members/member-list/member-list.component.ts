@@ -19,8 +19,6 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
   private currentMarker: any; 
   private platform: any;
   private map: any;
-  pageNumber = 1;
-  pageSize = 5;
   private apiMapKey =environment.apiMapKey;
   members: Member[] = [];
   pagination: Pagination | undefined;

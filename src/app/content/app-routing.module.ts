@@ -22,9 +22,8 @@ import { AccountGeneralComponent } from './account-settings/account-general/acco
 import { AccountSetvisibilityComponent } from './account-settings/account-setvisibility/account-setvisibility.component';
 import { AccountDisableAccountComponent } from './account-settings/account-disable-account/account-disable-account.component';
 import { EndCallComponent } from './call/end-call/end-call.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { UserMessagesComponent } from './messages/user-messages/user-messages.component';
+import { TermManagementComponent } from './admin/term-management/term-management.component';
 
 
 const routes: Routes = [
@@ -45,7 +44,8 @@ const routes: Routes = [
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
       { path: 'end-call/:otherPeerId', component: EndCallComponent, pathMatch: 'full' },
-      { path: 'messages/:username', component: UserMessagesComponent, resolve: { member: MemberDetailedResolver } }
+      { path: 'messages/:username', component: UserMessagesComponent, resolve: { member: MemberDetailedResolver } },
+      { path: 'terms', component: TermManagementComponent },
     ]
   },
   {
