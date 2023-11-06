@@ -7,7 +7,6 @@ import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
-import { CallService } from 'src/app/common/_services/call.service';
 import { MessageService } from 'src/app/common/_services/message.service';
 import { PresenceService } from 'src/app/common/_services/presence.service';
 

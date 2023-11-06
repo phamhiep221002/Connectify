@@ -5,6 +5,8 @@ import { User } from '../_models/user';
 import { Genders } from '../_models/gender';
 import { LookingForsDto } from '../_models/lookingForsDto';
 import { InterestsDto } from '../_models/interestsDto';
+import { Terms } from '../_models/term';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -77,4 +79,25 @@ export class AdminService {
   createInterest(interest: InterestsDto) {
     return this.http.post(this.baseUrl + 'interest', interest, { responseType: 'text' as 'json' });
   }
+  getAllTermList(): Observable<Terms[]>  {
+    return this.http.get<Terms[]>(this.baseUrl + 'TermLists');
+  }
+  getAllTerm(listId: string) {
+    return this.http.get(this.baseUrl + 'TermLists/' + listId);
+  }
+  createTermList(listId: string, term: string) {
+    return this.http.post(this.baseUrl + 'TermLists/' + listId, term, { responseType: 'text' as 'json' });
+  }
+  addTerm(listId: string, term: string) {
+    return this.http.post(this.baseUrl + 'TermLists/' + listId, term, { responseType: 'text' as 'json' });
+  }
+  deleteTerm(listId: string, term: string) {
+    return this.http.delete(this.baseUrl + 'TermLists/DeleteTerm/' + listId + '/' + term, { responseType: 'text' as 'json' });
+  }
+  deleteTermList(listId: string) {
+    return this.http.delete(this.baseUrl + 'TermLists/' + listId, { responseType: 'text' as 'json' });
+  }
+  refereshIndex(listId: string) {
+    return this.http.put(this.baseUrl + 'TermLists/' + listId, { responseType: 'text' as 'json' });
+}
 }
