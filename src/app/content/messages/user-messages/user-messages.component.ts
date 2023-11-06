@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { ConnectedMessage } from 'src/app/common/_models/connectedMessage';
@@ -19,6 +19,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./user-messages.component.css']
 })
 export class UserMessagesComponent implements OnInit, OnDestroy {
+  @HostListener('scroll', ['$event'])
+  @ViewChild('scrollable') private scrollableElementRef: ElementRef | undefined;
   username?: string;
   messageContent = '';
   loading = false;
@@ -48,11 +50,17 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   members: Member[] | undefined;
   search = '';
   fullName = '';
+  lastMessageId?: number;
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute,
     public presenceService: PresenceService, private memberService: MembersService, private accountService: AccountService, private router: Router) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
+        if (this.messages.length > 0) {
+          // Sắp xếp mảng tin nhắn theo ID tăng dần và lấy ID đầu tiên làm lastMessageId
+          this.lastMessageId = this.messages.map(message => message.id).sort((a, b) => a - b)[0];
+          console.log(this.lastMessageId);
+        }
         this.loadAllMessages();
       }
     );
@@ -73,6 +81,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         this.username = username;
       }
     });
+    console.log();
   }
   ngOnDestroy() {
     this.messageService.stopHubConnection();
@@ -80,7 +89,22 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.messageService.createHubConnection(this.user, this.member.userName);
     this.loadLikes();
-    console.log(this.username)
+    this.loadMoreMessages();
+  }
+  selectMessage(id: number) {
+    this.lastMessageId = id;
+    console.log(this.lastMessageId);
+  }
+  onScroll(event: any) {
+    const element = event.target;
+    // Kiểm tra nếu scroll xuống dưới cùng
+    if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
+      this.loadMoreMessages();
+    }
+    // Kiểm tra nếu scroll lên trên cùng
+    if (element.scrollTop === 0) {
+      this.loadMoreMessages();
+    }
   }
   loadAllMessages() {
     this.loading = true;
@@ -226,5 +250,13 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
 
   toggleChatinputMoreMenu() {
     this.isChatinputMoreMenuVisible = !this.isChatinputMoreMenuVisible;
+  }
+
+  // Gọi phương thức này khi người dùng muốn tải thêm tin nhắn
+  loadMoreMessages() {
+    var a= this.messages;
+    if (!this.username || !this.lastMessageId || !this.messageService) return;
+  
+    this.messageService.loadMoreMessages(this.username, this.lastMessageId);
   }
 }
