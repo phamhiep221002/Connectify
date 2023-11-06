@@ -1,5 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { ConnectedMessage } from 'src/app/common/_models/connectedMessage';
@@ -7,6 +6,7 @@ import { Member } from 'src/app/common/_models/member';
 import { Message } from 'src/app/common/_models/message';
 import { Pagination } from 'src/app/common/_models/pagination';
 import { User } from 'src/app/common/_models/user';
+import { AccountService } from 'src/app/common/_services/account.service';
 import { MembersService } from 'src/app/common/_services/members.service';
 import { MessageService } from 'src/app/common/_services/message.service';
 import { PresenceService } from 'src/app/common/_services/presence.service';
@@ -14,13 +14,12 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-member-messages',
-  templateUrl: './member-messages.component.html',
-  styleUrls: ['./member-messages.component.css']
+  selector: 'app-user-messages',
+  templateUrl: './user-messages.component.html',
+  styleUrls: ['./user-messages.component.css']
 })
-export class MemberMessagesComponent implements OnInit {
-  @Input() username?: string;
+export class UserMessagesComponent implements OnInit, OnDestroy {
+  username?: string;
   messageContent = '';
   loading = false;
   loadingfile = false;
@@ -40,7 +39,7 @@ export class MemberMessagesComponent implements OnInit {
   isChatinputMoreMenuVisible: boolean = false;
   isMessageBoxVisible = false;
   timeoutId: any;
-  user?: User;
+  user!: User;
   connectedMessage?: ConnectedMessage[];
   pagination?: Pagination;
   pageNumber = 1;
@@ -50,7 +49,7 @@ export class MemberMessagesComponent implements OnInit {
   search = '';
   fullName = '';
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute,
-    public presenceService: PresenceService, private memberService: MembersService) {
+    public presenceService: PresenceService, private memberService: MembersService, private accountService: AccountService, private router: Router) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
@@ -62,10 +61,26 @@ export class MemberMessagesComponent implements OnInit {
         this.member = data['member'];
       }
     })
-    this.loadLikes();
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: user => {
+        if (user) this.user = user;
+      }
+    });
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.params.subscribe(params => {
+      const username = params['username'];
+      if (username) {
+        this.username = username;
+      }
+    });
+  }
+  ngOnDestroy() {
+    this.messageService.stopHubConnection();
   }
   ngOnInit() {
-    console.log(this.username);
+    this.messageService.createHubConnection(this.user, this.member.userName);
+    this.loadLikes();
+    console.log(this.username)
   }
   loadAllMessages() {
     this.loading = true;
@@ -123,6 +138,7 @@ export class MemberMessagesComponent implements OnInit {
         this.loading = false;
       }
     }
+    console.log(this.username);
   }
 
   async sendLocationMessage() {

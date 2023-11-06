@@ -24,6 +24,7 @@ import { AccountDisableAccountComponent } from './account-settings/account-disab
 import { EndCallComponent } from './call/end-call/end-call.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { UserMessagesComponent } from './messages/user-messages/user-messages.component';
 
 
 const routes: Routes = [
@@ -44,7 +45,7 @@ const routes: Routes = [
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
       { path: 'end-call/:otherPeerId', component: EndCallComponent, pathMatch: 'full' },
-      { path: 'members/:username?tab=Messages', component: MemberMessagesComponent, resolve: { member: MemberDetailedResolver } }
+      { path: 'messages/:username', component: UserMessagesComponent, resolve: { member: MemberDetailedResolver } }
     ]
   },
   {

@@ -27,7 +27,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   constructor(private accountService: AccountService, private route: ActivatedRoute, 
       private messageService: MessageService, public presenceService: PresenceService, 
-      private router: Router, private callService: CallService) {
+      private router: Router) {
           this.accountService.currentUser$.pipe(take(1)).subscribe({
             next: user => {
               if (user) this.user = user;
