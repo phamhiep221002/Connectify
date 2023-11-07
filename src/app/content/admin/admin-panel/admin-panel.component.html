@@ -26,6 +26,11 @@
                             <app-interest-management></app-interest-management>
                         </div>
                     </tab>
+                    <tab heading="Terms management" *appHasRole="['Admin', 'Moderator']">
+                        <div class="container">
+                            <app-term-management></app-term-management>
+                        </div>
+                    </tab>
                 </tabset>
             </div>
         </div>

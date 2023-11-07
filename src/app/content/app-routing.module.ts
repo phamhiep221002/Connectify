@@ -45,7 +45,8 @@ const routes: Routes = [
       { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
       { path: 'end-call/:otherPeerId', component: EndCallComponent, pathMatch: 'full' },
       { path: 'messages/:username', component: UserMessagesComponent, resolve: { member: MemberDetailedResolver } },
-      { path: 'terms', component: TermManagementComponent },
+      { path: 'term', component: TermManagementComponent },
+      
     ]
   },
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },
   { path: '**', component: MessagesComponent },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

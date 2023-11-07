@@ -3,3 +3,6 @@ export interface Terms{
     Name: string;
     Description: string;
 }
+export interface Term{
+    Term: string;
+}
