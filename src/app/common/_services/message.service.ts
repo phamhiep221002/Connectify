@@ -41,6 +41,15 @@ export class MessageService {
       this.messageThreadSource.next(messages);
     })
 
+    this.hubConnection.on('LoadMoreMessageThread', messages => {
+      this.messageThread$.pipe(take(1)).subscribe(currentMessages => {
+        // Đảo ngược thứ tự của các tin nhắn mới để thêm vào đầu mảng
+        const updatedMessages = [...messages, ...currentMessages];
+        this.messageThreadSource.next(updatedMessages);
+      });
+    });
+    
+
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
       if (group.connections.some(x => x.username === otherUsername)) {
         this.messageThread$.pipe(take(1)).subscribe({
@@ -119,5 +128,10 @@ export class MessageService {
     params = params.append('FullName', fullName);
     return getPaginatedResult<ConnectedMessage[]>(this.baseUrl + 'messages/connectedmessages', params, this.http);
   }
-
+  // Phương thức để gọi LoadMoreMessages từ Hub
+  loadMoreMessages(otherUsername: string, lastMessageId: number): Promise<Message[]> {
+    return new Promise((resolve, reject) => {
+      this.hubConnection?.invoke<Message[]>('LoadMoreMessages', otherUsername, lastMessageId);
+    });
+  }
 }
