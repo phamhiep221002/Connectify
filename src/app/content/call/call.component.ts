@@ -31,6 +31,7 @@ export class CallComponent implements OnInit, OnDestroy {
   screenStream: MediaStream | null = null;
   autoDenyTimer: any;
   autoCallUserTimer: any;
+  isOtherScreenSharing = false;
 
   constructor(private accountService: AccountService, private callService: CallService, private route: ActivatedRoute, private router: Router) {
     this.accountService.currentUser$.subscribe(user => {
@@ -180,6 +181,7 @@ export class CallComponent implements OnInit, OnDestroy {
   }
   async shareScreen() {
     const screenStream = await this.getScreenStream();
+    this.isScreenSharing = true;
     if (screenStream) {
       this.isScreenSharing = true;
       this.screenVideo.nativeElement.classList.remove('hidden');  // Chỉ định màn hình chia sẻ của A hiển thị ở screenVideo
@@ -210,6 +212,7 @@ export class CallComponent implements OnInit, OnDestroy {
   }
   async stopScreenSharing() {
     const screenStream = this.screenVideo.nativeElement.srcObject as MediaStream;
+    this.isScreenSharing = false;
     if (screenStream && screenStream instanceof MediaStream) {
       screenStream.getTracks().forEach((track) => {
         track.stop();
@@ -220,6 +223,13 @@ export class CallComponent implements OnInit, OnDestroy {
     this.hideScreenShare();
     const createCallDto = this.createCallDto();
     this.callService.updateScreen(createCallDto);
+  }
+  toggleScreenSharing() {
+    if (this.isScreenSharing) {
+      this.stopScreenSharing();
+    } else {
+      this.shareScreen();
+    }
   }
   private createCallDto(): CreateCallDto {
     return {
