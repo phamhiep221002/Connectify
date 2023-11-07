@@ -20,9 +20,10 @@ import { environment } from 'src/environments/environment';
 })
 export class UserMessagesComponent implements OnInit, OnDestroy {
   @HostListener('scroll', ['$event'])
-  @ViewChild('scrollable') private scrollableElementRef: ElementRef | undefined;
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
   username?: string;
   messageContent = '';
+  private currentScrollHeight = 0;
   loading = false;
   loadingfile = false;
   loadinglocation = false;
@@ -33,6 +34,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   private apiMapKey = environment.apiMapKey;
   selectedFile?: File;
   messages?: Message[];
+  loadingOldMessages = false;
   member: Member = {} as Member;
   callUrl = environment.callUrl;
   isMessageNavBoxVisible: boolean = false;
@@ -52,7 +54,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   fullName = '';
   lastMessageId?: number;
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute,
-    public presenceService: PresenceService, private memberService: MembersService, private accountService: AccountService, private router: Router) {
+    public presenceService: PresenceService, private memberService: MembersService, public accountService: AccountService, private router: Router) {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
@@ -61,6 +63,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
           this.lastMessageId = this.messages.map(message => message.id).sort((a, b) => a - b)[0];
           console.log(this.lastMessageId);
         }
+        this.handleNewMessages(); 
         this.loadAllMessages();
       }
     );
@@ -97,14 +100,16 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   }
   onScroll(event: any) {
     const element = event.target;
-    // Kiểm tra nếu scroll xuống dưới cùng
-    if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
-      this.loadMoreMessages();
-    }
+    this.currentScrollHeight = element.scrollHeight - element.scrollTop;
     // Kiểm tra nếu scroll lên trên cùng
     if (element.scrollTop === 0) {
       this.loadMoreMessages();
     }
+  }
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer!.nativeElement.scrollTop = this.myScrollContainer!.nativeElement.scrollHeight;
+    } catch (err) { }
   }
   loadAllMessages() {
     this.loading = true;
@@ -113,9 +118,15 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         this.connectedMessage = response.result;
         this.pagination = response.pagination;
         this.loading = false;
+        this.cdr.detectChanges();
+        if (!this.loadingOldMessages) {
+          // Chỉ cuộn xuống cuối nếu không đang tải tin nhắn cũ
+          this.scrollToBottom();
+        }
       }
     })
   }
+  
   loadLikes() {
     this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize, this.search).subscribe({
       next: response => {
@@ -254,9 +265,30 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
 
   // Gọi phương thức này khi người dùng muốn tải thêm tin nhắn
   loadMoreMessages() {
-    var a= this.messages;
     if (!this.username || !this.lastMessageId || !this.messageService) return;
   
-    this.messageService.loadMoreMessages(this.username, this.lastMessageId);
+    this.loadingOldMessages = true; 
+    this.messageService.loadMoreMessages(this.username, this.lastMessageId).then(() => {
+      this.loadingOldMessages = false;
+    });
+  }
+
+  handleNewMessages(): void {
+    // Đợi cho đến khi Angular cập nhật DOM
+    this.cdr.detectChanges();
+
+    // Sử dụng setTimeout để đảm bảo các thay đổi đã được áp dụng vào DOM
+    setTimeout(() => {
+      const currentScrollTop = this.myScrollContainer?.nativeElement.scrollTop;
+      const newScrollHeight = this.myScrollContainer?.nativeElement.scrollHeight;
+
+      // Nếu đang không tải tin nhắn cũ, cuộn xuống cuối
+      if (!this.loadingOldMessages) {
+        this.myScrollContainer!.nativeElement.scrollTop = newScrollHeight;
+      } else {
+        // Nếu đang tải tin nhắn cũ, cập nhật vị trí cuộn để giữ nguyên vị trí hiện tại của người dùng
+        this.myScrollContainer!.nativeElement.scrollTop = newScrollHeight - this.currentScrollHeight + currentScrollTop;
+      }
+    });
   }
 }
