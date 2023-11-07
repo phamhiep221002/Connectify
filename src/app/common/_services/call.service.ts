@@ -37,15 +37,31 @@ export class CallService {
     this.hubConnection.start()
       .catch(error => console.log(error))
       .finally(() => { });
+
+          // Bắt đầu kết nối
+    this.hubConnection.on("StartCall", () =>{
       this.autoCloseTabTimer = setTimeout(() => {
-        this.missCall(user.username);
-        window.close(); // Đóng cửa sổ
+        this.missCall(otherUsername);
+        this.router.navigate(['/end-call/' + otherUsername]);
+        this.toastr.warning('User Busy');
       }, 20000);
+    });
+
 
     this.hubConnection.on('AcceptCall', () => {
       this.incomingCallSource.next(false);
       clearTimeout(this.autoCloseTabTimer);
       console.log("AcceptCall");
+    });
+
+    this.hubConnection.on('UserBusy', () => {
+      this.router.navigate(['/end-call/' + otherUsername]);
+      this.toastr.info('Miss Call');
+    });
+
+    this.hubConnection.on('UserOffline', () => {
+      this.router.navigate(['/end-call/' + otherUsername]);
+      this.toastr.info('User Busy');
     });
 
     this.hubConnection.on('MicroUpdate', () => {
