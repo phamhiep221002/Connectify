@@ -56,13 +56,13 @@
 
    */
 
-   section {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .fullscreen-media-container {
@@ -80,19 +80,11 @@
   display: none;
 }
 
-/* Khi chia sẻ màn hình được kích hoạt */
-.screen-sharing-active .video,
-.screen-sharing-active .screen-video,
-.screen-sharing-active .other-screen-video {
-  width: 50%; /* Chia đôi màn hình cho hai video */
-  float: left; /* Sắp xếp cạnh nhau */
-}
-
 .fullscreen-media-container.video video {
   width: 100vw;
   height: 100vh;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   position: absolute;
   left: 0;
   top: 0;
@@ -162,140 +154,154 @@
   background-color: rgba(0, 0, 0, 0.35);
 }
 
-.button-mic, .button-camera, .button-share{
+.button-mic,
+.button-camera,
+.button-share {
   all: unset;
   cursor: pointer;
   width: 44px;
   height: 44px;
   margin-right: 15px;
-    border-radius: 70px;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transform: translateZ(0);
-    background-color: rgba(255, 255, 255, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  border-radius: 70px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transform: translateZ(0);
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-.button-accept{
-all: unset;
+.button-accept {
+  all: unset;
   cursor: pointer;
   width: 44px;
   height: 44px;
-  margin-right: 15px;
-    border-radius: 70px;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transform: translateZ(0);
-    background-color: #00ff00;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  margin-right: 25px;
+  border-radius: 70px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transform: translateZ(0);
+  background-color: #00ff00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-.button-deny{
+.button-deny {
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  margin-left: 15px;
+  border-radius: 70px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transform: translateZ(0);
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.button-end-call {
   all: unset;
   cursor: pointer;
   width: 44px;
   height: 44px;
   margin-right: 15px;
-    border-radius: 70px;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transform: translateZ(0);
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  border-radius: 70px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transform: translateZ(0);
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
-
-.button-end-call{
-  all: unset;
-  cursor: pointer;
-  width: 44px;
-  height: 44px;
-  margin-right: 15px;
-    border-radius: 70px;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transform: translateZ(0);
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-
-}
-.button-accept:hover{
+.button-accept:hover {
   transform: scale(1.08);
-  background-color:  green;
-
+  background-color: green;
 }
 
-.button-end-call:hover, .button-deny:hover{
+.button-end-call:hover,
+.button-deny:hover {
   transform: scale(1.08);
   background-color: #e52441;
 }
 
-.button-mic:hover, .button-camera:hover, .button-share:hover  {
+.button-mic:hover,
+.button-camera:hover,
+.button-share:hover {
   transform: scale(1.08);
 }
 
 .button-share.active {
-  background-color: #007bff; 
+  background-color: #007bff;
 }
 
-
-.mic-on, .mic-off, .camera-on, .camera-off {
+.mic-on,
+.mic-off,
+.camera-on,
+.camera-off {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.mic-on,.camera-on {
-  z-index: 1; 
+.mic-on,
+.camera-on {
+  z-index: 1;
 }
 
-.mic-off,.camera-off {
+.mic-off,
+.camera-off {
   position: absolute;
   inset: 0;
-  z-index: 2; 
+  z-index: 2;
   opacity: 0;
 }
 
-
-.mic-on, .mic-off, .camera-on, .camera-off svg {
+.mic-on,
+.mic-off,
+.camera-on,
+.camera-off svg {
   color: #fff;
 }
-.button-mic.active, .button-camera.active {
-  background-color: red; 
+.button-mic.active,
+.button-camera.active {
+  background-color: red;
 }
 
-.button-mic.active .mic-off, .button-camera.active .camera-off {
-  opacity: 1; 
+.button-mic.active .mic-off,
+.button-camera.active .camera-off {
+  opacity: 1;
 }
 
-.button-mic.active .mic-on, .button-camera.active .camera-on {
-  opacity: 0; 
+.button-mic.active .mic-on,
+.button-camera.active .camera-on {
+  opacity: 0;
 }
 
-.button-mic:active, .button-camera:active {
+.button-mic:active,
+.button-camera:active {
   transform: scale(1.2);
 }
 
-
-.button-mic.active svg, .button-camera.active svg, .button-end-call.active svg {
+.button-mic.active svg,
+.button-camera.active svg,
+.button-end-call.active svg {
   fill: #fff;
 }
 

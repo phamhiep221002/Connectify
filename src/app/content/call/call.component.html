@@ -1,10 +1,10 @@
-
 <section class="call-container">
   <div class="fullscreen-media-container video overlay">
-    <video #remoteVideo autoplay></video>
+    <video #remoteVideo autoplay [ngClass]="{'hidden': false}"></video>
+    <video class="hidden" #otherScreenVideo autoplay [ngClass]="{'hidden': !isScreenSharing}"></video>
     <div class="overlay-content-container">
       <div class="partner-text-container">
-        <span class="name">Lisa</span>
+        <span class="name">Lisa</span> <!--Nhớ thay tên ở đây nha Hiệp-->
       </div>
       <div class="ui-container">
         <div class="navigation-controls-container" *ngIf="!showIncomingCallButtons">
@@ -44,21 +44,22 @@
       </div>
       <div class="cam-container remote-cam">
         <div class="remote-video">
-          <video #localVideo autoplay muted></video>
+          <video #localVideo autoplay muted [ngClass]="{'hidden': isScreenSharing}"></video>
+          <video #screenVideo autoplay muted [ngClass]="{'hidden': !isScreenSharing}"></video>
         </div>
         <div class="content">
           <span class="name">You</span>
         </div>
       </div>
     </div>
-    <div class="screen-video" >
+    <!-- <div class="screen-video" >
       <video class="hidden" #screenVideo autoplay muted></video>
     </div>
     <div class="other-screen-video">
       <video class="hidden" #otherScreenVideo autoplay></video>
-    </div>
+    </div> -->
   </div>
-  
+</section>
   
    <!-- <div class="remote-video">
     <video #remoteVideo autoplay></video>
@@ -82,7 +83,7 @@
     <button (click)="stopScreenSharing()">Stop Share Screen</button>
   </div> -->
   
-</section>
+
 
 <!-- <section class="call-container">
   <div class="fullscreen-media-container video overlay">

@@ -183,7 +183,7 @@ export class CallComponent implements OnInit, OnDestroy {
     const screenStream = await this.getScreenStream();
     this.isScreenSharing = true;
     if (screenStream) {
-      this.isScreenSharing = true;
+      this.hideScreenShare();
       this.screenVideo.nativeElement.classList.remove('hidden');  // Chỉ định màn hình chia sẻ của A hiển thị ở screenVideo
       if (this.myPeer && this.otherPeerId) {
         const call = this.myPeer.call(this.otherPeerId, screenStream);
@@ -210,6 +210,9 @@ export class CallComponent implements OnInit, OnDestroy {
   hideScreenShare() {
     this.screenVideo.nativeElement.classList.add('hidden');
   }
+  showVideoCall() {
+    this.screenVideo.nativeElement.classList.remove('hidden');
+  }
   async stopScreenSharing() {
     const screenStream = this.screenVideo.nativeElement.srcObject as MediaStream;
     this.isScreenSharing = false;
@@ -220,7 +223,7 @@ export class CallComponent implements OnInit, OnDestroy {
       });
     }
     this.callUser();
-    this.hideScreenShare();
+    this.showVideoCall();
     const createCallDto = this.createCallDto();
     this.callService.updateScreen(createCallDto);
   }
