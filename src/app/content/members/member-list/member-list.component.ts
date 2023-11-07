@@ -53,13 +53,22 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
     this.ageRangeSliderValue = [this.userParams!.minAge, this.userParams!.maxAge];
     this.distanceSliderValue = this.userParams!.distance;
   
-    this.locationService.checkLocation(() => {
-      this.loadMembers();
-  });
+    this.locationService.checkLocation();
   }
 
     ngOnInit() {
-      //this.loadMembers();
+      this.locationService.getCurrentLocation().subscribe(
+        (coords) => {
+          if (this.userParams) {
+            this.userParams.currentLatitude = coords.latitude;
+            this.userParams.currentLongitude = coords.longitude;
+            this.loadMembers();
+          }
+        },
+        (error) => {
+          console.error('Error getting current location:', error);
+        }
+      );
   }
   ngAfterViewChecked() {
     if (!this.map && this.mapElement && this.mapElement.nativeElement) {

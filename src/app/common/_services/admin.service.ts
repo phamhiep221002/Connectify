@@ -5,7 +5,7 @@ import { User } from '../_models/user';
 import { Genders } from '../_models/gender';
 import { LookingForsDto } from '../_models/lookingForsDto';
 import { InterestsDto } from '../_models/interestsDto';
-import { Terms } from '../_models/term';
+import { Term, Terms } from '../_models/term';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -82,22 +82,23 @@ export class AdminService {
   getAllTermList(): Observable<Terms[]>  {
     return this.http.get<Terms[]>(this.baseUrl + 'TermLists');
   }
-  getAllTerm(listId: string) {
-    return this.http.get(this.baseUrl + 'TermLists/' + listId);
+  getAllTerm(listId: number) {
+    return this.http.get<Term[]>(this.baseUrl + 'TermLists/' + listId);
   }
-  createTermList(listId: string, term: string) {
+  createTermList(name: string, description: string) {
+    const body = { name: name, description: description };
+    return this.http.post(this.baseUrl + 'TermLists', body, { responseType: 'text' as 'json' });
+  }
+  addTerm(listId: number, term: string) {
     return this.http.post(this.baseUrl + 'TermLists/' + listId, term, { responseType: 'text' as 'json' });
   }
-  addTerm(listId: string, term: string) {
-    return this.http.post(this.baseUrl + 'TermLists/' + listId, term, { responseType: 'text' as 'json' });
-  }
-  deleteTerm(listId: string, term: string) {
+  deleteTerm(listId: number, term: string) {
     return this.http.delete(this.baseUrl + 'TermLists/DeleteTerm/' + listId + '/' + term, { responseType: 'text' as 'json' });
   }
-  deleteTermList(listId: string) {
+  deleteTermList(listId: number) {
     return this.http.delete(this.baseUrl + 'TermLists/' + listId, { responseType: 'text' as 'json' });
   }
-  refereshIndex(listId: string) {
+  refereshIndex(listId: number) {
     return this.http.put(this.baseUrl + 'TermLists/' + listId, { responseType: 'text' as 'json' });
 }
 }

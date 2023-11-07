@@ -49,6 +49,7 @@ import { AccountDisableAccountComponent } from './account-settings/account-disab
 import { EndCallComponent } from './call/end-call/end-call.component';
 import { UserMessagesComponent } from './messages/user-messages/user-messages.component';
 import { TermManagementComponent } from './admin/term-management/term-management.component';
+import { TermComponent } from './admin/term-management/term/term.component';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import { TermManagementComponent } from './admin/term-management/term-management
     EndCallComponent,
     UserMessagesComponent,
     TermManagementComponent,
+    TermComponent
   ],
   imports: [
     BrowserAnimationsModule,

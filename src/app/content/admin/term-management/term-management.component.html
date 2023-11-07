@@ -1,8 +1,36 @@
-<div *ngFor="let term of termList">
-    <h1>{{term.Id}}</h1>
-    <br>
-    <h1>{{term.Name}}</h1>
-    <br>
-    <h1>{{term.Description}}</h1>
-</div>
-
+<h2>Term List Table</h2>
+<button (click)="openModal(createTermListTemplate)">Create new Term List</button>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let terms of termList">
+    <td>{{terms.Id}}</td>
+    <td>{{terms.Name}}</td>
+    <td>{{terms.Description}}</td>
+    <td><button (click)="onDelete(terms.Id)">Delete</button></td>
+    <td><button (click)="openModal(TermTemplate)">Term</button></td>
+  </tr>
+</table>
+<ng-template #createTermListTemplate>
+  <div class="modal-body">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+    <form class="form" [formGroup]="createForm" (ngSubmit)="createTermList()">
+      <div class="form-group">
+        <label for="createName">Name</label>
+        <input type="text" id="createName" class="form-control" formControlName="name" required>
+      </div>
+      <button type="submit" class="form-create-btn">Create</button>
+    </form>
+  </div>
+</ng-template>
+<ng-template #TermTemplate>
+  <div class="modal-body" *ngFor="let terms of termList">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+   <app-term [listId]="terms.Id"></app-term>
+  </div>
+</ng-template>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LocationDto } from '../_models/locationDto';
 import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class LocationService{
   getLocation(locationDto: LocationDto): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}users/update-location`, locationDto);
   }
-  checkLocation(callback: Function): void {
+  checkLocation(): void {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -38,7 +38,7 @@ export class LocationService{
           .subscribe((data: any) => {
             if (data.results.length > 0) {
               this.locationName = data.results[0].components.city || data.results[0].components.city_district;
-              this.updateLocation(latitude, longitude, this.locationName, callback);
+              this.updateLocation(latitude, longitude, this.locationName);
             } else {
               this.locationName = 'City not found';
               this.toastr.error(this.locationName);
@@ -62,12 +62,11 @@ export class LocationService{
       this.locationPermissionGranted = false;
     }
   }
-  updateLocation(latitude: number, longitude: number, locationName: string, callback: Function): void {
+  updateLocation(latitude: number, longitude: number, locationName: string): void {
     const locationDto = { latitude: latitude, longitude: longitude, locationName: locationName };
     this.getLocation(locationDto).subscribe(
       (next) => {
         this.router.navigateByUrl('/');
-        callback();  // Thêm dòng này
       },
       (error) => {
         this.router.navigateByUrl('/');
@@ -77,5 +76,29 @@ export class LocationService{
   
   isLocationPermissionGranted(): boolean {
     return this.locationPermissionGranted;
+  }
+
+  getCurrentLocation(): Observable<{ latitude: number, longitude: number }> {
+    let locationSubject = new Subject<{ latitude: number, longitude: number }>();
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          locationSubject.next({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          });
+        },
+        (error) => {
+          this.toastr.error('Failed to get location. Please manually share your location.', 'Error');
+          locationSubject.error('Failed to get location');
+        }
+      );
+    } else {
+      this.toastr.error('Your browser does not support Geolocation API. Please manually share your location.', 'Error');
+      locationSubject.error('Geolocation API not supported');
+    }
+
+    return locationSubject.asObservable();
   }
 }
