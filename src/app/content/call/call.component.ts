@@ -24,6 +24,7 @@ export class CallComponent implements OnInit, OnDestroy {
   @ViewChild('remoteVideo') remoteVideo!: ElementRef;
   @ViewChild('screenVideo') screenVideo!: ElementRef;
   @ViewChild('otherScreenVideo') otherScreenVideo!: ElementRef;
+  @ViewChild('incomingCallModal') incomingCallModal!: ElementRef;
   currentCameraStream: MediaStream | undefined;
   showIncomingCallButtons: boolean = false;
   otherPeerId: any;

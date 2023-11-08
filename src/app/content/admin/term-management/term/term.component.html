@@ -1,5 +1,30 @@
-<div *ngFor="let term of term">
-    <p>
-        {{term.Term}}
-    </p>
+<div class="add-term-form">
+  <form (ngSubmit)="addTerm(newTerm)">
+    <div class="form-group">
+      <label for="newTerm">New Term:</label>
+      <input type="text" class="form-control" id="newTerm" [(ngModel)]="newTerm" name="newTerm" required>
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+  <button (click)="refereshIndex(listId)" class="btn btn-success">Refersh Change</button>
+</div>
+
+
+<div class="table-responsive">
+  <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+          <tr>
+              <th class="text-center" style="width: 50%;">Term Name</th>
+              <th class="text-center">Edit</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let termItem of term">
+              <td class="text-center">{{ termItem.Term }}</td>
+              <td class="text-center">
+                <button class="btn btn-danger" (click)="deleteTerm(termItem.Term)"><i class="fa fa-trash-o"></i></button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>

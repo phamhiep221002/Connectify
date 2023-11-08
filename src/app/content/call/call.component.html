@@ -1,28 +1,30 @@
 <div class="call-container">
-  <div class="local-video">
-    <video #localVideo autoplay muted></video>
+  <div >
+    <div class="local-video">
+      <video #localVideo autoplay muted></video>
+    </div>
+    <div class="remote-video">
+      <video #remoteVideo autoplay></video>
+    </div>
+    <div class="screen-video">
+      <video class="hidden" #screenVideo autoplay muted></video>
+    </div>
+    <div class="other-screen-video">
+      <video class="hidden" #otherScreenVideo autoplay></video>
+    </div>
+    <div class="controls" *ngIf="!showIncomingCallButtons">
+      <button (click)="enableOrDisableVideo()" [ngClass]="{'camera-on': enableVideo, 'camera-off': !enableVideo}">
+        {{ enableVideo ? 'Camera On' : 'Camera Off' }}
+      </button>
+      <button (click)="enableOrDisableAudio()" [ngClass]="{'micro-on': enableAudio, 'micro-off': !enableAudio}">
+        {{ enableAudio ? 'Micro On' : 'Micro Off' }}
+      </button>
+      <button (click)="endCall()">End Call</button>
+      <button (click)="shareScreen()">Share Screen</button>
+      <button (click)="stopScreenSharing()">Stop Share Screen</button>
+    </div>
   </div>
-  <div class="remote-video">
-    <video #remoteVideo autoplay></video>
-  </div>
-  <div class="screen-video">
-    <video class="hidden" #screenVideo autoplay muted></video>
-  </div>
-  <div class="other-screen-video">
-    <video class="hidden" #otherScreenVideo autoplay></video>
-  </div>
-  <div class="controls">
-    <button (click)="enableOrDisableVideo()" [ngClass]="{'camera-on': enableVideo, 'camera-off': !enableVideo}">
-      {{ enableVideo ? 'Camera On' : 'Camera Off' }}
-    </button>
-    <button (click)="enableOrDisableAudio()" [ngClass]="{'micro-on': enableAudio, 'micro-off': !enableAudio}">
-      {{ enableAudio ? 'Micro On' : 'Micro Off' }}
-    </button>
 
-    <button (click)="endCall()">End Call</button>
-    <button (click)="shareScreen()">Share Screen</button>
-    <button (click)="stopScreenSharing()">Stop Share Screen</button>
-  </div>
   <div *ngIf="showIncomingCallButtons" class="incoming-call-controls">
     <button (click)="acceptIncomingCall()">Accept</button>
     <button (click)="denyIncomingCall()">Deny</button>

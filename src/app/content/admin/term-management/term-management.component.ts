@@ -23,7 +23,6 @@ export class TermManagementComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTermList();
     this.initializeCreateForm();
-    this.initializeTermForm();
   }
   getAllTermList() {
     this.adminService.getAllTermList().subscribe(response => {
@@ -55,10 +54,13 @@ export class TermManagementComponent implements OnInit {
         description: this.createForm.get('description')!.value
       };
       this.adminService.createTermList(newTerm.name, newTerm.description).subscribe({
-        next: (response) => {
+        next: (response: Terms) => {
           this.toastr.success('Term List created successfully');
-          const term = response as Terms;
-          this.termList?.push(term);
+          // Đợi 2 giây sau đó gọi lại getAllTermList
+          setTimeout(() => {
+            this.getAllTermList();
+          }, 1500);
+          this.termList?.push(response);
           this.createForm.reset();
           this.closeModal();
         },
@@ -71,6 +73,7 @@ export class TermManagementComponent implements OnInit {
       this.toastr.error('Please fill in all required fields');
     }
   }
+  
 
   onDelete(listId: number) {
     this.adminService.deleteTermList(listId).subscribe(response => {
@@ -78,11 +81,6 @@ export class TermManagementComponent implements OnInit {
       this.toastr.success('Deleted successfully!');
     }, error => {
       this.toastr.error(error);
-    });
-  }
-  getAllTerm(listId: number) {  
-    this.adminService.getAllTerm(listId).subscribe(response => {
-      console.log(response);
     });
   }
 }

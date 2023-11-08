@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
@@ -16,18 +16,18 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  getUsersWithRoles(){
+  getUsersWithRoles() {
     return this.http.get<User[]>(this.baseUrl + 'admin/users-with-roles');
   }
 
   updateUserRoles(username: string, roles: string[]) {
-    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' 
+    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/'
       + username + '?roles=' + roles, {});
   }
   blockUser(username: string) {
     return this.http.put(this.baseUrl + 'admin/block/' + username, { responseType: 'text' as 'json' });
   }
-  
+
   unblockUser(username: string) {
     return this.http.put(this.baseUrl + 'admin/unblock/' + username, { responseType: 'text' as 'json' });
   }
@@ -79,26 +79,45 @@ export class AdminService {
   createInterest(interest: InterestsDto) {
     return this.http.post(this.baseUrl + 'interest', interest, { responseType: 'text' as 'json' });
   }
-  getAllTermList(): Observable<Terms[]>  {
+  getAllTermList(): Observable<Terms[]> {
     return this.http.get<Terms[]>(this.baseUrl + 'TermLists');
   }
-  getAllTerm(listId: number) {
-    return this.http.get<Term[]>(this.baseUrl + 'TermLists/' + listId);
+  getAllTerm(listId: number): Observable<any> {
+    return this.http.get<Term[]>(this.baseUrl + 'TermLists/' + listId).pipe();
   }
-  createTermList(name: string, description: string) {
+  createTermList(name: string, description: string) : Observable<Terms>  {
     const body = { name: name, description: description };
-    return this.http.post(this.baseUrl + 'TermLists', body, { responseType: 'text' as 'json' });
-  }
-  addTerm(listId: number, term: string) {
-    return this.http.post(this.baseUrl + 'TermLists/' + listId, term, { responseType: 'text' as 'json' });
+    return this.http.post<Terms>(this.baseUrl + 'TermLists', body, { responseType: 'text' as 'json' });
   }
   deleteTerm(listId: number, term: string) {
-    return this.http.delete(this.baseUrl + 'TermLists/DeleteTerm/' + listId + '/' + term, { responseType: 'text' as 'json' });
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        term: term
+      }
+    };
+
+    return this.http.delete(`${this.baseUrl}TermLists/DeleteTerm/${listId}`, options);
   }
+  addTerm(listId: number, term: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+  
+    const body = {
+      term: term
+    };
+  
+    return this.http.post(`${this.baseUrl}TermLists/AddTerm/${listId}`, body, { headers: headers });
+  }
+  
+
   deleteTermList(listId: number) {
     return this.http.delete(this.baseUrl + 'TermLists/' + listId, { responseType: 'text' as 'json' });
   }
   refereshIndex(listId: number) {
     return this.http.put(this.baseUrl + 'TermLists/' + listId, { responseType: 'text' as 'json' });
-}
+  }
 }
