@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AccountService } from '../common/_services/account.service';
 import { LocationService } from '../common/_services/location.service';
 import { User } from '../common/_models/user';
@@ -18,9 +18,18 @@ export class AppComponent implements OnInit{
   latitude: number | undefined;
   longitude: number | undefined;
   foundCity: string | undefined;
+  showNav: boolean = true;
   accessDenied: boolean = false;
 
-  constructor (private accountService: AccountService ){}
+  constructor (private accountService: AccountService, private router: Router ){
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Cập nhật cờ dựa trên route
+        this.showNav = !event.url.includes('call');
+        this.showNav = !event.url.includes('messages');
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.setCurrentUser();
