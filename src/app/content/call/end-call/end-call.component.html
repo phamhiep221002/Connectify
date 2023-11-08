@@ -1,19 +1,21 @@
 <!-- <button (click)="onClick()">Close</button> -->
 <div class="call-ended-container">
-    <div class="call-ended">
-      <div class="call-ended-icon">
-        <img src=""  alt="Call Ended"> <!--Nhớ thêm hình đây nha Hiệp-->
-      </div>
-      <div class="call-ended-message">
-        <h2>Call Ended</h2>
-      </div>
-      <div class="call-ended-duration">
-        <span>Time duration: 00:05:20</span>
-      </div>
-      <button class="call-ended-close-button" (click)="onClick()">
-        <span class="X"></span>
-        <span class="Y"></span>
-        <div class="close">Close</div>
-      </button>
+  <div class="call-ended">
+    <div class="call-ended-icon">
+      <img src="{{
+          member.photoUrl || './assets/user.png'
+        }}" alt="Call Ended" /> <!--Nhớ thêm hình đây nha Hiệp-->
     </div>
+    <div class="call-ended-message">
+      <h2>Call Ended</h2>
+    </div>
+    <div class="call-ended-duration">
+      <span>Time duration: 00:05:20</span>
+    </div>
+    <button class="call-ended-close-button" (click)="onClick()">
+      <span class="X"></span>
+      <span class="Y"></span>
+      <div class="close">Close</div>
+    </button>
   </div>
+</div>

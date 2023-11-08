@@ -27,6 +27,7 @@ export class AppComponent implements OnInit{
         // Cập nhật cờ dựa trên route
         this.showNav = !event.url.includes('call');
         this.showNav = !event.url.includes('messages');
+        this.showNav = !event.url.includes('end-call');
       }
     });
   }

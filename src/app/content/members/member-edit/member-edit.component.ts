@@ -110,8 +110,6 @@ export class MemberEditComponent implements OnInit {
       error: error => {
         if (error.statusCode === 500) {
           this.toastr.error('There was an error updating your introduction. Please try again later.');
-        } else {
-          this.toastr.error(error);
         }
       }
     })

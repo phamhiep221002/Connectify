@@ -183,7 +183,7 @@
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Connected user
                       </h5>
-      
+
                       <div class="chat-message-list" *ngFor="let member of members">
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                           <li id="contact-id-1" data-name="favorite" class="active">
@@ -227,126 +227,127 @@
         </div>
       </div>
       <!-- Sửa ở đây nè Phúc Anh-->
-      
+
     </div>
   </div>
   <div class="user-chat w-100 overflow-hidden">
     <div class="chat-content d-lg-flex">
-    <!-- start chat conversation section -->
-    <div class="w-100 overflow-hidden position-relative">
-      <!-- conversation user -->
-      <div id="users-chat" class="position-relative" style="display: block">
-        <div class="py-3 user-chat-topbar">
-          <div class="row align-items-center">
-            <div class="col-sm-4 col-8">
-              <div class="d-flex align-items-center">
-                <div class="flex-shrink-0 d-block d-lg-none me-3">
-                  <a href="javascript: void(0);" class="btn-primary user-chat-remove fs-18 p-1"><i
-                      class="fa fa-chevron-left align-middle"></i></a>
-                </div>
-                <div class="flex-grow-1 overflow-hidden">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
-                      <img src="{{member.photoUrl || './assets/user.png'}}" class="rounded-circle avatar-sm"
-                        alt="image of user" />
-                      <span class="user-status"></span>
-                    </div>
-                    <div class="flex-grow-1 overflow-hidden">
-                      <h6 class="text-truncate mb-0 fs-18">
-                        <a style="text-decoration: none" class="user-profile-show text-reset">
-                          {{member.knownAs}}</a>
-                      </h6>
-                      <p class="text-truncate text-muted mb-0"
-                        *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
-                        <small>Online</small>
-                      </p>
+      <!-- start chat conversation section -->
+      <div class="w-100 overflow-hidden position-relative">
+        <!-- conversation user -->
+        <div id="users-chat" class="position-relative" style="display: block">
+          <div class="py-3 user-chat-topbar">
+            <div class="row align-items-center">
+              <div class="col-sm-4 col-8">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0 d-block d-lg-none me-3">
+                    <a href="javascript: void(0);" class="btn-primary user-chat-remove fs-18 p-1"><i
+                        class="fa fa-chevron-left align-middle"></i></a>
+                  </div>
+                  <div class="flex-grow-1 overflow-hidden">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
+                        <img src="{{member.photoUrl || './assets/user.png'}}" class="rounded-circle avatar-sm"
+                          alt="image of user" />
+                        <span class="user-status"></span>
+                      </div>
+                      <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="text-truncate mb-0 fs-18">
+                          <a style="text-decoration: none" class="user-profile-show text-reset">
+                            {{member.knownAs}}</a>
+                        </h6>
+                        <p class="text-truncate text-muted mb-0"
+                          *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                          <small>Online</small>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-8 col-4">
-              <ul class="list-inline user-chat-nav text-end mb-0">
-                <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                  <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target=".audiocallModal"
-                    (click)="callOpen()">
-                    <i class="fa fa-phone"></i>
-                  </button>
-                </li>
+              <div class="col-sm-8 col-4">
+                <ul class="list-inline user-chat-nav text-end mb-0">
+                  <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target=".audiocallModal"
+                      (click)="callOpen()">
+                      <i class="fa fa-phone"></i>
+                    </button>
+                  </li>
 
-                <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                  <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target=".videocallModal"
-                    (click)="callOpen()">
-                    <i class="fa fa-video-camera"></i>
-                  </button>
-                </li>
-              </ul>
+                  <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target=".videocallModal"
+                      (click)="callOpen()">
+                      <i class="fa fa-video-camera"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- end chat user head -->
+          <!-- end chat user head -->
 
-        <!-- start chat conversation -->
+          <!-- start chat conversation -->
 
-        <div class="chat-conversation p-3 p-lg-4" id="chat-conversation" data-simplebar="init">
-          <div class="simplebar-wrapper" style="margin: -24px">
-            <div class="simplebar-height-auto-observer-wrapper">
-              <div class="simplebar-height-auto-observer"></div>
-            </div>
-            <div class="simplebar-mask">
-              <div class="simplebar-offset" style="right: 0px; bottom: 0px">
-                <div #scrollMe class="simplebar-content-wrapper" (scroll)="onScroll($event)"
-                  style="overflow-x: hidden; overflow-y: scroll; height: 535px">
+          <div class="chat-conversation p-3 p-lg-4" id="chat-conversation" data-simplebar="init">
+            <div class="simplebar-wrapper" style="margin: -24px">
+              <div class="simplebar-height-auto-observer-wrapper">
+                <div class="simplebar-height-auto-observer"></div>
+              </div>
+              <div class="simplebar-mask">
+                <div class="simplebar-offset" style="right: 0px; bottom: 0px">
+                  <div #scrollMe class="simplebar-content-wrapper" (scroll)="onScroll($event)"
+                    style="overflow-x: hidden; overflow-y: scroll; height: 535px">
 
-                  <div class="simplebar-content" style="padding: 24px">
-                    <ul class="list-unstyled chat-conversation-list" id="users-conversation">
-                      <li *ngFor="let message of (messageService.messageThread$ | async)"
-                        [ngClass]="{'chat-list left': message.senderUsername === username, 'chat-list right': message.senderUsername !== username}">
-                        <div class="conversation-list">
-                          <div class="chat-avatar" *ngIf="message.senderUsername === username">
-                            <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="" />
-                          </div>
-                          <div class="user-chat-content">
-                            <div class="ctext-wrap">
-                              <div class="ctext-wrap-content" (mouseenter)="toggleMessageBox(true)"
-                                (mouseleave)="toggleMessageBox(false)">
-                                <div class="message" *ngIf="message.messageType === 'Image'">
-                                  <img [src]="message.content" width="500" loading="lazy" />
-                                </div>
-                                <div class="message" *ngIf="message.messageType === 'Video'">
-                                  <video controls [src]="message.content" width="500" loading="lazy"></video>
-                                </div>
-                                <div class="message" *ngIf="message.messageType === 'Location'">
-                                  <div class="mapper">
-                                    <img [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
-                                      width="500">
-                                    <div class="resize-btn-group">
-                                      <button class="resize" (click)="increaseZoom()">+</button>
-                                      <button class="resize" (click)="decreaseZoom()">-</button>
+                    <div class="simplebar-content" style="padding: 24px">
+                      <ul class="list-unstyled chat-conversation-list" id="users-conversation">
+                        <li *ngFor="let message of (messageService.messageThread$ | async)"
+                          [ngClass]="{'chat-list left': message.senderUsername === username, 'chat-list right': message.senderUsername !== username}">
+                          <div class="conversation-list">
+                            <div class="chat-avatar" *ngIf="message.senderUsername === username">
+                              <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="" />
+                            </div>
+                            <div class="user-chat-content">
+                              <div class="ctext-wrap">
+                                <div class="ctext-wrap-content" (mouseenter)="toggleMessageBox(true)"
+                                  (mouseleave)="toggleMessageBox(false)">
+                                  <div class="message" *ngIf="message.messageType === 'Image'">
+                                    <img [src]="message.content" width="500" loading="lazy" />
+                                  </div>
+                                  <div class="message" *ngIf="message.messageType === 'Video'">
+                                    <video controls [src]="message.content" width="500" loading="lazy"></video>
+                                  </div>
+                                  <div class="message" *ngIf="message.messageType === 'Location'">
+                                    <div class="mapper">
+                                      <img
+                                        [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
+                                        width="500">
+                                      <div class="resize-btn-group">
+                                        <button class="resize" (click)="increaseZoom()">+</button>
+                                        <button class="resize" (click)="decreaseZoom()">-</button>
+                                      </div>
                                     </div>
                                   </div>
+                                  <div class="message" *ngIf="message.messageType === 'File'">
+                                    <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
+                                  </div>
+                                  <div class="message" *ngIf="message.messageType === 'Audio'">
+                                    <audio controls [src]="message.content">
+                                    </audio>
+                                  </div>
+                                  <div class="message"
+                                    *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
+                                    <p class="mb-0 ctext-content" (click)="selectMessage(message.id)">
+                                      {{message.content}}
+                                    </p>
+                                  </div>
                                 </div>
-                                <div class="message" *ngIf="message.messageType === 'File'">
-                                  <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
-                                </div>
-                                <div class="message" *ngIf="message.messageType === 'Audio'">
-                                  <audio controls [src]="message.content">
-                                  </audio>
-                                </div>
-                                <div class="message"
-                                  *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
-                                  <p class="mb-0 ctext-content" (click)="selectMessage(message.id)">
-                                    {{message.content}}
-                                  </p>
-                                </div>
-                              </div>
-                              <div *ngIf="isMessageBoxVisible" class="align-self-start message-box-drop d-flex">
-                                <div class="dropdown message-box-dropdown">
-                                  <a (click)="toggleMessageMenu()" role="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-h"></i>
-                                  </a>
-                                  <div *ngIf="isMessageMenuVisible" class="dropdown-menu show" style="
+                                <div *ngIf="isMessageBoxVisible" class="align-self-start message-box-drop d-flex">
+                                  <div class="dropdown message-box-dropdown">
+                                    <a (click)="toggleMessageMenu()" role="button" data-bs-toggle="dropdown"
+                                      aria-haspopup="true" aria-expanded="false">
+                                      <i class="fa fa-ellipsis-h"></i>
+                                    </a>
+                                    <div *ngIf="isMessageMenuVisible" class="dropdown-menu show" style="
                                   position: absolute;
                                   inset: 0px auto auto 0px;
                                   margin: 0px;
@@ -356,7 +357,7 @@
                                     0px
                                   );
                                 " data-popper-placement="bottom-start">
-                                    <!-- <a class="dropdown-item d-flex align-items-center justify-content-between reply-message"
+                                      <!-- <a class="dropdown-item d-flex align-items-center justify-content-between reply-message"
                                         href="#" id="reply-message-0" data-bs-toggle="collapse"
                                         data-bs-target=".replyCollapse">Reply
                                         <i class="fa fa-share ms-2 text-muted"></i></a>
@@ -366,172 +367,174 @@
                                       <a class="dropdown-item d-flex align-items-center justify-content-between copy-message"
                                         href="#" id="copy-message-0">Copy
                                         <i class="fa fa-clone text-muted ms-2"></i></a>-->
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                                      (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Remove for
-                                      you
-                                      <i class="fa fa-trash-o text-muted ms-2"></i></a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between"
-                                      (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend
-                                      <i class="fa fa-undo text-muted ms-2"></i></a>
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between delete-item"
+                                        (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Remove
+                                        for
+                                        you
+                                        <i class="fa fa-trash-o text-muted ms-2"></i></a>
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between"
+                                        (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend
+                                        <i class="fa fa-undo text-muted ms-2"></i></a>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="conversation-name">
-                              <small class="text-muted">
-                                <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
-                                <span class="text-danger" *ngIf="!message.dateRead 
+                              <div class="conversation-name">
+                                <small class="text-muted">
+                                  <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                                  <span class="text-danger" *ngIf="!message.dateRead 
                                                       && message.senderUsername !== username">(unread)</span>
-                                <span class="text-success check-message-icon" *ngIf="message.dateRead 
+                                  <span class="text-success check-message-icon" *ngIf="message.dateRead 
                                                       && message.senderUsername !== username"><i
-                                    class="fa fa-check-circle"></i></span>
-                              </small>
+                                      class="fa fa-check-circle"></i></span>
+                                </small>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </li>
-                    </ul>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="simplebar-placeholder" style="width: auto; height: 1199px"></div>
           </div>
-          <div class="simplebar-placeholder" style="width: auto; height: 1199px"></div>
-        </div>
-        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden">
-          <div class="simplebar-scrollbar" style="
+          <div class="simplebar-track simplebar-horizontal" style="visibility: hidden">
+            <div class="simplebar-scrollbar" style="
                   width: 0px;
                   display: none;
                   transform: translate3d(0px, 0px, 0px);
                 "></div>
-        </div>
-        <div class="simplebar-track simplebar-vertical" style="visibility: visible">
-          <div class="simplebar-scrollbar" style="
+          </div>
+          <div class="simplebar-track simplebar-vertical" style="visibility: visible">
+            <div class="simplebar-scrollbar" style="
                   height: 337px;
                   display: block;
                   transform: translate3d(0px, 159px, 0px);
                 "></div>
+          </div>
         </div>
-      </div>
-      <!-- end chat conversation end -->
-      <!-- start chat input section -->
-      <div class="position-relative">
-        <div class="chat-input-section p-4 border-top">
-          <form id="chatinput-form" enctype="multipart/form-data" #messageForm="ngForm" autocomplete="off">
-            <div class="row g-0 align-items-center">
-              <div class="col-auto">
-                <div class="chat-input-links me-md-2">
-                  <div class="links-list-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
-                    aria-label="More" data-bs-original-title="More">
-                    <button (click)="toggleChatinputMoreMenu()" type="button"
-                      class="btn btn-link text-decoration-none btn-lg waves-effect collapsed" data-bs-toggle="collapse"
-                      data-bs-target="#chatinputmorecollapse" aria-expanded="false"
-                      aria-controls="chatinputmorecollapse">
-                      <i class="fa fa-ellipsis-h align-middle"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <form class="row g-0 align-items-center" #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()"
-                autocomplete="off">
-                <div class="col">
-                  <div class="position-relative">
-                    <div class="chat-input-feedback">
-                      Please Enter a Message
-                    </div>
-                    <input name="messageContent" required [(ngModel)]="messageContent" type="text"
-                      class="form-input input-sm" placeholder="Type a message..." />
-                  </div>
-                </div>
+        <!-- end chat conversation end -->
+        <!-- start chat input section -->
+        <div class="position-relative">
+          <div class="chat-input-section p-4 border-top">
+            <form id="chatinput-form" enctype="multipart/form-data" #messageForm="ngForm" autocomplete="off">
+              <div class="row g-0 align-items-center">
                 <div class="col-auto">
-                  <div class="chat-input-links ms-2 gap-md-1">
-                    <div class="links-list-item">
-                      <button class="sends" [disabled]="!messageForm.valid && !selectedFile" type="submit">
-                        <div class="svg-wrapper-1">
-                          <div class="svg-wrapper">
-                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M0 0h24v24H0z" fill="none"></path>
-                              <path
-                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                                fill="currentColor"></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <span><i *ngIf="loadingfile" class="fa fa-spinner fa-spin"></i></span>
+                  <div class="chat-input-links me-md-2">
+                    <div class="links-list-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                      data-bs-placement="top" aria-label="More" data-bs-original-title="More">
+                      <button (click)="toggleChatinputMoreMenu()" type="button"
+                        class="btn btn-link text-decoration-none btn-lg waves-effect collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#chatinputmorecollapse" aria-expanded="false"
+                        aria-controls="chatinputmorecollapse">
+                        <i class="fa fa-ellipsis-h align-middle"></i>
                       </button>
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
-          </form>
-          <div *ngIf="isChatinputMoreMenuVisible" class="dropup chat-input-collapse">
-            <div class="card mb-0">
-              <div class="card-body py-3">
-                <!-- Swiper -->
-                <div class="swiper chatinput-links">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <div class="text-center px-2 position-relative">
-                        <div>
-                          <input id="attachedfile-input" type="file" class="d-none" multiple=""
-                            (change)="onFileSelected($event)" />
-                          <label for="attachedfile-input" class="avatar-sm mx-auto stretched-link">
-                            <span class="avatar-title fs-18 rounded-circle">
-                              <i class="fa fa-paperclip"></i>
-                            </span>
-                          </label>
-                        </div>
-                        <h5 class="fs-11 text-uppercase mt-3 mb-0 text-body text-truncate">
-                          Attached
-                        </h5>
+                <form class="row g-0 align-items-center" #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()"
+                  autocomplete="off">
+                  <div class="col">
+                    <div class="position-relative">
+                      <div class="chat-input-feedback">
+                        Please Enter a Message
                       </div>
+                      <input name="messageContent" required [(ngModel)]="messageContent" type="text"
+                        class="form-input input-sm" placeholder="Type a message..." />
                     </div>
-                    <div class="swiper-slide">
-                      <div class="text-center px-2 position-relative">
-                        <div>
-                          <input id="galleryfile-input" type="file" class="d-none"
-                            accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg, .raw, .psd, .heic, .ai, .eps, .mp4, .avi, .mkv, .mov, .flv, .wmv, .m4v, .webm, .3gp, .mpeg, .mpg, .vob, .rm, .rmvb, .ts, .ogv, .swf"
-                            multiple (change)="onFileSelected($event)" />
-                          <label for="galleryfile-input" class="avatar-sm mx-auto stretched-link">
-                            <span class="avatar-title fs-18 rounded-circle">
-                              <i class="fa fa-file-image-o"></i>
-                            </span>
-                          </label>
-                        </div>
-                        <h5 class="fs-11 text-uppercase text-truncate mt-3 mb-0">
-                          Gallery
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="text-center px-2">
-                        <div>
-                          <input id="audiofile-input" type="file" class="d-none"
-                            accept=".mp3, .wav, .ogg, .m4a, .aac, .flac, .wma, .alac, .ac3, .amr, .dts, .ra, .mid, .midi, .ape, .aiff, .mka"
-                            multiple (change)="onFileSelected($event)" />
-                          <label for="audiofile-input" class="avatar-sm mx-auto stretched-link">
-                            <span class="avatar-title fs-18 rounded-circle">
-                              <i class="fa fa-headphones"></i>
-                            </span>
-                          </label>
-                        </div>
-                        <h5 class="fs-11 text-uppercase text-truncate mt-3 mb-0">
-                          Audio
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="text-center px-2">
-                        <div class="avatar-sm mx-auto">
-                          <div class="avatar-title fs-18 rounded-circle">
-                            <i class="fa fa-map-marker"></i>
+                  </div>
+                  <div class="col-auto">
+                    <div class="chat-input-links ms-2 gap-md-1">
+                      <div class="links-list-item">
+                        <button class="sends" [disabled]="!messageForm.valid && !selectedFile" type="submit">
+                          <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                  d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                  fill="currentColor"></path>
+                              </svg>
+                            </div>
                           </div>
+                          <span><i *ngIf="loadingfile" class="fa fa-spinner fa-spin"></i></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </form>
+            <div *ngIf="isChatinputMoreMenuVisible" class="dropup chat-input-collapse">
+              <div class="card mb-0">
+                <div class="card-body py-3">
+                  <!-- Swiper -->
+                  <div class="swiper chatinput-links">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="text-center px-2 position-relative">
+                          <div>
+                            <input id="attachedfile-input" type="file" class="d-none" multiple=""
+                              (change)="onFileSelected($event)" />
+                            <label for="attachedfile-input" class="avatar-sm mx-auto stretched-link">
+                              <span class="avatar-title fs-18 rounded-circle">
+                                <i class="fa fa-paperclip"></i>
+                              </span>
+                            </label>
+                          </div>
+                          <h5 class="fs-11 text-uppercase mt-3 mb-0 text-body text-truncate">
+                            Attached
+                          </h5>
                         </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="text-center px-2 position-relative">
+                          <div>
+                            <input id="galleryfile-input" type="file" class="d-none"
+                              accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .tif, .webp, .svg, .raw, .psd, .heic, .ai, .eps, .mp4, .avi, .mkv, .mov, .flv, .wmv, .m4v, .webm, .3gp, .mpeg, .mpg, .vob, .rm, .rmvb, .ts, .ogv, .swf"
+                              multiple (change)="onFileSelected($event)" />
+                            <label for="galleryfile-input" class="avatar-sm mx-auto stretched-link">
+                              <span class="avatar-title fs-18 rounded-circle">
+                                <i class="fa fa-file-image-o"></i>
+                              </span>
+                            </label>
+                          </div>
+                          <h5 class="fs-11 text-uppercase text-truncate mt-3 mb-0">
+                            Gallery
+                          </h5>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="text-center px-2">
+                          <div>
+                            <input id="audiofile-input" type="file" class="d-none"
+                              accept=".mp3, .wav, .ogg, .m4a, .aac, .flac, .wma, .alac, .ac3, .amr, .dts, .ra, .mid, .midi, .ape, .aiff, .mka"
+                              multiple (change)="onFileSelected($event)" />
+                            <label for="audiofile-input" class="avatar-sm mx-auto stretched-link">
+                              <span class="avatar-title fs-18 rounded-circle">
+                                <i class="fa fa-headphones"></i>
+                              </span>
+                            </label>
+                          </div>
+                          <h5 class="fs-11 text-uppercase text-truncate mt-3 mb-0">
+                            Audio
+                          </h5>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="text-center px-2">
+                          <div class="avatar-sm mx-auto">
+                            <div class="avatar-title fs-18 rounded-circle">
+                              <i class="fa fa-map-marker"></i>
+                            </div>
+                          </div>
 
-                        <h5 class="fs-11 text-uppercase text-truncate mt-3 mb-0">
-                          <a class="text-body stretched-link" (click)="sendLocationMessage()">Location</a>
-                        </h5>
+                          <h5 class="fs-11 text-uppercase text-truncate mt-3 mb-0">
+                            <a class="text-body stretched-link" (click)="sendLocationMessage()">Location</a>
+                          </h5>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -539,28 +542,27 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="replyCard">
-          <div class="card mb-0">
-            <div class="card-body py-3">
-              <div class="replymessage-block mb-0 d-flex align-items-start">
-                <div class="flex-grow-1">
-                  <h5 class="conversation-name"></h5>
-                  <p class="mb-0"></p>
-                </div>
-                <div class="flex-shrink-0">
-                  <button type="button" id="close_toggle" class="btn btn-sm btn-link mt-n2 me-n3 fs-18">
-                    <i class="fa fa-x align-middle"></i>
-                  </button>
+          <div class="replyCard">
+            <div class="card mb-0">
+              <div class="card-body py-3">
+                <div class="replymessage-block mb-0 d-flex align-items-start">
+                  <div class="flex-grow-1">
+                    <h5 class="conversation-name"></h5>
+                    <p class="mb-0"></p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <button type="button" id="close_toggle" class="btn btn-sm btn-link mt-n2 me-n3 fs-18">
+                      <i class="fa fa-x align-middle"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- end chat input section -->
       </div>
-      <!-- end chat input section -->
-    </div>
-    <!-- end chat conversation section -->
+      <!-- end chat conversation section -->
     </div>
     <!-- end user chat content -->
   </div>

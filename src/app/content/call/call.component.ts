@@ -24,6 +24,7 @@ export class CallComponent implements OnInit, OnDestroy {
   @ViewChild('remoteVideo') remoteVideo!: ElementRef;
   @ViewChild('screenVideo') screenVideo!: ElementRef;
   @ViewChild('otherScreenVideo') otherScreenVideo!: ElementRef;
+  @ViewChild('incomingCallModal') incomingCallModal!: ElementRef;
   currentCameraStream: MediaStream | undefined;
   showIncomingCallButtons: boolean = false;
   otherPeerId: any;
@@ -32,7 +33,7 @@ export class CallComponent implements OnInit, OnDestroy {
   autoDenyTimer: any;
   autoCallUserTimer: any;
   isOtherScreenSharing = false;
-
+  member: Member = {} as Member ;
   constructor(private accountService: AccountService, private callService: CallService, private route: ActivatedRoute, private router: Router) {
     this.accountService.currentUser$.subscribe(user => {
       if (user) {
@@ -48,6 +49,11 @@ export class CallComponent implements OnInit, OnDestroy {
         this.otherPeerId = usernameToCall;
       }
     });
+    this.route.data.subscribe({
+      next: data => {
+        this.member = data['member'];
+      }
+    })
 
     this.myPeer = new Peer(this.currentUser.username, {
       config: {
@@ -74,6 +80,7 @@ export class CallComponent implements OnInit, OnDestroy {
     this.callService.incomingCall$.subscribe(incoming => {
       this.showIncomingCallButtons = incoming;
     });
+    console.log(this.member);
   }
 
   async createLocalStream() {
