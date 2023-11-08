@@ -79,7 +79,8 @@
             <form>
               <div class="input-group search-panel mb-3">
                 <div class="InputContainer">
-                  <input placeholder="Search.." id="input" class="input" name="text" type="text" (input)="loadConnectedMessages()" [(ngModel)]="fullName"/>
+                  <input placeholder="Search.." id="input" class="input" name="text" type="text"
+                    (input)="loadConnectedMessages()" [(ngModel)]="fullName" />
                 </div>
               </div>
             </form>
@@ -92,7 +93,9 @@
               <div class="simplebar-mask">
                 <div class="simplebar-offset" style="right: 0px; bottom: 0px">
                   <div class="simplebar-content-wrapper" style="height: auto">
-                    <div #scrollConnectedMessage class="simplebar-content" style="padding: 0px"  (scroll)="onListUserMessageScroll($event)" style="overflow-x: hidden; overflow-y: scroll; height: 200px">
+                    <div #scrollConnectedMessage class="simplebar-content" style="padding: 0px"
+                      (scroll)="onListUserMessageScroll($event)"
+                      style="overflow-x: hidden; overflow-y: scroll; height: 200px">
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Latest messages
@@ -101,8 +104,7 @@
                       <div class="chat-message-list" *ngFor="let message of connectedMessage">
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                           <li id="contact-id-1" data-name="favorite" class="active">
-                            <a routerLink="/members/{{ message.userName }}" [queryParams]="{ tab: 'Messages' }"
-                              class="unread-msg-user">
+                            <a routerLink="/messages/{{ message.userName }}" class="unread-msg-user">
                               <div class="d-flex align-items-center">
                                 <div class="chat-user-img online align-self-center me-2 ms-0">
                                   <img src="{{
@@ -178,7 +180,9 @@
               <div class="simplebar-mask">
                 <div class="simplebar-offset" style="right: 0px; bottom: 0px">
                   <div class="simplebar-content-wrapper" style="height: auto">
-                    <div #scrollConnected class="simplebar-content" style="padding: 0px" (scroll)="onConnectedScroll($event)" style="overflow-x: hidden; overflow-y: scroll; height: 200px">
+                    <div #scrollConnected class="simplebar-content" style="padding: 0px"
+                      (scroll)="onConnectedScroll($event)"
+                      style="overflow-x: hidden; overflow-y: scroll; height: 200px">
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Connected user
@@ -187,8 +191,7 @@
                       <div class="chat-message-list" *ngFor="let member of members">
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                           <li id="contact-id-1" data-name="favorite" class="active">
-                            <a routerLink="/members/{{ member.userName }}" [queryParams]="{ tab: 'Messages' }"
-                              class="unread-msg-user">
+                            <a routerLink="/messages/{{ member.userName }}" class="unread-msg-user">
                               <div class="d-flex align-items-center">
                                 <div class="chat-user-img online align-self-center me-2 ms-0">
                                   <img src="{{

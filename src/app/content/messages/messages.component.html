@@ -110,8 +110,7 @@
                       <div class="chat-message-list" *ngFor="let message of connectedMessage">
                         <ul class="list-unstyled chat-list chat-user-list" id="favourite-users">
                           <li id="contact-id-1" data-name="favorite" class="active">
-                            <a routerLink="/members/{{ message.userName }}" [queryParams]="{ tab: 'Messages' }"
-                              class="unread-msg-user">
+                            <a routerLink="/messages/{{ message.userName }}" class="unread-msg-user">
                               <div class="d-flex align-items-center">
                                 <div class="chat-user-img online align-self-center me-2 ms-0">
                                   <img src="{{
