@@ -43,8 +43,8 @@ const routes: Routes = [
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
-      { path: 'call/:username', component: CallComponent, pathMatch: 'full' },
-      { path: 'end-call/:otherPeerId', component: EndCallComponent, pathMatch: 'full' },
+      { path: 'call/:username', component: CallComponent, pathMatch: 'full', resolve: { member: MemberDetailedResolver } },
+      { path: 'end-call/:username', component: EndCallComponent, pathMatch: 'full', resolve: { member: MemberDetailedResolver }  },
       { path: 'messages/:username', component: UserMessagesComponent, resolve: { member: MemberDetailedResolver } },
       { path: 'term/:Id', component: TermComponent, canActivate: [AdminGuard] },
 
