@@ -52,6 +52,8 @@ const routes: Routes = [
   },
   {
     path: 'account-settings',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     component: AccountSettingsComponent,
     children: [
       { path: '', redirectTo: 'general', pathMatch: 'full' },
