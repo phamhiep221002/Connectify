@@ -10,6 +10,7 @@ export class UserParams {
     distance = 100;
     currentLatitude!: number;
     currentLongitude!: number;
+    similarity = 2;
     constructor(user: User) {
         if (user.gender) {
             this.gender = user.gender;

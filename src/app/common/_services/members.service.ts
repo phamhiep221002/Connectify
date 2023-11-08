@@ -104,9 +104,19 @@ export class MembersService {
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'likes', params, this.http);
   }
-  getRecommendedMembers(_userParams: UserParams, pageNumber: number, pageSize: number) {
+  getRecommendedMembers(userParams: UserParams, pageNumber: number, pageSize: number) {
     let params = getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('minAge', userParams.minAge);
+    params = params.append('maxAge', userParams.maxAge);
+    params = params.append('gender', userParams.gender);
+    params = params.append('distance', userParams.distance);
+    params = params.append('similarity', userParams.similarity);
+    if (userParams.currentLatitude && userParams.currentLongitude != null) {
+      params = params.append('currentLatitude', userParams.currentLatitude);
+      params = params.append('currentLongitude', userParams.currentLongitude);
+    }
     return getPaginatedResult<Member[]>(this.baseUrl + 'users/recommended', params, this.http);
+    
   }
   getGender() {
     return this.http.get<any>(`${this.baseUrl}gender`);
