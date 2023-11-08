@@ -79,7 +79,7 @@
             <form>
               <div class="input-group search-panel mb-3">
                 <div class="InputContainer">
-                  <input placeholder="Search.." id="input" class="input" name="text" type="text" />
+                  <input placeholder="Search.." id="input" class="input" name="text" type="text" (input)="loadConnectedMessages()" [(ngModel)]="fullName"/>
                 </div>
               </div>
             </form>
@@ -92,7 +92,7 @@
               <div class="simplebar-mask">
                 <div class="simplebar-offset" style="right: 0px; bottom: 0px">
                   <div class="simplebar-content-wrapper" style="height: auto">
-                    <div class="simplebar-content" style="padding: 0px">
+                    <div #scrollConnectedMessage class="simplebar-content" style="padding: 0px"  (scroll)="onListUserMessageScroll($event)" style="overflow-x: hidden; overflow-y: scroll; height: 200px">
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Latest messages
@@ -166,7 +166,7 @@
             <div class="input-group search-panel mb-3">
               <div class="InputContainer">
                 <input placeholder="Search.." name="fullName" class="input" type="text" [(ngModel)]="search"
-                  (input)="loadLikes()" />
+                  (input)="loadSearchLikeConnected()" />
               </div>
             </div>
           </div>
@@ -178,7 +178,7 @@
               <div class="simplebar-mask">
                 <div class="simplebar-offset" style="right: 0px; bottom: 0px">
                   <div class="simplebar-content-wrapper" style="height: auto">
-                    <div class="simplebar-content" style="padding: 0px">
+                    <div #scrollConnected class="simplebar-content" style="padding: 0px" (scroll)="onConnectedScroll($event)" style="overflow-x: hidden; overflow-y: scroll; height: 200px">
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Connected user

@@ -21,6 +21,8 @@ import { environment } from 'src/environments/environment';
 export class UserMessagesComponent implements OnInit, OnDestroy {
   @HostListener('scroll', ['$event'])
   @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
+  @ViewChild('scrollConnected') private scrollableElementRef: ElementRef | undefined;
+  @ViewChild('scrollConnectedMessage') private scrollable: ElementRef | undefined;
   username?: string;
   messageContent = '';
   private currentScrollHeight = 0;
@@ -44,12 +46,15 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   isMessageBoxVisible = false;
   timeoutId: any;
   user!: User;
-  connectedMessage?: ConnectedMessage[];
+  connectedMessage: ConnectedMessage[]=[];
   pagination?: Pagination;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 50;
+  paginationListUserMessage?: Pagination;
+  pageNumberListUserMessage = 1;
+  pageSizeListUserMessage = 50;
   predicate = 'connected';
-  members: Member[] | undefined;
+  members: Member[] =[];
   search = '';
   fullName = '';
   lastMessageId?: number;
@@ -58,13 +63,13 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     this.messageService.messageThread$.subscribe(
       messages => {
         this.messages = messages;
+        this.loadConnectedMessages();
+        this.handleNewMessages();
         if (this.messages.length > 0) {
           // Sắp xếp mảng tin nhắn theo ID tăng dần và lấy ID đầu tiên làm lastMessageId
           this.lastMessageId = this.messages.map(message => message.id).sort((a, b) => a - b)[0];
           console.log(this.lastMessageId);
         }
-        this.handleNewMessages(); 
-        this.loadAllMessages();
       }
     );
     this.route.data.subscribe({
@@ -94,6 +99,30 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     this.loadLikes();
     this.loadMoreMessages();
   }
+  onConnectedScroll(event: any) {
+    const target = event.target;
+    const atBottom = target.scrollHeight - target.scrollTop >= target.clientHeight;
+
+    // Kiểm tra xem người dùng đã cuộn đến cuối danh sách chưa
+    if (atBottom && !this.loading && (this.pagination && this.pageNumber < this.pagination.totalPages)) {
+
+      this.pageNumber++;
+      this.loadLikes();
+    }
+  }
+
+  onListUserMessageScroll(event: any) {
+    const target = event.target;
+    const atBottom = target.scrollHeight - target.scrollTop >= target.clientHeight - 100;
+
+    // Kiểm tra xem người dùng đã cuộn đến cuối danh sách chưa
+    if (atBottom && !this.loading && (this.paginationListUserMessage && this.pageNumberListUserMessage < this.paginationListUserMessage.totalPages)) {
+      debugger
+      this.pageNumber++;
+      this.loadMoreConnectedMessages();
+    }
+  }
+  
   selectMessage(id: number) {
     this.lastMessageId = id;
     console.log(this.lastMessageId);
@@ -111,11 +140,46 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
       this.myScrollContainer!.nativeElement.scrollTop = this.myScrollContainer!.nativeElement.scrollHeight;
     } catch (err) { }
   }
-  loadAllMessages() {
+  loadMoreConnectedMessages() {
+    if (this.loading) return;
     this.loading = true;
-    this.messageService.getconnectedMessages(this.pageNumber, this.pageSize, this.fullName).subscribe({
+    this.pageNumberListUserMessage++;
+    this.messageService.getconnectedMessages(this.pageNumberListUserMessage, this.pageSizeListUserMessage, this.fullName).subscribe({
       next: response => {
-        this.connectedMessage = response.result;
+        if (response.result) {
+          this.connectedMessage = [...this.connectedMessage, ...response.result];
+        }
+        this.paginationListUserMessage = response.pagination;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    })
+  }
+  loadConnectedMessages() {
+    this.pageNumberListUserMessage = 1;
+    this.loading = true;
+    this.messageService.getconnectedMessages(1, this.pageSizeListUserMessage, this.fullName).subscribe({
+      next: response => {
+        this.connectedMessage = response.result ?? [];
+        this.paginationListUserMessage = response.pagination;
+        this.loading = false;
+        this.cdr.detectChanges();
+        if (!this.loadingOldMessages) {
+          // Chỉ cuộn xuống cuối nếu không đang tải tin nhắn cũ
+          this.scrollToBottom();
+        }
+      }
+    })
+  }
+  loadSearchLikeConnected() {
+    debugger
+    this.pageNumber = 1;
+    this.loading = true;
+    this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize, this.search).subscribe({
+      next: response => {
+        this.members = response.result ?? [];
         this.pagination = response.pagination;
         this.loading = false;
         this.cdr.detectChanges();
@@ -126,15 +190,23 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
       }
     })
   }
-  
+
   loadLikes() {
+    this.loading = true;
     this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize, this.search).subscribe({
       next: response => {
-        this.members = response.result;
+        if (response.result) {
+          this.members = [...this.members, ...response.result];
+        }
         this.pagination = response.pagination;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
       }
-    })
+    });
   }
+  
 
 
   onFileSelected(event: Event) {
@@ -162,7 +234,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         this.loadingfile = false;
       }
     } else {
-      if (this.messageContent.trim() === '') return;
+      if (this.messageContent.trim() === '') return;  
       this.loading = true;
       try {
         await this.messageService.sendMessage(this.username, this.messageContent);
@@ -266,8 +338,8 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   // Gọi phương thức này khi người dùng muốn tải thêm tin nhắn
   loadMoreMessages() {
     if (!this.username || !this.lastMessageId || !this.messageService) return;
-  
-    this.loadingOldMessages = true; 
+
+    this.loadingOldMessages = true;
     this.messageService.loadMoreMessages(this.username, this.lastMessageId).then(() => {
       this.loadingOldMessages = false;
     });
