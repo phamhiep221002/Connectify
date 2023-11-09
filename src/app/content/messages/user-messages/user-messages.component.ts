@@ -118,8 +118,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
 
     // Kiểm tra xem người dùng đã cuộn đến cuối danh sách chưa
     if (atBottom && !this.loading && (this.paginationListUserMessage && this.pageNumberListUserMessage < this.paginationListUserMessage.totalPages)) {
-      debugger
-      this.pageNumber++;
       this.loadMoreConnectedMessages();
     }
   }
@@ -175,7 +173,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     })
   }
   loadSearchLikeConnected() {
-    debugger
     this.pageNumber = 1;
     this.loading = true;
     this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize, this.search).subscribe({
@@ -253,7 +250,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     if (!this.username) return;
     this.loadinglocation = true;
     try {
-      debugger
       await this.messageService.createLocationMessage(this.username).then();
     } catch (error) {
       console.error("Failed to send location message:", error);
