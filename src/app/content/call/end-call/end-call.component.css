@@ -2,22 +2,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 85vh;
+    height: 100vh;
     width: 100vw;
   }
   
   .call-ended {
-    background: white;
+    background: #e9edf0;
     padding: 20px;
     text-align: center;
     height: 100%;
     width: 100%;
     position: relative;
   }
+
+  .call-ended-icon{
+    height: 100px;
+  }
   
   .call-ended-icon img {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
   }
   
   .call-ended-message {
@@ -38,7 +43,7 @@
     border-radius: 30px;
     transition: background 0.5s;
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
   }
   
   .X {

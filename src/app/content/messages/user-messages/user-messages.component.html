@@ -12,7 +12,7 @@
     <!-- End logo brand box -->
     <!-- Start the side-mess menu -->
     <div class="flex-lg-column my-0 sidemenu-navigation">
-      <ul class="nav nav-pills side-menu-nav">
+      <ul class="nav nav-pills side-menu-nav" role="tablist">
         <li class="nav-item d-none d-lg-block" role="presentation">
           <a class="nav-link" id="pills-user-tab" data-bs-toggle="pill" href="#pills-user" role="tab"
             aria-selected="false" tabindex="-1">
@@ -20,16 +20,13 @@
           </a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="pills-chat-tab" data-bs-toggle="pill" href="#pills-chat" role="tab"
-            aria-selected="true">
+          <a class="nav-link active" (click)="setActiveTab('chat')" [class.active]="activeTab === 'chat'" href="javascript:void(0);" role="tab">
             <i class="fa fa-comment-o" aria-hidden="true">
-              <span class="badge bg-danger fs-11 rounded-pill sidenav-item-badge">10</span>
             </i>
           </a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link" id="pills-contacts-tab" data-bs-toggle="pill" href="#pills-contacts" role="tab"
-            aria-selected="false" tabindex="-1">
+          <a class="nav-link" (click)="setActiveTab('contacts')" [class.active]="activeTab === 'contacts'" href="javascript:void(0);" role="tab" tabindex="-1">
             <i class="fa fa-address-book-o" aria-hidden="true"> </i>
           </a>
         </li>
@@ -60,7 +57,7 @@
   <div class="chat-leftsidebar">
     <div class="tab-content">
       <!-- Start Chatting tab -->
-      <div class="tab-pane active show" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
+      <div *ngIf="activeTab === 'chat'" id="chat" role="tabpanel" class="active">
         <div>
           <div class="px-4 pt-4">
             <div class="d-flex align-items-start">
@@ -95,7 +92,7 @@
                   <div class="simplebar-content-wrapper" style="height: auto">
                     <div #scrollConnectedMessage class="simplebar-content" style="padding: 0px"
                       (scroll)="onListUserMessageScroll($event)"
-                      style="overflow-x: hidden; overflow-y: scroll; height: 200px">
+                      style="overflow-x: hidden; overflow-y: scroll; height: 200px"> 
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Latest messages
@@ -148,13 +145,13 @@
           </div>
         </div>
       </div>
-      <!-- Sửa ở đây nè Phúc Anh-->
-      <div class="tab-pane active show" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
+      
+      <div *ngIf="activeTab === 'contacts'" id="contacts" role="tabpanel">
         <div>
           <div class="px-4 pt-4">
             <div class="d-flex align-items-start">
               <div class="d-flex flex-grow-1 flex-wrap-0 justify-content-between">
-                <h4 class="mb-4">Connected </h4>
+                <h4 class="mb-4">Contacts</h4>
                 <div tabindex="0" class="plusButton">
                   <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
                     <g mask="url(#mask0_21_345)">
@@ -185,7 +182,7 @@
                       style="overflow-x: hidden; overflow-y: scroll; height: 200px">
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
-                        Connected user
+                        Connected users
                       </h5>
 
                       <div class="chat-message-list" *ngFor="let member of members">
@@ -229,8 +226,6 @@
           </div>
         </div>
       </div>
-      <!-- Sửa ở đây nè Phúc Anh-->
-
     </div>
   </div>
   <div class="user-chat w-100 overflow-hidden">
@@ -325,8 +320,18 @@
                                         [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
                                         width="500">
                                       <div class="resize-btn-group">
-                                        <button class="resize" (click)="increaseZoom()">+</button>
-                                        <button class="resize" (click)="decreaseZoom()">-</button>
+                                        <button class="resize-btn" (click)="increaseZoom()">
+                                          <svg fill="rgb(168, 38, 255)" width="64px" height="64px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="rgb(168, 38, 255)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9,17h6v6a1,1,0,0,0,2,0V17h6a1,1,0,0,0,0-2H17V9a1,1,0,0,0-2,0v6H9a1,1,0,0,0,0,2Z"></path> </g></svg>
+                                        </button>
+                                        <button class="resize-btn-minus" (click)="decreaseZoom()">
+                                          <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                              <path d="M5 12H19" stroke="rgb(168, 38, 255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
+                                          </svg>
+                                        </button>
                                       </div>
                                     </div>
                                   </div>

@@ -2,7 +2,6 @@
 .side-menu {
     min-width: 90px;
     max-width: 90px;
-    height: 100vh;
     min-height: 570px;
     background-color: var(--bs-sidebar-bg);
     display: -webkit-box;
@@ -936,6 +935,63 @@
     content: "\f058";
     margin: 5px;
   }
+
+  .resize-btn-group {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+  .resize-btn {
+    border: 2px solid rgb(168, 38, 255);
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    position: relative;
+    margin: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    line-height: 10px;
+  }
+  .resize-btn svg {
+    width: 15px;
+    height: 15px;
+    transition: all 0.3s ease;
+  }
+  .resize-btn:hover svg {
+    fill: white;
+  }
+  .resize-btn:hover {
+    background-color: rgb(168, 38, 255);
+  }
+
+  .resize-btn-minus {
+    border: 2px solid rgb(168, 38, 255);
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    position: relative;
+    margin: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    line-height: 10px;
+  }
+  .resize-btn-minus svg {
+    width: 15px;
+    height: 15px;
+    transition: all 0.3s ease;
+  }
+  .resize-btn-minus:hover svg {
+    fill: white;
+  }
+  .resize-btn-minus:hover path {
+    stroke: white;
+  }
+  .resize-btn-minus:hover {
+    background-color: rgb(168, 38, 255);
+  }
   
   @media (max-width: 991.98px) {
     .side-menu {
@@ -977,7 +1033,7 @@
       height: calc(100vh - 190px);
   }
   
-    .user-chat {
+    /* .user-chat {
       position: fixed;
       left: 0;
       top: 0;
@@ -993,7 +1049,7 @@
       visibility: visible;
       -webkit-transform: translateX(0);
       transform: translateX(0);
-  }
+  } */
   
   .user-chat-topbar {
     position: fixed;

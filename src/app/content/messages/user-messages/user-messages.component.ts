@@ -58,6 +58,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   search = '';
   fullName = '';
   lastMessageId?: number;
+  activeTab: string = 'chat';
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute,
     public presenceService: PresenceService, private memberService: MembersService, public accountService: AccountService, private router: Router) {
     this.messageService.messageThread$.subscribe(
@@ -362,5 +363,9 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         this.myScrollContainer!.nativeElement.scrollTop = newScrollHeight - this.currentScrollHeight + currentScrollTop;
       }
     });
+  }
+
+  setActiveTab(tabName: string) {
+    this.activeTab = tabName;
   }
 }
