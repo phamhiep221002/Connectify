@@ -24,10 +24,7 @@ export class AppComponent implements OnInit{
   constructor (private accountService: AccountService, private router: Router ){
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Cập nhật cờ dựa trên route
-        this.showNav = !event.url.includes('call');
-        this.showNav = !event.url.includes('messages');
-        this.showNav = !event.url.includes('end-call');
+        this.showNav = !(event.url.includes('call') || event.url.includes('messages'));
       }
     });
   }
