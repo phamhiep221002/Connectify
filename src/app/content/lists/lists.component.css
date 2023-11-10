@@ -54,5 +54,12 @@
         width: 50%;
     }
 }
+.location-bars {
+    width: 19em;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+    align-items: center;
+}
 
 

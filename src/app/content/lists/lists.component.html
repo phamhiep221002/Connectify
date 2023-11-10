@@ -19,13 +19,13 @@
         </div>
         <div *ngIf="showRecommendedFilters">
             <div class="d-flex location-bars" *ngIf="userParams">
-                <form #form="ngForm" (ngSubmit)="loadRecommendedMembers()" autocomplete="off">
+                <form #form="ngForm" autocomplete="on">
                     <div class="d-flex location-bars">
                         <label class="col-form-label">Similarity: </label>
-                        <ngx-slider [(value)]="userParams.similarity" [options]="similaritySliderOptions">
+                        <ngx-slider [(value)]="userParams.similarity" [options]="similaritySliderOptions"
+                        (userChange)="loadRecommendedMembers()">
                         </ngx-slider>
-                    </div>
-                    <button class="btn btn-outline-info ms-1 btn-filter-1" type="submit">Apply Filters</button>
+                    </div> 
                 </form>
             </div>
         </div>
