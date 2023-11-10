@@ -238,10 +238,6 @@
             <div class="row align-items-center">
               <div class="col-sm-4 col-8">
                 <div class="d-flex align-items-center">
-                  <div class="flex-shrink-0 d-block d-lg-none me-3">
-                    <a href="javascript: void(0);" class="btn-primary user-chat-remove fs-18 p-1"><i
-                        class="fa fa-chevron-left align-middle"></i></a>
-                  </div>
                   <div class="flex-grow-1 overflow-hidden">
                     <div class="d-flex align-items-center">
                       <div class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
@@ -305,9 +301,10 @@
                               <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="" />
                             </div>
                             <div class="user-chat-content">
-                              <div class="ctext-wrap">
-                                <div class="ctext-wrap-content" (mouseenter)="toggleMessageBox(true)"
-                                  (mouseleave)="toggleMessageBox(false)">
+                              <div class="ctext-wrap" *ngFor="let message of messages">
+                                <div class="ctext-wrap-content"
+                                (mouseenter)="handleHover(message.id, true)"
+                                (mouseleave)="handleHover(message.id, false)">
                                   <div class="message" *ngIf="message.messageType === 'Image'">
                                     <img [src]="message.content" width="500" loading="lazy" />
                                   </div>
@@ -349,22 +346,16 @@
                                     </p>
                                   </div>
                                 </div>
-                                <div *ngIf="isMessageBoxVisible" class="align-self-start message-box-drop d-flex">
+                                <div class="align-self-start message-box-drop d-flex"  *ngIf="hoveredMessageId === message.id || selectedMessageId === message.id">
                                   <div class="dropdown message-box-dropdown">
-                                    <a (click)="toggleMessageMenu()" role="button" data-bs-toggle="dropdown"
-                                      aria-haspopup="true" aria-expanded="false">
+                                    <a *ngIf="hoveredMessageId === message.id"
+                                    (click)="toggleMessageBox(message.id)" role="button" data-bs-toggle="dropdown"
+                                      aria-haspopup="true">
                                       <i class="fa fa-ellipsis-h"></i>
                                     </a>
-                                    <div *ngIf="isMessageMenuVisible" class="dropdown-menu show" style="
-                                  position: absolute;
-                                  inset: 0px auto auto 0px;
-                                  margin: 0px;
-                                  transform: translate3d(
-                                    0px,
-                                    33.6px,
-                                    0px
-                                  );
-                                " data-popper-placement="bottom-start">
+                                    <div *ngIf="isMessageBoxVisible && selectedMessageId === message.id" class="dropdown-menu show" 
+                                  
+                                 data-popper-placement="bottom-start">
                                       <!-- <a class="dropdown-item d-flex align-items-center justify-content-between reply-message"
                                         href="#" id="reply-message-0" data-bs-toggle="collapse"
                                         data-bs-target=".replyCollapse">Reply
@@ -376,7 +367,7 @@
                                         href="#" id="copy-message-0">Copy
                                         <i class="fa fa-clone text-muted ms-2"></i></a>-->
                                       <a class="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                                        (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Remove
+                                        (click)="$event.stopPropagation()" (click)="deleteMessage(message.id); toggleMessageBox(message.id)">Remove
                                         for
                                         you
                                         <i class="fa fa-trash-o text-muted ms-2"></i></a>

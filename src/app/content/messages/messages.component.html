@@ -54,7 +54,7 @@
   </div>
   <!-- End the left bar menu -->
   <!-- Start chat left sidebar -->
-  <div class="chat-leftsidebar">
+  <div class="chat-leftsidebar w-100">
     <div class="tab-content">
       <!-- Start Chatting tab -->
       <div *ngIf="activeTab === 'chat'" id="chat" role="tabpanel" class="active">
@@ -76,8 +76,9 @@
             <form>
               <div class="input-group search-panel mb-3">
                 <div class="InputContainer">
-                  <input placeholder="Search.." id="input" class="input" name="text" type="text"
-                    (input)="loadConnectedMessages()" [(ngModel)]="fullName" />
+                  <input placeholder="Search.. " id="input" class="input" name="text" type="text"
+                    (input)="loadConnectedMessages()" [(ngModel)]="fullName"
+                     /> <i class="fa fa-search" aria-hidden="true"></i>
                 </div>
               </div>
             </form>

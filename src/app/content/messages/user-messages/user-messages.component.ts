@@ -39,7 +39,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   loadingOldMessages = false;
   member: Member = {} as Member;
   callUrl = environment.callUrl;
-  isMessageNavBoxVisible: boolean = false;
   isMessageMenuVisible: boolean = false;
   isEmojiMenuVisible: boolean = false;
   isChatinputMoreMenuVisible: boolean = false;
@@ -59,6 +58,9 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   fullName = '';
   lastMessageId?: number;
   activeTab: string = 'chat';
+  selectedMessageId?: number;
+  hoveredMessageId: number | undefined;
+  hoverTimeoutId?: number;
   constructor(public messageService: MessageService, private cdr: ChangeDetectorRef, private route: ActivatedRoute,
     public presenceService: PresenceService, private memberService: MembersService, public accountService: AccountService, private router: Router) {
     this.messageService.messageThread$.subscribe(
@@ -282,6 +284,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   deleteMessage(id: number) {
     this.messageService.deleteMessage(id).subscribe({
       next: () => {
+        this.toggleMessageBox(id);
         this.messages?.splice(this.messages.findIndex(m => m.id === id), 1);
         this.cdr.detectChanges();
       }
@@ -291,6 +294,7 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     this.messageService.unsendMessage(id).subscribe({
       next: () => {
         // this.messages?.splice(this.messages.findIndex(m => m.id === id), 1);
+        this.toggleMessageBox(id);
         this.cdr.detectChanges();
       }
     });
@@ -300,32 +304,36 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     window.open(this.callUrl + this.username, '_blank', 'height=600,width=800')
   }
 
-  toggleMessageBox(visible: boolean) {
-    // Delete the timer when the box is hidden before
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+  toggleMessageBox(id: number) {
+    this.selectedMessageId = id;
+    this.isMessageBoxVisible = !this.isMessageBoxVisible;
+  }
 
-    if (visible) {
-      this.isMessageBoxVisible = true;
+  handleHover(id: number, isHovering: boolean) {
+    if (this.hoverTimeoutId) {
+      clearTimeout(this.hoverTimeoutId);
+      this.hoverTimeoutId = undefined;
+    }
+  
+    if (isHovering) {
+      this.hoveredMessageId = id;
     } else {
-      // box hidden, delay 1s
-      this.timeoutId = setTimeout(() => {
-        this.isMessageBoxVisible = false;
-      }, 1000);  // Delay time
+      this.hoverTimeoutId = setTimeout(() => {
+        if (this.hoveredMessageId === id) {
+          this.hoveredMessageId = undefined;
+          // Ẩn toggleMessageBox nếu nó đang hiển thị
+          if (this.selectedMessageId === id && this.isMessageBoxVisible) {
+            this.isMessageBoxVisible = false;
+            this.selectedMessageId = undefined;
+          }
+        }
+      }, 10000) as unknown as number; // Thời gian trễ để ẩn kí tự và toggleMessageBox
     }
   }
 
-  toggleMessageNavBox() {
-    this.isMessageNavBoxVisible = !this.isMessageNavBoxVisible;
-  }
 
   toggleMessageMenu() {
     this.isMessageMenuVisible = !this.isMessageMenuVisible;
-  }
-
-  toggleEmojiMenu() {
-    this.isEmojiMenuVisible = !this.isEmojiMenuVisible;
   }
 
   toggleChatinputMoreMenu() {
