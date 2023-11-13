@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container-lists">
     <div class="text-center mt-3">
         <h2>Member Management</h2>
     </div>
 
-    <div class="like-lists">
+    <div class="d-flex align-items-center justify-content-center tab-menus">
         <div class="manage-choose">
             <div class="btn-group">
                 <button class="btn btn-primary btn-likes" btnRadio="liked" [(ngModel)]="predicate"
@@ -17,7 +17,7 @@
                     recommended</button>
             </div>
         </div>
-        <div *ngIf="showRecommendedFilters">
+        <div class="d-flex align-items-center justify-content-center" *ngIf="showRecommendedFilters">
             <div class="d-flex location-bars" *ngIf="userParams">
                 <form #form="ngForm" autocomplete="on">
                     <div class="d-flex location-bars">
@@ -29,7 +29,6 @@
                 </form>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-3" *ngFor="let member of members">
                 <app-member-card [member]="member"></app-member-card>
@@ -37,7 +36,7 @@
         </div>
     </div>
 
-    <div class="pagination-container d-flex justify-content-center" *ngIf="pagination">
+    <div class="pagination-container d-flex justify-content-center mt-3" *ngIf="pagination">
         <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
             [maxSize]="10" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
