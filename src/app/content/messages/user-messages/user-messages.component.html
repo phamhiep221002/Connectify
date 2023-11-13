@@ -261,14 +261,14 @@
               </div>
               <div class="col-sm-8 col-4">
                 <ul class="list-inline user-chat-nav text-end mb-0">
-                  <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                  <li class="list-inline-item d-lg-inline-block me-2 ms-0">
                     <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target=".audiocallModal"
                       (click)="callOpen()">
                       <i class="fa fa-phone"></i>
                     </button>
                   </li>
 
-                  <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                  <li class="list-inline-item d-lg-inline-block me-2 ms-0">
                     <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target=".videocallModal"
                       (click)="callOpen()">
                       <i class="fa fa-video-camera"></i>
@@ -301,21 +301,58 @@
                               <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="" />
                             </div>
                             <div class="user-chat-content">
-                              <div class="ctext-wrap" *ngFor="let message of messages">
-                                <div class="ctext-wrap-content"
-                                (mouseenter)="handleHover(message.id, true)"
+                              <div class="ctext-wrap" *ngFor="let message of messages"
+                              (mouseenter)="handleHover(message.id, true)"
                                 (mouseleave)="handleHover(message.id, false)">
-                                  <div class="message" *ngIf="message.messageType === 'Image'">
-                                    <img [src]="message.content" width="500" loading="lazy" />
+                                <div class="ctext-wrap-content" *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
+                                  <div class="message-text">
+                                    <p class="mb-0 ctext-content" (click)="selectMessage(message.id)">
+                                      {{message.content}}
+                                    </p>
                                   </div>
-                                  <div class="message" *ngIf="message.messageType === 'Video'">
-                                    <video controls [src]="message.content" width="500" loading="lazy"></video>
+                                </div>
+                                <div class="message-img mb-0" *ngIf="message.messageType === 'Image'">
+                                  <div class="message-img-list">
+                                    <div>
+                                      <a class="popup-img d-inline-block" href="{{message.content}}" target="_blank">
+                                        <img class="rounded border img-thumbnail" [src]="message.content" loading="lazy" />
+                                      </a>
+                                    </div>
                                   </div>
-                                  <div class="message" *ngIf="message.messageType === 'Location'">
+                                </div>
+                                <div class="ctext-wrap-content" *ngIf="message.messageType === 'File'">
+                                  <div class="p-3 border rounded-3">
+                                    <div class="d-flex align-items-center attached-file">
+                                      <div class="flex-shrink-0 avatar-sm me-3 ms-0 attached-file-avatar">
+                                        <div class="avatar-title rounded-circle fs-20">
+                                          <i class="fa fa-paperclip"></i>
+                                        </div>
+                                      </div>
+                                      <div class="flex-grow-1 overflow-hidden">
+                                        <div class="text-start">
+                                          <a class="fileName" href="{{message.content}}" target="_blank">{{message.fileName}}</a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="message-video" *ngIf="message.messageType === 'Video'">
+                                  <div>
+                                    <a class="popup-video d-inline-block" href="{{message.content}}" target="_blank">
+                                      <video class="rounded border video-thumbnail" controls [src]="message.content" loading="lazy"></video>
+                                    </a>
+                                  </div>
+                                </div>
+                                <div class="message-audio" *ngIf="message.messageType === 'Audio'">
+                                  <audio controls [src]="message.content">
+                                  </audio>
+                                </div>
+                                <div class="ctext-wrap-content" *ngIf="message.messageType === 'Location'">
+                                  <div class="message-location">
                                     <div class="mapper">
-                                      <img
+                                      <img class="rounded border location-thumbnail"
                                         [src]="getMapUrl(message.content.split(',')[0], message.content.split(',')[1])"
-                                        width="500">
+                                    >
                                       <div class="resize-btn-group">
                                         <button class="resize-btn" (click)="increaseZoom()">
                                           <svg fill="rgb(168, 38, 255)" width="64px" height="64px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="rgb(168, 38, 255)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9,17h6v6a1,1,0,0,0,2,0V17h6a1,1,0,0,0,0-2H17V9a1,1,0,0,0-2,0v6H9a1,1,0,0,0,0,2Z"></path> </g></svg>
@@ -332,20 +369,10 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="message" *ngIf="message.messageType === 'File'">
-                                    <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
-                                  </div>
-                                  <div class="message" *ngIf="message.messageType === 'Audio'">
-                                    <audio controls [src]="message.content">
-                                    </audio>
-                                  </div>
-                                  <div class="message"
-                                    *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
-                                    <p class="mb-0 ctext-content" (click)="selectMessage(message.id)">
-                                      {{message.content}}
-                                    </p>
-                                  </div>
                                 </div>
+                                <!-- <div class="message" >
+                                  <a href="{{message.content}}" target="_blank">{{message.fileName}}</a>
+                                </div> -->
                                 <div class="align-self-start message-box-drop d-flex"  *ngIf="hoveredMessageId === message.id || selectedMessageId === message.id">
                                   <div class="dropdown message-box-dropdown">
                                     <a *ngIf="hoveredMessageId === message.id"
@@ -433,6 +460,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="col">
                 <form class="row g-0 align-items-center" #messageForm="ngForm" (ngSubmit)="sendCombinedMessage()"
                   autocomplete="off">
                   <div class="col">
@@ -464,6 +492,7 @@
                     </div>
                   </div>
                 </form>
+                </div>
               </div>
             </form>
             <div *ngIf="isChatinputMoreMenuVisible" class="dropup chat-input-collapse">

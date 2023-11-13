@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "cancelbtn",
+        "Chatinput",
         "CONNECTIFY",
         "discraption",
         "editprofile",
@@ -24,6 +25,7 @@
         "Timeago",
         "titlecase",
         "Toastr",
+        "unsend",
         "updateintroduction",
         "Webstorage"
     ]
