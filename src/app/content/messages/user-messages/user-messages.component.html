@@ -301,7 +301,7 @@
                               <img src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="" />
                             </div>
                             <div class="user-chat-content">
-                              <div class="ctext-wrap" *ngFor="let message of messages"
+                              <div class="ctext-wrap" 
                               (mouseenter)="handleHover(message.id, true)"
                                 (mouseleave)="handleHover(message.id, false)">
                                 <div class="ctext-wrap-content" *ngIf="message.messageType !== 'Image' && message.messageType !== 'Video' && message.messageType !== 'Location'&& message.messageType !== 'File' && message.messageType !== 'Audio'">
