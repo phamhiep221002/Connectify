@@ -1,4 +1,5 @@
-<div class="container-lists">
+<div>
+<div class="container container-lists">
     <div class="text-center mt-3">
         <h2>Member Management</h2>
     </div>
@@ -29,8 +30,8 @@
                 </form>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-3" *ngFor="let member of members">
+        <div class="row member-card-container mt-3">
+            <div class="member-card" *ngFor="let member of members">
                 <app-member-card [member]="member"></app-member-card>
             </div>
         </div>
@@ -42,4 +43,5 @@
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
         </pagination>
     </div>
+</div>
 </div>

@@ -191,6 +191,11 @@
   .filter-form-select{
     width: 150px;
     height: 50px;
+    outline: none !important;
+    border-color: #aaa !important;
+    border-radius: 30px;
+    padding: 12px;
+    margin: 10px;
   }
 
   .text-container {
@@ -231,6 +236,15 @@
     width: 100%;
     justify-content: center;
   }
+  .filter-form-select{
+    width: 100%;
+    height: 50px;
+      outline: none !important;
+      border-color: #aaa !important;
+      border-radius: 30px;
+      padding: 12px;
+  
+  }
 }
 
 @media (min-width: 992px) {
@@ -259,5 +273,10 @@
 .filter-form-select{
   width: 100%;
   height: 50px;
+    outline: none !important;
+    border-color: #aaa !important;
+    border-radius: 30px;
+    padding: 12px;
+
 }
 }

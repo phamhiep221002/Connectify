@@ -31,7 +31,7 @@
           </a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link" id="pills-bookmark-tab" data-bs-toggle="pill" href="#pills-bookmark" role="tab"
+          <a class="nav-link" data-bs-toggle="pill" routerLink="/lists" 
             aria-selected="false" tabindex="-1">
             <i class="fa fa-bookmark-o" aria-hidden="true"> </i>
           </a>
@@ -93,7 +93,7 @@
                   <div class="simplebar-content-wrapper" style="height: auto">
                     <div #scrollConnectedMessage class="simplebar-content" style="padding: 0px"
                       (scroll)="onListUserMessageScroll($event)"
-                      style="overflow-x: hidden; overflow-y: scroll; height: 200px"> 
+                      style="overflow-x: hidden; overflow-y: scroll; height: 100%"> 
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Latest messages
@@ -180,7 +180,7 @@
                   <div class="simplebar-content-wrapper" style="height: auto">
                     <div #scrollConnected class="simplebar-content" style="padding: 0px"
                       (scroll)="onConnectedScroll($event)"
-                      style="overflow-x: hidden; overflow-y: scroll; height: 200px">
+                      style="overflow-x: hidden; overflow-y: scroll; height: 100%">
                       <!-- Start chat-message-list -->
                       <h5 class="mb-3 px-4 mt-4 fs-11 text-muted text-uppercase">
                         Connected users

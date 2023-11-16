@@ -1102,6 +1102,25 @@ audio {
   max-width: 350px;
 }
 
+.message-miss-call{
+  background-color: #e9ecef !important ;
+  border-radius: 16px;
+  border: #ccc 0.2px solid;
+}
+.missed-call{
+  background-color: #ff003c !important ;
+}
+
+.message-call{
+  background-color: #e9ecef !important ;
+  border-radius: 16px;
+  border: #ccc 0.2px solid;
+}
+
+.called{
+  background-color: #b1b1b1 !important ;
+}
+
 
 @media (max-width: 991.98px) {
   .side-menu, .side-menu .navbar-brand-box, .chat-leftsidebar  {

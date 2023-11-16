@@ -59,6 +59,10 @@
     align-items: center;
 }
 
+.member-card-container{
+    width: 100%;
+}
+
 .pagination {
     display: flex;
     padding-left: 0;
@@ -84,17 +88,31 @@
     box-shadow: 0px 10px 27px -20px rgba(0, 0, 0, 0.33);
 }
 @media (max-width: 767px) {
-    .col-3 {
+
+    .member-card-container {
+        display: block;
+        margin: 20px;
         width: 100%;
-    }
+      }
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .col-3 {
-        width: 50%;
-    }
+  
+  .member-card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
+@media (min-width: 992px) {
+    
+    .member-card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 2fr);
+      gap: 20px;
+    }
+}
 
 
