@@ -393,6 +393,7 @@
 
 .user-chat .chat-content {
   position: relative;
+  height: 100%;
 }
 
 .user-chat-topbar {
