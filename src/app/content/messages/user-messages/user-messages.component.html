@@ -397,7 +397,7 @@
                                         <div class="text-start">
                                           <strong>Called</strong>
                                           <p class="mb-0 ctext-content" (click)="selectMessage(message.id)">
-                                            Call ended - {{message.content}}
+                                            {{message.content}}
                                           </p>                                        
                                         </div>
                                       </div>
@@ -439,8 +439,9 @@
                               <div class="conversation-name">
                                 <small class="text-muted">
                                   <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
-                                  <span class="text-danger" *ngIf="!message.dateRead 
-                                                      && message.senderUsername !== username">(unread)</span>
+                                  <span *ngIf="!message.dateRead 
+                                                      && message.senderUsername !== username"><i
+                                      class="fa fa-circle-thin"></i></span>
                                   <span class="text-success check-message-icon" *ngIf="message.dateRead 
                                                       && message.senderUsername !== username"><i
                                       class="fa fa-check-circle"></i></span>

@@ -1036,6 +1036,10 @@ audio {
   margin: 5px;
 }
 
+.fa-circle-thin:before {
+  margin: 5px;
+}
+
 .chat-conversation .right .conversation-list .resize-btn-group {
   display: flex;
   justify-content: flex-end;
