@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, AfterViewChecked, TemplateRef } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { Member } from 'src/app/common/_models/member';
 import { Pagination } from 'src/app/common/_models/pagination';
@@ -6,6 +6,7 @@ import { UserParams } from 'src/app/common/_models/userParams';
 import { MembersService } from 'src/app/common/_services/members.service';
 import { LocationService } from 'src/app/common/_services/location.service';
 import { environment } from 'src/environments/environment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 declare var H: any;
 
 @Component({
@@ -14,11 +15,13 @@ declare var H: any;
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit, AfterViewChecked {
-  @ViewChild('mapContainer') 
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
+  @ViewChild('filterModal') filterModalTemplate!: TemplateRef<any>;
   public mapElement!: ElementRef;
   private currentMarker: any; 
   private platform: any;
   private map: any;
+  bsModalRef!: BsModalRef;
   private apiMapKey =environment.apiMapKey;
   members: Member[] = [];
   pagination: Pagination | undefined;
@@ -34,9 +37,12 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
   };
   distanceSliderValue = 100;
   ageRangeSliderValue: number[] = [];
+  member: any;
+  modalRef!: BsModalRef;
   constructor(
     private memberService: MembersService,
     public locationService: LocationService,
+    private modalService: BsModalService,
   ) {
     this.userParams = this.memberService.getUserParams();
     this.platform = new H.service.Platform({
@@ -138,5 +144,9 @@ export class MemberListComponent implements OnInit, AfterViewChecked {
       this.memberService.setUserParams(this.userParams);
       this.loadMembers();
     }
+  }
+
+  openFilterModal() {
+    this.modalRef = this.modalService.show(this.filterModalTemplate);
   }
 }
