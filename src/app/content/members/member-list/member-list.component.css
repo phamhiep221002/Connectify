@@ -187,6 +187,8 @@
   
   .filter-form{
     flex-wrap: wrap;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
   }
   .filter-form-select{
     width: 150px;
@@ -216,6 +218,7 @@
 @media (min-width: 768px) and (max-width: 991px) {
   .filter-form{
     flex-wrap: wrap;
+    font-family: 'Roboto', sans-serif;
   }
   .member-card-container {
     display: grid;
@@ -227,6 +230,8 @@
     flex-direction: column;
     gap: 15px;
     margin: 20px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
   }
   .filters-btn-group {
     align-items: center;
@@ -251,6 +256,7 @@
   .filter-form{
     justify-content: space-between;
     flex-wrap: wrap;
+    font-family: 'Roboto', sans-serif;
   }
   .member-card-container {
     display: grid;
@@ -263,6 +269,8 @@
     gap: 20px;
     margin: 20px;
     align-items: center;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
 }
 .filters-btn-group {
   align-items: center;

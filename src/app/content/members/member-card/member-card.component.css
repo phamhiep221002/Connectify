@@ -60,10 +60,12 @@
   
   .card p {
 	font-size: 17px;
-	color: #4c5656;
-	margin-top: 30px;
-	z-index: 7;
-	transition: color 0.3s ease-out;
+    color: #9761cb;
+    margin-top: 30px;
+    z-index: 7;
+    transition: color 0.3s ease-out;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
   }
   
   .circle {

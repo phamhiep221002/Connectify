@@ -7,10 +7,11 @@
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
   }
 
   .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
-    border-bottom: 4px solid #C670D0;
+    border-bottom: 4px solid #ceb2fc;
   }
 
   .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
@@ -28,7 +29,7 @@
   }
 
   .member-tabset > .nav-tabs > li.active {
-    border-bottom: 4px solid #C670D0;
+    border-bottom: 4px solid #ceb2fc;
     color: black;
     position: relative;
   }
@@ -99,5 +100,6 @@ pagination{
 
   ul.nav.nav-tabs {
     justify-content: center;
+    font-family: 'Roboto', sans-serif;
 }
   

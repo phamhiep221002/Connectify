@@ -2,7 +2,7 @@
   <button class="btn btn-info" (click)="openCreateGendersModal(createGenderTemplate)">Create new Genders</button>
 </td>
 <div class="table-responsive">
-  <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+  <table class="align-middle mb-0 table table-borderless table-hover">
       <thead>
           <tr>
               <th class="text-center">ID</th>
@@ -27,7 +27,7 @@
       <form class="form" [formGroup]="editForm" (ngSubmit)="updateGender()">
         <div class="form-group">
           <label for="name">Gender</label>
-          <input type="text" id="name" class="form-control" formControlName="name" required>
+          <input type="text" id="name" class="form-input" formControlName="name" required>
         </div>
         <button type="submit" class="form-submit-btn">Update</button>
       </form>
@@ -48,7 +48,7 @@
   <form class="form" [formGroup]="genderForm" (ngSubmit)="createGender()">
     <div class="form-group">
       <label for="name">Gender</label>
-      <input type="text" id="name" class="form-control" formControlName="name" required>
+      <input type="text" id="name" class="form-input" formControlName="name" required>
     </div>
     <button type="submit" class="form-create-btn">Create</button>
   </form>

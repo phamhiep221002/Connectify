@@ -1,8 +1,8 @@
 <td class="new_genders">
-  <button class="btn btn-info" (click)="openModal(createTermListTemplate)">Create new Term List</button>
+  <button class="btn btn-info" (click)="openModal(createTermListTemplate)">Create New Term List</button>
 </td>
 <div class="table-responsive">
-  <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+  <table class="align-middle mb-0 table table-borderless table-hover">
       <thead>
           <tr>
               <th class="text-center">ID</th>
@@ -18,7 +18,7 @@
               <td class="text-center">{{ terms.Description }}</td>
 
               <td class="text-center">
-                <button class="btn btn-default" [routerLink]="['/term', terms.Id]">Edit Term</button>
+                <button class="btn btn-default" [routerLink]="['/term', terms.Id]"><i class="fa fa-pencil"></i></button>
                 <button class="btn btn-danger" (click)="onDelete(terms.Id)"><i class="fa fa-trash-o"></i></button>
               </td>
           </tr>
@@ -31,9 +31,9 @@
     <form class="form" [formGroup]="createForm" (ngSubmit)="createTermList()">
       <div class="form-group">
         <label for="createName">Name</label>
-        <input type="text" id="createName" class="form-control" formControlName="name" required>
+        <input type="text" id="createName" class="form-input" formControlName="name" required>
         <label for="createDescription">Description</label>
-        <input type="text" id="createDescription" class="form-control" formControlName="description" required>
+        <input type="text" id="createDescription" class="form-input" formControlName="description" required>
       </div>
       <button type="submit" class="form-create-btn">Create</button>
     </form>

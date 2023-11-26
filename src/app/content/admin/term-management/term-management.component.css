@@ -56,8 +56,8 @@
 .modal-body .form-group {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  width: 90%;
+  gap: 5px;
+  width: 100%;
 }
 
 .modal-body .form-group label {

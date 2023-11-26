@@ -86,3 +86,11 @@ td {
     display: flex;
     padding: 1.2rem;
 }
+
+.btn-default {
+  background: #00C2AD;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin: 5px;
+}
