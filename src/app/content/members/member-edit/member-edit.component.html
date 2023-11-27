@@ -13,7 +13,7 @@
                         class="img-fluid img-thumbnail mb-3">
                       <div class="profile-name">
                         <h4>{{member.userName}}</h4>
-                        <p>{{member.knownAs}}</p>
+                        <p>{{member.fullName}}</p>
                       </div>
                     </div>
                     <div class="edit-profile">
@@ -66,8 +66,12 @@
                     <p class="lead fw-normal mb-1">About</p>
                     <div class="p-4" style="background-color: #f8f9fa;">
                       <div class="profile-detail">
-                        <strong><span class="icon">🙍</span>Fullname:</strong>
-                        <p>{{member.fullName}}</p>
+                        <strong><span class="icon">🙍</span>Nickname:</strong>
+                        <p>{{member.knownAs}}</p>
+                      </div>
+                      <div class="profile-detail">
+                        <strong><span class="icon">💬</span>Introduction:</strong>
+                        <p style="text-align: justify; text-justify: inter-word;">{{member.introduction}}</p>
                       </div>
                       <div class="profile-detail">
                         <strong><span class="icon">📍</span>Location:</strong>
@@ -80,6 +84,14 @@
                       <div class="profile-detail">
                         <strong><span class="icon">⚧️</span>Gender:</strong>
                         <p>{{member.gender}}</p>
+                      </div>
+                      <div class="profile-detail">
+                        <strong><span class="icon">📅</span>Member since:</strong>
+                        <p>{{member.created | date: 'dd MMM yyyy'}}</p>
+                      </div>
+                      <div class="profile-detail">
+                        <strong><span class="icon">🕰️</span>Last active:</strong>
+                        <p>{{member.lastActive | timeago}}</p>
                       </div>
                       <div class="profile-detail hobbies">
                         <strong><span class="icon">🔍</span>Looking fors:</strong>
@@ -96,22 +108,8 @@
                           </button>
                         </div>
                       </div>
-                      <div>
-                        <strong><span class="icon">💬</span>Introduction:</strong>
-                        <p style="text-align: justify; text-justify: inter-word;">{{member.introduction}}</p>
-                      </div>
-                      <div class="profile-detail">
-                        <strong><span class="icon">📅</span>Member since:</strong>
-                        <p>{{member.created | date: 'dd MMM yyyy'}}</p>
-                      </div>
-                      <div class="profile-detail">
-                        <strong><span class="icon">🕰️</span>Last active:</strong>
-                        <p>{{member.lastActive | timeago}}</p>
-                      </div>
-                      <div class="profile-detail">
-                        <strong><span class="icon">🌆</span>City:</strong>
-                        <p>{{member.city}}</p>
-                      </div>
+                      
+                      
                       <div class="profile-detail hobbies">
                         <strong><span class="icon">🌟</span>Interests:</strong>
                         <div class="hobbies-items" *ngFor="let interest of member.interests">

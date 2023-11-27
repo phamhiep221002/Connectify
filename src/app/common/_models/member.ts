@@ -18,4 +18,5 @@ export interface Member {
     photos: Photo[];    
     isVisible: boolean;
     fullName: string;
+    distance: number;
 }

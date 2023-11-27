@@ -69,7 +69,7 @@
                 </div>
                 <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all justify">
                     <h4 class="text-center" style=" text-transform: uppercase; font-weight: 700; font-style: italic;">
-                      {{member.userName}}
+                      {{member.fullName}} ({{member.knownAs}})
                     </h4>
                     <p class="sm-width-95 sm-margin-auto" style="text-align: justify;">{{member.introduction}}</p>
                 </div>
@@ -81,6 +81,17 @@
                     <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)" >
                       <div class="contact-info-section" >
                           <ul class="list-style9 no-margin">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fa fa-venus-mars fa-lg text-pink"></i>
+                                        <strong class=" text-pink" style="margin-left: 10px;">Gender:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>{{member.gender}}</p>
+                                    </div>
+                                </div>
+                            </li>
                               <li>
                                   <div class="row">
                                       <div class="col-md-5 col-5">
@@ -93,6 +104,17 @@
                                   </div>
 
                               </li>
+                              <li>
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fa fa-road fa-lg text-blue"></i>
+                                        <strong class="text-blue" style="margin-left: 10px;">Distance:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>{{member.distance}} km</p>
+                                    </div>
+                                </div>
+                            </li>
                               <li>
 
                                   <div class="row">
@@ -127,7 +149,7 @@
                                           <strong class="text-green" style="margin-left: 10px;">Member since:</strong>
                                       </div>
                                       <div class="col-md-7 col-7">
-                                          <p>{{member.created | date: 'dd MMM yyyy'}}.</p>
+                                          <p>{{member.created | date: 'dd MMM yyyy'}}</p>
                                       </div>
                                   </div>
 
@@ -154,16 +176,14 @@
                                           <strong class="text-pink" style="margin-left: 10px;">Interests:</strong>
                                       </div>
                                       <div class="col-md-7 col-7">
-                                        <p>{{member.interests}}</p>
+                                        <ul>
+                                            <li *ngFor="let interests of member.interests">{{interests.name}}</li>
+                                        </ul>
                                       </div>
                                   </div>
                               </li>
                           </ul>
                       </div>   
-                  </tab>
-                  <tab heading="Interests" (selectTab)="onTabActivated($event)" >
-                    <h4>Interests</h4>
-                    <p>{{member.interests}}</p>
                   </tab>
                   <tab heading="Photos" (selectTab)="onTabActivated($event)" style="justify-content: center;">
                     <div class="col-auto">
