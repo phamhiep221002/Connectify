@@ -108,7 +108,7 @@
                                   <img src="{{
                                       message.photoUrl || './assets/user.png'
                                     }}" alt="Chat Avatar" class="rounded-circle avatar-xs" /><span
-                                    class="user-status"></span>
+                                    class="user-status" *ngIf="(presenceService.onlineUsers$ | async)?.includes(message.userName)"></span>
                                 </div>
                                 <div class="overflow-hidden me-2">
                                   <p class="text-truncate chat-username mb-0">
@@ -195,7 +195,7 @@
                                   <img src="{{
                                         member.photoUrl || './assets/user.png'
                                       }}" alt="Chat Avatar" class="rounded-circle avatar-xs" /><span
-                                    class="user-status"></span>
+                                    class="user-status" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)"></span>
                                 </div>
                                 <div class="overflow-hidden me-2">
                                   <p class="text-truncate chat-username mb-0">

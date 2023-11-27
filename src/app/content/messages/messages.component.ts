@@ -7,6 +7,7 @@ import { Pagination } from 'src/app/common/_models/pagination';
 import { User } from 'src/app/common/_models/user';
 import { AccountService } from 'src/app/common/_services/account.service';
 import { MembersService } from 'src/app/common/_services/members.service';
+import { PresenceService } from 'src/app/common/_services/presence.service';
 import { MessageService } from 'src/app/common/_services/message.service';
 
 
@@ -44,7 +45,7 @@ export class MessagesComponent implements OnInit {
   pageNumberListUserMessage = 1;
   pageSizeListUserMessage = 50;
 
-  constructor(private messageService: MessageService, private cdr: ChangeDetectorRef, private memberService: MembersService, public accountService: AccountService, private router: Router) {
+  constructor(private messageService: MessageService, public presenceService: PresenceService, private cdr: ChangeDetectorRef, private memberService: MembersService, public accountService: AccountService, private router: Router) {
   }
 
   ngOnInit(): void {
