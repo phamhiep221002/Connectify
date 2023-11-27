@@ -426,10 +426,8 @@
                                         <i class="fa fa-clone text-muted ms-2"></i></a>-->
                                       <a class="dropdown-item d-flex align-items-center justify-content-between delete-item"
                                         (click)="$event.stopPropagation()" (click)="deleteMessage(message.id); toggleMessageBox(message.id)">Remove
-                                        for
-                                        you
                                         <i class="fa fa-trash-o text-muted ms-2"></i></a>
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between"
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between" *ngIf="message.senderUsername != username && message.messageType !== 'Unsent'"
                                         (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend
                                         <i class="fa fa-undo text-muted ms-2"></i></a>
                                     </div>
