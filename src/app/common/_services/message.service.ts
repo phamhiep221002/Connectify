@@ -75,9 +75,26 @@ export class MessageService {
     this.hubConnection.on('UnsendMessage', message => {
       this.messageThread$.pipe(take(1)).subscribe({
         next: messages => {
-          messages.splice(messages.findIndex(m => m.id === message), 1);
-          this.messageThreadSource.next([...messages, message])
+          // Xóa tin nhắn cũ nếu nó tồn tại
+          const existingMessageIndex = messages.findIndex(m => m.id === message.id);
+          if (existingMessageIndex !== -1) {
+            messages[existingMessageIndex].messageType = "Unsent";
+            messages[existingMessageIndex].content = "This message has been unsent";
+          }
         }
+        // next: messages => {
+        //   // Tìm vị trí thích hợp dựa trên ID
+        //   let insertIndex = messages.findIndex(m => m.id > message.id);
+        //   if (insertIndex === -1) {
+        //     insertIndex = messages.length; // Nếu không tìm thấy, thêm vào cuối mảng
+        //   }
+    
+        //   // Chèn tin nhắn vào vị trí tìm được
+        //   messages.splice(insertIndex, 0, message);
+    
+        //   // Cập nhật danh sách tin nhắn
+        //   this.messageThreadSource.next([...messages]);
+        // }
       })
     })
   }
