@@ -1,6 +1,10 @@
 section{
-  width: 70em;
-  margin-left: 100px;
+  width: 100wh;
+  height: auto;
+  padding: 120px 0;
+  overflow: hidden;
+  background: #fff !important;
+  font-family: 'Roboto', sans-serif;
 }
 .img-thumbnail {
     width: 120px;
@@ -92,10 +96,6 @@ section{
     align-items: center;
     width: 100%;
     margin-left: 100px;
-}
-
-.row{
-  width: 100%;
 }
 
 
@@ -329,31 +329,6 @@ section{
   background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
 
-.edit-btn {
-  text-decoration: none;
-  position: relative;
-  border: none;
-  font-size: 14px;
-  font-family: inherit;
-  color: #fff;
-  margin-top: 20px;
-  width: 9em;
-  height: 3em;
-  line-height: 2em;
-  text-align: center;
-  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
-  background-size: 300%;
-  border-radius: 30px;
-  z-index: 1;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-
-.edit-btn:hover {
-  animation: ani 8s linear infinite;
-  border: none;
-}
-
 @keyframes ani {
   0% {
     background-position: 0%;
@@ -362,28 +337,6 @@ section{
   100% {
     background-position: 400%;
   }
-}
-
-.edit-btn:before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  z-index: -1;
-  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
-  background-size: 400%;
-  border-radius: 35px;
-  transition: 1s;
-}
-
-.edit-btn:hover::before {
-  filter: blur(20px);
-}
-
-.edit-btn:active {
-  background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
 }
 
 .rounded-social-buttons {
@@ -601,4 +554,158 @@ section{
     width: 50%;
     float: right;
   }
+}
+
+.card-style1 {
+  box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
+}
+.border-0 {
+  border: 0!important;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+}
+
+.mb-2-3, .my-2-3 {
+  margin-bottom: 2.3rem;
+}
+
+.section-title {
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+.text-primary {
+  color: #ffdf7e !important;
+  font-size: 17px;
+}
+.text-secondary {
+  color: #15395A !important;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
+.display-26 {
+  font-size: 1.3rem;
+}
+
+@media screen and (min-width: 992px){
+  .p-lg-7 {
+      padding: 4rem;
+  }
+}
+@media screen and (min-width: 768px){
+  .p-md-6 {
+      padding: 3.5rem;
+  }
+}
+@media screen and (min-width: 576px){
+  .p-sm-2-3 {
+      padding: 2.3rem;
+  }
+}
+.p-1-9 {
+  padding: 1.9rem;
+}
+
+.bg-secondary {
+  background: #35235F!important;
+}
+@media screen and (min-width: 576px){
+  .pe-sm-6, .px-sm-6 {
+      padding-right: 3.5rem;
+  }
+}
+@media screen and (min-width: 576px){
+  .ps-sm-6, .px-sm-6 {
+      padding-left: 3.5rem;
+  }
+}
+.pe-1-9, .px-1-9 {
+  padding-right: 1.9rem;
+}
+.ps-1-9, .px-1-9 {
+  padding-left: 1.9rem;
+}
+.pb-1-9, .py-1-9 {
+  padding-bottom: 1.9rem;
+}
+.pt-1-9, .py-1-9 {
+  padding-top: 1.9rem;
+}
+.mb-1-9, .my-1-9 {
+  margin-bottom: 1.9rem;
+}
+@media (min-width: 992px){
+  .d-lg-inline-block {
+      display: inline-block!important;
+  }
+}
+.rounded {
+  border-radius: 0.25rem!important;
+}
+
+
+.d-flex.progress-text {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 10px;
+}
+
+.edit-btn{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 40px;
+  border: none;
+  padding: 0px 20px;
+  background-color: #35235F;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 2px 2px 0px #463275;
+  transition-duration: .3s;
+}
+
+.svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: white;
+  transition-duration: .3s;
+}
+
+.edit-btn:hover {
+  color: transparent;
+}
+
+.edit-btn:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: .3s;
+}
+
+.edit-btn:active {
+  transform: translate(3px , 3px);
+  transition-duration: .3s;
+  box-shadow: 2px 2px 0px rgb(140, 32, 212);
 }
