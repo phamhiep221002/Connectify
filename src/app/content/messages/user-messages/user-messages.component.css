@@ -102,7 +102,7 @@
 }
 
 .chat-room-list {
-  max-height: calc(100vh - 126px);
+  max-height: calc(97vh - 126px);
 }
 
 [data-simplebar] {
