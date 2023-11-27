@@ -15,8 +15,8 @@ declare var H: any;
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit, AfterViewChecked {
-  @ViewChild('mapContainer') mapContainer!: ElementRef;
   @ViewChild('filterModal') filterModalTemplate!: TemplateRef<any>;
+  @ViewChild('mapContainer')
   public mapElement!: ElementRef;
   private currentMarker: any; 
   private platform: any;
