@@ -262,7 +262,8 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   getMapUrl(latitude: string, longitude: string): string {
     const apiKey = this.apiMapKey;
     const markerSize = this.calculateMarkerSize(this.zoomLevel);
-    return `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${apiKey}&lat=${latitude}&lon=${longitude}&z=${this.zoomLevel}&poi=${latitude},${longitude}&poisize=${markerSize}&w=600&h=400&ppi=320&poithm=2`;
+    return `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${apiKey}&lat=${latitude}&lon=${longitude}&z=${this.zoomLevel}&poi=${latitude},
+    ${longitude}&poisize=${markerSize}&w=600&h=400&ppi=320&poithm=2`;
   }
   increaseZoom() {
     if (this.zoomLevel < 20) this.zoomLevel++;

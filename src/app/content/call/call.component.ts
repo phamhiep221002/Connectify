@@ -89,6 +89,8 @@ export class CallComponent implements OnInit, OnDestroy {
         video: this.enableVideo,
         audio: this.enableAudio
       };
+      console.log(this.enableVideo);
+      console.log(this.enableAudio);
       this.stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
       // Thêm kiểm tra null trước khi gán cho localVideo.nativeElement.srcObject
       if (this.localVideo) {

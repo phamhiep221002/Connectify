@@ -53,7 +53,7 @@ export class PresenceService {
         .pipe(take(1))
         .subscribe({
           next: () => {
-            this.router.navigateByUrl('/members/' + username + '?tab=Messages')
+            this.router.navigateByUrl('/messages/' + username)
           }
 
         })
