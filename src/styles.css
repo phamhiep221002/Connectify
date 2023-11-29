@@ -55,14 +55,6 @@
       --bs-nav-tabs-border-width: 0px;
   }
 
-pagination{
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.25rem;
-    margin: 10px;
-    padding: 10px;
-  }
 
   .pagination .page-item.active .page-link {
     background: #9F5BDC;
