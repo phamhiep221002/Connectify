@@ -67,11 +67,12 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
       messages => {
         this.messages = messages;
         this.loadConnectedMessages();
-        this.handleNewMessages();
+        
         if (this.messages.length > 0) {
           // Sắp xếp mảng tin nhắn theo ID tăng dần và lấy ID đầu tiên làm lastMessageId
           this.lastMessageId = this.messages.map(message => message.id).sort((a, b) => a - b)[0];
         }
+        this.handleNewMessages();
       }
     );
     this.route.data.subscribe({
