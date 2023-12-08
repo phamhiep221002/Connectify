@@ -404,7 +404,6 @@
   z-index: 1001;
   background-color: #fff;
   border-bottom: 1px dashed var(--bs-border-color);
-  max-width: 1200px;
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
@@ -440,7 +439,6 @@
 
 .chat-conversation {
   height: calc(100vh - 94px);
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -651,7 +649,6 @@
   backdrop-filter: blur(7px);
   position: relative;
   z-index: 1;
-  max-width: 1200px;
   margin: 0 auto;
 }
 .file_Upload,
@@ -665,7 +662,6 @@
   bottom: 0;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  max-width: 1200px;
   margin: 0 auto;
 }
 .chat-input-links {
