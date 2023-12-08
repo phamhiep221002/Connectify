@@ -240,6 +240,9 @@
                 <div class="d-flex align-items-center">
                   <div class="flex-grow-1 overflow-hidden">
                     <div class="d-flex align-items-center">
+                      <a href="https://connectify.io.vn/members/{{member.userName}}">
+
+
                       <div class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
                         <img src="{{member.photoUrl || './assets/user.png'}}" class="rounded-circle avatar-sm"
                           alt="image of user" />
@@ -248,13 +251,14 @@
                       <div class="flex-grow-1 overflow-hidden">
                         <h6 class="text-truncate mb-0 fs-18">
                           <a style="text-decoration: none" class="user-profile-show text-reset">
-                            {{member.knownAs}}</a>
+                            {{member.fullName}}</a>
                         </h6>
                         <p class="text-truncate text-muted mb-0"
                           *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
                           <small>Online</small>
                         </p>
                       </div>
+                    </a>
                     </div>
                   </div>
                 </div>
