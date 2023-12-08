@@ -8,7 +8,7 @@
             <li class="list-inline-item">
                 <button (click)="addLike(member)" class="btn btn-primary btn-icon"><i class="fa fa-heart"></i></button>
             </li>
-            <!-- <li class="list-inline-item">
+             <li class="list-inline-item">
                 <button
                     routerLink="/members/{{member.userName}}" 
                     [queryParams]="{tab: 'Messages'}"
@@ -47,23 +47,21 @@
 </div> -->
 
 <div class="card member" *ngIf="member">
-  <div class="overlay"></div>
-  <div class="circle">
-    <img
-      src="{{ member.photoUrl || './assets/user.png' }}"
-      alt="{{ member.knownAs }}"
-    />
-  </div>
-  <p
-    [class.is-online]="
-      (presenceService.onlineUsers$ | async)?.includes(member.userName)
-    "
-  >
-    {{ member.knownAs }}, {{ member.age }}
-  </p>
+    <div class="overlay"></div>
+    <div class="circle">
+        <img routerLink="/members/{{member.userName}}" src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.knownAs }}" />
+        <span class="user-status" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)"></span>
+    </div>
+    
+    <p>
+        {{ member.fullName }}, {{ member.age }}
+    </p>
+    <!-- <p *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+        Online
+    </p> -->
 
-  <ul>
-    <li><a routerLink="/members/{{member.userName}}"><i class="fa fa-user"></i></a></li>
-    <li><a (click)="addLike(member)"><i class="fa fa-heart"></i></a></li>
-</ul>
+    <ul>
+        <li><a routerLink="/members/{{member.userName}}"><i class="fa fa-user"></i></a></li>
+        <li><a (click)="addLike(member)"><i class="fa fa-heart"></i></a></li>
+    </ul>
 </div>

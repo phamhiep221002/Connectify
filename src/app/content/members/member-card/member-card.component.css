@@ -234,3 +234,15 @@
 		line-height: 40px;
 	}
 }
+
+  .user-status {
+	width: 10px;
+	height: 10px;
+	background-color: #06d6a0;
+	border-radius: 50%;
+	border: 2px solid var(--bs-secondary-bg);
+	position: absolute;
+	right: 0;
+	left: auto;
+	bottom: 0;
+  }
