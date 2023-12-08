@@ -67,6 +67,10 @@
                 <div class="members-online text-center mt-3"  *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
                     <i class="class fa fa-user-circle text-success"></i> Online now
                 </div>
+<!-- 
+                <div class="members-online text-center mt-3"  *ngIf="!(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                    <i class="class fa fa-user-circle text-success"></i> Active {{member.lastActive | timeago}}
+                </div> -->
                 <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all justify">
                     <h4 class="text-center" style=" text-transform: uppercase; font-weight: 700; font-style: italic;">
                       {{member.fullName}} ({{member.knownAs}})
