@@ -427,7 +427,7 @@
                                       <a class="dropdown-item d-flex align-items-center justify-content-between delete-item"
                                         (click)="$event.stopPropagation()" (click)="deleteMessage(message.id); toggleMessageBox(message.id)">Remove
                                         <i class="fa fa-trash-o text-muted ms-2"></i></a>
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between" *ngIf="message.senderUsername != username && message.messageType !== 'Unsent'"
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between" *ngIf="message.senderUsername != username && (message.messageType !== 'Unsent' && message.messageType !== 'MissCall' && message.messageType !== 'Call' && message.messageType !== 'MissCall')"
                                         (click)="$event.stopPropagation()" (click)="unsendMessage(message.id)">Unsend
                                         <i class="fa fa-undo text-muted ms-2"></i></a>
                                     </div>
