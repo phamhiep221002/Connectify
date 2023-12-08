@@ -14,7 +14,7 @@
     <div class="flex-lg-column my-0 sidemenu-navigation">
       <ul class="nav nav-pills side-menu-nav">
         <li class="nav-item d-none d-lg-block" role="presentation">
-          <a class="nav-link" id="pills-user-tab" data-bs-toggle="pill" href="#pills-user" role="button" routerLink="/member/edit"
+          <a class="nav-link" id="pills-user-tab" data-bs-toggle="pill" role="button" routerLink="/member/edit"
             aria-selected="false" tabindex="-1">
             <i class="fa fa-user-o"></i>
           </a>
@@ -44,7 +44,7 @@
         <li class="nav-item profile-user-dropdown" role="presentation">
           <a class="nav-link bg-light" aria-haspopup="true" aria-expanded="false"
             *ngIf="accountService.currentUser$ | async as user">
-            <img src="{{ user.photoUrl || './assets/user.png' }}" alt="profile-user"
+            <img src="{{ user.photoUrl || './assets/user.png' }}" alt="profile-user" routerLink="/member/edit" routerLinkActive="active" 
               class="profile-user rounded-circle" />
           </a>
         </li>

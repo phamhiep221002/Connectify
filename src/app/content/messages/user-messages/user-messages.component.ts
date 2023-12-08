@@ -71,7 +71,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         if (this.messages.length > 0) {
           // Sắp xếp mảng tin nhắn theo ID tăng dần và lấy ID đầu tiên làm lastMessageId
           this.lastMessageId = this.messages.map(message => message.id).sort((a, b) => a - b)[0];
-          console.log(this.lastMessageId);
         }
       }
     );
@@ -92,7 +91,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         this.username = username;
       }
     });
-    console.log();
   }
   ngOnDestroy() {
     this.messageService.stopHubConnection();
@@ -122,11 +120,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
     if (atBottom && !this.loading && (this.paginationListUserMessage && this.pageNumberListUserMessage < this.paginationListUserMessage.totalPages)) {
       this.loadMoreConnectedMessages();
     }
-  }
-  
-  selectMessage(id: number) {
-    this.lastMessageId = id;
-    console.log(this.lastMessageId);
   }
   onScroll(event: any) {
     const element = event.target;
@@ -245,7 +238,6 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
         this.loading = false;
       }
     }
-    console.log(this.username);
   }
 
   async sendLocationMessage() {
@@ -352,14 +344,10 @@ export class UserMessagesComponent implements OnInit, OnDestroy {
   }
 
   handleNewMessages(): void {
-    // Đợi cho đến khi Angular cập nhật DOM
-    this.cdr.detectChanges();
-
-    // Sử dụng setTimeout để đảm bảo các thay đổi đã được áp dụng vào DOM
     setTimeout(() => {
       const currentScrollTop = this.myScrollContainer?.nativeElement.scrollTop;
       const newScrollHeight = this.myScrollContainer?.nativeElement.scrollHeight;
-
+  
       // Nếu đang không tải tin nhắn cũ, cuộn xuống cuối
       if (!this.loadingOldMessages) {
         this.myScrollContainer!.nativeElement.scrollTop = newScrollHeight;
