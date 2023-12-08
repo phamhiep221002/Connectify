@@ -308,68 +308,6 @@
   background-color: rgba(239, 71, 111, 0.18);
 }
 
-.plusButton {
-  /* Config start */
-  --plus_sideLength: 2rem;
-  --plus_topRightTriangleSideLength: 0.01rem;
-  /* Config end */
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid white;
-  width: var(--plus_sideLength);
-  height: var(--plus_sideLength);
-  background-color: #deb8f8;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.plusButton::before {
-  position: absolute;
-  content: "";
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-width: 0 var(--plus_topRightTriangleSideLength)
-    var(--plus_topRightTriangleSideLength) 0;
-  border-style: solid;
-  border-color: transparent white transparent transparent;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.2s;
-}
-
-.plusButton:hover {
-  cursor: pointer;
-}
-
-.plusButton:hover::before {
-  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
-}
-
-.plusButton:focus-visible::before {
-  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
-}
-
-.plusButton > .plusIcon {
-  fill: white;
-  width: calc(var(--plus_sideLength) * 0.7);
-  height: calc(var(--plus_sideLength) * 0.7);
-  z-index: 1;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.2s;
-}
-
-.plusButton:hover > .plusIcon {
-  fill: #a682c0;
-  transform: rotate(180deg);
-}
-
-.plusButton:focus-visible > .plusIcon {
-  fill: black;
-  transform: rotate(180deg);
-}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -404,7 +342,6 @@
   z-index: 1001;
   background-color: #fff;
   border-bottom: 1px dashed var(--bs-border-color);
-  max-width: 1200px;
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
@@ -440,7 +377,6 @@
 
 .chat-conversation {
   height: calc(100vh - 94px);
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -651,7 +587,6 @@
   backdrop-filter: blur(7px);
   position: relative;
   z-index: 1;
-  max-width: 1200px;
   margin: 0 auto;
 }
 .file_Upload,
@@ -665,7 +600,6 @@
   bottom: 0;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  max-width: 1200px;
   margin: 0 auto;
 }
 .chat-input-links {

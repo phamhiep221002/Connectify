@@ -37,13 +37,12 @@
 }
 
 .welcome-pattern {
-  position: absolute;
+  position: relative;
   width: 100%;
-  bottom: -5px;
+  bottom: -10px;
   left: 0;
   right: 0;
   z-index: 4;
-  margin-top: 20px;
 }
 
 .welcome-pattern img {
@@ -138,14 +137,14 @@
 .contact-area p {
   color: #fff;
   margin-bottom: 30px;
+  font-size: 20px;
 }
 
 
-
 .contact-pattern {
-  position: absolute;
+  position: relative;
     width: 100%;
-    bottom: -15px;
+    bottom: -108px;
     left: 0;
     right: 0;
     z-index: 1;
@@ -153,6 +152,13 @@
 
 .contact-pattern img {
   width: 100%;
+}
+
+.login-btn{
+  margin-bottom: 30px;
+  margin: 0 20px;
+  text-align: center;
+
 }
 
 
