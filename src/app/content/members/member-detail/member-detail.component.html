@@ -64,13 +64,13 @@
                 <div class="team-single-img">
                     <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}">
                 </div>
-                <div class="members-online text-center mt-3"  *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                <div class="members-online text-center mt-3" style="margin-bottom: 16px;" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
                     <i class="class fa fa-user-circle text-success"></i> Online now
                 </div>
-<!-- 
-                <div class="members-online text-center mt-3"  *ngIf="!(presenceService.onlineUsers$ | async)?.includes(member.userName)">
-                    <i class="class fa fa-user-circle text-success"></i> Active {{member.lastActive | timeago}}
-                </div> -->
+
+                <div class="members-online text-center mt-3" style="margin-bottom: 16px;"  *ngIf="!(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                    <i class="class fa fa-user-circle"></i> Active {{member.lastActive | timeago}}
+                </div>
                 <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all justify">
                     <h4 class="text-center" style=" text-transform: uppercase; font-weight: 700; font-style: italic;">
                       {{member.fullName}} ({{member.knownAs}})
@@ -132,7 +132,7 @@
                                   </div>
 
                               </li>
-                              <li>
+                              <!-- <li>
 
                                   <div class="row">
                                       <div class="col-md-5 col-5">
@@ -144,7 +144,7 @@
                                       </div>
                                   </div>
 
-                              </li>
+                              </li> -->
                               <li>
 
                                   <div class="row">
